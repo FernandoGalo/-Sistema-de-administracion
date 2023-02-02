@@ -266,5 +266,20 @@ main{
     padding-bottom: 15px;
 }
 
+/* PAGINA HTML DE INFORMACION GENERAL */
 
+.info_empresa h1{
+    text-align: center;
+    padding-bottom: 1rem;
+}
+.parrafo_info{
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 18px;
+    margin-left: 50px;
+}
+
+.bold{
+    font-weight: bold;
+}
 
