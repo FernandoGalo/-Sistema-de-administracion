@@ -16,10 +16,8 @@
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
-
 <body>
-
+    
     <header>
 
         <div class="header__superior">
@@ -37,12 +35,12 @@
                 </label>
                 <nav>
                     <ul>
-                        <li> <a href="index.html" id="selected"></a></li>
+                        <li> <a href="#" id="selected"></a></li>
                         <li> <a href="#">Conocenos +</a>
                             <ul>
                                 <li><a href="#">Redes Sociales</a></li>
-                                <li><a href="mision_vision.html">Misión y Visión</a></li>
-                                <li><a href="informacion_general.html">Información General</a></li>
+                                <li><a href="#">Misión y Visión</a></li>
+                                <li><a href="#">Información General</a></li>
                             </ul>
                         </li>
                         <li> <a href="#">Proyectos +</a>
@@ -59,7 +57,7 @@
                                 <li><a href="#">Enviar Datos</a></li>
                             </ul>
                         </li>
-                        <li> <a href="Login.php">Miembros</a></li>
+                        <li> <a href="#">Miembros</a></li>
                         <li> <a href="Donar.html">Dona Aqui</a></li>
                     </ul>
                 </nav>
@@ -68,17 +66,54 @@
         </div>
 
     </header> <!-- Fin Header -->
-    
-    <main>
-        <article>
-            <h2>Historia sobre la fundacion de la asociación</h2>
-            <p>La idea de fundar una organización sin fines de lucro se dio entre un grupo de amigos, quienes vienen de casas y familias de escasos recursos, con el sueño de regalar las oportunidades que ellos no tuvieron a otros. Viendo la situación de Honduras, un país subdesarrollado, se decide crear la Asociación Creo en ti, con el propósito de hacer una labor social, solidarizándose con el pueblo hondureño en distintas comunidades dentro y fuera del Distrito Central.</p>
-        </article>
 
+    <main class="Donar">
+        <div id="smart-button-container">
+            <div style="text-align: center;">
+              <div id="paypal-button-container"></div>
+            </div>
+          </div>
+        <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+        <script>
+          function initPayPalButton() {
+            paypal.Buttons({
+              style: {
+                shape: 'pill',
+                color: 'blue',
+                layout: 'vertical',
+                label: 'pay',
+                
+              },
+      
+              createOrder: function(data, actions) {
+                return actions.order.create({
+                  purchase_units: [{"description":"Dona lo que quieras","amount":{"currency_code":"USD","value":1}}]
+                });
+              },
+      
+              onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                  
+                  // Full available details
+                  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+      
+                  // Show a success message within this page, e.g.
+                  const element = document.getElementById('paypal-button-container');
+                  element.innerHTML = '';
+                  element.innerHTML = '<h3>Thank you for your payment!</h3>';
+      
+                  // Or go to another URL:  actions.redirect('thank_you.html');
+                  
+                });
+              },
+      
+              onError: function(err) {
+                console.log(err);
+              }
+            }).render('#paypal-button-container');
+          }
+          initPayPalButton();
+        </script>
     </main>
-
 </body>
-
-
-
 </html>
