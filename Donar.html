@@ -16,10 +16,8 @@
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
-
 <body>
-
+    
     <header>
 
         <div class="header__superior">
@@ -41,7 +39,7 @@
                         <li> <a href="#">Conocenos +</a>
                             <ul>
                                 <li><a href="#">Redes Sociales</a></li>
-                                <li><a href="mision_vision.html">Misión y Visión</a></li>
+                                <li><a href="#">Misión y Visión</a></li>
                                 <li><a href="#">Información General</a></li>
                             </ul>
                         </li>
@@ -59,7 +57,7 @@
                                 <li><a href="#">Enviar Datos</a></li>
                             </ul>
                         </li>
-                        <li> <a href="Login.php">Miembros</a></li>
+                        <li> <a href="#">Miembros</a></li>
                         <li> <a href="Donar.html">Dona Aqui</a></li>
                     </ul>
                 </nav>
@@ -68,29 +66,54 @@
         </div>
 
     </header> <!-- Fin Header -->
-    
-    <main>
-        <article>
-            <h2>HOLA</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut corporis eum voluptas distinctio praesentium quaerat ipsa placeat dolorem iusto cum error ipsam temporibus enim accusamus, minima quod consequatur at nemo.</p>
-        </article>
 
-
-        <article>
-            <h2>QUE TAL</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati dignissimos harum dolore id a hic, sapiente, deserunt voluptatem necessitatibus culpa labore expedita itaque iure dolorum est alias ipsa earum error!</p>
-        </article>
-
-
-        <article>
-            <h2>ESTAS</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae laborum consequuntur ad, voluptatem dolore expedita quisquam, accusamus, odio eligendi quibusdam eveniet totam accusantium. Quaerat, ullam dolor! Placeat, pariatur aut?</p>
-        </article>
-
+    <main class="Donar">
+        <div id="smart-button-container">
+            <div style="text-align: center;">
+              <div id="paypal-button-container"></div>
+            </div>
+          </div>
+        <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+        <script>
+          function initPayPalButton() {
+            paypal.Buttons({
+              style: {
+                shape: 'pill',
+                color: 'blue',
+                layout: 'vertical',
+                label: 'pay',
+                
+              },
+      
+              createOrder: function(data, actions) {
+                return actions.order.create({
+                  purchase_units: [{"description":"Dona lo que quieras","amount":{"currency_code":"USD","value":1}}]
+                });
+              },
+      
+              onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                  
+                  // Full available details
+                  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+      
+                  // Show a success message within this page, e.g.
+                  const element = document.getElementById('paypal-button-container');
+                  element.innerHTML = '';
+                  element.innerHTML = '<h3>Thank you for your payment!</h3>';
+      
+                  // Or go to another URL:  actions.redirect('thank_you.html');
+                  
+                });
+              },
+      
+              onError: function(err) {
+                console.log(err);
+              }
+            }).render('#paypal-button-container');
+          }
+          initPayPalButton();
+        </script>
     </main>
-
 </body>
-
-
-
 </html>
