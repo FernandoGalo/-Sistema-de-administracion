@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-    'Aqui iria el sistema, si tuviera alguno XD'
+    'Aqui iria el sistema, si tuviera alguno XD '
     </div>
     
 </body>
