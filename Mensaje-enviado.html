@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asociación Creo en Ti</title>
+    <title>Mensaje enviado</title>
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap"
+        rel="stylesheet">
     <!-- Preload -->
     <link rel="preload" href="css/normalize.css">
     <link rel="stylesheet" href="css/normalize.css">
-
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    
-    <header>
 
+    <!-- Libreria de JavaScrip -->
+    <script src="js/Contactenos.js"></script>
+
+
+    <!--__________________________________________Responsive____________________________________________-->
+    <!-- Para Escritorio -->
+    <link rel="stylesheet" media="screen and (min-device-width: 1025px) and (max-width: 1440px)"
+        href="css/desktop-style.css" />
+    <!-- Para Celular -->
+    <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 767px)' href='css/mobile-style.css' />
+    <!-- Para Tablet -->
+    <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
+
+
+
+</head>
+
+<body>
+
+    <header>
         <div class="header__superior">
             <div class="logo">
-                <img src="img/asociacion.jpg" alt=""> 
+                <img src="img/asociacion.jpg" alt="">
             </div>
         </div>
 
@@ -35,7 +54,7 @@
                 </label>
                 <nav>
                     <ul>
-                        <li> <a href="index.html" id="selected"></a></li>
+                        <li> <a href="#" id="selected"></a></li>
                         <li> <a href="#">Conocenos +</a>
                             <ul>
                                 <li><a href="#">Redes Sociales</a></li>
@@ -54,7 +73,7 @@
                             <ul>
                                 <li><a href="#">¿Cómo donar?</a></li>
                                 <li><a href="#">Voluntariado</a></li>
-                                <li><a href="Contactenos.html">Contactenos</a></li>
+                                <li><a href="Contactenos.html">Contàctenos</a></li>
                             </ul>
                         </li>
                         <li> <a href="#">Miembros</a></li>
@@ -62,34 +81,19 @@
                     </ul>
                 </nav>
             </div>
-
         </div>
 
     </header> <!-- Fin Header -->
 
-    <main class="Main_Mision_Vision">
-        <h1>Misión y Visión</h1>
-
-        <section>
-            <h2>Misión</h2>
-            <p>La Asociación Creo en Ti es una Organización Social que tiene como finalidad promover el desarrollo humano y el progreso de las comunidades urbanas y rurales, especialmente en las mujeres, niños, jóvenes y adultos mayores mediante acciones de investigación, capacitación, organización, servicios de atención, procurando que las personas accedan a una gama de oportunidades basada en la equidad de género y derechos humanos, así como acciones que conlleven al desarrollo de infraestructuras en las comunidades que permitan a sus habitantes acceder a un mejor nivel de vida.</p>
-
-            <picture class="imgMV">
-                <source srcset="img/imgMision.jpg" type="image/jpg">
-                <img loading="lazy" width="400" height="300" src="img/imgMision.jpg" alt="imagen Misión">
-            </picture>
-
+    <section class="formulario_contac" >
+        <section class="mensaje_exito">
+            <h1> <span class="fas fa-heart"></span>!GRACIAS, SU MENSAJE SE ENVIÓ EXITOSAMENTE! <span
+                    class="fas fa-hand-holding-heart"></span></h1>
+            <h3>La Asociacion Creo en ti, se contactara con usted pronto</h3>
+            <a href="Contactenos.html">Enviar nuevo mensaje</a>
         </section>
+    </section>
 
-        <section>
-            <h2>Visión</h2>
-            <p>Ser una Asociación que en el corto y mediano plazo contribuya a mejorar las condiciones de vida de los seres humanos a través del desarrollo sostenible de las comunidades, con personal profesional y técnico que den respuesta a las necesidades reales que surgen en el ámbito nacional, capacitándose y actualizándose constantemente para que sea nuestro más valioso recurso y así puedan llevar a cabo los diferentes proyectos de la asociación con los actores sociales que se involucran.</p>
-
-            <picture>
-                <source srcset="img/imgVision.jpg" type="image/jpg">
-                <img loading="lazy" width="300" height="250" src="img/imgVision.jpg" alt="imagen Visión">
-            </picture>
-        </section>
-    </main>
 </body>
+
 </html>
