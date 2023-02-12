@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
-
+:root{
+    --fuenteParrafos: 'Open Sans', sans-serif;
+}
 *{
     margin: 0;
     padding: 0;
@@ -247,7 +249,26 @@ main{
     }
 }
 
+/* Global */
+p{
+    font-family: var(--fuenteParrafos);
+}
+img{
+    max-width: 100%;
+}
 
+/* Pagina HTML Index*/
+.center__index{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5rem;
+}
+.contenido__index p{
+    padding-top: 1.5rem;
+    line-height: 1.8rem;
+    font-family: var(--fuenteParrafos);
+}
 
 /* PAGINA HTML DE MISION Y VISION */
 .Main_Mision_Vision{
@@ -264,6 +285,12 @@ main{
     font-size: 18px;
     padding-top: 10px;
     padding-bottom: 15px;
+    line-height: 1.8rem;
+}
+.img__MisionVision{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* PAGINA HTML DE INFORMACION GENERAL */
@@ -282,4 +309,49 @@ main{
 .bold{
     font-weight: bold;
 }
+.imgAso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+/* PAGINA HTML DE REDES SOCIALES*/
+.redesSociales h1{
+    text-align: center;
+    margin-top: 2rem;
+}
+.redesSociales h3{
+    font-size: 1.7rem;
+    padding-bottom: 3rem;
+}
+.redesSociales p{
+    font-size: 2rem;
+    padding-bottom: 1.5rem;
+    margin-left: 50px;
+}
+.img__Facebook{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+}
+.img__Instagram{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+}
+
+/* Header */
+.header__inferior{
+    background-image: url(../img/imagenIndex.png);
+    height: 45rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
 
