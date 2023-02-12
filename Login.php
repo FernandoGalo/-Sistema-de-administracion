@@ -20,10 +20,10 @@
                 <img src="img/asociacion.jpg" alt=""> 
             </div>
     <form actions2="controlador_login.php" method="post">
-     <?php
-     include ("conexion_BD.php");
-     include ("controlador_login.php");
-     ?>
+    <?php
+    include ("conexion_BD.php");
+    include ("controlador_login.php");
+    ?>
             <h2>Usuario</h2>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
