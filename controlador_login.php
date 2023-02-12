@@ -6,7 +6,7 @@ if (!empty($_POST["btn_Login"])) {
     } else{
         $usuario=$_POST["usuario"];
         $contra=$_POST["contra"];
-        $sql=$conexion->query("SELECT * FROM Login where nombre='$usuario' and contraseña='$contra'  ");
+        $sql=$conexion->query("SELECT * FROM usuarios where Nombre_Usuario='$usuario' and Contrasena_usuario='$contra'  ");
         if ($datos=$sql->fetch_object()) {
             header("location: Sistema_Principal.php");
             echo "Ingreso al sistema exitoso";
@@ -17,6 +17,10 @@ if (!empty($_POST["btn_Login"])) {
     }
 }
 
+if (!empty($_POST["btn_R_Ingreso"])) {
+    header("location: Registro_N_Usuario.php");
+}
+    
 
 
 ?>

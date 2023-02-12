@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Login </title>
+<title> Registro de usuario </title>
     <link rel="stylesheet" href="css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,28 +18,30 @@
 <body>
     <section class="f_login">
             
-    <form actions2="controlador_login.php" method="post">
-            <h2>Inicio</h2>
+    <form actions2="controlador_registro.php" method="post">
+            <h2>Registro</h2>
             <div class="logo_l">
             <img src="img/asociacion.jpg"> 
             </div>
             <?php
     include ("conexion_BD.php");
-    include ("controlador_login.php");
+    include ("controlador_registro.php");
     ?>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
-        <h3>Usuario</h3>
-        <input class="controls" type="text" name="usuario" placeholder="Ingrese su Usuario"><br>
+        <h3>Nombre de usuario</h3>
+        <input class="controls" type="text" name="R_usuario" placeholder="Ingrese su Usuario"><br>
         <h3>contraseña</h3>
-        <input class="controls" type="password" name="contra" placeholder="Ingrese su Contraseña"><br>
-        <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Secion" ></br>
-        <p><a href="renovar-Contra.php">¿Olvidaste la Contraseña?</a><p>
-        <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" ></br>
+        <input class="controls" type="password" name="R_contra" placeholder="Ingrese su Contraseña"><br>
+        <h3>Correo Electronico</h3>
+        <input class="controls" type="text" name="R_correo" placeholder="Ingrese su Correo Electronico"><br>
+
+        <input class="buttons" type="submit" Class="btn" name="btn_enviar_R" value="Enviar"> 
+       
     </form>
     <section>
-    <li><a href="index.html">Pagina Web</a></li>
+    <li><a href="Login.php">volver atras</a></li>
 </body>
 
 </html>
