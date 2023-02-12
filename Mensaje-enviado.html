@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asociación Creo en Ti</title>
+    <title>Mensaje enviado</title>
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap"
+        rel="stylesheet">
     <!-- Preload -->
     <link rel="preload" href="css/normalize.css">
     <link rel="stylesheet" href="css/normalize.css">
-
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
-</head>
 
+    <!-- Libreria de JavaScrip -->
+    <script src="js/Contactenos.js"></script>
+
+
+    <!--__________________________________________Responsive____________________________________________-->
+    <!-- Para Escritorio -->
+    <link rel="stylesheet" media="screen and (min-device-width: 1025px) and (max-width: 1440px)"
+        href="css/desktop-style.css" />
+    <!-- Para Celular -->
+    <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 767px)' href='css/mobile-style.css' />
+    <!-- Para Tablet -->
+    <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
+
+
+
+</head>
 
 <body>
 
     <header>
-
         <div class="header__superior">
             <div class="logo">
-                <img src="img/asociacion.jpg" alt=""> 
+                <img src="img/asociacion.jpg" alt="">
             </div>
         </div>
 
@@ -37,7 +54,7 @@
                 </label>
                 <nav>
                     <ul>
-                        <li> <a href="index.html" id="selected"></a></li>
+                        <li> <a href="#" id="selected"></a></li>
                         <li> <a href="#">Conocenos +</a>
                             <ul>
                                 <li><a href="#">Redes Sociales</a></li>
@@ -56,10 +73,10 @@
                             <ul>
                                 <li><a href="#">¿Cómo donar?</a></li>
                                 <li><a href="#">Voluntariado</a></li>
-                                <li><a href="Contactenos.html">Contactenos</a></li>
+                                <li><a href="Contactenos.html">Contàctenos</a></li>
                             </ul>
                         </li>
-                        <li> <a href="Login.php">Miembros</a></li>
+                        <li> <a href="#">Miembros</a></li>
                         <li> <a href="Donar.html">Dona Aqui</a></li>
                     </ul>
                 </nav>
@@ -67,27 +84,16 @@
         </div>
 
     </header> <!-- Fin Header -->
-    
-    <main>
 
-        <article class="contenido__index">
-
-            <div class="center__index">
-                <picture>
-                    <source srcset="img/imagenIndex.png" type="image/png">
-                    <img loading="lazy" width="400" height="300" src="img/imagenIndex.png" alt="imagen Index">
-                </picture>
-            </div>
-
-            <h2>Historia sobre la fundacion de la asociación</h2>
-            <p>La idea de fundar una organización sin fines de lucro se dio entre un grupo de amigos, quienes vienen de casas y familias de escasos recursos, con el sueño de regalar las oportunidades que ellos no tuvieron a otros. Viendo la situación de Honduras, un país subdesarrollado, se decide crear la Asociación Creo en ti, con el propósito de hacer una labor social, solidarizándose con el pueblo hondureño en distintas comunidades dentro y fuera del Distrito Central.</p>
-        </article>
-
-    </main>
-</div>
+    <section class="formulario_contac" >
+        <section class="mensaje_exito">
+            <h1> <span class="fas fa-heart"></span>!GRACIAS, SU MENSAJE SE ENVIÓ EXITOSAMENTE! <span
+                    class="fas fa-hand-holding-heart"></span></h1>
+            <h3>La Asociacion Creo en ti, se contactara con usted pronto</h3>
+            <a href="Contactenos.html">Enviar nuevo mensaje</a>
+        </section>
+    </section>
 
 </body>
-
-
 
 </html>
