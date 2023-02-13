@@ -27,7 +27,8 @@
     include ("conexion_BD.php");
     include ("controlador_login.php");
     ?>
-            <?php if(isset($_GET['error'])) { ?>
+            <?php 
+            if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
         <h3>Usuario</h3>
