@@ -14,6 +14,12 @@
 
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" media="screen and (min-device-width: 1025px) and (max-width: 1440px)" href="css/desktop-style.css" />
+    <!-- Para Celular -->
+    <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 767px)' href='css/mobile-style.css' />
+    <!-- Para Tablet -->
+    <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
 </head>
 <body>
     <section class="f_login">

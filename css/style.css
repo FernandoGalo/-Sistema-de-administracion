@@ -309,7 +309,6 @@ img{
 .bold{
     font-weight: bold;
 }
-<<<<<<< HEAD
 .imgAso{
     display: flex;
     justify-content: center;
@@ -355,7 +354,6 @@ img{
     background-position: center center;
 }
 
-=======
 /*Login*/
 .f_login{
   width: 400px;
@@ -368,7 +366,6 @@ img{
   border-top: 4px solid #0057da;
   color: rgb(0, 238, 255);
 }
->>>>>>> 9198206b6c40e004e969cc3b440f208497f77587
 
 .f_login h2{
     margin: 0;

@@ -279,3 +279,110 @@
 .mensaje_exito a:hover{
     background: #5a40ec;
 }
+
+/*Login*/
+
+.f_login{
+    width: 400px;
+    height: 650px;
+    background-color: #0099e9;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 7px 13px 37px #000;
+    padding: 20px 30px;
+    border-top: 4px solid #0057da;
+    color: rgb(0, 238, 255);
+  }
+  
+  .f_login h2{
+      margin: 0;
+      text-align: center;
+      height: 40px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid;
+      font-size: 20px;
+  }
+  .f_login h3{
+      margin-bottom: 2px;
+      text-align: left;
+      height: 20px;
+      color: #000;
+  }
+  .controls {
+  width: 100%;
+  border: 1px solid #0099e9;
+  margin-bottom: 15px;
+  padding: 11px 10 px;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  }
+  .buttons{
+     width: 100%;
+     height: 40px;
+     background: #000; 
+     border: none;
+     color: white;
+     margin-bottom: 16px;
+  }
+  .buttons:hover{
+      color: #000;
+      background: #fff;
+  }
+  .f_login p{
+      height: 40px;
+      text-align: center;
+      border-bottom: 1px solid;
+  }
+  
+  .f_login a{
+      color: black;
+      text-decoration: none;
+      font-size: 17px;
+  }
+  .f_login a:hover{
+      text-decoration: underline;
+      color: #fff;
+  }
+  .alert alert-danger{
+      color: #ff0000;
+  }
+  
+  .logo_l{
+      display: flex;
+      justify-content: center;
+  }
+  .logo_l img{
+      
+      width: 200px;
+      height: 200px;
+  }
+  
+  .recu_contra {
+      width: 400px;
+      height: 400px;
+      background-color: #006aa3;
+      margin: auto;
+      margin-top: 100px;
+      box-shadow: 7px 13px 37px #000;
+      padding: 20px 30px;
+      border-top: 4px solid #016ea8;
+      color: rgb(0, 0, 0);
+  }
+  
+  .recu_contra h1{
+      margin: 0;
+      text-align: center;
+      height: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid;
+      font-size: 20px;
+  }
+  .recu_contra h3{
+      margin-bottom: 2px;
+      text-align: left;
+      height: 20px;
+      color: #000;
+  }
+  
