@@ -6,7 +6,7 @@ if (!empty($_POST["btn_Login"])) {
     } else{
         $usuario=$_POST["usuario"];
         $contra=$_POST["contra"];
-        $sql=$conexion->query("SELECT * FROM usuarios where Nombre_Usuario='$usuario' and Contrasena_usuario='$contra'  ");
+        $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and Contraseña='$contra'  ");
         if ($datos=$sql->fetch_object()) {
             header("location: Sistema_Principal.php");
             echo "Ingreso al sistema exitoso";
