@@ -38,9 +38,9 @@
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
         <h3>Usuario</h3>
-        <input class="controls" type="text" name="usuario" placeholder="Ingrese su Usuario"><br>
+        <input class="controls" maxlength="15" type="text" style="text-transform:uppercase" name="usuario" placeholder="Ingrese su Usuario"><br>
         <h3>contraseña</h3>
-        <input class="controls" type="password" name="contra" placeholder="Ingrese su Contraseña"><br>
+        <input class="controls" maxlength="8" type="password" name="contra" placeholder="Ingrese su Contraseña"><br>
         <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Secion" ></br>
         <p><a href="renovar-Contra.php">¿Olvidaste la Contraseña?</a><p>
         <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" ></br>

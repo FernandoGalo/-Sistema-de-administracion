@@ -6,12 +6,20 @@ if (!empty($_POST["btn_Login"])) {
     } else{
         $usuario=$_POST["usuario"];
         $contra=$_POST["contra"];
-        $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and Contraseña='$contra'  ");
+        $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and Contraseña='$contra' ");
         if ($datos=$sql->fetch_object()) {
-            header("location: Sistema_Principal.php");
+            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Primer_Ingreso>=1 ");
+            if ($datos=$sql->fetch_object()) {
+                header("location: Sistema_Principal.php");
             echo "Ingreso al sistema exitoso";
+            } else {
+                header("location: Primer_Ingreso.php");
+                echo "Ingreso al sistema exitoso";
+            }
+            
+            
         } else {
-            echo '<div class="alert alert-danger">Usuario o contraseña incorrectos </div>';
+            echo '<div class="alert alert-danger">Usuario o contraseña incorrecto </div>';
         }
         
     }

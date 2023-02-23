@@ -20,7 +20,7 @@
             
     <form actions2="controlador_registro.php" method="post">
             <h2>Registro</h2>
-            <div class="logo_l">
+            <div class="log_R">
             <img src="img/asociacion.jpg"> 
             </div>
             <?php
@@ -31,9 +31,11 @@
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
         <h3>Nombre de usuario</h3>
-        <input class="controls" type="text" name="R_usuario" placeholder="Ingrese su Usuario"><br>
+        <input class="controls" type="text" maxlength="15" style="text-transform:uppercase" name="R_usuario" placeholder="Ingrese su Usuario"><br>
         <h3>contraseña</h3>
-        <input class="controls" type="password" name="R_contra" placeholder="Ingrese su Contraseña"><br>
+        <input class="controls" type="password" maxlength="8" name="R_contra" placeholder="Ingrese su Contraseña"><br>
+        <h3>confirmar contraseña</h3>
+        <input class="controls" type="password" maxlength="8" name="R_contra_2" placeholder="Ingrese su Contraseña"><br>
         <h3>Correo Electronico</h3>
         <input class="controls" type="text" name="R_correo" placeholder="Ingrese su Correo Electronico"><br>
 
