@@ -17,13 +17,18 @@
 </head>
   
 <body>
-    <?php
-    include ("controlador de inicio.php");
-    ?>
+<?php
+session_start();
+$_SESSION['user'];
+if (empty($_SESSION['user'])) {
+    header('location:Login.php');
+}
+?>
     <header>
     <div class="logo_l">
         <img src="img/asociacion.jpg"> 
     </div>
+    
     <h1>Asociacion Creo en tí</h1>
             <li><a href="Login.php">Desconectar</a></li>
             <input class="buttons" type="submit" Class="btn" name="btn_E_Configuracion" value="Configuracion" ></br>

@@ -30,6 +30,8 @@
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
+            <h3>Nombre completo</h3>
+        <input class="controls" type="text" name="R_Nombre" placeholder="Ingrese su Nombre completo"><br>
         <h3>Nombre de usuario</h3>
         <input class="controls" type="text" maxlength="15" style="text-transform:uppercase" name="R_usuario" placeholder="Ingrese su Usuario"><br>
         <h3>contraseña</h3>
