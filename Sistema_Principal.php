@@ -17,6 +17,9 @@
 </head>
   
 <body>
+    <?php
+    include ("controlador de inicio.php");
+    ?>
     <header>
     <div class="logo_l">
         <img src="img/asociacion.jpg"> 
