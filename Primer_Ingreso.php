@@ -23,13 +23,8 @@
             if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
-        <h3>¿gg?</h3>
-        <input class="controls" type="text" name="Pregunta" placeholder="Ingrese su Usuario"><br>
-        <h3>Ingrese su nueva contraseña</h3>
-        <input class="controls" type="password" name="contranueva" placeholder="Ingrese su Contraseña aqui"><br>
-        <input class="buttons" type="submit" Class="btn" name="btn_enviar_pi" value="Enviar"> 
-        </form>
-        </section>
+
+</section>
 </body>
 
 </html>

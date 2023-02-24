@@ -33,7 +33,7 @@
             <h3>Nombre completo</h3>
         <input class="controls" type="text" name="R_Nombre" placeholder="Ingrese su Nombre completo"><br>
         <h3>Nombre de usuario</h3>
-        <input class="controls" type="text" maxlength="15" style="text-transform:uppercase" name="R_usuario" placeholder="Ingrese su Usuario"><br>
+        <input class="controls" type="text" maxlength="15" name="R_usuario" placeholder="Ingrese su Usuario"><br>
         <h3>contraseña</h3>
         <input class="controls" type="password" maxlength="8" name="R_contra" placeholder="Ingrese su Contraseña"><br>
         <h3>confirmar contraseña</h3>

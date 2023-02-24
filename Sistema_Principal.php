@@ -19,8 +19,7 @@
 <body>
 <?php
 session_start();
-$_SESSION['user'];
-if (empty($_SESSION['user'])) {
+if (empty($_SESSION['user']) and empty($_SESSION['passw'])) {
     header('location:Login.php');
 }
 ?>
@@ -30,7 +29,7 @@ if (empty($_SESSION['user'])) {
     </div>
     
     <h1>Asociacion Creo en tí</h1>
-            <li><a href="Login.php">Desconectar</a></li>
+    <input class="buttons" type="submit" Class="btn" name="btn_cerrar_S" value="cerrar_sesion" ></br>
             <input class="buttons" type="submit" Class="btn" name="btn_E_Configuracion" value="Configuracion" ></br>
     </header>
 
