@@ -1,37 +1,31 @@
+<?php
+$conexion = new mysqli("localhost", "root", "", "bd_asociacion_creo_en_ti", "3306");
+$conexion->set_charset("utf8");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<title> Monstrar bitacora </title>
+    <link rel="stylesheet" href="css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactenos Creo en ti</title>
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
     <!-- Preload -->
     <link rel="preload" href="css/normalize.css">
     <link rel="stylesheet" href="css/normalize.css">
+
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Libreria de JavaScrip -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="js/Contactenos.js"></script>
     
-
-    <!--__________________________________________Responsive____________________________________________-->
-    <!-- Para Escritorio -->
     <link rel="stylesheet" media="screen and (min-device-width: 1025px) and (max-width: 1440px)" href="css/desktop-style.css" />
     <!-- Para Celular -->
     <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 767px)' href='css/mobile-style.css' />
     <!-- Para Tablet -->
     <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
-
 </head>
 <body>
     
@@ -81,56 +75,51 @@
             </div>
 
         </div>
+        <div>
+<div class="container">
+<div class="consulta mt-4">
+<div class="row">
+    <div class="col-6">
+        <h3>
+            Bitacora
+        </h3>
+    </div>
+</div>
+<div class="box-body">
+    <div class="table table-responsive">
+        <table table border="1" class="table table-hover">
+            <thead>
+             <tr>
+                    <th>Bitacora</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Objeto</th>
+                    <th>Accion</th>
+                    <th>Descripcion</th>
+                    
+                </tr>
+            </thead>
+            <?php
+            $sql="SELECT * from tbl_ms_bitacora";
+            $result=mysqli_query($conexion,$sql);
+
+            while($mostrar=mysqli_fetch_array($result)){
+                ?>
+
+                <tr> 
+                    <td><?php echo $mostrar['ID_Bitacora']?></td>
+                    <td><?php echo $mostrar['Fecha']?></td>
+                    <td><?php echo $mostrar['ID_Usuario']?></td>
+                    <td><?php echo $mostrar['ID_Objeto']?></td>
+                    <td><?php echo $mostrar['Accion']?></td>
+                    <td><?php echo $mostrar['Descripcion']?></td>
+                </tr>
+             <?php
+            }
+             ?>
+        </table>
+    </div>
+</div>
 
     </header> <!-- Fin Header -->
 
-    <main class="Donar">
-        <div id="smart-button-container">
-            <div style="text-align: center;">
-              <div id="paypal-button-container"></div>
-            </div>
-          </div>
-        <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
-        <script>
-          function initPayPalButton() {
-            paypal.Buttons({
-              style: {
-                shape: 'pill',
-                color: 'blue',
-                layout: 'vertical',
-                label: 'pay',
-                
-              },
-      
-              createOrder: function(data, actions) {
-                return actions.order.create({
-                  purchase_units: [{"description":"Dona lo que quieras","amount":{"currency_code":"USD","value":1}}]
-                });
-              },
-      
-              onApprove: function(data, actions) {
-                return actions.order.capture().then(function(orderData) {
-                  
-                  // Full available details
-                  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-      
-                  // Show a success message within this page, e.g.
-                  const element = document.getElementById('paypal-button-container');
-                  element.innerHTML = '';
-                  element.innerHTML = '<h3>Gracias por su donacion!</h3>';
-      
-                  // Or go to another URL:  actions.redirect('thank_you.html');
-                  
-                });
-              },
-      
-              onError: function(err) {
-                console.log(err);
-              }
-            }).render('#paypal-button-container');
-          }
-          initPayPalButton();
-        </script>
-    </main>
-</body>
-</html>
