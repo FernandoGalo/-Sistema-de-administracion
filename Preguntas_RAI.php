@@ -22,9 +22,8 @@
     <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
 </head>
 <body>
-<h3>Responda a las preguntas seleccionadas</h3>
-<input class="controls" type="combobox" name="Respuesta" placeholder="Ingrese su Respuesta"><br>
-        <input class="buttons" type="submit" Class="btn" name="btn_Respuestas" value="enviar Respuestas" ></br>
-</body>
+// este apartado es para responder 3 preguntas  cuando el usuario se autoregistro en "Registro_N_Usuario"
+// aca solo se registran las preguntas y no se cambia la contraseña
+
 
 </html>

@@ -16,14 +16,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-        <section class="primer_i">
-
-        <form actions2="controlador_login.php" method="post">
-        <?php 
-            if(isset($_GET['error'])) { ?>
-             <p class="error"><?php echo $_GET['error']; ?></p>
-            <?php } ?>
-
+    // este apartado es para responder 3 preguntas  cuando el usuario fue creado en la base de datos
+    // aca se registran las preguntas y se cambia la contraseña
 </section>
 </body>
 
