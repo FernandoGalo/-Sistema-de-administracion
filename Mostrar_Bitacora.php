@@ -1,6 +1,15 @@
 <?php
+
 $conexion = new mysqli("localhost", "root", "", "bd_asociacion_creo_en_ti", "3306");
 $conexion->set_charset("utf8");
+session_start();
+require_once "EVENT_BITACORA.php";
+
+#$user = new Manto;
+#$user-> select = 'tbl_ms_usuario.Nombre_Usuario,tbl_ms_usuario.ID_Usuario';
+#$user->from ='tbl_ms_bitacora inner join tbl_ms_usuario on (tbl_ms_usuario.ID_Usuario = tbl_ms_bitacora.ID_Usuario)';
+#$user->condition = '';
+#$user->leer();
 
 ?>
 
