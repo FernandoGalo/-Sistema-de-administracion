@@ -30,6 +30,10 @@ class Manto{
     public $usuario;
     public $contra;
 
+    #atributos para registrar nuevo usuario
+    public $R_usuario;
+    public $R_contra;
+
     #metodo insertar
     public function insertar(){
         $model = new conexion;
@@ -82,7 +86,7 @@ class Manto{
             
             
                     }else{
-                        $consulta = execute();
+                        $consulta -> execute();
                     }
     }
     #termina metodo editar
@@ -177,5 +181,57 @@ class Manto{
         <?php
         }
     }
+
+
+    //===================================================================================
+    //===================================================================================Oscar Quin
+        #atributos para Registrar Nuevo Usuario
+        //public $R_Nombre;
+        //public $R_usuario;
+        //public $R_contra;
+        //public $R_contra_2;
+        //public $R_correo;
+
+    public function regNuevoUser(){
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $sql = "SELECT * FROM tbl_ms_usuario where Usuario=:R_usuario AND Contraseña=:R_contra AND Estado_Usuario ='ACTIVO'";
+        $consulta = $conexion->prepare($sql);
+        $consulta->bindParam(':R_usuario',$this->R_usuario,PDO::PARAM_STR);
+        $consulta->bindParam(':R_contra',$this->R_contra,PDO::PARAM_STR);
+        $consulta->execute();
+        $total = $consulta->rowCount();
+        if($total ==0){
+            ?>
+<script>
+    location.href="Registro_N_Usuario.php";
+</script>
+
+            <?php
+        }else{
+            $fecha = date("Y-m-d");
+            $hora = date("H:i:s");
+            
+            $fila = $consulta->fetch();
+
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['1']."','Creacion de Usuario Nuevo','El usuario fue creado')";
+            #$sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['ID_Objeto']."','Inicio de secion','Entro al sistema')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+
+            session_start();
+            $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
+            ?>
+        <script>
+             location.href="Mostrar_Bitacora.php";
+         </script>
+
+        <?php
+        }
+
+
+    }
+    //===================================================================================
+    //===================================================================================
 }  
 ?>
