@@ -44,6 +44,7 @@ if (!empty($_POST["btn_enviar_R"])) {
                 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
                 $R_F_Vencida= date('Y-m-d',strtotime($R_Fecha_actual.'+ 1 month')); /*le suma 1 mes a la fecha actual*/
                 $sql=$conexion->query("INSERT INTO tbl_ms_usuario(ID_Usuario,ID_Rol,Nombre_Usuario,Usuario,Contraseña,Correo_Electronico,Fecha_Ultima_conexion, Preguntas_contestadas, Primer_ingreso, Fecha_vencimiento,Estado_Usuario, Creado_por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) VALUES ('$ID_Usuario',3,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','ACTIVO','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual' );");
+                //aqui iria la funcion bitacora
                 header("location: Preguntas_RAI.php"); /*como esto es autoregistro el usuario debe configurar las preguntas secretas */
                 }
                     

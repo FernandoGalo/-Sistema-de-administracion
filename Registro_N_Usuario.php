@@ -18,20 +18,20 @@
 <body>
     <section class="f_login">
             
-    <form actions2="controlador_registro.php" method="post">
+    <form actions2="controlador_registro.php" method="post"> <!--envia datos de tipo post -->
             <h2>Registro</h2>
             <div class="log_R">
-            <img src="img/asociacion.jpg"> 
+            <img src="img/asociacion.jpg">  <!--logo -->
             </div>
             <?php
     include ("conexion_BD.php");
-    include ("controlador_registro.php");
+    include ("controlador_registro.php"); /*incluyo los controladores que necesita para funcionar */
     ?>
             <?php if(isset($_GET['error'])) { ?>
-             <p class="error"><?php echo $_GET['error']; ?></p>
+             <p class="error"><?php echo $_GET['error']; ?></p> <!-- esto manda los errores php que esten sucediendo -->
             <?php } ?>
             <h3>Nombre completo</h3>
-        <input class="controls" type="text" name="R_Nombre" placeholder="Ingrese su Nombre completo"><br>
+        <input class="controls" type="text" name="R_Nombre" placeholder="Ingrese su Nombre completo"><br> <!--text de nombre completo -->
         <h3>Nombre de usuario</h3>
         <input class="controls" type="text" maxlength="15" name="R_usuario" placeholder="Ingrese su Usuario"><br>
         <h3>contraseña</h3>
@@ -41,11 +41,11 @@
         <h3>Correo Electronico</h3>
         <input class="controls" type="text" name="R_correo" placeholder="Ingrese su Correo Electronico"><br>
 
-        <input class="buttons" type="submit" Class="btn" name="btn_enviar_R" value="Enviar"> 
+        <input class="buttons" type="submit" Class="btn" name="btn_enviar_R" value="Enviar">  <!--boton que envia los datos de registro al controlador -->
        
     </form>
     <section>
-    <li><a href="Login.php">volver atras</a></li>
+    <li><a href="Login.php">volver atras</a></li> <!-- text que te manda a login-->
 </body>
 
 </html>
