@@ -7,7 +7,7 @@ class Conexion{
 }
 
 
-class Manto{
+class EVENT_BITACORA{
     
     #atributo para insertar
     public $tabla;

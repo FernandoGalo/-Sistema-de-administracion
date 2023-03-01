@@ -3,7 +3,7 @@
 require_once "EVENT_BITACORA.php";
 if(isset($_POST['btn_Login'])){
 
-    $model = new Manto;
+    $model = new EVENT_BITACORA;
     $model->usuario = $_POST['usuario'];
     $model->contra = $_POST['contra'];
     $model->login();
