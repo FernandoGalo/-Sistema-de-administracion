@@ -1,16 +1,16 @@
 <?php 
 
-require_once "EVENT_BITACORA.php";
-if(isset($_POST['btn_enviar_R'])){
+ require_once "EVENT_BITACORA.php";
+ if(isset($_POST['btn_enviar_R'])){
 
-    $model = new Manto;
-    //$model->R_Nombre = $_POST['R_Nombre'];
-    $model->R_usuario = $_POST['R_usuario'];
-    $model->R_contra = $_POST['R_contra'];
-    //$model->R_contra_2 = $_POST['R_contra_2'];
-    //$model->R_correo = $_POST['R_correo'];
-    $model->regNuevoUser();
-};
+     $model = new EVENT_BITACORA;
+     //$model->R_Nombre = $_POST['R_Nombre'];
+     $model->R_usuario = $_POST['R_usuario'];
+     $model->R_contra = $_POST['R_contra'];
+     //$model->R_contra_2 = $_POST['R_contra_2'];
+     //$model->R_correo = $_POST['R_correo'];
+     $model->regNuevoUser();
+ };
 ?>
 <!DOCTYPE html>
 <html lang="en">

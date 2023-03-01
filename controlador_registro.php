@@ -1,4 +1,5 @@
 <?php
+
 /*cuando se presiona el boton enviar registro */ 
 if (!empty($_POST["btn_enviar_R"])) {
     /*si el campo usuario o contraseña o nombre completo o contraseña no tiene datos envia una alterta*/
@@ -44,7 +45,21 @@ if (!empty($_POST["btn_enviar_R"])) {
                 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
                 $R_F_Vencida= date('Y-m-d',strtotime($R_Fecha_actual.'+ 1 month')); /*le suma 1 mes a la fecha actual*/
                 $sql=$conexion->query("INSERT INTO tbl_ms_usuario(ID_Usuario,ID_Rol,Nombre_Usuario,Usuario,Contraseña,Correo_Electronico,Fecha_Ultima_conexion, Preguntas_contestadas, Primer_ingreso, Fecha_vencimiento,Estado_Usuario, Creado_por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) VALUES ('$ID_Usuario',3,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','ACTIVO','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual' );");
-                //aqui iria la funcion bitacora
+                //aqui iria la funcion bitacora                    
+
+                        $model = new EVENT_BITACORA;
+                        //$model->R_Nombre = $_POST['R_Nombre'];
+                        $model->R_usuario = $_POST['R_usuario'];
+                        $model->R_contra = $_POST['R_contra'];
+                        //$model->R_contra_2 = $_POST['R_contra_2'];
+                        //$model->R_correo = $_POST['R_correo'];
+                        $model->regNuevoUser();
+                    
+
+                include_once('EVENT_BITACORA.php');
+                require_once('EVENT_BITACORA.php');
+
+                //regNuevoUser();
                 header("location: Preguntas_RAI.php"); /*como esto es autoregistro el usuario debe configurar las preguntas secretas */
                 }
                     
