@@ -49,7 +49,7 @@ if (!empty($_POST["btn_enviar_R"])) {
                     }
                 $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
                 $sql=$conexion->query("INSERT INTO tbl_ms_usuario(ID_Usuario,ID_Rol,Nombre_Usuario,Usuario,Contraseña,Correo_Electronico,Fecha_Ultima_conexion, Preguntas_contestadas, Primer_ingreso, Fecha_vencimiento, Creado_por, Fecha_Creacion, Modificado_Por, Fecha_Modificacion, Estado_Usuario, Intentos) 
-                VALUES ('$ID_Usuario',1,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','NUEVO',0)");
+                VALUES ('$ID_Usuario',1,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','ACTIVO',0)");
                 //aqui iria la funcion bitacora                    
 
                         $model = new EVENT_BITACORA;
