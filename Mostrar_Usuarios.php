@@ -93,22 +93,14 @@ require_once "EVENT_BITACORA.php";
         <table table border="1" class="table table-hover">
             <thead>
              <tr>
-                    <th>ID Usuario</th>
-                    <th>Rol</th>
-                    <th>Nombre</th>   
                     <th>Usuario</th>
-                    <th>Contraseña</th>
+                    <th>Nombre</th> 
+                    <th>Rol</th>
                     <th>Correo Electronico</th>
-                    <th>Fecha ultima conexion</th>
-                    <th>Preguntas contestadas</th>
-                    <th>Primer Ingreso</th>
-                    <th>Fecha Vencimiento</th>
-                    <th>Creado Por</th>
+                    <th>Contraseña</th>
                     <th>Fecha Creacion</th>
-                    <th>Modificado Por</th>
-                    <th>Fecha Modificacion</th>
-                    <th>Estado Usuario</th>
-
+                    <th>ID Usuario</th>
+                    <th>Fecha Vencimiento</th>
                     
                 </tr>
             </thead>
@@ -119,22 +111,15 @@ require_once "EVENT_BITACORA.php";
             while($mostrar=mysqli_fetch_array($result)){
                 ?>
 
-                <tr> 
-                    <td><?php echo $mostrar['ID_Usuario']?></td>
-                    <td><?php echo $mostrar['ID_Rol']?></td>
+                <tr>
+                    <td><?php echo $mostrar['Usuario']?></td> 
                     <td><?php echo $mostrar['Nombre_Usuario']?></td>
-                    <td><?php echo $mostrar['Usuario']?></td>
-                    <td><?php echo $mostrar['Contraseña']?></td>
+                    <td><?php echo $mostrar['ID_Rol']?></td>
                     <td><?php echo $mostrar['Correo_electronico']?></td>
-                    <td><?php echo $mostrar['Fecha_Ultima_conexion']?></td>
-                    <td><?php echo $mostrar['Preguntas_Contestadas']?></td>
-                    <td><?php echo $mostrar['Primer_Ingreso']?></td>
-                    <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
-                    <td><?php echo $mostrar['Creado_Por']?></td>
+                    <td><?php echo $mostrar['Contraseña']?></td>
                     <td><?php echo $mostrar['Fecha_Creacion']?></td>
-                    <td><?php echo $mostrar['Modificado_Por']?></td>
-                    <td><?php echo $mostrar['Fecha_Modificacion']?></td>
-                    <td><?php echo $mostrar['Estado_Usuario']?></td>
+                    <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
+                    
                 </tr>
              <?php
             }
