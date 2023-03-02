@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Primer Ingreso </title>
+<title> Recuperar contraseña </title>
     <link rel="stylesheet" href="css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,22 +16,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-        <section class="primer_i">
-
-        <form class="content" action="preguntas.php" method="post" enctype="multipart/form-data">
-        <?php 
-            if(isset($_GET['error'])) { ?>
-             <p class="error"><?php echo $_GET['error']; ?></p>
-            <?php } ?>
-
+    <section class="f_login">
+            
+    <form class="content" action="recupera_contra_pregunta.php" method="post" enctype="multipart/form-data">
+            <h2>Recuperacion de Contraseña</h2><div class="log_R">
+            <img src="img/asociacion.jpg"> 
+            </div>
             <?php
-             include ("conexion_BD.php");
-             //require ("preguntas.php");
+    include ("conexion_BD.php");
+   include ("recupera_contra_pregunta.php");
+    ?>
+            <?php if(isset($_GET['error'])) { ?>
+             <p class="error"><?php echo $_GET['error']; ?></p>
+            <?php }
+             ?>
+              <?php
 
-             session_start();
-             $user=$_SESSION['usuario'];
+    
+    
+            /* $user=$_POST['Usuario_Recupera'];
+               session_start();
+    $_SESSION['usuario']=$user;*/
         $sql=$conexion->query("SELECT * FROM tbl_preguntas");
         ?>
+
+ <!-- comienza el while -->
+            <i class="fas fa-user-alt"></i>
+            <input class="controls" type="text" name="Usuario_Recupera" placeholder="Ingrese el Usuario" required>
+         
 
         <h3>Seleccione una pregunta</h3>
         <select class="controls" type="text" name="Pregunta" required ><br>
@@ -43,14 +55,17 @@
           }
         ?>
 
-        <input class="controls" type="text" name="respuesta" placeholder="Ingrese la Respuesta "><br>
+        <input class="controls" type="text" required name="respuesta" placeholder="Ingrese la Respuesta "><br>
+     <!-- TERMINA EL WHILE -->
 
          <h3>Debe de Realizar cambio de contraseña</h3>
-        <input class="controls" type="password" name="contranueva" placeholder="Ingrese la Contraseña Nueva "><br>
+        <input class="controls" type="password" name="contranueva" required placeholder="Ingrese la Contraseña Nueva "><br>
 
        <input class="buttons" type="submit" Class="btn" name="btn_enviar_R" value="Enviar"> 
-        </form>
-        </section>
+       
+    </form>
+    <section>
+    <li><a href="renovar-Contra.php">volver atras</a></li>
 </body>
 
 </html>

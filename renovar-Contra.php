@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Login </title>
+    <title> ¿Olvidaste tu contraseña?</title>
     <link rel="stylesheet" href="css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,9 +14,25 @@
 
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <!--__________________________________________Responsive____________________________________________-->
+    <!-- Para Escritorio -->
+    <link rel="stylesheet" media="screen and (min-device-width: 1025px) and (max-width: 1440px)" href="css/desktop-style.css" />
+    <!-- Para Celular -->
+    <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 767px)' href='css/mobile-style.css' />
+    <!-- Para Tablet -->
+    <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
 </head>
-<body>
-    <section class="recu_contra">
+
+<body style="background: rgb(1,5,36);
+            background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
+
+<form action="controlador_recupera_contra_p.php" method="post">
+    <section class="recuperar_contra">
+    <?php
+   
+   
+    ?>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
@@ -24,12 +40,20 @@
             <img src="img/asociacion.jpg"> 
         </div>
 
-        <h1>Recuperacion de Contraseña</h1>
-        <h3>Se le enviaria un correo con la contraseña</h3>
-        <h3>Correo</h3>
-            <input class="controls" type="email" name="email" placeholder="Ingrese su Correo Electronico">
-            <input class="buttons" type="submit" Class="btn" name="btn_enviar_C" value="Enviar"> 
+ 
+
+        <h1>¿Olvidaste tu contraseña?</h1>
+        <h4>Por favor, Eliga una opcion</h4>
+          
+            <input class="buttons_recupera_contra" type="button" Class="btn" name="btn_enviar_C" value="Enviar contraseña por correo" onclick="window.location.href='controlador_recupera_contra_c.php'">
+            <input class="buttons_recupera_contra" type="submit" Class="btn" name="btn_pregun_secret" value="Recuperar vìa preguntas secretas">
+             <li><a href="Login.php">volver atras</a></li>
     </section>
+   
+    </form>
+
 </body>
+
+
 
 </html>
