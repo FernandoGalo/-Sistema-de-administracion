@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
     <section class="f_login">
             
     <form class="content" action="recupera_contra_pregunta.php" method="post" enctype="multipart/form-data">

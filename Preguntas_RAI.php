@@ -22,8 +22,34 @@
     <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
 </head>
 <body>
-// este apartado es para responder 3 preguntas  cuando el usuario se autoregistro en "Registro_N_Usuario"
-// aca solo se registran las preguntas y no se cambia la contraseña
 
+<section class="primer_i">
 
+<form class="content" action="Mas_Preguntas.php" method="post" enctype="multipart/form-data">
+<?php 
+    if(isset($_GET['error'])) { ?>
+     <p class="error"><?php echo $_GET['error']; ?></p>
+    <?php } ?>
+
+    <?php
+     include ("conexion_BD.php");
+     //require ("preguntas.php");
+$sql=$conexion->query("SELECT * FROM tbl_preguntas");
+?>
+
+<h3>Seleccione una pregunta</h3>
+<select class="controls" type="text" name="Pregunta" required ><br>
+    <?php
+while($row=mysqli_fetch_array($sql)){
+?>
+         <option value="<?php echo $row['ID_Pregunta'];?>"><?php echo $row['Pregunta'];?></option>
+  <?php
+  }
+?>
+
+<input class="controls" type="text" name="respuesta" placeholder="Ingrese la Respuesta "><br>
+
+<input class="buttons" type="submit" Class="btn" name="btn_enviar_M_P" value="Enviar"> 
+</form>
+</section>
 </html>

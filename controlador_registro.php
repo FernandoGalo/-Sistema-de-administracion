@@ -1,9 +1,4 @@
 <?php
-$sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
-                
-while($row=mysqli_fetch_array($sql1)){
-     $diasV=$row['Valor'];
-}
 /*cuando se presiona el boton enviar registro */ 
 if (!empty($_POST["btn_enviar_R"])) {
     /*si el campo usuario o contraseña o nombre completo o contraseña no tiene datos envia una alterta*/
@@ -47,9 +42,14 @@ if (!empty($_POST["btn_enviar_R"])) {
                 $R_contra=$_POST["R_contra"];
                 $R_Correo=$_POST["R_correo"];
                 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
+                $sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
+                
+                    while($row=mysqli_fetch_array($sql1)){
+                    $diasV=$row['Valor'];
+                    }
                 $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
                 $sql=$conexion->query("INSERT INTO tbl_ms_usuario(ID_Usuario,ID_Rol,Nombre_Usuario,Usuario,Contraseña,Correo_Electronico,Fecha_Ultima_conexion, Preguntas_contestadas, Primer_ingreso, Fecha_vencimiento, Creado_por, Fecha_Creacion, Modificado_Por, Fecha_Modificacion, Estado_Usuario, Intentos) 
-                VALUES ('$ID_Usuario',1,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,0,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','NUEVO',0)");
+                VALUES ('$ID_Usuario',1,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','NUEVO',0)");
                 //aqui iria la funcion bitacora                    
 
                         $model = new EVENT_BITACORA;
@@ -64,7 +64,6 @@ if (!empty($_POST["btn_enviar_R"])) {
 
                 if ($sql) {
                         echo'<script>alert("Datos Guardados exitosamente ")</script>';
-                          header("refresh:0;url=Login.php");
                 } else {
             ini_set('error_reporting', E_ALL);
                 }
@@ -72,7 +71,11 @@ if (!empty($_POST["btn_enviar_R"])) {
                 include_once('EVENT_BITACORA.php');
                 require_once('EVENT_BITACORA.php');
 
+                
                 //regNuevoUser();
+                session_start();
+                $_SESSION['user']=$R_usuario;
+                $_SESSION['ID_User']=$ID_Usuario;
                 header("location: Preguntas_RAI.php"); /*como esto es autoregistro el usuario debe configurar las preguntas secretas */
                 }
                     
