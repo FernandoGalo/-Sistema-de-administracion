@@ -1,3 +1,13 @@
+<?php
+
+$conexion = new mysqli("localhost", "root", "", "bd_asociacion_creo_en_ti", "3306");
+$conexion->set_charset("utf8");
+session_start();
+require_once "EVENT_BITACORA.php";
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -94,29 +104,44 @@
                           </form>
 
                         <thead>
-                            <th>ID</th>
-                            <th>ID ROL</th>
-                            <th>Nombre_usuario</th>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Rol</th>
+                            <th>correo electronico</th>
                             <th>Contraseña</th>
-                            <th>fecha ultima conexion</th>
-                            <th>Estado</th>
+                            <th>Fecha Creacion</th>
+                            <th>Fecha Vencimiento </th>
+                            <th>Estado del usuario</th>
                           </thead>
                           <tbody>                            
                           </tbody>
-                          <tfoot>     
-                            <th>ID</th>
-                            <th>ID ROL</th>
-                            <th>Nombre_usuario</th>
-                            <th>Contraseña</th>
-                            <th>fecha ultima conexion</th>
-                            <th>Estado</th>
-                            <th></th>
-                            <th></th>
+                          <tfoot>
+
+                          <?php
+                          $sql="SELECT * from tbl_ms_usuario";
+                          $result=mysqli_query($conexion,$sql);
+
+                           while($mostrar=mysqli_fetch_array($result)){
+                           ?>
+
+                            <tr>
+                         <td><?php echo $mostrar['Usuario']?></td> 
+                         <td><?php echo $mostrar['Nombre_Usuario']?></td>
+                         <td><?php echo $mostrar['ID_Rol']?></td>
+                         <td><?php echo $mostrar['Correo_electronico']?></td>
+                         <td><?php echo $mostrar['Contraseña']?></td>
+                         <td><?php echo $mostrar['Fecha_Creacion']?></td>
+                         <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
+                         <td><?php echo $mostrar['Estado_Usuario']?></td>
+                             </tr>
+                            <?php
+                             }
+                             ?>     
                           </tfoot>
                         </table>
                     </div>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" method="POST">
+                        <form name="formulario" id="formulario" action="Agregar.php" method="POST">
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
