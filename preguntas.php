@@ -32,9 +32,15 @@ require 'conexion_BD.php';
                 //edicion de contraseña, preguntas y primer ingreso
                 $sql2=$conexion->query("UPDATE tbl_ms_usuario SET Contraseña='$NContra', Preguntas_Contestadas='1',Primer_Ingreso='1', Modificado_Por='$User', Fecha_Modificacion='$R_Fecha_actual', Estado_Usuario='ACTIVO' WHERE ID_Usuario='$idUser'");
 
+                $sql4=$conexion->query("UPDATE tbl_ms_usuario SET Preguntas_Contestadas='1' WHERE Usuario='$User'");
+                
                 if ($sql) {
                         echo'<script>alert("Datos Guardados exitosamente ")</script>';
-                          header("refresh:0;url=Login.php");
+                        session_start();
+                        
+                        $_SESSION['user']=$User;
+                        $_SESSION['ID_User']=$idUser;
+                        header("location: Preguntas_RAI.php");
                 } else {
             ini_set('error_reporting', E_ALL);
            
