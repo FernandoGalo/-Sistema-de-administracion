@@ -28,6 +28,58 @@
 
     <link rel="preload" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>
+function soloLetras(e) {
+    // Obtener el código ASCII de la tecla presionada
+    var key = e.keyCode || e.which;
+    
+    // Convertir el código ASCII a una letra
+    var letra = String.fromCharCode(key).toLowerCase();
+    
+    // Definir la expresión regular
+    var soloLetras = /[a-z\s]/;
+    
+    // Verificar si la letra es válida
+    if (!soloLetras.test(letra)) {
+        // Si la letra no es válida, cancelar el evento
+        e.preventDefault();
+        return false;
+    }
+}
+</script>
+    <script>
+		function validarMayusculas(e) {
+			var tecla = e.keyCode || e.which;
+			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+			var letras = /^[A-Z]+$/;
+
+			if(!letras.test(teclaFinal)){
+				e.preventDefault();
+			}
+		}
+	</script>
+            <script>
+function bloquearEspacio(event) {
+  var tecla = event.keyCode || event.which;
+  if (tecla == 32) {
+    return false;
+  }
+}
+</script>
+<script>
+function mostrarContrasena() {
+    let R_contra = document.getElementById("R_contra");
+    let R_contra_2= document.getElementById("R_contra_2");
+
+    if (R_contra.type == "password") {
+        R_contra.type = "text";
+        R_contra_2.type = "text";
+    } else {
+        R_contra.type = "password";
+        R_contra_2.type = "password";
+    }
+  }
+</script>
 </head>
 <body>
     <section class="f_login">
@@ -45,13 +97,13 @@
              <p class="error"><?php echo $_GET['error']; ?></p> <!-- esto manda los errores php que esten sucediendo -->
             <?php } ?>
             <h3>Nombre completo</h3>
-        <input class="controls" type="text" name="R_Nombre" placeholder="Ingrese su Nombre completo"><br> <!--text de nombre completo -->
+        <input class="controls" type="text" name="R_Nombre" onkeypress="return soloLetras(event);" placeholder="Ingrese su Nombre completo"><br> <!--text de nombre completo -->
         <h3>Nombre de usuario</h3>
-        <input class="controls" type="text" maxlength="15" name="R_usuario" placeholder="Ingrese su Usuario"><br>
-        <h3>contraseña</h3>
-        <input class="controls" type="password" maxlength="8" name="R_contra" placeholder="Ingrese su Contraseña"><br>
-        <h3>confirmar contraseña</h3>
-        <input class="controls" type="password" maxlength="8" name="R_contra_2" placeholder="Ingrese su Contraseña"><br>
+        <input class="controls" type="text" maxlength="15" name="R_usuario" onkeypress="validarMayusculas(event)" placeholder="Ingrese su Usuario"><br>
+        <h3>contraseña</h3> <button type="button" class="fa fa-eye" onclick="mostrarContrasena()"></button>
+        <input class="controls" type="password" maxlength="8" name="R_contra" id="R_contra" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese su Contraseña"><br>
+        <h3>Confirmar Contraseña</h3>
+        <input class="controls" type="password" maxlength="8" name="R_contra_2" id="R_contra_2" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese nuevamente la Contraseña"><br>
         <h3>Correo Electronico</h3>
         <input class="controls" type="text" name="R_correo" placeholder="Ingrese su Correo Electronico"><br>
 
