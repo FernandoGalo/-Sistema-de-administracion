@@ -62,7 +62,7 @@ require_once "EVENT_BITACORA.php";
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="period.html"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
 						</li>
 					</ul>
 				</li>
@@ -104,6 +104,7 @@ require_once "EVENT_BITACORA.php";
                           </form>
 
                         <thead>
+                            <th>ID</th>
                             <th>Usuario</th>
                             <th>Nombre</th>
                             <th>Rol</th>
@@ -125,6 +126,7 @@ require_once "EVENT_BITACORA.php";
                            ?>
 
                             <tr>
+                         <td><?php echo $mostrar['ID_Usuario']?></td> 
                          <td><?php echo $mostrar['Usuario']?></td> 
                          <td><?php echo $mostrar['Nombre_Usuario']?></td>
                          <td><?php echo $mostrar['ID_Rol']?></td>
@@ -144,27 +146,45 @@ require_once "EVENT_BITACORA.php";
                         <form name="formulario" id="formulario" action="Agregar.php" method="POST">
                         <div class="container">
                           <div class="row">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>ID:</label>
+                            <input type="number" class="form-control" name="ID" id="ID" maxlength="20" placeholder="ID">
+                          </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Nombre usuario(*):</label>
-                            <input type="hidden" name="idusuario" id="idusuario">
-                            <input type="text" class="form-control" name="Nombre usuario" id="Nombre usuario" maxlength="100" placeholder="Nombre usuario" required>
+                            <label>Usuario(*):</label>
+                            <input type="hidden" name="usuario" id="usuario">
+                            <input type="text" class="form-control" name="usuario" id="usuario" maxlength="100" placeholder="Nombre usuario" required>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Nombre Usuario(*):</label>
+                            <input type="hidden" name="nombusu" id="nombusu">
+                            <input type="text" class="form-control" name="nombusu" id="nombusu" maxlength="100" placeholder="Nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Rol:</label>
                             <input type="number" class="form-control" name="Rol" id="Rol" maxlength="20" placeholder="Rol">
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Correo electronico(*):</label>
+                            <input type="hidden" name="correo" id="correo">
+                            <input type="text" class="form-control" name="correo" id="correo" maxlength="100" placeholder="Nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Contraseña (*):</label>
                             <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Fecha:</label>
-                            <input type="text" class="form-control" name="Fecha" id="Fecha" maxlength="20" placeholder="Fecha">
+                            <label>Fecha Creacion:</label>
+                            <input type="text" class="form-control" name="Fechacrea" id="Fechacrea" maxlength="20" placeholder="Fecha">
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Estado:</label>
-                            <ul style="list-style: none;" id="permisos">
-                            </ul>
+                            <label>Fecha Vencimiento:</label>
+                            <input type="text" class="form-control" name="Fechaven" id="Fechaven" maxlength="20" placeholder="Fecha">
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Estado(*):</label>
+                            <input type="hidden" name="estado" id="estado">
+                            <input type="text" class="form-control" name="estado" id="estado" maxlength="100" placeholder="Nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="zmdi zmdi-download"></i> Guardar</button>

@@ -1,3 +1,13 @@
+<?php
+
+$conexion = new mysqli("localhost", "root", "", "bd_asociacion_creo_en_ti", "3306");
+$conexion->set_charset("utf8");
+session_start();
+require_once "EVENT_BITACORA.php";
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,7 +38,7 @@
 						</a>
 					</li>
 					<li>
-                        <a href="Login.php" class="btn-exit-system">
+						<a href="Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -72,9 +82,62 @@
 		</nav>
 		<!-- Muestra el contenido de la pagina -->
 		<div class="container-fluid">
-			<h1>Sistema Principal</h1>
-		</div>
-		<div class="container-fluid">
+        <div class="row">
+              <div class="col-md-12">
+                  <div class="box">
+                    <div class="box-header with-border">
+                          <h1 class="box-title">Bitacora</h1>
+                        </div>
+                        <br>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- centro -->
+                    <div class="panel-body table-responsive" id="listadoregistros">
+                        <table id="tbllistado" class="table table-bordered table-hover">
+                        
+                        <!-- Buscar -->
+                        <form action="" method="post">
+                            <label for="campo">Buscar:</label>
+                            <input type="text" name="campo" id="campo">
+                          </form>
+
+                        <thead>
+                            <th>ID bitacora</th>
+                            <th>fecha</th>
+                            <th>ID usuario</th>
+                            <th>ID objeto</th>
+                            <th>Accion</th>
+                            <th>Descripcion</th>
+                          </thead>
+                          <tbody>                            
+                          </tbody>
+                          <tfoot>
+
+                          <?php
+            $sql="SELECT * from tbl_ms_bitacora";
+            $result=mysqli_query($conexion,$sql);
+
+            while($mostrar=mysqli_fetch_array($result)){
+                ?>
+
+                <tr> 
+                    <td><?php echo $mostrar['ID_Bitacora']?></td>
+                    <td><?php echo $mostrar['Fecha']?></td>
+                    <td><?php echo $mostrar['ID_Usuario']?></td>
+                    <td><?php echo $mostrar['ID_Objeto']?></td>
+                    <td><?php echo $mostrar['Accion']?></td>
+                    <td><?php echo $mostrar['Descripcion']?></td>
+                </tr>
+             <?php
+            }
+             ?>     
+                          </tfoot>
+                        </table>
+                    </div>
+                    <!--Fin centro -->
+                  </div><!-- /.box -->
+              </div><!-- /.col -->
+          </div><!-- /.row -->
 		</div>
 	</section>
 

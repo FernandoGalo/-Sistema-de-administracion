@@ -19,11 +19,6 @@ $sql1=$conexion->query("SELECT Preguntas_Contestadas FROM `tbl_ms_usuario` WHERE
                 $respuesta=$_POST["respuesta"];
                 $R_Fecha_actual = date("Y-m-j");
                 
-
-
-
-              
-  
                 //Insert de Nueva Pregunta
                 $sql=$conexion->query("INSERT INTO tbl_ms_preguntas_x_usuario(`ID_Pregunta`, `ID_Usuario`, `Respuesta`, `Creado_Por`, `Fecha_Creacion`) 
                     VALUES ('$pregunta','$idUser','$respuesta', '$User', '$R_Fecha_actual')");
