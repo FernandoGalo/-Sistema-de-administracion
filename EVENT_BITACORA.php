@@ -155,9 +155,6 @@ class EVENT_BITACORA{
         $total = $consulta->rowCount();
         if($total ==0){
             ?>
-<script>
-    location.href="Login.php";
-</script>
 
             <?php
         }else{
@@ -174,9 +171,6 @@ class EVENT_BITACORA{
             session_start();
             $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
             ?>
-        <script>
-             location.href="Mostrar_Bitacora.php";
-         </script>
 
         <?php
         }
@@ -203,9 +197,7 @@ class EVENT_BITACORA{
         $total = $consulta->rowCount();
         if($total ==0){
             ?>
-<script>
-    location.href="Registro_N_Usuario.php";
-</script>
+
 
             <?php
         }else{
@@ -222,9 +214,6 @@ class EVENT_BITACORA{
             session_start();
             $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
             ?>
-        <script>
-             location.href="Mostrar_Bitacora.php";
-         </script>
 
         <?php
         }

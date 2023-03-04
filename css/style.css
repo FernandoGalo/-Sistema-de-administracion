@@ -480,5 +480,16 @@ height: 40px;
     color: rgb(0, 238, 255);
 }
 
+.button11 {
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button11:hover {
+    background-color: #ccc;
+  }
 
   
