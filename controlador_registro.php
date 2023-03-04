@@ -6,22 +6,21 @@ if (!empty($_POST["btn_enviar_R"])) {
     {
         echo '<div class="alert alert-danger">los campos estan vacios</div>';
     } else{
-        /*esta parte valida si ambas contraseñas son iguales*/
-        if (($_POST["R_contra"]) != ($_POST["R_contra_2"])) {
-            echo '<div class="alert alert-danger">la contraseña es distinta </div>';
-        } else {
-            /*primero llenamos la variable Registro_correo y luego validamos que sea un correo*/ 
-            $R_Correo=$_POST["R_correo"];
-            if (!filter_var($R_Correo, FILTER_VALIDATE_EMAIL)) {
-                echo '<div class="alert alert-danger">formato de correo erroneo</div>'; 
-            }else{
-                /*esta seccion valida si el usuario existe en la base de datos, despues de llenar la variable registro_usuario */
-                $R_usuario=$_POST["R_usuario"];
+        $R_usuario=$_POST["R_usuario"];/*esta seccion valida si el usuario existe en la base de datos, despues de llenar la variable registro_usuario */
                 $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$R_usuario'");
                 if ($datos=$sql->fetch_object()) {
                     echo "<br/>". "El Nombre de Usuario ya existe en la base de datos." . "<br/>";
                     echo "<br/>". "Por favor use otro nombre de usuario." . "<br/>";
                 } else {
+            
+            
+            if (($_POST["R_contra"]) != ($_POST["R_contra_2"])) { /*esta parte valida si ambas contraseñas son iguales*/
+                echo '<div class="alert alert-danger">la contraseña es distinta </div>';
+            }else{
+                $R_Correo=$_POST["R_correo"];/*primero llenamos la variable Registro_correo y luego validamos que sea un correo*/ 
+                if (!filter_var($R_Correo, FILTER_VALIDATE_EMAIL)) {
+                    echo '<div class="alert alert-danger">formato de correo erroneo</div>'; 
+                }else {
                     /*despues de haber validad todo el documento y que se haya cumplido todo comienza esta seccion */
                     /*primero crea un id aleatorio de solo numeros con un tamaño de 5 caracteres */
                     $caracteres = '0123456789'; /*abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ mantengo esto por si se desea usar varchar*/
@@ -49,7 +48,7 @@ if (!empty($_POST["btn_enviar_R"])) {
                     }
                 $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
                 $sql=$conexion->query("INSERT INTO tbl_ms_usuario(ID_Usuario,ID_Rol,Nombre_Usuario,Usuario,Contraseña,Correo_Electronico,Fecha_Ultima_conexion, Preguntas_contestadas, Primer_ingreso, Fecha_vencimiento, Creado_por, Fecha_Creacion, Modificado_Por, Fecha_Modificacion, Estado_Usuario, Intentos) 
-                VALUES ('$ID_Usuario',1,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','ACTIVO',0)");
+                VALUES ('$ID_Usuario',1,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','BLOQUEADO',0)");
                 //aqui iria la funcion bitacora                    
 
                         $model = new EVENT_BITACORA;
@@ -86,5 +85,4 @@ if (!empty($_POST["btn_enviar_R"])) {
         
         
     }
-
 ?>

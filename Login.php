@@ -31,10 +31,38 @@ if(isset($_POST['btn_Login'])){
     <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 767px)' href='css/mobile-style.css' />
     <!-- Para Tablet -->
     <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='css/medium-style.css' />
+    <script>
+		function validarMayusculas(e) {
+			var tecla = e.keyCode || e.which;
+			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+			var letras = /^[A-Z]+$/;
+
+			if(!letras.test(teclaFinal)){
+				e.preventDefault();
+			}
+		}
+	</script>
+            <script>
+function bloquearEspacio(event) {
+  var tecla = event.keyCode || event.which;
+  if (tecla == 32) {
+    return false;
+  }
+}
+</script>
+<script>
+function mostrarPassword() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 </head>
 <body>
-    <section class="f_login">
-            
+<section class="f_login">
     <form actions2="controlador_login.php" method="post">
             <h2>Inicio</h2>
             <div class="logo_l">
@@ -48,10 +76,13 @@ if(isset($_POST['btn_Login'])){
             if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
+    
         <h3>Usuario</h3>
-        <input class="controls" maxlength="15" type="text" name="usuario" placeholder="Ingrese su Usuario"><br> 
+        <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="validarMayusculas(event)"  placeholder="Ingrese su Usuario"><br> 
         <h3>contraseña</h3>
-        <input class="controls" maxlength="8" type="password" name="contra" placeholder="Ingrese su Contraseña"><br>
+        <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
+        <input class="controls" maxlength="8" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese su Contraseña"><br>
+
         <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Secion" ></br>
         <p><a href="renovar-Contra.php">¿Olvidaste la Contraseña?</a><p>
         <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" ></br>
