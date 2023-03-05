@@ -19,7 +19,7 @@ require 'conexion_BD.php';
                 
                 //edicion de contraseña, preguntas y primer ingreso
                 $sql2=$conexion->query("UPDATE tbl_ms_usuario SET Contraseña='$NContra', Modificado_Por='$User', Fecha_Modificacion='$R_Fecha_actual', Estado_Usuario='ACTIVO' WHERE ID_Usuario='$idUser' ");
-
+                $sql2=$conexion->query("INSERT INTO tbl_ms_hist_contraseña(`ID_Usuario`, `Contraseña`, `Creado_Por`, `Fecha_Creacion`) VALUES ('$idUser','$NContra','$User','$R_Fecha_actual')");
                 
                         echo'<script>alert("Datos Guardados exitosamente ")</script>';
                         session_start();
