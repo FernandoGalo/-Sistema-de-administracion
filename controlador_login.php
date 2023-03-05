@@ -16,13 +16,13 @@ if (!empty($_POST["btn_Login"])) {
         
         if ($datos=$sql->fetch_object()) {
             //Si el usuario esta Bloqueado
-            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='BLOQUEADO' ");
+            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='BLOQUEADO' and Usuario='$usuario' ");
             if ($datos=$sql->fetch_object()) {
                  echo '<div class="alert_danger">Usuario Bloqueado, comuniquese con el Administrador del Sistema </div>';
             }else {
                 //si el usuario esta activo y con preguntas ingresadas
 
-            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Primer_Ingreso>=1 and Estado_Usuario='ACTIVO' and
+            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='ACTIVO' and
             Usuario='$usuario' ");
 
 
@@ -35,7 +35,14 @@ if (!empty($_POST["btn_Login"])) {
 
             } else {
                 //si el usuario le faltan ingresar Preguntas
-                header("location: Primer_Ingreso.php");
+                $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
+                
+                while($row=mysqli_fetch_array($sql1)){
+                     $idUser=$row['ID_Usuario'];
+                }
+                $_SESSION['user']=$usuario;
+                $_SESSION['ID_User']=$idUser;
+                header("location: Preguntas_RAI.php");
 
             }
             

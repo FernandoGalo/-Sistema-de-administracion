@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Primer Ingreso </title>
+<title> nueva contraseña </title>
     <link rel="stylesheet" href="css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,7 @@
 <body>
         <section class="primer_i">
 
-        <form class="content" action="preguntas.php" method="post" enctype="multipart/form-data">
+        <form class="content" action="controlador_N_Contra.php" method="post" enctype="multipart/form-data">
         <?php 
             if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
@@ -26,26 +26,10 @@
 
             <?php
              include ("conexion_BD.php");
-             //require ("preguntas.php");
-
-             session_start();
-             $user=$_SESSION['usuario'];
-        $sql=$conexion->query("SELECT * FROM tbl_preguntas");
+             //include ("controlador_N_Contra");
         ?>
-
-        <h3>Seleccione una pregunta</h3>
-        <select class="controls" type="text" name="Pregunta" required ><br>
-            <?php
-        while($row=mysqli_fetch_array($sql)){
-        ?>
-                 <option value="<?php echo $row['ID_Pregunta'];?>"><?php echo $row['Pregunta'];?></option>
-          <?php
-          }
-        ?>
-
-        <input class="controls" type="text" name="respuesta" placeholder="Ingrese la Respuesta "><br>
-
-         <h3>Debe de Realizar cambio de contraseña</h3>
+         <h3>Es necesario un cambio de contraseña</h3>
+         <h3>Por favor ingrese una nueva contraseña</h3>
         <input class="controls" type="password" name="contranueva" placeholder="Ingrese la Contraseña Nueva "><br>
 
        <input class="buttons" type="submit" Class="btn" name="btn_enviar_R" value="Enviar"> 
