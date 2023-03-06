@@ -1,6 +1,6 @@
 <?php
 
-require_once("conexion_BD.php");
+require_once("../conexion_BD.php");
 
 if(!empty($_POST['ID']) && !empty($_POST['usuario']) && !empty($_POST['nombusu']) && !empty($_POST['Rol']) && !empty($_POST['correo']) && !empty($_POST['clave']) && !empty($_POST['Fechacrea']) && !empty($_POST['Fechaven']) && !empty($_POST['estado'])){
 

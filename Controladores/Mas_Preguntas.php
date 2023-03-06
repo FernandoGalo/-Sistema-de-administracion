@@ -1,5 +1,5 @@
 <?php
-require 'conexion_BD.php';
+require '../conexion_BD.php';
        
   
   session_start();
@@ -12,7 +12,7 @@ $sql1=$conexion->query("SELECT Preguntas_Contestadas FROM `tbl_ms_usuario` WHERE
                  while($row=mysqli_fetch_array($sql1)){
                       $preguntas_C=$row['Preguntas_Contestadas'];
                  }
-//if (!empty($_POST["btn_enviar_pi"])) {
+
    
                  
                 $pregunta=$_POST["Pregunta"];
@@ -27,7 +27,7 @@ $sql1=$conexion->query("SELECT Preguntas_Contestadas FROM `tbl_ms_usuario` WHERE
                 
                 if ($sql) {
                           
-                          include("Controlador_Revision_P.php");
+                          include("../Controladores/Controlador_Revision_P.php");
                 } else {
             ini_set('error_reporting', E_ALL);
            

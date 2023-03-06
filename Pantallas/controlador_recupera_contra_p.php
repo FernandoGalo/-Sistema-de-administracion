@@ -9,23 +9,23 @@
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
     <!-- Preload -->
-    <link rel="preload" href="css/normalize.css">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preload" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
 
-    <link rel="preload" href="css/style.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preload" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     
     <section class="f_login">
             
-    <form class="content" action="recupera_contra_pregunta.php" method="post" enctype="multipart/form-data">
+    <form class="content" action="../Controladores/recupera_contra_pregunta.php" method="post" enctype="multipart/form-data">
             <h2>Recuperacion de Contraseña</h2><div class="log_R">
-            <img src="img/asociacion.jpg"> 
+            <img src="../img/asociacion.jpg"> 
             </div>
             <?php
-    include ("conexion_BD.php");
-   include ("recupera_contra_pregunta.php");
+    include ("../conexion_BD.php");
+   include ("../Controladores/recupera_contra_pregunta.php");
     ?>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
@@ -66,7 +66,7 @@
        
     </form>
     <section>
-    <li><a href="renovar-Contra.php">volver atras</a></li>
+    <li><a href="../Pantallas/renovar-Contra.php">volver atras</a></li>
 </body>
 
 </html>

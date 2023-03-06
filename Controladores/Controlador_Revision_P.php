@@ -22,14 +22,14 @@ $sql=$conexion->query("SELECT Preguntas_Contestadas FROM `tbl_ms_usuario` WHERE 
 if ($C_preguntas_respondidas >= $parametro_preguntas) {
    $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='NUEVO' and ID_Usuario='$idUser' ");
             if ($datos=$sql->fetch_object()) {
-               header("location: nueva_Contraseña.php");
+               header("location:../Pantallas/nueva_Contraseña.php");
             }else {
-               header("location: login.php");
+               header("location:../Pantallas/login.php");
             }
    
     
  } else {
-    header("location: Preguntas_RAI.php");
+    header("location:../Pantallas/Preguntas_RAI.php");
  }
  
  // Cerrar la conexión a la base de datos

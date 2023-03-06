@@ -9,23 +9,23 @@
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
     <!-- Preload -->
-    <link rel="preload" href="css/normalize.css">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preload" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
 
-    <link rel="preload" href="css/style.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preload" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
         <section class="primer_i">
 
-        <form class="content" action="controlador_N_Contra.php" method="post" enctype="multipart/form-data">
+        <form class="content" action="../Controladores/controlador_N_Contra.php" method="post" enctype="multipart/form-data">
         <?php 
             if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
             <?php } ?>
 
             <?php
-             include ("conexion_BD.php");
+             include ("../conexion_BD.php");
              //include ("controlador_N_Contra");
         ?>
          <h3>Es necesario un cambio de contraseña</h3>

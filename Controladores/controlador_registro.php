@@ -1,4 +1,5 @@
 <?php
+require '../conexion_BD.php';
 /*cuando se presiona el boton enviar registro */ 
 if (!empty($_POST["btn_enviar_R"])) {
     /*si el campo usuario o contraseña o nombre completo o contraseña no tiene datos envia una alterta*/
@@ -51,14 +52,7 @@ if (!empty($_POST["btn_enviar_R"])) {
                 VALUES ('$ID_Usuario',3,'$R_Nombre', '$R_usuario','$R_contra','$R_Correo','$R_Fecha_actual',0,1,'$R_F_Vencida','$R_usuario', '$R_Fecha_actual','$R_usuario', '$R_Fecha_actual','BLOQUEADO',0)");
                 //aqui iria la funcion bitacora                    
 
-                        $model = new EVENT_BITACORA;
-                        //$model->R_Nombre = $_POST['R_Nombre'];
-                        $model->R_usuario = $_POST['R_usuario'];
-                        $model->R_contra = $_POST['R_contra'];
-                        //$model->R_contra_2 = $_POST['R_contra_2'];
-                        //$model->R_correo = $_POST['R_correo'];
-                        $model->regNuevoUser();
-                     //Insert de Historico de Contraseñas
+                       
                 $sql2=$conexion->query("INSERT INTO tbl_ms_hist_contraseña(`ID_Usuario`, `Contraseña`, `Creado_Por`, `Fecha_Creacion`) VALUES ('$ID_Usuario','$R_contra','$R_usuario','$R_Fecha_actual')");
 
                 if ($sql) {
@@ -66,16 +60,24 @@ if (!empty($_POST["btn_enviar_R"])) {
                 } else {
             ini_set('error_reporting', E_ALL);
                 }
+                $model = new EVENT_BITACORA;
+                //$model->R_Nombre = $_POST['R_Nombre'];
+                $model->R_usuario = $_POST['R_usuario'];
+                $model->R_contra = $_POST['R_contra'];
+                //$model->R_contra_2 = $_POST['R_contra_2'];
+                //$model->R_correo = $_POST['R_correo'];
+                $model->regNuevoUser();
+             //Insert de Historico de Contraseñas
 
-                include_once('EVENT_BITACORA.php');
-                require_once('EVENT_BITACORA.php');
+                include_once('../EVENT_BITACORA.php');
+                require_once('../EVENT_BITACORA.php');
 
                 
                 //regNuevoUser();
                 session_start();
                 $_SESSION['user']=$R_usuario;
                 $_SESSION['ID_User']=$ID_Usuario;
-                header("location: Preguntas_RAI.php"); /*como esto es autoregistro el usuario debe configurar las preguntas secretas */
+                header("location:../Pantallas/Preguntas_RAI.php"); /*como esto es autoregistro el usuario debe configurar las preguntas secretas */
                 }
                     
             }

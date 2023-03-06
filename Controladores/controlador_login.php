@@ -1,4 +1,5 @@
 <?php
+require '../conexion_BD.php';
 /*cuando se presiona el boton dentro de login se activa esta funcion */
 if (!empty($_POST["btn_Login"])) {
     /*si el apartado text de usuario y contraseña esta vacio manda un echo de campo vacio */
@@ -31,7 +32,7 @@ if (!empty($_POST["btn_Login"])) {
                  session_start();
                 $_SESSION['user']=$usuario;
                 $_SESSION['passw']=$contra;
-                header("location: controlador_de_inicio.php");
+                header("location: ../Controladores/controlador_de_inicio.php");
 
             } else {
                 //si el usuario le faltan ingresar Preguntas
@@ -40,9 +41,10 @@ if (!empty($_POST["btn_Login"])) {
                 while($row=mysqli_fetch_array($sql1)){
                      $idUser=$row['ID_Usuario'];
                 }
+                session_start();
                 $_SESSION['user']=$usuario;
                 $_SESSION['ID_User']=$idUser;
-                header("location: Preguntas_RAI.php");
+                header("location: ../Pantallas/Preguntas_RAI.php");
 
             }
             
@@ -85,7 +87,7 @@ if (!empty($_POST["btn_Login"])) {
 }  
 /*este boton te lleva a registro */
 if (!empty($_POST["btn_R_Ingreso"])) {
-    header("location: Registro_N_Usuario.php");
+    header("location: ../Pantallas/Registro_N_Usuario.php");
 }
     
 

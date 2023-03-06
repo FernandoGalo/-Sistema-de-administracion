@@ -1,5 +1,5 @@
 <?php
-require 'conexion_BD.php';
+require '../conexion_BD.php';
 
 $colums = [ 'ID_Usuario','ID_Rol', 'Nombre_Usuario', 'Contraseña', 'Fecha_Ultima_conexion', 'Estado_Usuario'];
 $table = "tbl_ms_usuario";

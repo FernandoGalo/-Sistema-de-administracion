@@ -1,5 +1,5 @@
 <?php
-include ("conexion_BD.php");
+include ("../conexion_BD.php");
 
 if (!empty($_POST["btn_enviar_R"])) {
  //session_start();
@@ -16,7 +16,7 @@ $sql=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$User' and 
         
             echo'<script>alert("Ingrese un Usuario Valido ")</script>';
         
-     header( "refresh:0;url=controlador_recupera_contra_p.php" ); 
+     header( "refresh:0;url=../Pantallas/controlador_recupera_contra_p.php" ); 
     } else {
         
         //Extrae el Id del usuario
@@ -34,7 +34,7 @@ $sql=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$User' and 
 
 
                  echo'<script>alert("Contraseña Actualizada ")</script>';
-                          header("refresh:0;url=Sistema_Principal.php");
+                          header("refresh:0;url=../Pantallas/Home.HTML");
 
 
 
@@ -42,7 +42,7 @@ $sql=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$User' and 
             //edicion de contraseña, preguntas y primer ingreso
                 $sql2=$conexion->query("UPDATE tbl_ms_usuario SET Estado_Usuario='BLOQUEADO' WHERE ID_Usuario='$idUser'");
                  echo'<script>alert("Pregunta o respuesta Invalida. Usuario Bloqueado ")</script>';
-                   header( "refresh:0;url=controlador_recupera_contra_p.php" ); 
+                   header( "refresh:0;url=../Pantallas/controlador_recupera_contra_p.php" ); 
    
         }
 

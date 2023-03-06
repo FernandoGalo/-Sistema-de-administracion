@@ -1,6 +1,6 @@
 <?php 
 
- require_once "EVENT_BITACORA.php";
+ require_once "../EVENT_BITACORA.php";
  if(isset($_POST['btn_enviar_R'])){
 
      $model = new EVENT_BITACORA;
@@ -23,11 +23,11 @@
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
     <!-- Preload -->
-    <link rel="preload" href="css/normalize.css">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preload" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
 
-    <link rel="preload" href="css/style.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preload" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script>
 function soloLetras(e) {
     // Obtener el código ASCII de la tecla presionada
@@ -84,14 +84,14 @@ function mostrarContrasena() {
 <body>
     <section class="f_login">
             
-    <form actions2="controlador_registro.php" method="post"> <!--envia datos de tipo post -->
+    <form actions2="../Controladores/controlador_registro.php" method="post"> <!--envia datos de tipo post -->
             <h2>Registro</h2>
             <div class="log_R">
-            <img src="img/asociacion.jpg">  <!--logo -->
+            <img src="../img/asociacion.jpg">  <!--logo -->
             </div>
             <?php
-    include ("conexion_BD.php");
-    include ("controlador_registro.php"); /*incluyo los controladores que necesita para funcionar */
+    include ("../conexion_BD.php");
+    include ("../Controladores/controlador_registro.php"); /*incluyo los controladores que necesita para funcionar */
     ?>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p> <!-- esto manda los errores php que esten sucediendo -->
@@ -111,7 +111,7 @@ function mostrarContrasena() {
        
     </form>
     <section>
-    <li><a href="Login.php">volver atras</a></li> <!-- text que te manda a login-->
+    <li><a href="../Pantallas/Login.php">volver atras</a></li> <!-- text que te manda a login-->
 </body>
 
 </html>

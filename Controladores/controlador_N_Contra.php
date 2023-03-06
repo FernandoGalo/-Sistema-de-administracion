@@ -1,5 +1,5 @@
 <?php
-require 'conexion_BD.php';
+require '../conexion_BD.php';
        
   
   session_start();
@@ -26,7 +26,7 @@ require 'conexion_BD.php';
                         
                         $_SESSION['user']=$User;
                         $_SESSION['ID_User']=$idUser;
-                        header("location: Login.php");
+                        header("location:../Pantallas/Login.php");
             ini_set('error_reporting', E_ALL);
            
           // } 
