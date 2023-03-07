@@ -3,6 +3,11 @@ require '../conexion_BD.php';
 /*cuando se presiona el boton enviar registro */ 
 if (!empty($_POST["btn_enviar_R"])) {
     /*si el campo usuario o contraseña o nombre completo o contraseña no tiene datos envia una alterta*/
+    $Contra=$_POST["R_contra"];
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W]).{8,}$/', $Contra)) {
+        echo "La contraseña debe tener al menos una letra minúscula, una letra mayúscula, un carácter especial y un número.";
+        echo"ingrese una contraseña de 8 digitos";
+    } else {
     if (empty($_POST["R_usuario"]) and empty($_POST["R_contra"])and empty($_POST["R_correo"]) and empty($_POST["R_Nombre"])) 
     {
         echo '<div class="alert alert-danger">los campos estan vacios</div>';
@@ -85,6 +90,6 @@ if (!empty($_POST["btn_enviar_R"])) {
         }
         }
         
-        
+    }  
     }
 ?>

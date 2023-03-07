@@ -12,9 +12,9 @@ if (!empty($_POST["btn_Login"])) {
         $contra=$_POST["contra"];
         session_start();
         $_SESSION['usuario']=$usuario;
+
+
         $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and Contraseña='$contra'");
-        
-        
         if ($datos=$sql->fetch_object()) {
             //Si el usuario esta Bloqueado
             $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='BLOQUEADO' and Usuario='$usuario' ");
@@ -60,14 +60,11 @@ if (!empty($_POST["btn_Login"])) {
                          $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario'");
                   while ($row=mysqli_fetch_array($sql)) {
                            $intentos_u=$row['Intentos']+1;
+                           if ($intentos_u>=$intentos_p) {
+                            //bloquea el usuario si llego a los intentos permitidos
+                                $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Estado_Usuario='BLOQUEADO', Intentos='$intentos_u' WHERE Usuario='$usuario'");
+                               echo '<div class="alert alert-danger">Usuario Bloqueado, comuniquese con el Administrador del Sistema </div>';
 
-                               if ($intentos_u>=$intentos_p) {
-                                //bloquea el usuario si llego a los intentos permitidos
-                                    $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Estado_Usuario='BLOQUEADO', Intentos='$intentos_u' WHERE Usuario='$usuario'");
-                                   echo '<div class="alert alert-danger">Usuario Bloqueado, comuniquese con el Administrador del Sistema </div>';
-                                
-                                
-                                
                             } else {
                                 //suma intentos
                                 $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Intentos='$intentos_u' WHERE Usuario='$usuario'");

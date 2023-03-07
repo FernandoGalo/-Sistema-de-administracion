@@ -27,7 +27,7 @@
 <body style="background: rgb(1,5,36);
             background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
 
-<form action="../Controladores/controlador_recupera_contra_p.php" method="post">
+<form action="../pantallas/controlador_recupera_contra_p.php" method="post">
     <section class="recuperar_contra">
     <?php
    
@@ -46,7 +46,7 @@
         <h4>Por favor, Eliga una opcion</h4>
           
             <input class="buttons_recupera_contra" type="button" Class="btn" name="btn_enviar_C" value="Enviar contraseña por correo" onclick="window.location.href='controlador_recupera_contra_c.php'">
-            <input class="buttons_recupera_contra" type="submit" Class="btn" name="btn_pregun_secret" value="Recuperar vìa preguntas secretas">
+            <input class="buttons_recupera_contra" type="submit" Class="btn" name="btn_pregun_secret" value="Recuperar vía preguntas secretas">
              <li><a href="../Pantallas/Login.php">volver atras</a></li>
     </section>
    
