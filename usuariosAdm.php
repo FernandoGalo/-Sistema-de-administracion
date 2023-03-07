@@ -15,6 +15,11 @@ require_once "EVENT_BITACORA.php";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="./css/main.css">
+  <script type="text/javascript">
+    function confirmar(){
+      return confirm('¿Está Seguro?, se eliminará el usuario');
+    }
+  </script>
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -87,6 +92,7 @@ require_once "EVENT_BITACORA.php";
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento usuarios</h1>
+                          <a href="Insert_Usuarios.php">Nuevo Usuario</a>
                           <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Usuario</button>
                           <div class="box-tools pull-right">
                         </div>
@@ -126,15 +132,20 @@ require_once "EVENT_BITACORA.php";
                            ?>
 
                             <tr>
-                         <td><?php echo $mostrar['ID_Usuario']?></td> 
-                         <td><?php echo $mostrar['Usuario']?></td> 
-                         <td><?php echo $mostrar['Nombre_Usuario']?></td>
-                         <td><?php echo $mostrar['ID_Rol']?></td>
-                         <td><?php echo $mostrar['Correo_electronico']?></td>
-                         <td><?php echo $mostrar['Contraseña']?></td>
-                         <td><?php echo $mostrar['Fecha_Creacion']?></td>
-                         <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
-                         <td><?php echo $mostrar['Estado_Usuario']?></td>
+                              <td><?php echo $mostrar['ID_Usuario']?></td> 
+                              <td><?php echo $mostrar['Usuario']?></td> 
+                              <td><?php echo $mostrar['Nombre_Usuario']?></td>
+                              <td><?php echo $mostrar['ID_Rol']?></td>
+                              <td><?php echo $mostrar['Correo_electronico']?></td>
+                              <td><?php echo $mostrar['Contraseña']?></td>
+                              <td><?php echo $mostrar['Fecha_Creacion']?></td>
+                              <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
+                              <td><?php echo $mostrar['Estado_Usuario']?></td>
+                              <td>
+                                <?php echo "<a href='Update_Usuarios.php?ID_Usuario=".$mostrar['ID_Usuario']."'>EDITAR</a>"; ?>
+                                -
+                                <?php echo "<a href='Delete_Usuarios.php?Nombre_Usuario=".$mostrar['Nombre_Usuario']."' onclick='return confirmar()'>ELIMINAR</a>"; ?>
+                              </td>
                              </tr>
                             <?php
                              }
