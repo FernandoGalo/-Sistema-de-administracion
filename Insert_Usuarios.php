@@ -6,6 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGREGAR</title>
     <link rel="stylesheet" href="css/estilos.css">
+
+    <script>
+        function soloLetras(e) {
+            // Obtener el código ASCII de la tecla presionada
+            var key = e.keyCode || e.which;
+            
+            // Convertir el código ASCII a una letra
+            var letra = String.fromCharCode(key).toLowerCase();
+            
+            // Definir la expresión regular
+            var soloLetras = /[a-z\s]/;
+            
+            // Verificar si la letra es válida
+            if (!soloLetras.test(letra)) {
+                // Si la letra no es válida, cancelar el evento
+                e.preventDefault();
+                return false;
+            }
+        }
+        </script>
+            <script>
+                function validarMayusculas(e) {
+                    var tecla = e.keyCode || e.which;
+                    var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+                    var letras = /^[A-Z]+$/;
+
+                    if(!letras.test(teclaFinal)){
+                        e.preventDefault();
+                    }
+                }
+            </script>
+                    <script>
+        function bloquearEspacio(event) {
+        var tecla = event.keyCode || event.which;
+        if (tecla == 32) {
+            return false;
+        }
+        }
+</script>
+
 </head>
 <body>
     <?php
@@ -51,6 +91,22 @@
 
             include("conexion_BD.php");
 
+
+
+
+            if(empty($nombreCompleto)){
+                echo"<p class='error'>* Debes colocar tu nombre completo</p>";
+            }else if(empty($nombreUsuario)){
+                echo"<p class='error'>* Debes colocar tu usuario</p>";
+            }else if(empty($contrasena)){
+                echo"<p class='error'>* Debes colocar tu password</p>";
+            }else if(empty($email)){
+                echo"<p class='error'>* Debes colocar tu correo</p>";
+            }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                echo "<p class='error'> El correo es incorrecto</p>";
+            }else{
+
+                
             $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, 3,'$nombreCompleto', '$nombreUsuario','$contrasena','$email', '$R_F_Vencida','$R_Fecha_actual', 'ACTIVO')";
 
             $resultado = mysqli_query($conexion,$sql);
@@ -69,19 +125,25 @@
                     </script>";
             }
             mysqli_close($conexion);
+            }
+            
+
+
+
+
         }else{
                 
     ?>
     <h1>Agregar Nuevo Usuario</h1>
     <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
         <label>Nombre Completo:</label>
-        <input type="text" name="Nombre_Usuario">
+        <input type="text" name="Nombre_Usuario" maxlength="60" onkeypress="return soloLetras(event);">
         <br>
         <label>Nombre de Usuario</label>
-        <input type="text" name="Usuario">
+        <input type="text" name="Usuario" maxlength="15" onkeypress="validarMayusculas(event);">
         <br>
         <label>Contra</label>
-        <input type="text" name="Contraseña">
+        <input type="text" name="Contraseña" maxlength="8" onkeypress="return bloquearEspacio(event);">
         <br>
         <!-- <label>Confirmar Contra</label>
         <input type="text" name="confPass">
