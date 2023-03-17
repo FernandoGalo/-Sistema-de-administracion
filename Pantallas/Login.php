@@ -81,7 +81,7 @@ function mostrarPassword() {
         <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="validarMayusculas(event)"  placeholder="Ingrese su Usuario"><br> 
         <h3>contraseña</h3>
         <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
-        <input class="controls" maxlength="8" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese su Contraseña"><br>
+        <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese su Contraseña"><br>
 
         <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Sesion" ></br>
         <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" ></br>
