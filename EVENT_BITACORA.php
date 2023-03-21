@@ -5,7 +5,7 @@ class Conexion{
     }
     
 }
-
+include("conexion_BD.php");
 
 class EVENT_BITACORA{
     
@@ -175,6 +175,129 @@ class EVENT_BITACORA{
         <?php
         }
     }
+    public function Cerrarlogin(){
+        
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $sql = "SELECT * FROM tbl_ms_usuario where Usuario=:usuario AND Contraseña=:contra AND Estado_Usuario ='ACTIVO'";
+        $consulta = $conexion->prepare($sql);
+        $consulta->bindParam(':usuario',$this->usuario,PDO::PARAM_STR);
+        $consulta->bindParam(':contra',$this->contra,PDO::PARAM_STR);
+        $consulta->execute();
+        $total = $consulta->rowCount();
+        if($total ==0){
+            ?>
+
+            <?php
+        }else{
+            $fecha = date("Y-m-d");
+            $hora = date("H:i:s");
+            
+            $fila = $consulta->fetch();
+
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['1']."','Salida de sesion','Salio del sistema sistema')";
+            #$sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['ID_Objeto']."','Inicio de secion','Entro al sistema')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+
+            session_start();
+            $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
+            ?>
+
+        <?php
+        }
+    }
+    public function RegInsert(){
+        session_start();
+        
+        $_SESSION['IDUsuarioBitacora'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Accion = "Creacion de usuario";
+            $IDU =  $_SESSION['IDUsuarioBitacora'];
+            $Usuario = $_SESSION['UsuarioBitacora'];
+            $Descripcion = "Nuevo usuario agregado: " .$Usuario;
+            $fecha = date("Y-m-d");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDU', '1', 'Creacion de usuario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+
+    }
+
+
+
+    public function RegUpt(){
+        session_start();
+        $_SESSION['UsuarioBitacoraUP'];
+        $_SESSION['IDUsuarioBitacoraUP'];
+       
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
+            $id =  $_SESSION['IDUsuarioBitacoraUP'];
+            $user = $_SESSION['UsuarioBitacoraUP'];
+            $Descripcion = "Se modifico el usuario: " .$user;
+            $fecha = date("Y-m-d");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$id ', '1', 'Modificacion de usuario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+
+    }
+
+
+
+    public function RegDelete(){
+        session_start();
+
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $IDDEL= $_SESSION['IDUsuarioBitacoraDELETE'];
+            $Nombre_Usuario = $_SESSION['UsuarioBitacoraDELETE'];
+            $Descripcion = "Se elimino el usuario: " .$Nombre_Usuario;
+            $fecha = date("Y-m-d");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', $IDDEL, '1', 'Eliminacion de usuario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+        
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+
+    }
+
 
 
     //===================================================================================

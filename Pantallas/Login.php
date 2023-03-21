@@ -7,13 +7,25 @@ if(isset($_POST['btn_Login'])){
     $model->usuario = $_POST['usuario'];
     $model->contra = $_POST['contra'];
     $model->login();
+
+};
+
+
+?>
+<?php 
+if(isset($_POST['btn_Login'])){
+
+$model = new EVENT_BITACORA;
+$model->usuarioDEL = $_POST['usuario'];
+
+$model->RegDelete();
 };
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title> Login </title>
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
