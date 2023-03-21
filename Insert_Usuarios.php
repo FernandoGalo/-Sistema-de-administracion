@@ -122,7 +122,14 @@
                 echo "<script languaje='JavaScript'>
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('usuariosAdm.php');
-                            </script>";                          
+                            </script>";     
+                            require_once "EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['UsuarioBitacora']=$nombreUsuario;
+                            $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
+                            $model->RegInsert();
+
             }else{
                 // Los dcatos NO ingresaron a la BD
                 echo "<script languaje='JavaScript'>

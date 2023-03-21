@@ -3,7 +3,7 @@
 $conexion = new mysqli("localhost", "root", "", "bd_asociacion_creo_en_ti", "3306");
 $conexion->set_charset("utf8");
 session_start();
-require_once "EVENT_BITACORA.php";
+include("../EVENT_BITACORA.PHP");
 
 ?>
 
@@ -14,7 +14,7 @@ require_once "EVENT_BITACORA.php";
 	<title>Inicio</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -28,7 +28,7 @@ require_once "EVENT_BITACORA.php";
 			<!-- Informacion de usuario de la barra lateral -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./img/avatar.jpg" alt="UserIcon">
+					<img src="../img/avatar.jpg" alt="UserIcon">
 					<figcaption class="text-center text-titles">Nombre de usuario</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -144,7 +144,7 @@ require_once "EVENT_BITACORA.php";
 
 	
 	<!--script en java para los efectos-->
-	<script src="./js/jquery-3.1.1.min.js"></script>
-	<script src="./js/main.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/main.js"></script>
 </body>
 </html>

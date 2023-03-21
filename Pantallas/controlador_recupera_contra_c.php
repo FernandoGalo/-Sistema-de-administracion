@@ -43,7 +43,7 @@
             <?php
             
     include ("../conexion_BD.php");
-   include ("../Pantallas/controlador_recupera_contra_correo.php");
+    include ("../Controladores/recupera_contra_correo.php");
     ?>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p>
