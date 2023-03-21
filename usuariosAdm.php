@@ -1,8 +1,6 @@
 <?php
 
-$conexion = new mysqli("localhost", "root", "", "bd_asociacion_creo_en_ti", "3306");
-$conexion->set_charset("utf8");
-session_start();
+require_once "conexion_BD.php";
 require_once "EVENT_BITACORA.php";
 
 ?>
@@ -92,7 +90,6 @@ require_once "EVENT_BITACORA.php";
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento usuarios</h1>
-                          <a href="Insert_Usuarios.php">Nuevo Usuario</a>
                           <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Usuario</button>
                           <div class="box-tools pull-right">
                         </div>
@@ -119,13 +116,16 @@ require_once "EVENT_BITACORA.php";
                             <th>Fecha Creacion</th>
                             <th>Fecha Vencimiento </th>
                             <th>Estado del usuario</th>
+                            <th>Acciones</th>
                           </thead>
                           <tbody>                            
                           </tbody>
                           <tfoot>
 
                           <?php
-                          $sql="SELECT * from tbl_ms_usuario";
+                          $sql="SELECT u.ID_Usuario, u.Usuario, u.Nombre_Usuario, r.Rol, u.Correo_electronico, u.Contraseña, u.Fecha_Creacion, u.Fecha_Vencimiento, u.Estado_Usuario
+                          FROM tbl_ms_usuario u
+                          JOIN tbl_ms_roles r ON u.ID_Rol = r.ID_Rol";
                           $result=mysqli_query($conexion,$sql);
 
                            while($mostrar=mysqli_fetch_array($result)){
@@ -135,17 +135,20 @@ require_once "EVENT_BITACORA.php";
                               <td><?php echo $mostrar['ID_Usuario']?></td> 
                               <td><?php echo $mostrar['Usuario']?></td> 
                               <td><?php echo $mostrar['Nombre_Usuario']?></td>
-                              <td><?php echo $mostrar['ID_Rol']?></td>
+                              <td><?php echo $mostrar['Rol']?></td>
                               <td><?php echo $mostrar['Correo_electronico']?></td>
                               <td><?php echo $mostrar['Contraseña']?></td>
                               <td><?php echo $mostrar['Fecha_Creacion']?></td>
                               <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
                               <td><?php echo $mostrar['Estado_Usuario']?></td>
                               <td>
-                                <?php echo "<a href='Update_Usuarios.php?ID_Usuario=".$mostrar['ID_Usuario']."'>EDITAR</a>"; ?>
-                                -
-                                <?php echo "<a href='Delete_Usuarios.php?Nombre_Usuario=".$mostrar['Nombre_Usuario']."' onclick='return confirmar()'>ELIMINAR</a>"; ?>
-                              </td>
+                              <a href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' class='boton-editar'>
+                              <i class='zmdi zmdi-edit'></i> Editar
+                              </a>
+                              <a href='Delete_Usuarios.php?Nombre_Usuario=<?php echo $mostrar['Nombre_Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              </a>
+                            </td>
                              </tr>
                             <?php
                              }
@@ -154,51 +157,46 @@ require_once "EVENT_BITACORA.php";
                         </table>
                     </div>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Agregar.php" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_Usuarios.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>ID:</label>
-                            <input type="number" class="form-control" name="ID" id="ID" maxlength="20" placeholder="ID">
-                          </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario(*):</label>
-                            <input type="hidden" name="usuario" id="usuario">
-                            <input type="text" class="form-control" name="usuario" id="usuario" maxlength="100" placeholder="Nombre usuario" required>
+                            <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
+                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Nombre_Usuario" onkeypress="return soloLetras(event);"required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Usuario(*):</label>
-                            <input type="hidden" name="nombusu" id="nombusu">
-                            <input type="text" class="form-control" name="nombusu" id="nombusu" maxlength="100" placeholder="Nombre usuario" required>
+                            <input type="hidden" name="Usuario" id="Usuario">
+                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Nombre usuario" onkeypress="validarMayusculas(event);" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Rol:</label>
-                            <input type="number" class="form-control" name="Rol" id="Rol" maxlength="20" placeholder="Rol">
+                            <label>Rol de usuario:</label>
+                            <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:admin 2:Editor 3:Super">
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Correo electronico(*):</label>
-                            <input type="hidden" name="correo" id="correo">
-                            <input type="text" class="form-control" name="correo" id="correo" maxlength="100" placeholder="Nombre usuario" required>
+                            <input type="hidden" name="Correo_electronico" id="Correo_electronico">
+                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Contraseña (*):</label>
-                            <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña" required>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Fecha Creacion:</label>
-                            <input type="text" class="form-control" name="Fechacrea" id="Fechacrea" maxlength="20" placeholder="Fecha">
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Fecha Vencimiento:</label>
-                            <input type="text" class="form-control" name="Fechaven" id="Fechaven" maxlength="20" placeholder="Fecha">
+                          <label for="contraseña">Contraseña</label>
+                          <div class="input-group">
+                          <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" maxlength="8" onkeypress="return bloquearEspacio(event);" required>
+                           <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="ver-ocultar" onclick="mostrarContrasena()">
+                          <i class="zmdi zmdi-eye"></i>
+                          </button>
+                         </div>
+                         </div>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Estado(*):</label>
-                            <input type="hidden" name="estado" id="estado">
-                            <input type="text" class="form-control" name="estado" id="estado" maxlength="100" placeholder="Nombre usuario" required>
+                            <label>Fecha de Vencimiento(*):</label>
+                            <input type="hidden" name="FechaVencimiento" id="FechaVencimiento">
+                            <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
@@ -215,8 +213,61 @@ require_once "EVENT_BITACORA.php";
 
 	
 	<!--script en java para los efectos-->
+  <script>
+  function mostrarContrasena() {
+    var contrasenaInput = document.getElementById("contraseña");
+    var botonVerOcultar = document.getElementById("ver-ocultar");
+    
+    if (contrasenaInput.type === "password") {
+      contrasenaInput.type = "text";
+      botonVerOcultar.innerHTML = '<i class="zmdi zmdi-eye-off"></i>';
+    } else {
+      contrasenaInput.type = "password";
+      botonVerOcultar.innerHTML = '<i class="zmdi zmdi-eye"></i>';
+    }
+  }
+  </script>
+  <script>
+        function soloLetras(e) {
+            // Obtener el código ASCII de la tecla presionada
+            var key = e.keyCode || e.which;
+            
+            // Convertir el código ASCII a una letra
+            var letra = String.fromCharCode(key).toLowerCase();
+            
+            // Definir la expresión regular
+            var soloLetras = /[a-z\s]/;
+            
+            // Verificar si la letra es válida
+            if (!soloLetras.test(letra)) {
+                // Si la letra no es válida, cancelar el evento
+                e.preventDefault();
+                return false;
+            }
+        }
+        </script>
+            <script>
+                function validarMayusculas(e) {
+                    var tecla = e.keyCode || e.which;
+                    var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+                    var letras = /^[A-Z]+$/;
+
+                    if(!letras.test(teclaFinal)){
+                        e.preventDefault();
+                    }
+                }
+            </script>
+        <script>
+        function bloquearEspacio(event) {
+        var tecla = event.keyCode || event.which;
+        if (tecla == 32) {
+            return false;
+        }
+        }
+</script>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="./js/main.js"></script>
-    <script src="./js/usuario.js"></script>
+  <script src="./js/usuario.js"></script>
+
 </body>
 </html>
