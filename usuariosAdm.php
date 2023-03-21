@@ -65,7 +65,7 @@ require_once "EVENT_BITACORA.php";
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Controladores/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="./Controladores/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
 						</li>
 					</ul>
 				</li>

@@ -12,15 +12,7 @@ if(isset($_POST['btn_Login'])){
 
 
 ?>
-<?php 
-if(isset($_POST['btn_Login'])){
 
-$model = new EVENT_BITACORA;
-$model->usuarioDEL = $_POST['usuario'];
-
-$model->RegDelete();
-};
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
