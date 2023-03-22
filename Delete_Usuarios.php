@@ -1,9 +1,21 @@
-<?php 
+<?php
 $IDusuarioDelete = $_GET['ID_Usuario'];
 // Conexión a la base de datos
 $pdo = new PDO('mysql:host=localhost;dbname=bd_asociacion_creo_en_ti', 'root', '');
-
 // Desactivar las restricciones de clave externa
+$stmt = $pdo->prepare('SELECT Usuario FROM tbl_ms_usuario WHERE ID_Usuario= :id');
+
+// Vincular el valor del ID al parámetro de la consulta
+$id = $IDusuarioDelete; // El ID del usuario a buscar
+$stmt->bindParam(':id', $id);
+
+// Ejecutar la consulta
+$stmt->execute();
+
+// Obtener el resultado de la consulta
+$usuario = $stmt->fetch();
+$usuarioDelete = $usuario['Usuario'];
+
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
 
 // Borrar los registros de las tablas
@@ -31,16 +43,12 @@ if ($totalRowCount > 0) {
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('usuariosAdm.php');
                 </script>";
-                $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE ID_Usuario='$IDDEL'");
                 
-                while($row=mysqli_fetch_array($sql1)){
-                   $Nombre_Usuario=$row['Usuario'];
-                }
                    
                 require_once "EVENT_BITACORA.php";
                 $model = new EVENT_BITACORA;
-                session_start(); 
-                $_SESSION['UsuarioBitacoraDELETE']=$Nombre_Usuario;
+                session_start();
+                $_SESSION['UsuarioBitacoraDELETE']=$usuarioDelete;
                 $_SESSION['IDUsuarioBitacoraDELETE']=$IDusuarioDelete;
                 $model->RegDelete();
              
