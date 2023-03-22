@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title> Recuperar contraseña </title>
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,13 +60,41 @@
      <!-- TERMINA EL WHILE -->
 
          <h3>Debe de Realizar cambio de contraseña</h3>
-        <input class="controls" type="password" name="contranueva" required placeholder="Ingrese la Contraseña Nueva "><br>
-
-       <input class="buttons" type="submit" Class="btn" name="btn_enviar_R" value="Enviar"> 
+        <input class="controls" type="password" name="contranueva" id="contranueva" required placeholder="Ingrese la Contraseña Nueva " onkeypress="return bloquearEspacio(event);" required><br>
+        <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
+        <input class="buttons" type="submit" class="btn" name="btn_enviar_R" value="Enviar"> 
        
     </form>
     <section>
     <li><a href="../Pantallas/renovar-Contra.php">volver atras</a></li>
 </body>
+
+
+<script>
+function mostrarPassword() {
+  var password = document.getElementById("contranueva");
+  var boton = document.querySelector(".fa-eye");
+
+  if (password.type === "password") {
+    password.type = "text";
+    boton.classList.remove("fa-eye");
+    boton.classList.add("fa-eye-slash");
+  } else {
+    password.type = "password";
+    boton.classList.remove("fa-eye-slash");
+    boton.classList.add("fa-eye");
+  }
+}
+</script>
+
+<script>
+        function bloquearEspacio(event) {
+        var tecla = event.keyCode || event.which;
+        if (tecla == 32) {
+            return false;
+        }
+        }
+</script>
+
 
 </html>

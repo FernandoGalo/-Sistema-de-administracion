@@ -38,7 +38,7 @@ include("../EVENT_BITACORA.PHP");
 						</a>
 					</li>
 					<li>
-						<a href="Login.php" class="btn-exit-system">
+						<a href="../Pantallas/Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -71,7 +71,7 @@ include("../EVENT_BITACORA.PHP");
 	</section>
 
 	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage">
+	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
 		<!-- Barra superior -->
 		<nav class="full-box dashboard-Navbar">
 			<ul class="full-box list-unstyled text-right">

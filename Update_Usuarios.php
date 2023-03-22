@@ -12,43 +12,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function soloLetras(e) {
-            // Obtener el código ASCII de la tecla presionada
-            var key = e.keyCode || e.which;
-            
-            // Convertir el código ASCII a una letra
-            var letra = String.fromCharCode(key).toLowerCase();
-            
-            // Definir la expresión regular
-            var soloLetras = /[a-z\s]/;
-            
-            // Verificar si la letra es válida
-            if (!soloLetras.test(letra)) {
-                // Si la letra no es válida, cancelar el evento
-                e.preventDefault();
-                return false;
-            }
-        }
-        </script>
-            <script>
-                function validarMayusculas(e) {
-                    var tecla = e.keyCode || e.which;
-                    var teclaFinal = String.fromCharCode(tecla).toUpperCase();
-                    var letras = /^[A-Z]+$/;
+<script>
+		function validarMayusculas(e) {
+			var tecla = e.keyCode || e.which;
+			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+			var letras = /^[A-Z]+$/;
 
-                    if(!letras.test(teclaFinal)){
-                        e.preventDefault();
-                    }
-                }
-            </script>
-                    <script>
-        function bloquearEspacio(event) {
-        var tecla = event.keyCode || event.which;
-        if (tecla == 32) {
-            return false;
-        }
-        }
+			if(!letras.test(teclaFinal)){
+				e.preventDefault();
+			}
+		}
 </script>
 <title>Inicio</title>
 	<meta charset="UTF-8">
@@ -78,7 +51,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="Login.php" class="btn-exit-system">
+						<a href="./Pantallas/Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -102,7 +75,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="./Controladores/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
 						</li>
 					</ul>
 				</li>
@@ -117,7 +90,7 @@
             $id=$_POST['IDusuario'];
             $userName=$_POST['Nombre_Usuario'];
             $user=$_POST['Usuario'];//Obtenidos desde el formulario
-            //$Rol= $_POST['Rol'];
+            $Rol= $_POST['Rol'];
             $contra=$_POST['contraseña'];
             $email=$_POST['Correo_electronico'];
             $vencimiento = $_POST['FechaVencimiento'];
@@ -143,7 +116,7 @@
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado' WHERE ID_Usuario='$id';";
+            $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', ID_Rol ='$Rol', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado' WHERE ID_Usuario='$id';";
             $resultado=mysqli_query($conexion,$sql);
 
             if($resultado){
@@ -176,7 +149,7 @@
             $idUser=$fila['ID_Usuario'];
             $nombreUsuario=$fila['Nombre_Usuario'];
             $usuario=$fila['Usuario'];//recuperando los datos desde la BD
-            //$Rol=$fila['ID_Rol'];
+            $Rol=$fila['ID_Rol'];
             $pass=$fila['Contraseña'];
             $correo=$fila['Correo_electronico'];
             $vencimiento=$fila['Fecha_Vencimiento'];
@@ -186,7 +159,7 @@
 
     ?>
     	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage">
+	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
 		<!-- Barra superior -->
 		<nav class="full-box dashboard-Navbar">
 			<ul class="full-box list-unstyled text-right">
@@ -219,23 +192,23 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario(*):</label>
                             <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
-                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" onkeypress="return soloLetras(event);" value="<?php echo $nombreUsuario; ?>" placeholder="Nombre usuario" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100"  value="<?php echo $nombreUsuario; ?>" placeholder="Ingrese el usuario" onkeypress="validarMayusculas(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Usuario(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Nombre usuario" onkeypress="validarMayusculas(event);" value="<?php echo $usuario; ?>" required>
+                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" onkeypress="validarMayusculas(event);" value="<?php echo $usuario; ?>" required>
                           </div>
-                          <!--<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Rol de Usuario(*):</label>
-                            <input type="hidden" name="Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="1:Admin,2:Supervisor,3:Editor" value="<?php echo $Rol; ?>"required>
-                          </div>-->
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Correo electronico(*):</label>
-                            <input type="hidden" name="Correo_electronico" id="Correo_electronico">
-                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Nombre usuario" value="<?php echo $correo; ?>" required>
+                            <label>Rol de Usuario(*):</label>
+                            <input type="hidden" name="Rol" id="Rol">
+                            <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:admin 2:Editor 3:Super"value="<?php echo $Rol; ?>"required>
                           </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <label>Correo electrónico (*):</label>
+                           <input type="hidden" name="Correo_electronico" id="Correo_electronico">
+                           <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electrónico" value="<?php echo $correo; ?>" onkeypress="validarCorreo(event)" required>
+                            </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                           <label for="contraseña">Contraseña</label>
                           <div class="input-group">
@@ -250,7 +223,7 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Vencimiento(*):</label>
                             <input type="hidden" name="FechaVencimiento" id="FechaVencimiento">
-                            <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Nombre usuario" value="<?php echo $vencimiento; ?>" required>
+                            <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de vencimiento" value="<?php echo $vencimiento; ?>" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Estado Actual(*)</label>
@@ -293,6 +266,17 @@
 
 
 	<!--script en java para los efectos-->
+  <script>
+		function validarMayusculas(e) {
+			var tecla = e.keyCode || e.which;
+			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+			var letras = /^[A-Z]+$/;
+
+			if(!letras.test(teclaFinal)){
+				e.preventDefault();
+			}
+		}
+	</script>
     <script>
   function mostrarContrasena() {
     var contrasenaInput = document.getElementById("contraseña");
@@ -307,6 +291,25 @@
     }
   }
   </script>
+  <script>
+function validarCorreo(event) {
+  var correo = event.target.value;
+  var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!regex.test(correo)) {
+    event.target.setCustomValidity("Ingrese un correo electrónico válido");
+  } else {
+    event.target.setCustomValidity("");
+  }
+}
+</script>
+<script>
+        function bloquearEspacio(event) {
+        var tecla = event.keyCode || event.which;
+        if (tecla == 32) {
+            return false;
+        }
+        }
+</script>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="./js/main.js"></script>
     <script src="./js/usuario.js"></script>

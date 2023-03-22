@@ -1,6 +1,9 @@
 <?php
 
-require_once "conexion_BD.php";
+
+require 'conexion_BD.php';
+/*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
+
 require_once "EVENT_BITACORA.php";
 
 ?>
@@ -41,7 +44,7 @@ require_once "EVENT_BITACORA.php";
 						</a>
 					</li>
 					<li>
-						<a href="Login.php" class="btn-exit-system">
+						<a href="./Pantallas/Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -74,7 +77,7 @@ require_once "EVENT_BITACORA.php";
 	</section>
 
 	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage">
+	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
 		<!-- Barra superior -->
 		<nav class="full-box dashboard-Navbar">
 			<ul class="full-box list-unstyled text-right">
@@ -163,21 +166,21 @@ require_once "EVENT_BITACORA.php";
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario(*):</label>
                             <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
-                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Nombre_Usuario" onkeypress="return soloLetras(event);"required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de Usuario" onkeypress="validarMayusculas(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Usuario(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Nombre usuario" onkeypress="validarMayusculas(event);" required>
+                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Rol de usuario:</label>
-                            <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:admin 2:Editor 3:Super">
+                            <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Correo electronico(*):</label>
                             <input type="hidden" name="Correo_electronico" id="Correo_electronico">
-                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Nombre usuario" required>
+                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electronico" onkeypress="validarCorreo(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                           <label for="contraseña">Contraseña</label>
@@ -193,7 +196,7 @@ require_once "EVENT_BITACORA.php";
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Vencimiento(*):</label>
                             <input type="hidden" name="FechaVencimiento" id="FechaVencimiento">
-                            <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Nombre usuario" required>
+                            <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de Vencimiento" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
@@ -228,36 +231,28 @@ require_once "EVENT_BITACORA.php";
   }
   </script>
   <script>
-        function soloLetras(e) {
-            // Obtener el código ASCII de la tecla presionada
-            var key = e.keyCode || e.which;
-            
-            // Convertir el código ASCII a una letra
-            var letra = String.fromCharCode(key).toLowerCase();
-            
-            // Definir la expresión regular
-            var soloLetras = /[a-z\s]/;
-            
-            // Verificar si la letra es válida
-            if (!soloLetras.test(letra)) {
-                // Si la letra no es válida, cancelar el evento
-                e.preventDefault();
-                return false;
-            }
-        }
-        </script>
-            <script>
-                function validarMayusculas(e) {
-                    var tecla = e.keyCode || e.which;
-                    var teclaFinal = String.fromCharCode(tecla).toUpperCase();
-                    var letras = /^[A-Z]+$/;
+		function validarMayusculas(e) {
+			var tecla = e.keyCode || e.which;
+			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+			var letras = /^[A-Z]+$/;
 
-                    if(!letras.test(teclaFinal)){
-                        e.preventDefault();
-                    }
-                }
-            </script>
-        <script>
+			if(!letras.test(teclaFinal)){
+				e.preventDefault();
+			}
+		}
+	</script>
+    <script>
+function validarCorreo(event) {
+  var correo = event.target.value;
+  var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!regex.test(correo)) {
+    event.target.setCustomValidity("Ingrese un correo electrónico válido");
+  } else {
+    event.target.setCustomValidity("");
+  }
+}
+</script>
+<script>
         function bloquearEspacio(event) {
         var tecla = event.keyCode || event.which;
         if (tecla == 32) {
