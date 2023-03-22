@@ -125,7 +125,7 @@ if (!empty($_POST["btn_enviar_C"])) {
 
                             $mail->send();
                             echo'<script>alert("Correo Enviado Satisfactoriamente")</script>';
-                            header("refresh:0;url=../Pantallas/Login.php");
+                            header("refresh:0;url=../Pantallas/Nueva_Contra.php");
 
                             //La contraseña se Autoingresa 
                             $sql3=$conexion->query("UPDATE tbl_ms_usuario SET Contraseña='$password', Fecha_Vencimiento='$expiry_date', Modificado_Por='$User', Fecha_Modificacion='$R_Fecha_actual' WHERE ID_Usuario='$idUser'");
