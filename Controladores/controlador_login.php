@@ -16,37 +16,42 @@ if (!empty($_POST["btn_Login"])) {
 
         $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and Contraseña='$contra'");
         if ($datos=$sql->fetch_object()) {
-            //Si el usuario esta Bloqueado
-            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='BLOQUEADO' and Usuario='$usuario' ");
+            //si el usuario esta inactivo (nuevo registro)
+            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='INACTIVO' and Usuario='$usuario' ");
             if ($datos=$sql->fetch_object()) {
-                 echo '<div class="alert_danger">Usuario Bloqueado, comuniquese con el Administrador del Sistema </div>';
-            }else {
-                //si el usuario esta activo y con preguntas ingresadas
-
-            $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='ACTIVO' and
-            Usuario='$usuario' ");
-
-
-            if ($datos=$sql->fetch_object()) {
-                 $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Intentos='0' WHERE Usuario='$usuario'");
-                 session_start();
-                $_SESSION['user']=$usuario;
-                $_SESSION['passw']=$contra;
-                header("location: ../Controladores/controlador_de_inicio.php");
-
-            } else {
-                //si el usuario le faltan ingresar Preguntas
-                $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
-                
-                while($row=mysqli_fetch_array($sql1)){
-                     $idUser=$row['ID_Usuario'];
-                }
-                session_start();
-                $_SESSION['user']=$usuario;
-                $_SESSION['ID_User']=$idUser;
-                header("location: ../Pantallas/Preguntas_RAI.php");
-
-            }
+                 echo '<div class="alert_danger">Usuario inactivo, comuniquese con el Administrador del Sistema </div>';
+            }else{//Si el usuario esta Bloqueado
+                $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='BLOQUEADO' and Usuario='$usuario' ");
+                if ($datos=$sql->fetch_object()) {
+                     echo '<div class="alert_danger">Usuario Bloqueado, comuniquese con el Administrador del Sistema </div>';
+                }else {
+                    //si el usuario esta activo y con preguntas ingresadas
+    
+                $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='ACTIVO' and
+                Usuario='$usuario' ");
+    
+    
+                if ($datos=$sql->fetch_object()) {
+                     $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Intentos='0' WHERE Usuario='$usuario'");
+                     session_start();
+                    $_SESSION['user']=$usuario;
+                    $_SESSION['passw']=$contra;
+                    header("location: ../Controladores/controlador_de_inicio.php");
+    
+                } else {
+                    //si el usuario le faltan ingresar Preguntas
+                    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
+                    
+                    while($row=mysqli_fetch_array($sql1)){
+                         $idUser=$row['ID_Usuario'];
+                    }
+                    session_start();
+                    $_SESSION['user']=$usuario;
+                    $_SESSION['ID_User']=$idUser;
+                    header("location: ../Pantallas/Preguntas_RAI.php");
+    
+                }}
+            
             
             
         }} else {
