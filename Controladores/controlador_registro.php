@@ -65,17 +65,13 @@ if (!empty($_POST["btn_enviar_R"])) {
                 } else {
             ini_set('error_reporting', E_ALL);
                 }
-                $model = new EVENT_BITACORA;
-                //$model->R_Nombre = $_POST['R_Nombre'];
-                $model->R_usuario = $_POST['R_usuario'];
-                $model->R_contra = $_POST['R_contra'];
-                //$model->R_contra_2 = $_POST['R_contra_2'];
-                //$model->R_correo = $_POST['R_correo'];
-                $model->regNuevoUser();
-             //Insert de Historico de Contraseñas
-
-                include_once('../EVENT_BITACORA.php');
-                require_once('../EVENT_BITACORA.php');
+                $nombreUsuario=$R_usuario;
+                require_once "../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['UsuarioBitacora']=$nombreUsuario;
+                            $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
+                            $model->RegInsert();
 
                 
                 //regNuevoUser();
