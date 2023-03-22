@@ -18,14 +18,12 @@ function init() {
 
 //Función limpiar
 function limpiar() {
-    $("#nombre").val("");
-    $("#email").val("");
-    $("#cargo").val("");
-    $("#login").val("");
-    $("#clave").val("");
-    $("#imagenmuestra").attr("src", "");
-    $("#imagenactual").val("");
-    $("#idusuario").val("");
+    $("#Nombre_Usuario").val("");
+    $("#Usuario").val("");
+    $("#Correo_electronico").val("");
+    $("#contrasena").val("");
+    $("#FechaVencimiento").val("");
+    $("#Estado").attr("src", "");
 }
 
 //Función mostrar formulario

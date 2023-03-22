@@ -85,9 +85,11 @@
         if(isset($_POST['enviar'])){
             $nombreCompleto = $_POST['Nombre_Usuario'];
             $nombreUsuario = $_POST['Usuario'];
-            $contrasena = $_POST['Contraseña'];
+            $contraseña = $_POST['contraseña'];
+            $Rol = $_POST['Rol'];
             //$verifContra = $_POST[''];
             $email = $_POST['Correo_electronico'];
+            $vencimiento = $_POST['FechaVencimiento'];
 
             include("conexion_BD.php");
 
@@ -98,16 +100,30 @@
                 echo"<p class='error'>* Debes colocar tu nombre completo</p>";
             }else if(empty($nombreUsuario)){
                 echo"<p class='error'>* Debes colocar tu usuario</p>";
-            }else if(empty($contrasena)){
+            }else if(empty($contraseña)){
                 echo"<p class='error'>* Debes colocar tu password</p>";
+            }else if(empty($Rol)){
+                echo"<p class='error'>* Debes colocar el rol del 1 al 3</p>";
+            }else if(empty($vencimiento)){
+                echo"<p class='error'>* Debes colocar la fecha de vencimiento</p>";
             }else if(empty($email)){
                 echo"<p class='error'>* Debes colocar tu correo</p>";
             }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 echo "<p class='error'> El correo es incorrecto</p>";
             }else{
 
+                if (strlen($contraseña) < 8 || !preg_match('/[a-z]/', $contraseña) || !preg_match('/[A-Z]/', $contraseña) || !preg_match('/[0-9]/', $contraseña) ) {
+                    echo'<script>alert("Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
+                    header("refresh:0;url=usuariosAdm.php");
+                    //echo '<div class="alert_danger">Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula</div>';
+
+
+                }else{
+
                 
-            $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, 3,'$nombreCompleto', '$nombreUsuario','$contrasena','$email', '$R_F_Vencida','$R_Fecha_actual', 'ACTIVO')";
+
+                
+            $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$vencimiento','$R_Fecha_actual', 'NUEVO')";
 
             $resultado = mysqli_query($conexion,$sql);
 
@@ -116,7 +132,14 @@
                 echo "<script languaje='JavaScript'>
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('usuariosAdm.php');
-                            </script>";                          
+                            </script>";     
+                            require_once "EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['UsuarioBitacora']=$nombreUsuario;
+                            $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
+                            $model->RegInsert();
+
             }else{
                 // Los dcatos NO ingresaron a la BD
                 echo "<script languaje='JavaScript'>
@@ -126,35 +149,11 @@
             }
             mysqli_close($conexion);
             }
-            
+        }
 
 
 
 
-        }else{
-                
-    ?>
-    <h1>Agregar Nuevo Usuario</h1>
-    <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-        <label>Nombre Completo:</label>
-        <input type="text" name="Nombre_Usuario" maxlength="60" onkeypress="return soloLetras(event);">
-        <br>
-        <label>Nombre de Usuario</label>
-        <input type="text" name="Usuario" maxlength="15" onkeypress="validarMayusculas(event);">
-        <br>
-        <label>Contra</label>
-        <input type="text" name="Contraseña" maxlength="8" onkeypress="return bloquearEspacio(event);">
-        <br>
-        <!-- <label>Confirmar Contra</label>
-        <input type="text" name="confPass">
-        <br> -->
-        <label>Correo Electronico</label>
-        <input type="text" name="Correo_electronico">
-        <br>
-        <input type="submit" name="enviar" value="AGREGAR">
-        <a href="usuariosAdm.php">Regresar</a>
-    </form>
-    <?php
         }
     ?>
 </body>

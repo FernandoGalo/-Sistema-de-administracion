@@ -594,3 +594,34 @@ body, html{
 		padding-left: 0;
 	}
 }
+
+/*Boton editar y eliminar*/
+.boton-editar, .boton-eliminar {
+	display: inline-block;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+  }
+  
+  .boton-editar {
+	background-color: #4CAF50;
+  }
+  
+  .boton-eliminar {
+	background-color: #f44336;
+  }
+  
+  .boton-editar i, .boton-eliminar i {
+	margin-right: 5px;
+  }
+  
+  .boton-editar:hover, .boton-eliminar:hover {
+	background-color: #333;
+  }
