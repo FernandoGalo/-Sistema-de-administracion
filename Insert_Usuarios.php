@@ -112,6 +112,16 @@
                 echo "<p class='error'> El correo es incorrecto</p>";
             }else{
 
+                if (strlen($contraseña) < 8 || !preg_match('/[a-z]/', $contraseña) || !preg_match('/[A-Z]/', $contraseña) || !preg_match('/[0-9]/', $contraseña) ) {
+                    echo'<script>alert("Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
+                    header("refresh:0;url=usuariosAdm.php");
+                    //echo '<div class="alert_danger">Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula</div>';
+
+
+                }else{
+
+                
+
                 
             $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$vencimiento','$R_Fecha_actual', 'NUEVO')";
 
@@ -139,7 +149,7 @@
             }
             mysqli_close($conexion);
             }
-            
+        }
 
 
 

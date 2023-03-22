@@ -182,7 +182,7 @@ require_once "EVENT_BITACORA.php";
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                           <label for="contraseña">Contraseña</label>
                           <div class="input-group">
-                          <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" maxlength="8" onkeypress="return bloquearEspacio(event);" required>
+                          <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" onkeypress="return bloquearEspacio(event);" required>
                            <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="button" id="ver-ocultar" onclick="mostrarContrasena()">
                           <i class="zmdi zmdi-eye"></i>

@@ -52,7 +52,7 @@ include("../EVENT_BITACORA.PHP");
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
+							<a href="../usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
 						</li>
 					</ul>
 				</li>
