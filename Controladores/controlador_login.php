@@ -33,10 +33,22 @@ if (!empty($_POST["btn_Login"])) {
     
                 if ($datos=$sql->fetch_object()) {
                      $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Intentos='0' WHERE Usuario='$usuario'");
-                     session_start();
-                    $_SESSION['user']=$usuario;
-                    $_SESSION['passw']=$contra;
-                    header("location: ../Controladores/controlador_de_inicio.php");
+                     
+                     $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where ID_Rol='1' and Usuario='$usuario' ");
+                     if ($datos=$sql->fetch_object()) {
+                        //ingreso admin
+                        session_start();
+                        $_SESSION['user']=$usuario;
+                        $_SESSION['passw']=$contra;
+                        header("location: ../Controladores/controlador_de_inicio.php");
+                     }else{
+                        //ingreso no admin
+                        session_start();
+                        $_SESSION['user']=$usuario;
+                        $_SESSION['passw']=$contra;
+                        header("location: ../Controladores/controlador_de_inicio.php");
+                     }
+                     
     
                 } else {
                     //si el usuario le faltan ingresar Preguntas
