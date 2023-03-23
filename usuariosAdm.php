@@ -148,7 +148,7 @@ require_once "EVENT_BITACORA.php";
                               <a href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i> Editar
                               </a>
-                              <a href='Delete_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <a href='Delete_Usuarios.php?Usuario=<?php echo $mostrar['Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i> Eliminar
                               </a>
                             </td>

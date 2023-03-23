@@ -209,7 +209,7 @@ class EVENT_BITACORA{
     }
     public function RegInsert(){
         session_start();
-        
+        $IDGlobal=$_SESSION['user'];
         $_SESSION['IDUsuarioBitacora'];
             $model = new conexion();
             $conexion = $model->conectar();
@@ -272,10 +272,14 @@ class EVENT_BITACORA{
 
     public function RegDelete(){
         session_start();
+
             $model = new conexion();
             $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
             $IDDEL= $_SESSION['IDUsuarioBitacoraDELETE'];
-            $Nombre_Usuario=$_SESSION['UsuarioBitacoraDELETE'];
+            $Nombre_Usuario = $_SESSION['UsuarioBitacoraDELETE'];
             $Descripcion = "Se elimino el usuario: " .$Nombre_Usuario;
             $fecha = date("Y-m-d");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
