@@ -1,7 +1,7 @@
 <?php
 require '../conexion_BD.php';
 session_start();
-if (empty($_SESSION['user']) and empty($_SESSION['passw'])) {
+if (empty($_SESSION['user']) and empty($_SESSION['ID_User'])) {
     header('location:../Pantallas/Login.php');
 }else{
         header('location:../Pantallas/home.html');

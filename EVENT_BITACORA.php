@@ -209,7 +209,7 @@ class EVENT_BITACORA{
     }
     public function RegInsert(){
         session_start();
-        $IDGlobal=$_SESSION['user'];
+        $IDGlobal=$_SESSION['ID_User'];
         $_SESSION['IDUsuarioBitacora'];
             $model = new conexion();
             $conexion = $model->conectar();
@@ -222,7 +222,34 @@ class EVENT_BITACORA{
             $Descripcion = "Nuevo usuario agregado: " .$Usuario;
             $fecha = date("Y-m-d");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-            VALUES (NULL,'$fecha', '$IDU', '1', 'Creacion de usuario', '$Descripcion')";
+            VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de usuario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+
+    }
+    public function RegautoInsert(){
+        session_start();
+        $_SESSION['IDUsuarioBitacora'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Accion = "Creacion de usuario";
+            $IDU =  $_SESSION['IDUsuarioBitacora'];
+            $Usuario = $_SESSION['UsuarioBitacora'];
+            $Descripcion = "Se a autoregistrado el usuario : " .$Usuario;
+            $fecha = date("Y-m-d");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDU', '1', 'creacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
     
@@ -242,7 +269,7 @@ class EVENT_BITACORA{
         session_start();
         $_SESSION['UsuarioBitacoraUP'];
         $_SESSION['IDUsuarioBitacoraUP'];
-       
+        $IDGlobal=$_SESSION['ID_User'];
             $model = new conexion();
             $conexion = $model->conectar();
             $sql = "SELECT * FROM tbl_ms_usuario";
@@ -254,7 +281,7 @@ class EVENT_BITACORA{
             $Descripcion = "Se modifico el usuario: " .$user;
             $fecha = date("Y-m-d");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-            VALUES (NULL,'$fecha', '$id ', '1', 'Modificacion de usuario', '$Descripcion')";
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
     
@@ -272,7 +299,7 @@ class EVENT_BITACORA{
 
     public function RegDelete(){
         session_start();
-
+        $IDGlobal=$_SESSION['ID_User'];
             $model = new conexion();
             $conexion = $model->conectar();
             $sql = "SELECT * FROM tbl_ms_usuario";
@@ -283,7 +310,7 @@ class EVENT_BITACORA{
             $Descripcion = "Se elimino el usuario: " .$Nombre_Usuario;
             $fecha = date("Y-m-d");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-            VALUES (NULL,'$fecha', $IDDEL, '1', 'Eliminacion de usuario', '$Descripcion')";
+            VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
         

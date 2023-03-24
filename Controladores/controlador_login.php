@@ -26,6 +26,12 @@ if (!empty($_POST["btn_Login"])) {
                      echo '<div class="alert_danger">Usuario Bloqueado, comuniquese con el Administrador del Sistema </div>';
                 }else {
                     //si el usuario esta activo y con preguntas ingresadas
+                    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
+                    
+                    while($row=mysqli_fetch_array($sql1)){
+                         $idUser=$row['ID_Usuario'];
+                    }
+                    
     
                 $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='ACTIVO' and
                 Usuario='$usuario' ");
@@ -38,14 +44,14 @@ if (!empty($_POST["btn_Login"])) {
                      if ($datos=$sql->fetch_object()) {
                         //ingreso admin
                         session_start();
-                        $_SESSION['user']=$usuario;
-                        $_SESSION['passw']=$contra;
+                    $_SESSION['user']=$usuario;
+                    $_SESSION['ID_User']=$idUser;
                         header("location: ../Controladores/controlador_de_inicio.php");
                      }else{
                         //ingreso no admin
                         session_start();
-                        $_SESSION['user']=$usuario;
-                        $_SESSION['passw']=$contra;
+                    $_SESSION['user']=$usuario;
+                    $_SESSION['ID_User']=$idUser;
                         header("location: ../Controladores/controlador_de_inicio.php");
                      }
                      

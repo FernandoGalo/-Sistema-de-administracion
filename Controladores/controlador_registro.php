@@ -71,7 +71,7 @@ if (!empty($_POST["btn_enviar_R"])) {
                             session_start();
                             $_SESSION['UsuarioBitacora']=$nombreUsuario;
                             $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
-                            $model->RegInsert();
+                            $model->RegautoInsert();
 
                 
                 //regNuevoUser();

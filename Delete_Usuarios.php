@@ -30,9 +30,18 @@ include("conexion_BD.php");
 
                             
     }else{
-        echo "<script languaje='JavaScript'>
-        alert('Los datos NO se eliminaron de la BD');
+        if (mysqli_errno($conexion)) {
+            echo "<script languaje='JavaScript'>
+        alert('No puedes borrar este usuario');
         location.assign('usuariosAdm.php');
         </script>";   
+        } else {
+            echo "<script languaje='JavaScript'>
+        alert('Los datos NO se eliminaron de la BD');
+        location.assign('usuariosAdm.php');
+        </script>"; 
+        }
+          
     }
+    $conexion->close();
 ?>
