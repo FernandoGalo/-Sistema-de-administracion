@@ -246,7 +246,7 @@ class EVENT_BITACORA{
             $Accion = "Creacion de usuario";
             $IDU =  $_SESSION['IDUsuarioBitacora'];
             $Usuario = $_SESSION['UsuarioBitacora'];
-            $Descripcion = "Se a autoregistrado el usuario : " .$Usuario;
+            $Descripcion = "Se autoregistro el usuario: " .$Usuario;
             $fecha = date("Y-m-d");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDU', '1', 'creacion de usuario', '$Descripcion')";
