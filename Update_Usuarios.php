@@ -94,7 +94,7 @@
             $contra=$_POST['contraseña'];
             $email=$_POST['Correo_electronico'];
             $vencimiento = $_POST['FechaVencimiento'];
-            $Estado = $_POST['Estado'];
+            $Estado = strtoupper($_POST['Estado']);
 
 
 
@@ -191,18 +191,24 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario(*):</label>
-                            <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100"  value="<?php echo $nombreUsuario; ?>" placeholder="Ingrese el usuario" onkeypress="validarMayusculas(event)" required>
+                            <input type="hidden" name="Usuario" id="Usuario">
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100"  value="<?php echo $usuario; ?>" placeholder="Ingrese el usuario" onkeypress="validarMayusculas(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Usuario(*):</label>
-                            <input type="hidden" name="Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" onkeypress="validarMayusculas(event);" value="<?php echo $usuario; ?>" required>
+                            <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
+                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" onkeypress="validarMayusculas(event);" value="<?php echo $nombreUsuario; ?>" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Rol de Usuario(*):</label>
-                            <input type="hidden" name="Rol" id="Rol">
-                            <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:admin 2:Editor 3:Super"value="<?php echo $Rol; ?>"required>
+                            <!-- <input type="hidden" name="Rol" id="Rol"> -->
+                            <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:admin 2:Editor 3:Super"value=""required> -->
+                            <select class="form-control" name="Rol" id="Rol" required>
+                              <option value="">Selecione un Rol</option>
+                              <option value= 1 >ADMINISTRADOR</option>
+                              <option value= 2 >EDITOR</option>
+                              <option value= 3 >SUPERVISOR</option>
+                            </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           <label>Correo electrónico (*):</label>

@@ -9,8 +9,9 @@ include("conexion_BD.php");
                  }
 
 
+    try {
 
-    //DELETE FROM tbl_ms_usuario WHERE Usuario = $id
+        //DELETE FROM tbl_ms_usuario WHERE Usuario = $id
     $sql = "DELETE FROM tbl_ms_usuario WHERE Usuario = '$Nombre_Usuario'";
     $resultado = mysqli_query($conexion,$sql);
 
@@ -44,4 +45,19 @@ include("conexion_BD.php");
           
     }
     $conexion->close();
+
+
+        } catch (Exception $e) {
+            $mensajeError = $e->getMessage();
+            // echo "<script languaje='JavaScript'>
+            //     alert('Excepción capturada: $mensajeError');
+            //     location.assign('usuariosAdm.php');
+            // </script>";
+
+            echo "<script languaje='JavaScript'>
+            alert('Los datos NO se eliminaron de la BD por dependencias');
+            location.assign('usuariosAdm.php');
+        </script>";
+        }
+    
 ?>

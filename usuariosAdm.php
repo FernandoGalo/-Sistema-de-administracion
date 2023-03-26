@@ -6,6 +6,23 @@ require 'conexion_BD.php';
 
 require_once "EVENT_BITACORA.php";
 
+
+
+
+//Parte 2
+                
+$R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
+
+
+$sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
+
+    while($row=mysqli_fetch_array($sql1)){
+    $diasV=$row['Valor'];
+    }
+$R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
+//fin parte 2
+
+
 ?>
 
 
@@ -93,7 +110,7 @@ require_once "EVENT_BITACORA.php";
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento usuarios</h1>
-                          <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Usuario</button>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Usuario</button>
                           <div class="box-tools pull-right">
                         </div>
                         <br>
@@ -165,17 +182,23 @@ require_once "EVENT_BITACORA.php";
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario(*):</label>
-                            <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de Usuario" onkeypress="validarMayusculas(event)" required>
+                            <input type="hidden" name="Usuario" id="Usuario">
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre de Usuario" onkeypress="validarMayusculas(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Usuario(*):</label>
-                            <input type="hidden" name="Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
+                            <input type="hidden" name="Nombre_Usuario" id="Usuario">
+                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Rol de usuario:</label>
-                            <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">
+                           <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
+                            <select class="form-control" name="Rol" id="Rol" required>
+                              <option value="">Selecione un Rol</option>
+                              <option value= 1 >ADMINISTRADOR</option>
+                              <option value= 2 >EDITOR</option>
+                              <option value= 3 >SUPERVISOR</option>
+                            </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Correo electronico(*):</label>
@@ -196,7 +219,11 @@ require_once "EVENT_BITACORA.php";
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Vencimiento(*):</label>
                             <input type="hidden" name="FechaVencimiento" id="FechaVencimiento">
-                            <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de Vencimiento" required>
+                            <input type="date" value="<?php echo $R_F_Vencida?>" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de Vencimiento" readonly>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Estado(*)</label>
+                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="NUEVO" readonly>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>

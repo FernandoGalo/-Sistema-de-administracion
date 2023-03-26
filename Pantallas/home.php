@@ -1,6 +1,4 @@
-<?php
-	include('../Controladores/controlador_de_inicio.php');
-	?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

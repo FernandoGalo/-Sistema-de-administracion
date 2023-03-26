@@ -83,8 +83,8 @@
                 //fin parte 2
     //====================================================
         if(isset($_POST['enviar'])){
+            $nombreUsuario = strtoupper($_POST['Usuario']);
             $nombreCompleto = $_POST['Nombre_Usuario'];
-            $nombreUsuario = $_POST['Usuario'];
             $contraseña = $_POST['contraseña'];
             $Rol = $_POST['Rol'];
             //$verifContra = $_POST[''];
@@ -123,7 +123,7 @@
                 
 
                 
-            $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$vencimiento','$R_Fecha_actual', 'NUEVO')";
+            $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$R_F_Vencida','$R_Fecha_actual', 'NUEVO')";
 
             $resultado = mysqli_query($conexion,$sql);
 
