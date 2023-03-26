@@ -108,8 +108,6 @@
                 echo"<p class='error'>* Debes colocar la fecha de vencimiento</p>";
             }else if(empty($email)){
                 echo"<p class='error'>* Debes colocar tu correo</p>";
-            }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                echo "<p class='error'> El correo es incorrecto</p>";
             }else{
 
                 if (strlen($contraseña) < 8 || !preg_match('/[a-z]/', $contraseña) || !preg_match('/[A-Z]/', $contraseña) || !preg_match('/[0-9]/', $contraseña) ) {

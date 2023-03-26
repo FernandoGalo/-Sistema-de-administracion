@@ -1,28 +1,7 @@
 <?php
-
-
-require 'conexion_BD.php';
+require '../../conexion_BD.php';
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
-
-require_once "EVENT_BITACORA.php";
-
-
-
-
-//Parte 2
-                
-$R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
-
-
-$sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
-
-    while($row=mysqli_fetch_array($sql1)){
-    $diasV=$row['Valor'];
-    }
-$R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
-//fin parte 2
-
-
+require_once "../../EVENT_BITACORA.php";
 ?>
 
 
@@ -32,106 +11,15 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 	<title>Inicio</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="../../css/main.css">
   <script type="text/javascript">
     function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el usuario');
+      return confirm('¿Está Seguro?, se eliminará el proyecto');
     }
   </script>
 </head>
-<body>
-	<!--Seccion donde va toda la barra lateral -->
-	<section class="full-box cover dashboard-sideBar">
-		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
-		<div class="full-box dashboard-sideBar-ct">
-			<!--Muestra el titulo de la barra lateral-->
-			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				Creo en ti <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
-			</div>
-			<!-- Informacion de usuario de la barra lateral -->
-			<div class="full-box dashboard-sideBar-UserInfo">
-				<figure class="full-box">
-					<img src="./img/avatar.jpg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Nombre de usuario</figcaption>
-				</figure>
-				<ul class="full-box list-unstyled text-center">
-					<li>
-						<a href="#!">
-							<i class="zmdi zmdi-settings"></i>
-						</a>
-					</li>
-					<li>
-						<a href="./Pantallas/Login.php" class="btn-exit-system">
-							<i class="zmdi zmdi-power"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<!-- Menu de la barra lateral -->
-			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				<li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href="usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Seguridad <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href="./Controladores/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
-						</li>
-					</ul>
-				</li>
-        <li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Proyectos </a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-money-box"></i> Fondos <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-accounts"></i> Voluntarios <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-money"></i> Pagos <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento pagos </a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</section>
+
+<?php include '../sidebar.php'; ?>
 
 	<!-- Pagina de contenido-->
 	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
@@ -149,7 +37,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento usuarios</h1>
+                          <h1 class="box-title">Mantenimiento Proyectos</h1>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Usuario</button>
                           <div class="box-tools pull-right">
                         </div>
@@ -182,37 +70,10 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                           </tbody>
                           <tfoot>
 
-                          <?php
-                          $sql="SELECT u.ID_Usuario, u.Usuario, u.Nombre_Usuario, r.Rol, u.Correo_electronico, u.Contraseña, u.Fecha_Creacion, u.Fecha_Vencimiento, u.Estado_Usuario
-                          FROM tbl_ms_usuario u
-                          JOIN tbl_ms_roles r ON u.ID_Rol = r.ID_Rol";
-                          $result=mysqli_query($conexion,$sql);
 
-                           while($mostrar=mysqli_fetch_array($result)){
-                           ?>
 
-                            <tr>
-                              <td><?php echo $mostrar['ID_Usuario']?></td> 
-                              <td><?php echo $mostrar['Usuario']?></td> 
-                              <td><?php echo $mostrar['Nombre_Usuario']?></td>
-                              <td><?php echo $mostrar['Rol']?></td>
-                              <td><?php echo $mostrar['Correo_electronico']?></td>
-                              <td><?php echo $mostrar['Contraseña']?></td>
-                              <td><?php echo $mostrar['Fecha_Creacion']?></td>
-                              <td><?php echo $mostrar['Fecha_Vencimiento']?></td>
-                              <td><?php echo $mostrar['Estado_Usuario']?></td>
-                              <td>
-                              <a href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
-                              </a>
-                              <a href='Delete_Usuarios.php?Usuario=<?php echo $mostrar['Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
-                              </a>
-                            </td>
-                             </tr>
-                            <?php
-                             }
-                             ?>     
+
+
                           </tfoot>
                         </table>
                     </div>
@@ -283,11 +144,9 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 
 	
 	<!--script en java para los efectos-->
-  
- 	<script src="./js/jquery-3.1.1.min.js"></script>
-  <script src="./js/events.js"></script>
-	<script src="./js/main.js"></script>
-  <script src="./js/usuario.js"></script>
+	<script src="../../js/jquery-3.1.1.min.js"></script>
+	<script src="../../js/main.js"></script>
+  <script src="../../js/usuario.js"></script>
 
 </body>
 </html>

@@ -12,17 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<script>
-		function validarMayusculas(e) {
-			var tecla = e.keyCode || e.which;
-			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
-			var letras = /^[A-Z]+$/;
 
-			if(!letras.test(teclaFinal)){
-				e.preventDefault();
-			}
-		}
-</script>
 <title>Inicio</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -78,6 +68,46 @@
 							<a href="./Controladores/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
 						</li>
 					</ul>
+          <li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Proyectos </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money-box"></i> Fondos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-accounts"></i> Voluntarios <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money"></i> Pagos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento pagos </a>
+						</li>
+					</ul>
+				</li>
 				</li>
 			</ul>
 		</div>
@@ -269,56 +299,11 @@
 
 
 
-
-
 	<!--script en java para los efectos-->
-  <script>
-		function validarMayusculas(e) {
-			var tecla = e.keyCode || e.which;
-			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
-			var letras = /^[A-Z]+$/;
-
-			if(!letras.test(teclaFinal)){
-				e.preventDefault();
-			}
-		}
-	</script>
-    <script>
-  function mostrarContrasena() {
-    var contrasenaInput = document.getElementById("contraseña");
-    var botonVerOcultar = document.getElementById("ver-ocultar");
-    
-    if (contrasenaInput.type === "password") {
-      contrasenaInput.type = "text";
-      botonVerOcultar.innerHTML = '<i class="zmdi zmdi-eye-off"></i>';
-    } else {
-      contrasenaInput.type = "password";
-      botonVerOcultar.innerHTML = '<i class="zmdi zmdi-eye"></i>';
-    }
-  }
-  </script>
-  <script>
-function validarCorreo(event) {
-  var correo = event.target.value;
-  var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!regex.test(correo)) {
-    event.target.setCustomValidity("Ingrese un correo electrónico válido");
-  } else {
-    event.target.setCustomValidity("");
-  }
-}
-</script>
-<script>
-        function bloquearEspacio(event) {
-        var tecla = event.keyCode || event.which;
-        if (tecla == 32) {
-            return false;
-        }
-        }
-</script>
 	<script src="./js/jquery-3.1.1.min.js"></script>
+  <script src="./js/events.js"></script>
 	<script src="./js/main.js"></script>
-    <script src="./js/usuario.js"></script>
+  <script src="./js/usuario.js"></script>
 
 </body>
 </html>
