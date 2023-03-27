@@ -53,7 +53,7 @@
 
 
             <i class="fas fa-user-alt"></i>
-            <input onkeypress="validarMayusculas(event)" style="text-transform:uppercase" class="controls" type="text" name="Usuario_Recupera" placeholder="Ingrese el Usuario" required>
+            <input onkeypress="validarMayusculas(event)" style="text-transform:uppercase" class="controls" type="text" name="Usuario_Recupera" placeholder="Ingrese el Usuario" onpaste="return false" oncopy="return false" required>
          
 
 

@@ -8,7 +8,7 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
- 
+
 if (!empty($_POST["btn_enviar_C"])) {  
     $User=$_POST['Usuario_Recupera'];
     $R_Fecha_actual = date('Y-m-j');
@@ -78,9 +78,9 @@ if (!empty($_POST["btn_enviar_C"])) {
                             //Generar codigo o contraseña para recuperar la contraseña
                             $length = 10; // longitud de la contraseña deseada
                             $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // caracteres permitidos
-                            $password = '';
+                            $token = '';
                             for ($i = 0; $i < $length; $i++) {
-                                $password .= $chars[mt_rand(0, strlen($chars) - 1)];
+                                $token .= $chars[mt_rand(0, strlen($chars) - 1)];
                             }
 
 
@@ -115,9 +115,9 @@ if (!empty($_POST["btn_enviar_C"])) {
                                 <p>Para confirmar esta peticion y establecer una nueva contraseña, por favor presione la siguiente direccion: 
                                 <a href="http://localhost:90/Sistema-administrativo-de-fondos-y-proyectos/Pantallas/Nueva_Contra.php">Cambiar Contraseña</a></p>
 
-                                <b><p>(Por favor realiza el cambio de contraseña, ya que la contraseña proporcionada es valido durante 24 horas desde el momento en que hizo la solicitud.)</b></p></b> 
+                                <b><p>(Por favor realiza el cambio de contraseña, ya que el token proporcionada es valido durante 24 horas desde el momento en que hizo la solicitud.)</b></p></b> 
 
-                                <p>Su Nueva Contraseña es:, <b>Password:'.$password;' </p>
+                                <p>Su token es:, <b>Token:'.$token;' </p>
                                 
                             
                                 </body>';
@@ -125,11 +125,11 @@ if (!empty($_POST["btn_enviar_C"])) {
 
                             $mail->send();
                             echo'<script>alert("Correo Enviado Satisfactoriamente")</script>';
-                            header("refresh:0;url=../Pantallas/Nueva_Contra.php");
+                            header("refresh:0;url=../Pantallas/Login.php");
 
                             //La contraseña se Autoingresa 
-                            $sql3=$conexion->query("UPDATE tbl_ms_usuario SET Contraseña='$password', Fecha_Vencimiento='$expiry_date', Modificado_Por='$User', Fecha_Modificacion='$R_Fecha_actual' WHERE ID_Usuario='$idUser'");
-                            $sql4=$conexion->query(" INSERT INTO `tbl_ms_hist_contraseña`(`ID_Usuario`, `Contraseña`, `Creado_Por`, `Fecha_Creacion`) VALUES ('$idUser','$password','ADMIN','$R_Fecha_actual')");
+                            $sql3=$conexion->query("UPDATE tbl_ms_usuario SET Token='$token', Fecha_Vencimiento='$expiry_date', Modificado_Por='$User', Fecha_Modificacion='$R_Fecha_actual' WHERE ID_Usuario='$idUser'");
+                           
 
                             } catch (Exception $e) {
                             echo'<script>alert("Error en el Envio de Correo")</script>';
