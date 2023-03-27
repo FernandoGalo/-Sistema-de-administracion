@@ -23,7 +23,7 @@
 						</a>
 					</li>
 					<li>
-                        <a href="Login.php" class="btn-exit-system">
+                        <a href="../../Pantallas/Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -37,7 +37,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
+							<a href="../Usuarios/usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
 						</li>
 					</ul>
 				</li>
@@ -47,7 +47,13 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="../seguridad/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+						</li>
+						<li>
+							<a href="../seguridad/Parametros.php"><i class="zmdi zmdi-seat"></i> Parametros </a>
+						</li>
+						<li>
+							<a href="../seguridad/Parametros.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Parametros </a>
 						</li>
 					</ul>
 				</li>

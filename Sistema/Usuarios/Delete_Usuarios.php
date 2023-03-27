@@ -1,5 +1,5 @@
 <?php
-include("conexion_BD.php");
+include("../../conexion_BD.php");
     $Nombre_Usuario = $_GET['Usuario'];
 
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
@@ -22,7 +22,7 @@ include("conexion_BD.php");
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('usuariosAdm.php');
                 </script>";     
-                require_once "EVENT_BITACORA.php";
+                require_once "../../EVENT_BITACORA.php";
                 $model = new EVENT_BITACORA;
                 session_start();
                 $_SESSION['UsuarioBitacoraDELETE']=$Nombre_Usuario;

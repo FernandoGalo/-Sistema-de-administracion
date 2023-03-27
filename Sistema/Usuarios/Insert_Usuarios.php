@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGREGAR</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="../../css/estilos.css">
 
     <script>
         function soloLetras(e) {
@@ -49,7 +49,7 @@
 </head>
 <body>
     <?php
-    include("conexion_BD.php");
+    include("../../conexion_BD.php");
 
     //===================================================
     
@@ -91,24 +91,7 @@
             $email = $_POST['Correo_electronico'];
             $vencimiento = $_POST['FechaVencimiento'];
 
-            include("conexion_BD.php");
-
-
-
-
-            if(empty($nombreCompleto)){
-                echo"<p class='error'>* Debes colocar tu nombre completo</p>";
-            }else if(empty($nombreUsuario)){
-                echo"<p class='error'>* Debes colocar tu usuario</p>";
-            }else if(empty($contraseña)){
-                echo"<p class='error'>* Debes colocar tu password</p>";
-            }else if(empty($Rol)){
-                echo"<p class='error'>* Debes colocar el rol del 1 al 3</p>";
-            }else if(empty($vencimiento)){
-                echo"<p class='error'>* Debes colocar la fecha de vencimiento</p>";
-            }else if(empty($email)){
-                echo"<p class='error'>* Debes colocar tu correo</p>";
-            }else{
+            include("../../conexion_BD.php");
 
                 if (strlen($contraseña) < 8 || !preg_match('/[a-z]/', $contraseña) || !preg_match('/[A-Z]/', $contraseña) || !preg_match('/[0-9]/', $contraseña) ) {
                     echo'<script>alert("Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
@@ -131,7 +114,7 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('usuariosAdm.php');
                             </script>";     
-                            require_once "EVENT_BITACORA.php";
+                            require_once "../../EVENT_BITACORA.php";
                             $model = new EVENT_BITACORA;
                             session_start();
                             $_SESSION['UsuarioBitacora']=$nombreUsuario;
@@ -147,11 +130,6 @@
             }
             mysqli_close($conexion);
             }
-        }
-
-
-
-
         }
     ?>
 </body>
