@@ -50,10 +50,10 @@
 							<a href="../seguridad/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
 						</li>
 						<li>
-							<a href="../seguridad/Parametros.php"><i class="zmdi zmdi-seat"></i> Parametros </a>
+							<a href="../seguridad/ParametrosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Parametros </a>
 						</li>
 						<li>
-							<a href="../seguridad/Parametros.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Parametros </a>
+							<a href="../seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
 						</li>
 					</ul>
 				</li>
@@ -83,7 +83,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
+							<a href="../Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
 						</li>
 					</ul>
 				</li>
