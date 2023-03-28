@@ -52,7 +52,7 @@ include("../EVENT_BITACORA.PHP");
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Sistema/Usuarios/usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
+							<a href="../usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
 						</li>
 					</ul>
 				</li>
@@ -104,8 +104,8 @@ include("../EVENT_BITACORA.PHP");
                         <thead>
                             <th>ID bitacora</th>
                             <th>fecha</th>
-                            <th>ID usuario</th>
-                            <th>ID objeto</th>
+                            <th>Usuario</th>
+                            <th>Objeto</th>
                             <th>Accion</th>
                             <th>Descripcion</th>
                           </thead>
@@ -114,7 +114,10 @@ include("../EVENT_BITACORA.PHP");
                           <tfoot>
 
                           <?php
-            $sql="SELECT * from tbl_ms_bitacora";
+            $sql="SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
+			from tbl_ms_bitacora b
+			JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
+			JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario";
             $result=mysqli_query($conexion,$sql);
 
             while($mostrar=mysqli_fetch_array($result)){
@@ -123,8 +126,8 @@ include("../EVENT_BITACORA.PHP");
                 <tr> 
                     <td><?php echo $mostrar['ID_Bitacora']?></td>
                     <td><?php echo $mostrar['Fecha']?></td>
-                    <td><?php echo $mostrar['ID_Usuario']?></td>
-                    <td><?php echo $mostrar['ID_Objeto']?></td>
+                    <td><?php echo $mostrar['Usuario']?></td>
+                    <td><?php echo $mostrar['Objeto']?></td>
                     <td><?php echo $mostrar['Accion']?></td>
                     <td><?php echo $mostrar['Descripcion']?></td>
                 </tr>
