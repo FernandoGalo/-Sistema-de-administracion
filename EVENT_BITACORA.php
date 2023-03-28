@@ -158,7 +158,7 @@ class EVENT_BITACORA{
 
             <?php
         }else{
-            $fecha = date("Y-m-d");
+            $fecha = date("Y-m-d h:i:s");
             $hora = date("H:i:s");
             
             $fila = $consulta->fetch();
@@ -220,7 +220,8 @@ class EVENT_BITACORA{
             $IDU =  $_SESSION['IDUsuarioBitacora'];
             $Usuario = $_SESSION['UsuarioBitacora'];
             $Descripcion = "Nuevo usuario agregado: " .$Usuario;
-            $fecha = date("Y-m-d");
+            $fecha = date("Y-m-d h:i:s");
+
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
@@ -247,7 +248,7 @@ class EVENT_BITACORA{
             $IDU =  $_SESSION['IDUsuarioBitacora'];
             $Usuario = $_SESSION['UsuarioBitacora'];
             $Descripcion = "Se autoregistro el usuario: " .$Usuario;
-            $fecha = date("Y-m-d");
+            $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDU', '1', 'creacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
@@ -279,7 +280,7 @@ class EVENT_BITACORA{
             $id =  $_SESSION['IDUsuarioBitacoraUP'];
             $user = $_SESSION['UsuarioBitacoraUP'];
             $Descripcion = "Se modifico el usuario: " .$user;
-            $fecha = date("Y-m-d");
+            $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
@@ -308,7 +309,7 @@ class EVENT_BITACORA{
             $IDDEL= $_SESSION['IDUsuarioBitacoraDELETE'];
             $Nombre_Usuario = $_SESSION['UsuarioBitacoraDELETE'];
             $Descripcion = "Se elimino el usuario: " .$Nombre_Usuario;
-            $fecha = date("Y-m-d");
+            $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
@@ -351,7 +352,7 @@ class EVENT_BITACORA{
 
             <?php
         }else{
-            $fecha = date("Y-m-d");
+            $fecha = date("Y-m-d h:i:s");
             $hora = date("H:i:s");
             
             $fila = $consulta->fetch();
