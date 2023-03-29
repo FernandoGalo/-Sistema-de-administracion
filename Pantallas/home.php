@@ -29,7 +29,7 @@
 						</a>
 					</li>
 					<li>
-                        <a href="Login.php" class="btn-exit-system">
+                        <a href="../Pantallas/Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -43,7 +43,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
+							<a href="../Sistema/Usuarios/usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
 						</li>
 					</ul>
 				</li>
@@ -53,7 +53,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="../Sistema/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
 						</li>
 					</ul>
 				</li>
@@ -73,7 +73,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Fondos/Admin_Fondos.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
+							<a href="../Sistema/Fondos/FondosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
 						</li>
 					</ul>
 				</li>

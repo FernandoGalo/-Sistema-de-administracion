@@ -1,6 +1,6 @@
 <?php
-    include("conexion_BD.php");
-    require_once "EVENT_BITACORA.php";
+    include("../../conexion_BD.php");
+    require_once "../../EVENT_BITACORA.php";
     
     
 ?>
