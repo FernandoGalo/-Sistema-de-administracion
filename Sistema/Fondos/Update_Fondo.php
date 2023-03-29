@@ -20,6 +20,7 @@
     <?php
         if(isset($_POST['enviar_F2'])){
             //aqui entra sio el usuario ha presionado el boton enviar
+            session_start();
             $Usuario=$_SESSION['usuario'];
             
             echo $Usuario;        
@@ -38,7 +39,7 @@
             //si lo que esta en el form esta vacio
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_fondos SET ID_Donante = $ID_Donador, ID_de_proyecto = $ID_Proyecto, ID_usuario = $ID_Usuario, Fecha_de_adquisicion_F  ='$Fecha_Adquisicion', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_fondo='$ID_Fondo';";
+            $sql="UPDATE tbl_fondos SET ID_Donante = $ID_Donador, ID_de_proyecto = $ID_Proyecto, ID_usuario = $ID_Usuario, Fecha_de_adquisicion_F  ='$Fecha_Adquisicion', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_fondo = $ID_Fondo;";
             $resultado=mysqli_query($conexion,$sql);
 
             if($resultado){
@@ -67,22 +68,23 @@
             $ID_Proyecto=$fila['ID_de_proyecto'];
             $ID_Usuario=$fila['ID_usuario'];
             $Fecha_Adquisicion=$fila['Fecha_de_adquisicion_F'];
-
             mysqli_close($conexion);
-
+            
     ?>
     	<!-- Pagina de contenido-->
 	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
-	<form name="formulario" id="formulario" action="Insert_Fondo.php" method="POST">
+	<<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <!--<label>ID del fondo(*):</label>
+                            <label>ID del fondo(*):</label>
                             <input type="hidden" name="ID_Fondo" id="ID_Fondo">
-                            <input style="text" type="text" class="form-control" name="ID_Fondo" id="ID_Fondo" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del fondo" required>
-                          </div>-->
+                            <input style="text" type="text" class="form-control" name="ID_Fondo" id="ID_Fondo" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="<?php echo $id?>" readonly>
+                          </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <?php require '../../conexion_BD.php';?>
                             <label>Donante(*):</label>
+
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_donantes");
                           ?>
@@ -113,11 +115,13 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario</label>
+                            <?php session_start();     
+                            $usuario=$_SESSION['usuario'];?>
                             <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" placeholder="<?php echo $usuario?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Adquisicion:</label>
-                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" placeholder="Ingrese la Fecha de Adquisicion">
+                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" placeholder="$Fecha_Adquisicion">
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
