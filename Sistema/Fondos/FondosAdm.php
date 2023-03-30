@@ -36,7 +36,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 	<link rel="stylesheet" href="../../css/main.css">
   <script type="text/javascript">
     function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el usuario');
+      return confirm('¿Está Seguro?, se eliminará el Fondo');
     }
   </script>
 </head>
