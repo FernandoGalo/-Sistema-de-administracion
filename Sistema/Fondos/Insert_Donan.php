@@ -66,7 +66,7 @@
                             $model = new EVENT_BITACORA;
                             session_start();
                             $_SESSION['DonanteBitacora']=$nombreDonante;
-                            $_SESSION['IDUsuarioBitacora']=$ID_Donante;
+                            $_SESSION['IDdonanteBitacora']=$ID_Donante;
                             $model->RegInsertDon();
 
             }else{

@@ -378,6 +378,7 @@ public function RegUptFondo(){
 
      //===================================================================================
     //===================================================================================
+    #registro voluntario
     public function RegInsertvol(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -406,6 +407,7 @@ public function RegUptFondo(){
     }
  //===================================================================================
     //===================================================================================
+    #delete voluntario
     public function DeleteVol(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -435,7 +437,7 @@ public function RegUptFondo(){
     }
      //===================================================================================
     //===================================================================================
-
+#registro pago
     public function RegInsertPago(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -465,6 +467,7 @@ public function RegUptFondo(){
 
      //===================================================================================
     //===================================================================================
+    #update voluntario
     public function RegUptVol(){
         session_start();
 
@@ -495,6 +498,7 @@ public function RegUptFondo(){
 
      //===================================================================================
     //===================================================================================
+    #update pago
     public function RegUptpag(){
         session_start();
 
@@ -523,7 +527,7 @@ public function RegUptFondo(){
     
     }
         //===================================================================================
-
+#delete pago
     public function DeletePago(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -553,11 +557,12 @@ public function RegUptFondo(){
 
       //===================================================================================
     //===================================================================================
-
+#registro donante
     public function RegInsertDon(){
         session_start();
+        $IDGlobal=$_SESSION['ID_User'];
       $donante= $_SESSION['DonanteBitacora'];
-      $_SESSION['IDUsuarioBitacora'];
+      $_SESSION['IDdonanteBitacora'];
             $model = new conexion();
             $conexion = $model->conectar();
 
@@ -582,7 +587,7 @@ public function RegUptFondo(){
     }
 
      //===================================================================================
-
+#delete donante
      public function DeleteDon(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -612,6 +617,7 @@ public function RegUptFondo(){
 
        //===================================================================================
     //===================================================================================
+    #update donante
     public function RegUptdon(){
         session_start();
 
