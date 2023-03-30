@@ -51,9 +51,8 @@ require_once "../../EVENT_BITACORA.php";
                         <!-- Buscar -->
                         <form action="" method="post">
                             <label for="campo">Buscar:</label>
-                            <input type="text" name="campo" id="campo">
-                          </form>
-
+                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
+                        </form>
                         <thead>
                             <th>ID</th>
                             <th>Usuario</th>
@@ -144,7 +143,9 @@ require_once "../../EVENT_BITACORA.php";
 
 	
 	<!--script en java para los efectos-->
-	<script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../js/Buscador.js"></script>
+  <script src="../../js/events.js"></script>
+ 	<script src="../../js/jquery-3.1.1.min.js"></script>
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
 
