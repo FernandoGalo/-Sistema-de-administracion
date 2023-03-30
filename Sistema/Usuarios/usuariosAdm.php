@@ -76,21 +76,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                             <input type="text" name="campo" id="campo">
                             <input type="submit" value="Buscar">
                           </form>
-                          <?php if(isset($_POST['palabra'])) {
-    $palabra = $_POST['campo'];
-
-    // Consulta SQL para buscar registros que contengan la palabra ingresada
-    $sql = "SELECT u.ID_Usuario, u.Usuario, u.Nombre_Usuario, r.Rol, u.Correo_electronico, u.Contraseña, u.Fecha_Creacion, u.Fecha_Vencimiento, u.Estado_Usuario
-    FROM tbl_ms_usuario u WHERE nombre LIKE '%$palabra%' OR email LIKE '%$palabra%';
-    JOIN tbl_ms_roles r ON u.ID_Rol = r.ID_Rol";
-    $result=mysqli_query($conexion,$sql);
-
-    // Verificar si se encontraron registros
-    if (mysqli_num_rows($resultado) > 0) {
-        // Recorrer los registros y mostrarlos
-        while($fila = mysqli_fetch_assoc($resultado)) {
-            echo "ID:"
-            ?>
+                        
                         <thead>
                             <th>ID</th>
                             <th>Usuario</th>
