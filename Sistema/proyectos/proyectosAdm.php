@@ -55,21 +55,43 @@ require_once "../../EVENT_BITACORA.php";
                         </form>
                         <thead>
                             <th>ID</th>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                            <th>correo electronico</th>
-                            <th>Contraseña</th>
-                            <th>Fecha Creacion</th>
-                            <th>Fecha Vencimiento </th>
-                            <th>Estado del usuario</th>
+                            <th>Nombre del proyecto</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha final</th>
+                            <th>Fondos proyecto</th>
+                            <th>Estado Proyecto</th>
                             <th>Acciones</th>
                           </thead>
                           <tbody>                            
                           </tbody>
+
                           <tfoot>
+                          <?php
+                          $sql="SELECT * from tbl_proyectos";
+                          $result=mysqli_query($conexion,$sql);
 
+                           while($mostrar=mysqli_fetch_array($result)){
+                           ?>
 
+                            <tr>
+                              <td><?php echo $mostrar['ID_proyecto']?></td> 
+                              <td><?php echo $mostrar['Nombre_del_proyecto']?></td> 
+                              <td><?php echo $mostrar['Fecha_de_inicio_P']?></td>
+                              <td><?php echo $mostrar['Fecha_final_P']?></td>
+                              <td><?php echo $mostrar['Fondos_proyecto']?></td>
+                              <td><?php echo $mostrar['Estado_Proyecto']?></td>
+                              <td>
+                              <a href='Update_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' class='boton-editar'>
+                              <i class='zmdi zmdi-edit'></i> Editar
+                              </a>
+                              <a href='Delete_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              </a>
+                            </td>
+                             </tr>
+                            <?php
+                             }
+                             ?> 
 
 
 
