@@ -557,9 +557,10 @@ public function RegUptFondo(){
     public function RegInsertDon(){
         session_start();
       $donante= $_SESSION['DonanteBitacora'];
+      $_SESSION['IDUsuarioBitacora'];
             $model = new conexion();
             $conexion = $model->conectar();
-            $sql = "SELECT * FROM tbl_ms_usuario";
+
             $consulta = $conexion->prepare($sql);
             $fila = $consulta->fetch();
 
