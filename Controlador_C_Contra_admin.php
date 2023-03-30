@@ -1,4 +1,5 @@
 <?php
+$Fecha_Actual = date('Y-m-d');  
 if (!empty($_POST["btn_enviar_N_Contra"])){
     
  if (empty($_POST["C_contra_A"]) and empty($_POST["C_contra_N"])and empty($_POST["C_contra_N_2"])) {

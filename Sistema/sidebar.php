@@ -18,7 +18,7 @@
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li>
-						<a href="#!">
+						<a href="../conf/gestion.php">
 							<i class="zmdi zmdi-settings"></i>
 						</a>
 					</li>
@@ -73,7 +73,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../../Sistema/Fondos/FondosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
+							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
 						</li>
 					</ul>
 				</li>
@@ -83,7 +83,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../../Sistema/Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
+							<a href="../Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
 						</li>
 					</ul>
 				</li>

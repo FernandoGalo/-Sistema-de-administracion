@@ -1,7 +1,8 @@
 <?php
-require 'conexion_BD.php';
+require '../../conexion_BD.php';
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
-require_once "EVENT_BITACORA.php";
+require_once "../../EVENT_BITACORA.php";
+include("../../Controlador_C_contra_admin.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,11 +11,6 @@ require_once "EVENT_BITACORA.php";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
-  <script type="text/javascript">
-    function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el proyecto');
-    }
-  </script>
 </head>
 
 <?php include '../sidebar.php'; ?>
@@ -32,14 +28,12 @@ require_once "EVENT_BITACORA.php";
 		<!-- Muestra el contenido de la pagina -->
 		<div class="container-fluid">
     <form actions2="Controlador_C_contra_admin.php" method="post">
-<?php
-include("Controlador_C_contra_admin.php");
-?>
+
 <button type="button" class="fa fa-eye" onclick="mostrarContrasena()"></button>
 <h3>ingrese su antigua contraseña<h3>
 <input class="controls" type="password" maxlength="8" name="C_contra_A" id="C_contra_A" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su antigua Contraseña"><br>
 <h3>ingrese su nueva contraseña</h3> 
-       <input class="controls" type="password" maxlength="8" name="C_contra_N" id="C_contra_N" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su nueva Contraseña"><br>
+<input class="controls" type="password" maxlength="8" name="C_contra_N" id="C_contra_N" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su nueva Contraseña"><br>
         <h3>ingrese nuevamente su Contraseña</h3>
         <input class="controls" type="password" maxlength="8" name="C_contra_N_2" id="C_contra_N_2" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese nuevamente su nueva Contraseña"><br>
 
