@@ -137,7 +137,7 @@
                             <label>Usuario</label>
                             <?php session_start();     
                             $usuario=$_SESSION['usuario'];?>
-                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" readonly>
+                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" style="text-transform:uppercase" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Adquisicion:</label>
