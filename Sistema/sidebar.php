@@ -73,7 +73,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Sistema/Fondos/FondosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
+							<a href="../../Sistema/Fondos/FondosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
 						</li>
 					</ul>
 				</li>
