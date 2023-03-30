@@ -32,7 +32,7 @@ include("../EVENT_BITACORA.PHP");
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li>
-						<a href="#!">
+						<a href="../Sistema/conf/gestion.php">
 							<i class="zmdi zmdi-settings"></i>
 						</a>
 					</li>
@@ -45,13 +45,18 @@ include("../EVENT_BITACORA.PHP");
 			</div>
 			<!-- Menu de la barra lateral -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<li>
+					<a href="../Pantallas/home.php">
+						<i class="zmdi zmdi-home"></i> Home
+					</a>
+			</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
+							<a href="../Sistema/Usuarios/usuariosAdm.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Mantenimiento usuarios</a>
 						</li>
 					</ul>
 				</li>
@@ -61,7 +66,56 @@ include("../EVENT_BITACORA.PHP");
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="Bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
+						</li>
+						<li>
+							<a href="../Sistema/seguridad/ParametrosAdm.php"><i class="zmdi zmdi-archive"></i> Parametros </a>
+						</li>
+						<li>
+							<a href="../Sistema/seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Sistema/proyectos/proyectosAdm.php"><i class="zmdi zmdi-markunread-mailbox"></i> Mantenimiento Proyectos </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money-box"></i> Fondos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Sistema/Fondos/FondosAdm.php"><i class="zmdi zmdi-assignment-returned"></i> Mantenimiento Fondos </a>
+						</li>
+						<li>
+							<a href="../Sistema/Fondos/DonacAdm.php"><i class="zmdi zmdi-favorite"></i> Donaciones </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-accounts"></i> Voluntarios <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Sistema/Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento voluntarios </a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money"></i> Pagos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Sistema/pagos/PagosAdm.php"><i class="zmdi zmdi-money-box"></i> Mantenimiento pagos </a>
 						</li>
 					</ul>
 				</li>

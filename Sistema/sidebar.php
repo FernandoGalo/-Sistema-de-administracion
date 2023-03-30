@@ -31,6 +31,11 @@
 			</div>
 			<!-- Menu de la barra lateral -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<li>
+					<a href="../../Pantallas/home.php">
+						<i class="zmdi zmdi-home"></i> Home
+					</a>
+			</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -47,10 +52,10 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../seguridad/Bitacora.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Bitacora </a>
+							<a href="../../Controladores/Bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
 						</li>
 						<li>
-							<a href="../seguridad/ParametrosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Parametros </a>
+							<a href="../seguridad/ParametrosAdm.php"><i class="zmdi zmdi-archive"></i> Parametros </a>
 						</li>
 						<li>
 							<a href="../seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
@@ -63,7 +68,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Proyectos </a>
+							<a href="../proyectos/proyectosAdm.php"><i class="zmdi zmdi-markunread-mailbox"></i> Mantenimiento Proyectos </a>
 						</li>
 					</ul>
 				</li>
@@ -73,7 +78,10 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento Fondos </a>
+							<a href="../Fondos/FondosAdm.php"><i class="zmdi zmdi-assignment-returned"></i> Mantenimiento Fondos </a>
+						</li>
+						<li>
+							<a href="../Fondos/DonacAdm.php"><i class="zmdi zmdi-favorite"></i> Donaciones </a>
 						</li>
 					</ul>
 				</li>
@@ -83,7 +91,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
+							<a href="../Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento voluntarios </a>
 						</li>
 					</ul>
 				</li>
@@ -93,7 +101,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Sistema/pagos/PagosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento pagos </a>
+							<a href="../pagos/PagosAdm.php"><i class="zmdi zmdi-money-box"></i> Mantenimiento pagos </a>
 						</li>
 					</ul>
 				</li>
