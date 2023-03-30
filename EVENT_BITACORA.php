@@ -435,6 +435,36 @@ public function RegUptFondo(){
     }
      //===================================================================================
     //===================================================================================
+
+    public function RegInsertPago(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+       $idpago= $_SESSION['IDpagoBitacora'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Accion = "Creacion de Pago";
+            $Descripcion = "Nuevo Pago agregado: ".$idpago;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de Pago', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+
+    }
+
+     //===================================================================================
+    //===================================================================================
     public function RegUptVol(){
         session_start();
 
@@ -450,6 +480,152 @@ public function RegUptFondo(){
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de voluntario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+
+     //===================================================================================
+    //===================================================================================
+    public function RegUptpag(){
+        session_start();
+
+        $IDGlobal=$_SESSION['ID_User'];
+       $pago= $_SESSION['pagoBitacoraUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            
+            $Descripcion = "Se modifico el pago: " .$idpago;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de pago', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+        //===================================================================================
+
+    public function DeletePago(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+     $idpago=$_SESSION['IDPagoBitacoraDELETE'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Descripcion = "Se elimino el Pago: ".$idpago;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de Pago', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+        
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+
+      //===================================================================================
+    //===================================================================================
+
+    public function RegInsertDon(){
+        session_start();
+      $donante= $_SESSION['DonanteBitacora'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+
+            $Descripcion = "Nuevo Donante agregado: ".$donante;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de Donante', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+
+    }
+
+     //===================================================================================
+
+     public function DeleteDon(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+      $iddonante=  $_SESSION['IDdonanteBitacoraDELETE'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Descripcion = "Se elimino el Donante: ".$iddonante;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de Donante', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+        
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+
+       //===================================================================================
+    //===================================================================================
+    public function RegUptdon(){
+        session_start();
+
+        $IDGlobal=$_SESSION['ID_User'];
+        $Nombredonante=$_SESSION['donanteBitacoraUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            
+            $Descripcion = "Se modifico el donante: " .$Nombredonante;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de donante', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
     

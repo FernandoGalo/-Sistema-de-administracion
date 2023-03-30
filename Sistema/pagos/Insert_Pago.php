@@ -44,12 +44,12 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('PagosAdm.php');
                             </script>";   
-                           // //require_once "../../EVENT_BITACORA.php";
-                           // $model = new EVENT_BITACORA;
-                           // session_start();
+                           require_once "../../EVENT_BITACORA.php";
+                           $model = new EVENT_BITACORA;
+                           session_start();
  
-                           // $_SESSION['IDFondoBitacora']=$ID_Fondo;
-                           // $model->RegaInsertFondo();  
+                           $_SESSION['IDpagoBitacora']=$ID_Pago;
+                           $model->RegInsertPago();  
 
             }else{
                 // Los dcatos NO ingresaron a la BD

@@ -46,12 +46,12 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('PagosAdm.php');
                     </script>";
-                    //require_once "../../EVENT_BITACORA.php";
-                   // $model = new EVENT_BITACORA;
-                    //session_start();
+                    require_once "../../EVENT_BITACORA.php";
+                    $model = new EVENT_BITACORA;
+                    session_start();
 
-                   // $_SESSION['IDFondoBitacoraUP']=$ID_Fondo;
-                   // $model->RegUptFondo();
+                    $_SESSION['pagoBitacoraUP']=$Monto;
+                    $model->RegUptpag();
 
             }else{
                 echo "<script language='JavaScript'>

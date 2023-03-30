@@ -65,9 +65,9 @@
                             require_once "../../EVENT_BITACORA.php";
                             $model = new EVENT_BITACORA;
                             session_start();
-                            $_SESSION['UsuarioBitacora']=$nombreDonante;
+                            $_SESSION['DonanteBitacora']=$nombreDonante;
                             $_SESSION['IDUsuarioBitacora']=$ID_Donante;
-                            $model->RegInsert();
+                            $model->RegInsertDon();
 
             }else{
                 // Los dcatos NO ingresaron a la BD

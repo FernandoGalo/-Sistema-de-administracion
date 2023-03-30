@@ -15,11 +15,11 @@ $ID_Pago = $_GET['ID_de_pago'];
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('PagosAdm.php');
                 </script>";     
-              //  require_once "../../EVENT_BITACORA.php";
-              //  $model = new EVENT_BITACORA;
-               // session_start();
-               // $_SESSION['IDFondoBitacoraDELETE']=$ID_Fondo;
-               // $model->DeleteFondo();
+               require_once "../../EVENT_BITACORA.php";
+              $model = new EVENT_BITACORA;
+               session_start();
+               $_SESSION['IDPagoBitacoraDELETE']=$ID_Pago;
+               $model->DeletePago();
 
         
     }else{
