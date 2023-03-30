@@ -19,11 +19,9 @@
 <body>
     <?php
         if(isset($_POST['enviar_F2'])){
-            //aqui entra sio el usuario ha presionado el boton enviar
+            //aqui entra si el usuario ha presionado el boton enviar
             session_start();
-            $Usuario=$_SESSION['usuario'];
-            
-            echo $Usuario;        
+            $Usuario=$_SESSION['usuario'];       
     include("../../conexion_BD.php");
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Usuario'");
 
@@ -39,8 +37,8 @@
             //si lo que esta en el form esta vacio
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_fondos SET ID_Donante = $ID_Donador, ID_de_proyecto = $ID_Proyecto, ID_usuario = $ID_Usuario, Fecha_de_adquisicion_F  ='$Fecha_Adquisicion', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_fondo = $ID_Fondo;";
-            $resultado=mysqli_query($conexion,$sql);
+            $sql="UPDATE tbl_fondos SET ID_Donante = $ID_Donador, ID_de_proyecto = $ID_Proyecto, ID_usuario = $ID_Usuario, Fecha_de_adquisicion_F  ='$Fecha_Adquisicion', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_fondo = $ID_Fondo";
+            $resultado = mysqli_query($conexion,$sql);
 
             if($resultado){
                 echo "<script language='JavaScript'>
@@ -72,14 +70,35 @@
             
     ?>
     	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
-	<<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
+      <section class="full-box dashboard-contentPage" style="overflow-y: auto;">
+		<!-- Barra superior -->
+		<nav class="full-box dashboard-Navbar">
+			<ul class="full-box list-unstyled text-right">
+				<li class="pull-left">
+					<a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
+				</li>
+			</ul>
+		</nav>
+		<!-- Muestra el contenido de la pagina -->
+		<div class="container-fluid">
+        <div class="row">
+              <div class="col-md-12">
+                  <div class="box">
+                    <div class="box-header with-border">
+                          <h1 class="box-title">Editar Fondos</h1>
+                        </div>
+                        <br>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- centro -->
+                    <div class="panel-body">
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>ID del fondo(*):</label>
                             <input type="hidden" name="ID_Fondo" id="ID_Fondo">
-                            <input style="text" type="text" class="form-control" name="ID_Fondo" id="ID_Fondo" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="<?php echo $id?>" readonly>
+                            <input style="text" type="text" class="form-control" name="ID_Fondo" id="ID_Fondo" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  value="<?php echo $ID_Fondo; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           <?php require '../../conexion_BD.php';?>
@@ -88,7 +107,7 @@
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_donantes");
                           ?>
-                            <select class="controls" type="text" name="Donante" id="Donante" required ><br>
+                            <select class="controls" type="text" name="Donante" id="Donante" value="<?php echo $ID_Donador; ?>" required ><br>
                            <?php
                             while($row1=mysqli_fetch_array($sql)){
                             ?>
@@ -103,7 +122,7 @@
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
                           ?>
-                            <select class="controls" type="text" name="Proyecto" id="Proyecto" required ><br>
+                            <select class="controls" type="text" name="Proyecto" id="Proyecto" value="<?php echo $$ID_Proyecto; ?>" required ><br>
                            <?php
                             while($row1=mysqli_fetch_array($sql2)){
                             ?>
@@ -117,18 +136,29 @@
                             <label>Usuario</label>
                             <?php session_start();     
                             $usuario=$_SESSION['usuario'];?>
-                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" placeholder="<?php echo $usuario?>" readonly>
+                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Adquisicion:</label>
-                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" placeholder="$Fecha_Adquisicion">
+                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" value="<?php echo $Fecha_Adquisicion; ?>>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                            <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
+                          <button class="btn btn-danger" type="button">
+                          <a href="FondosAdm.php" style="color:white; text-decoration:none;">
+                          <i class="zmdi zmdi-close-circle"></i> Cancelar
+                          </a>
+                          </button>
                           </div>
                           </div>
                           </div>
+                        </form>
+                        </div>
+                    <!--Fin centro -->
+                  </div><!-- /.box -->
+              </div><!-- /.col -->
+          </div><!-- /.row -->
+		</div>
 	</section>
                         
 
