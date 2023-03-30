@@ -1,3 +1,42 @@
+<script>
+function buscarTabla() {
+  // Obtener el valor del campo de entrada
+  var valorBuscado = document.getElementById("buscador").value.toLowerCase();
+  
+  // Obtener la tabla
+  var tabla = document.getElementById("tbllistado");
+
+  // Obtener todas las filas de la tabla, excepto la fila de encabezado
+  var filas = tabla.getElementsByTagName("tr");
+  
+  // Recorrer todas las filas de la tabla y comprobar si coinciden con el valor buscado
+  for (var i = 0; i < filas.length; i++) {
+    var mostrarFila = false;
+    
+    // Obtener todas las celdas de la fila actual
+    var celdas = filas[i].getElementsByTagName("td");
+    
+    // Recorrer todas las celdas de la fila y comprobar si alguna coincide con el valor buscado
+    for (var j = 0; j < celdas.length; j++) {
+      var celda = celdas[j];
+      if (celda) {
+        var contenidoCelda = celda.innerHTML.toLowerCase();
+        if (contenidoCelda.indexOf(valorBuscado) > -1) {
+          mostrarFila = true;
+          break;
+        }
+      }
+    }
+    
+    // Mostrar u ocultar la fila según si se encontró una coincidencia o no
+    if (mostrarFila) {
+      filas[i].style.display = "";
+    } else {
+      filas[i].style.display = "none";
+    }
+  }
+}
+</script>
 <?php
 
 
@@ -5,6 +44,7 @@ require '../../conexion_BD.php';
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
 
 require_once "../../EVENT_BITACORA.php";
+
 
 
 
@@ -71,13 +111,9 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                         <table id="tbllistado" class="table table-bordered table-hover">
                         
                         <!-- Buscar -->
-                        <form action="" method="post">
-                            <label for="campo">Buscar:</label>
-                            <input type="text" name="campo" id="campo">
-                            <input type="submit" value="Buscar">
-                          </form>
                         
-                        <thead>
+                        <thead >
+                        
                             <th>ID</th>
                             <th>Usuario</th>
                             <th>Nombre</th>
@@ -88,8 +124,12 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                             <th>Fecha Vencimiento </th>
                             <th>Estado del usuario</th>
                             <th>Acciones</th>
+                            <form action="" method="post">
+                            <label for="campo">Buscar:</label>
+                            <input type="text" name="buscador" id="buscador" onkeyup="buscarTabla()">
+                          </form>
                           </thead>
-                          <tbody>                            
+                          <tbody>                      
                           </tbody>
                           <tfoot>
 
@@ -125,7 +165,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                              }
                              ?>     
                           </tfoot>
-                        </table>
+                        </table >
                     </div>
                     <div class="panel-body" id="formularioregistros">
                         <form name="formulario" id="formulario" action="Insert_Usuarios.php" method="POST">
