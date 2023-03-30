@@ -13,7 +13,13 @@ include("../../conexion_BD.php");
         echo "<script languaje='JavaScript'>
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('FondosAdm.php');
-                </script>";     
+                </script>";    
+                require_once "../../EVENT_BITACORA.php";
+                $model = new EVENT_BITACORA;
+                session_start();
+                $_SESSION['IDFondoBitacoraDELETE']=$ID_Fondo;
+                $model->DeleteFondo();
+ 
         
     }else{
         if (mysqli_errno($conexion)) {
