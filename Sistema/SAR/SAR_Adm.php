@@ -81,7 +81,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                             <th>RTN</th>
                             <th>Numero de Declaracion</th>
                             <th>Nombre o Razon Social</th>
-                            <th>Apartamento</th>
+                            <th>Departamento</th>
                             <th>Municipio</th>
                             <th>Barrio o Colonia</th>
                             <th>Calle o Avenida</th>
@@ -92,7 +92,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                             <th>Domicilio</th>
                             <th>Correo</th>
                             <th>Profesion u oficio</th>
-                            <th>confirmar</th>
+                            <th>CAI</th>
                             <th>Fecha Limite de Emision</th>
                             <th>Numero Inicial</th>
                             <th> Numero final</th>

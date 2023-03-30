@@ -180,12 +180,16 @@
                 echo "<p class='error'> Debes colocar el numero inicial</p>";
             }else if(empty($num_final)){
                 echo "<p class='error'> Debes colocar el numero final</p>";
-
+            }else{
 
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final = $bloque WHERE ID_SAR='$id_sar';";
+            // $sql="UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final = $bloque WHERE ID_SAR='$id_sar';";
+
+
+            $sql = "UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final WHERE ID_SAR = $id_sar;";
+
             $resultado=mysqli_query($conexion,$sql);
 
 
