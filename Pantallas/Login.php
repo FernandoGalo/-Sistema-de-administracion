@@ -36,15 +36,15 @@ if(isset($_POST['btn_Login'])){
     <!-- Para Tablet -->
     <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='../css/medium-style.css' />
     <script>
-function validarMayusculas(event) {
-  var input = event.target;
-  var tecla = String.fromCharCode(event.keyCode);
-  if (/[^A-Z]/.test(tecla)) {
-    return false; // Impide cualquier carácter que no sea una letra mayúscula
-  }
-  input.value = input.value.toUpperCase();
-  return true;
-}
+function validarMayusculas(e) {
+			var tecla = e.keyCode || e.which;
+			var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+			var letras = /^[A-Z]+$/;
+
+			if(!letras.test(teclaFinal)){
+				e.preventDefault();
+			}
+		}
 function impedirPegar(event) {
   event.preventDefault(); // Impide la acción predeterminada de pegar el texto
 }
@@ -85,7 +85,7 @@ function mostrarPassword() {
             <?php } ?>
     
         <h3>Usuario</h3>
-        <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Usuario"><br> 
+        <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)" style="text-transform:uppercase" placeholder="Ingrese su Usuario"><br> 
         <h3>contraseña</h3>
         <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
         <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña"><br>

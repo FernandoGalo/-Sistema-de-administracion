@@ -13,10 +13,11 @@
 <title>Inicio</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="../../css/main.css">
 
 </head>
 <body>
+
     <?php
         if(isset($_POST['enviar_F2'])){
             //aqui entra si el usuario ha presionado el boton enviar
@@ -140,7 +141,7 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Adquisicion:</label>
-                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" value="<?php echo $Fecha_Adquisicion; ?>>
+                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" value="<?php echo $Fecha_Adquisicion; ?>">
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
@@ -173,6 +174,6 @@
   <script src="./js/events.js"></script>
 	<script src="./js/main.js"></script>
   <script src="./js/usuario.js"></script>
-
+  <?php include '../sidebar.php'; ?>
 </body>
 </html>
