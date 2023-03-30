@@ -34,114 +34,8 @@ class EVENT_BITACORA{
     public $R_usuario;
     public $R_contra;
 
-    #metodo insertar
-    public function insertar(){
-        $model = new conexion;
-        $conexion = $model->conectar();
-        $tabla = $this->tabla;
-        $values = $this->values;
-        $columnas = $this->columnas;
-
-        $sql = "INSERT INTO $tabla ($columnas) VALUES $values ";
-
-        $consulta = $conexion->prepare(sql);
-
-        if(! $consulta){
-
-            ?>
-            <script>    
-                alert("error en la consulta");
-            </script>
-            <?php
-        }else{
-            $consulta->execute();
-        }
-    }
-    #terminar metodo insertar
-
-
-    #metodo editar
-    public function editar(){
-        $model = new Conexion;
-        $conexion = $model-> conectar();
-            $update = $this->update;
-            $set = $this->set;
-            $condition = $this->condition;
-
-            if($condition !=""){
-                $condition = "WHERE ".$condition;
-
-            }
-            $sql = "UPDATE $update SET $set $condition";
-
-            $consulta = $conexion->prepare($sql);
-                    if(! $condition){
-
-                        ?>
-    <script>
-        alert("error en la consulta");
-    </script> 
-
-    <?php
-            
-            
-                    }else{
-                        $consulta -> execute();
-                    }
-    }
-    #termina metodo editar
-
-
-    #metodo eliminar
-    public function eliminar(){
-
-        $model = new Conexion;
-        $conexion = $model ->conectar();
-        $deletefrom = $this->deletefrom;
-        $condition = $this-> condition;
-            if($condition !=""){
-
-                $condition = "WHERE ".$condition;
-            }
-
-            $sql = "DELETE FROM $deletefrom $condition";
-            $consulta = $conexion-> prepare(sql);
-                    if(! $consulta){
-                        ?>
-            <script>
-                alert("error en la consulta")
-            </script>
-            <?php
-                    }else{
-                        $consulta-> execute();
-                    }
-    }
-        #terminar el metodo eliminar
-
-
-        #metodo leer
-        public function leer(){
-            $model = new Conexion;
-            $conexion = $model->conectar();
-
-            $select = $this-> select;
-            $from = $this->from;
-            $condition = $this->condition;
-            $rows = $this->rows;
-                if($condition !=""){
-            $condition = "WHERE ".$condition;
-        }
-
-        $sql = "SELECT $select FROM $from $condition";
-        $consulta = $conexion-> prepare($sql);
-        $consulta->execute();
-
-        while($filas = $consulta->fetch()){
-            $this->rows[] = $filas;
-        }
-    }
-    #termina metodo leer
-
+    //===================================================================================
+    //===================================================================================
 
     public function login(){
         
@@ -175,6 +69,9 @@ class EVENT_BITACORA{
         <?php
         }
     }
+    
+    //===================================================================================
+    //===================================================================================
     public function Cerrarlogin(){
         
         $model = new conexion();
@@ -207,6 +104,9 @@ class EVENT_BITACORA{
         <?php
         }
     }
+    
+    //===================================================================================
+    //===================================================================================
     public function RegInsert(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -236,8 +136,12 @@ class EVENT_BITACORA{
         
 
     }
+    
+    //===================================================================================
+    //===================================================================================
     public function RegautoInsert(){
         session_start();
+        $IDGlobal=$_SESSION['ID_User'];
         $_SESSION['IDUsuarioBitacora'];
             $model = new conexion();
             $conexion = $model->conectar();
@@ -250,7 +154,7 @@ class EVENT_BITACORA{
             $Descripcion = "Se autoregistro el usuario: " .$Usuario;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-            VALUES (NULL,'$fecha', '$IDU', '1', 'creacion de usuario', '$Descripcion')";
+            VALUES (NULL,'$fecha', '$IDGlobal', '1', 'creacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
     
@@ -265,6 +169,8 @@ class EVENT_BITACORA{
     }
 
 
+    //===================================================================================
+    //===================================================================================
 
     public function RegUpt(){
         session_start();
@@ -297,6 +203,8 @@ class EVENT_BITACORA{
     }
 
 
+    //===================================================================================
+    //===================================================================================
 
     public function RegDelete(){
         session_start();
@@ -373,5 +281,104 @@ class EVENT_BITACORA{
     }
     //===================================================================================
     //===================================================================================
+
+
+
+##Insert fondos
+public function RegaInsertFondo(){
+    session_start();
+    $Fondo=$_SESSION['IDFondoBitacora'];
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $sql = "SELECT * FROM tbl_ms_usuario";
+        $consulta = $conexion->prepare($sql);
+        $fila = $consulta->fetch();
+        $Accion = "Creacion de usuario";
+
+        $Usuario = $_SESSION['UsuarioBitacora'];
+        $Descripcion = "Se registro el fondo: " .$Fondo;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Registro de fondo', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+
+        
+      
+        ?>
+
+    <?php
+
+    
+
+}
+
+    //===================================================================================
+    //===================================================================================
+#Delete Fondos
+public function DeleteFondo(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+   $Fondo=$_SESSION['IDFondoBitacoraDELETE'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $sql = "SELECT * FROM tbl_ms_usuario";
+        $consulta = $conexion->prepare($sql);
+        $fila = $consulta->fetch();
+        $Descripcion = "Se elimino el fondo: " .$Fondo;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de fondo', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+    
+
+        
+      
+        ?>
+
+    <?php
+
+    
+
+}
+
+    //===================================================================================
+    //===================================================================================
+# Registro de Fondos
+public function RegUptFondo(){
+    session_start();
+    $idfondo= $_SESSION['IDFondoBitacoraUP'];
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $sql = "SELECT * FROM tbl_ms_usuario";
+        $consulta = $conexion->prepare($sql);
+        $fila = $consulta->fetch();
+        $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
+        $id =  $_SESSION['IDUsuarioBitacoraUP'];
+        $user = $_SESSION['UsuarioBitacoraUP'];
+        $Descripcion = "Se modifico el fondo: " .$idfondo;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de fondo', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+
+        
+      
+        ?>
+
+    <?php
+
+    
+
+}
+
+
+    //===================================================================================
+    //===================================================================================
+
 }  
 ?>
