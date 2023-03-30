@@ -82,13 +82,21 @@ $usuario=$_SESSION['usuario'];
                               <td><?php echo $mostrar['ID_Rol']?></td> 
                               <td><?php echo $mostrar['Rol']?></td> 
                               <td><?php echo $mostrar['Descripcion']?></td>
-                              <td><?php echo $mostrar['Estado']?></td>
+                              <?php if($mostrar['Estado'] == 1){
+                                echo "<td>Activo</td>";
+                              }else{
+                                echo "<td>Inactivo</td>";
+                              } 
+                              ?>
                               <td>
-                              <a href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' class='boton-editar'>
+                              <a href='Update_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i> Editar
                               </a>
-                              <a href='Delete_Usuarios.php?Usuario=<?php echo $mostrar['Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <a href='Delete_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i> Eliminar
+                              </a>
+                              <a href='Permisos_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-permiso'>
+                              <i class='zmdi zmdi-key'></i> Permisos
                               </a>
                             </td>
                              </tr>
@@ -99,29 +107,30 @@ $usuario=$_SESSION['usuario'];
                         </table>
                     </div>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Insert_Usuarios.php" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_Roles.php" method="POST">
                         <div class="container">
                           <div class="row">
+
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre rol(*):</label>
-                            <input type="hidden" name="Nombre_rol" id="Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre de Usuario" onkeypress="validarMayusculas(event)" required>
+                            <input type="hidden" name="Nombre_rol" id="Nombre_rol">
+                            <input type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol" onkeypress="validarMayusculas(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Descripcion(*):</label>
-                            <input type="hidden" name="Nombre_Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
+                            <input type="hidden" name="descripcion" id="descripcion">
+                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Estado:</label>
                            <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
-                            <select class="form-control" name="Rol" id="Rol" required>
+                            <select class="form-control" name="estado" id="estado" required>
                               <option value="">Selecione un estado</option>
-                              <option value= 1 >ADMINISTRADOR</option>
-                              <option value= 2 >EDITOR</option>
-                              <option value= 3 >SUPERVISOR</option>
+                              <option value="1" >ACTIVO</option>
+                              <option value="2" >INACTIVO</option>
                             </select>
                           </div>
+
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>

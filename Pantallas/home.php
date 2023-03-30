@@ -111,6 +111,18 @@
 						</li>
 					</ul>
 				</li>
+
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money"></i> SAR <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Sistema/SAR/SAR_Adm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento SAR </a>
+						</li>
+					</ul>
+				</li>
+
 			</ul>
 		</div>
 	</section>
