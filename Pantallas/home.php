@@ -83,7 +83,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
+							<a href="../Sistema/Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento voluntarios </a>
 						</li>
 					</ul>
 				</li>

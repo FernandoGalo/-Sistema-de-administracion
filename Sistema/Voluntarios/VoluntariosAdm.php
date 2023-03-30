@@ -5,6 +5,8 @@ require '../../conexion_BD.php';
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
 
 require_once "../../EVENT_BITACORA.php";
+session_start();     
+$usuario=$_SESSION['usuario'];
 
 ?>
 
@@ -42,8 +44,8 @@ require_once "../../EVENT_BITACORA.php";
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento voluntarios</h1>
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Rol</button>
+                          <h1 class="box-title">Mantenimiento Voluntarios</h1>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Voluntario</button>
                           <div class="box-tools pull-right">
                         </div>
                         <br>
@@ -55,10 +57,10 @@ require_once "../../EVENT_BITACORA.php";
                         
                         <!-- Buscar -->
                         <form action="" method="post">
-                            <label for="campo">Buscar:</label>
+                            <label for="campo">Buscar: </label>
                             <input type="text" name="campo" id="campo">
                           </form>
-
+                          
                         <thead>
                             <th>ID</th>
                             <th>Nombre voluntario</th>
@@ -83,10 +85,10 @@ require_once "../../EVENT_BITACORA.php";
                               <td><?php echo $mostrar['Telefono_Voluntario']?></td>
                               <td><?php echo $mostrar['Direccion_Voluntario']?></td>
                               <td>
-                              <a href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' class='boton-editar'>
+                              <a href='Update_Voluntarios.php?ID_Voluntario=<?php echo $mostrar['ID_Voluntario']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i> Editar
                               </a>
-                              <a href='Delete_Usuarios.php?Usuario=<?php echo $mostrar['Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <a href='Delete_Voluntarios.php?ID_Voluntario=<?php echo $mostrar['ID_Voluntario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i> Eliminar
                               </a>
                             </td>
@@ -98,31 +100,32 @@ require_once "../../EVENT_BITACORA.php";
                         </table>
                     </div>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Insert_Usuarios.php" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_Voluntarios.php" method="POST">
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Nombre rol(*):</label>
-                            <input type="hidden" name="Nombre_rol" id="Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre de Usuario" onkeypress="validarMayusculas(event)" required>
+                            <label>ID Voluntario(*):</label>
+                            <input type="hidden" name="ID_Voluntario" id="ID_Voluntario">
+                            <input onpaste="return false" style="text-transform:uppercase" style="text" type="text" class="form-control" name="ID_Voluntario" id="ID_Voluntario" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del Voluntario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Descripcion(*):</label>
-                            <input type="hidden" name="Nombre_Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
+                            <label>Nombre Voluntario(*):</label>
+                            <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario" onkeypress="validarMayusculas(event)" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Estado:</label>
-                           <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
-                            <select class="form-control" name="Rol" id="Rol" required>
-                              <option value="">Selecione un estado</option>
-                              <option value= 1 >ADMINISTRADOR</option>
-                              <option value= 2 >EDITOR</option>
-                              <option value= 3 >SUPERVISOR</option>
-                            </select>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Telefono(*):</label>
+                            <input type="hidden" name="Telefono_Voluntario" id="Telefono_Voluntario">
+                            <input style="text-transform:uppercase" style="text" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" required>
                           </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Direccion Voluntario(*):</label>
+                            <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
+                            <textarea style="text-transform:uppercase" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion voluntario"  required></textarea>
+                          </div>
+                        
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar_V" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
@@ -144,6 +147,11 @@ require_once "../../EVENT_BITACORA.php";
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
+
+  
+
+
+
 
 </body>
 </html>
