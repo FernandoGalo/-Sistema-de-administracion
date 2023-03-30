@@ -46,6 +46,11 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('FondosAdm.php');
                     </script>";
+                    $model = new EVENT_BITACORA;
+                    session_start();
+
+                    $_SESSION['IDFondoBitacoraUP']=$ID_Fondo;
+                    $model->RegUptFondo();
 
             }else{
                 echo "<script language='JavaScript'>

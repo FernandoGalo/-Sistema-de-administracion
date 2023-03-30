@@ -43,6 +43,12 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('FondosAdm.php');
                             </script>";     
+                            $model = new EVENT_BITACORA;
+                            session_start();
+ 
+                            $_SESSION['IDFondoBitacora']=$ID_Fondo;
+                            $model->RegaInsertFondo();  
+
 
             }else{
                 // Los dcatos NO ingresaron a la BD

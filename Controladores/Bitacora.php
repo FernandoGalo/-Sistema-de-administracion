@@ -116,7 +116,8 @@ include("../EVENT_BITACORA.PHP");
             $sql="SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
 			from tbl_ms_bitacora b
 			JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-			JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario";
+			JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
+			ORDER BY fecha DESC";
             $result=mysqli_query($conexion,$sql);
 
             while($mostrar=mysqli_fetch_array($result)){

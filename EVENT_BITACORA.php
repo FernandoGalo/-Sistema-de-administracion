@@ -376,9 +376,91 @@ public function RegUptFondo(){
 
 }
 
-
+     //===================================================================================
     //===================================================================================
-    //===================================================================================
+    public function RegInsertvol(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+     $voluntario=$_SESSION['nombreVolBitacora'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Accion = "Creacion de Voluntario";
+            $Descripcion = "Nuevo Voluntario agregado: ".$voluntario;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de voluntario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
 
+    }
+ //===================================================================================
+    //===================================================================================
+    public function DeleteVol(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+       $idvol=$_SESSION['idVolBitacoraDELETE'];
+       $voldelete= $_SESSION['NombreVolBitacoraDELETE'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            $Descripcion = "Se elimino el Voluntario: ".$idvol;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de voluntario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+        
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+     //===================================================================================
+    //===================================================================================
+    public function RegUptVol(){
+        session_start();
+
+        $IDGlobal=$_SESSION['ID_User'];
+       $Voluntarioup= $_SESSION['VOLBitacoraUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            
+            $Descripcion = "Se modifico el voluntario: " .$Voluntarioup;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de voluntario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
 }  
 ?>
