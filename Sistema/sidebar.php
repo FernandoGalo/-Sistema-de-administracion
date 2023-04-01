@@ -4,7 +4,10 @@
 
 <!--Seccion donde va toda la barra lateral -->
 <?php
-$usuario=$_SESSION['usuario'];?>
+require '../../conexion_BD.php';
+$usuario=$_SESSION['usuario'];
+?>
+
 <section class="full-box cover dashboard-sideBar" style="overflow-y: auto;">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
 		<div class="full-box dashboard-sideBar-ct">
@@ -48,6 +51,8 @@ $usuario=$_SESSION['usuario'];?>
 						</li>
 					</ul>
 				</li>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Seguridad <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -64,6 +69,7 @@ $usuario=$_SESSION['usuario'];?>
 						</li>
 					</ul>
 				</li>
+				<?php } ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>

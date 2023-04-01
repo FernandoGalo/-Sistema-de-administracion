@@ -1,7 +1,7 @@
 <?php
 
-
 require '../../conexion_BD.php';
+
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
 
 require_once "../../EVENT_BITACORA.php";

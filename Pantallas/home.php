@@ -8,8 +8,13 @@
 	<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
- <?php session_start();     
-$usuario=$_SESSION['usuario'];?>
+ <?php 
+ require '../conexion_BD.php'; 
+ session_start();
+$usuario=$_SESSION['usuario'];
+$ID_Rol=$_SESSION['ID_Rol'];
+?>
+
 	<!--Seccion donde va toda la barra lateral -->
 	<section class="full-box cover dashboard-sideBar" style="overflow-y: auto;">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
@@ -55,21 +60,25 @@ $usuario=$_SESSION['usuario'];?>
 					</ul>
 				</li>
 				<li>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+if ($datos=$sql->fetch_object()) { ?>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Seguridad <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../Controladores/Bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
+							<a href="../../Controladores/Bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
 						</li>
 						<li>
-							<a href="../Sistema/seguridad/ParametrosAdm.php"><i class="zmdi zmdi-archive"></i> Parametros </a>
+							<a href="../seguridad/ParametrosAdm.php"><i class="zmdi zmdi-archive"></i> Parametros </a>
 						</li>
 						<li>
-							<a href="../Sistema/seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
+							<a href="../seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
 						</li>
 					</ul>
+					<?php } ?>
 				</li>
+				
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
