@@ -57,7 +57,7 @@ class EVENT_BITACORA{
             
             $fila = $consulta->fetch();
 
-            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['1']."','Inicio de sesion','Entro al sistema')";
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."', 1 ,'Inicio de sesion','Entro al sistema')";
             #$sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['ID_Objeto']."','Inicio de secion','Entro al sistema')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
@@ -415,9 +415,6 @@ public function RegUptFondo(){
        $voldelete= $_SESSION['NombreVolBitacoraDELETE'];
             $model = new conexion();
             $conexion = $model->conectar();
-
-            $consulta = $conexion->prepare($sql);
-            $fila = $consulta->fetch();
             $Descripcion = "Se elimino el Voluntario: ".$idvol;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
