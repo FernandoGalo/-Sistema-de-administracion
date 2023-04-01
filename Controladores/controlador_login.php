@@ -31,7 +31,12 @@ if (!empty($_POST["btn_Login"])) {
                     while($row=mysqli_fetch_array($sql1)){
                          $idUser=$row['ID_Usuario'];
                     }
+
+                    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
                     
+                    while($row=mysqli_fetch_array($sql1)){
+                         $ID_Rol=$row['ID_Rol'];
+                    }
     
                 $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='ACTIVO' and
                 Usuario='$usuario' ");
@@ -46,12 +51,14 @@ if (!empty($_POST["btn_Login"])) {
                         session_start();
                     $_SESSION['user']=$usuario;
                     $_SESSION['ID_User']=$idUser;
+                    $_SESSION['ID_Rol']=$ID_Rol;
                         header("location: ../Controladores/controlador_de_inicio.php");
                      }else{
                         //ingreso no admin
                         session_start();
                     $_SESSION['user']=$usuario;
                     $_SESSION['ID_User']=$idUser;
+                    $_SESSION['ID_Rol']=$ID_Rol;
                         header("location: ../Controladores/controlador_de_inicio.php");
                      }
                      

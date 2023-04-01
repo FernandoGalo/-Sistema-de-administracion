@@ -14,6 +14,7 @@ require_once "../../EVENT_BITACORA.php";
 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
 session_start();     
 $usuario=$_SESSION['user'];
+$ID_Rol=$_SESSION['ID_Rol'];
 
 $sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
 
@@ -61,16 +62,21 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento de fondos</h1>
+                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol ");
+if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Fondo</button>
                           <div class="box-tools pull-right">
+                            <?php } ?>
                         </div>
                         <br>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
+                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol ");
+if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table id="tbllistado" class="table table-bordered table-hover">
-                      
+                        
                         <!-- Buscar -->
                         <form action="" method="post">
                             <label for="campo">Buscar:</label>
@@ -105,11 +111,17 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                               <td><?php echo $mostrar['Nombre_Usuario']?></td>
                               <td><?php echo $mostrar['Fecha_de_adquisicion_F']?></td>
                               <td>
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Fondo.php?ID_de_fondo=<?php echo $mostrar['ID_de_fondo']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i> Editar
+                                <?php } ?>
                               </a>
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Fondo.php?ID_de_fondo=<?php echo $mostrar['ID_de_fondo']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i> Eliminar
+                              <?php } ?>
                               </a>
                             </td>
                              </tr>
@@ -119,6 +131,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                           </tfoot>
                         </table>
                     </div>
+                    <?php } ?>
                     <div class="panel-body" id="formularioregistros">
                         <form name="formulario" id="formulario" action="Insert_Fondo.php" method="POST">
                         <div class="container">
