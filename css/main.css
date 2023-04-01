@@ -625,3 +625,10 @@ body, html{
   .boton-editar:hover, .boton-eliminar:hover {
 	background-color: #333;
   }
+
+
+  /* Boton para permisos */
+  .boton-permiso{
+   
+  }
+

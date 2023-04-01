@@ -119,6 +119,18 @@ include("../EVENT_BITACORA.PHP");
 						</li>
 					</ul>
 				</li>
+
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money"></i> SAR <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Sistema/SAR/SAR_Adm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento SAR </a>
+						</li>
+					</ul>
+				</li>
+
 			</ul>
 		</div>
 	</section>
@@ -149,10 +161,10 @@ include("../EVENT_BITACORA.PHP");
                         <table id="tbllistado" class="table table-bordered table-hover">
                         
                         <!-- Buscar -->
-                        <form action="" method="post">
+						<form action="" method="post">
                             <label for="campo">Buscar:</label>
-                            <input type="text" name="campo" id="campo">
-                          </form>
+                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
+                        </form>
 
                         <thead>
                             <th>ID bitacora</th>
@@ -203,5 +215,6 @@ include("../EVENT_BITACORA.PHP");
 	<!--script en java para los efectos-->
 	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script src="../js/Buscador.js"></script>
 </body>
 </html>
