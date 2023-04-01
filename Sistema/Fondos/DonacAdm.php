@@ -90,16 +90,16 @@ if ($datos=$sql->fetch_object()) { ?>
                               <td><?php echo $mostrar['Correo_D']?></td>
                               <td>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
-                              if ($datos=$sql->fetch_object()) { ?>
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i> Editar
                               <?php } ?>
                               </a>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
-                              if ($datos=$sql->fetch_object()) { ?>
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i> Eliminar
-                              <? } ?>
+                              <?php } ?>
                               </a>
                             </td>
                              </tr>
