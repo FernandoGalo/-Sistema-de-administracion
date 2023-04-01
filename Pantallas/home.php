@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+ <?php session_start();     
+$usuario=$_SESSION['usuario'];?>
 	<!--Seccion donde va toda la barra lateral -->
 	<section class="full-box cover dashboard-sideBar" style="overflow-y: auto;">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
@@ -20,7 +22,7 @@
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="../img/avatar.jpg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Nombre de usuario</figcaption>
+					<figcaption class="text-center text-titles"><?php echo $usuario; ?></figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li>

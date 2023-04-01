@@ -3,6 +3,8 @@
 
 
 <!--Seccion donde va toda la barra lateral -->
+<?php
+$usuario=$_SESSION['usuario'];?>
 <section class="full-box cover dashboard-sideBar" style="overflow-y: auto;">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
 		<div class="full-box dashboard-sideBar-ct">
@@ -14,7 +16,7 @@
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="../../img/avatar.jpg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Nombre de usuario</figcaption>
+					<figcaption class="text-center text-titles"><?php echo $usuario; ?></figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li>

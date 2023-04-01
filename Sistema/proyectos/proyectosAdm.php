@@ -6,6 +6,8 @@ require_once "../../EVENT_BITACORA.php";
 
 
 <!DOCTYPE html>
+<?php    session_start();
+$usuario=$_SESSION['usuario'];?>
 <html lang="es">
 <head>
 	<title>Inicio</title>
