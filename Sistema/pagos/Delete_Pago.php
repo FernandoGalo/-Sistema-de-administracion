@@ -16,16 +16,16 @@ $ID_Pago = $_GET['ID_de_pago'];
                 location.assign('PagosAdm.php');
                 </script>";     
                require_once "../../EVENT_BITACORA.php";
-              $model = new EVENT_BITACORA;
+               $model = new EVENT_BITACORA;
                session_start();
-               $_SESSION['IDPagoBitacoraDELETE']=$ID_Pago;
+               $_SESSION['idPagoBitdel']=$ID_Pago;
                $model->DeletePago();
 
         
     }else{
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>
-        alert('No puedes borrar este usuario');
+        alert('No puedes borrar este pago');
         location.assign('PagosAdm.php');
         </script>";   
         } else {
@@ -41,10 +41,7 @@ $ID_Pago = $_GET['ID_de_pago'];
 
         } catch (Exception $e) {
             $mensajeError = $e->getMessage();
-            // echo "<script languaje='JavaScript'>
-            //     alert('Excepción capturada: $mensajeError');
-            //     location.assign('PagosAdm.php');
-            // </script>";
+
 
             echo "<script languaje='JavaScript'>
             alert('Los datos NO se eliminaron de la BD por dependencias');

@@ -107,6 +107,7 @@ class EVENT_BITACORA{
     
     //===================================================================================
     //===================================================================================
+    #registro usuario
     public function RegInsert(){
         session_start();
         $IDGlobal=$_SESSION['ID_User'];
@@ -171,24 +172,24 @@ class EVENT_BITACORA{
 
     //===================================================================================
     //===================================================================================
+    #update usuario
 
-    public function RegUpt(){
+    public function RegUptusu(){
         session_start();
-        $_SESSION['UsuarioBitacoraUP'];
-        $_SESSION['IDUsuarioBitacoraUP'];
+
         $IDGlobal=$_SESSION['ID_User'];
+
+
             $model = new conexion();
             $conexion = $model->conectar();
             $sql = "SELECT * FROM tbl_ms_usuario";
             $consulta = $conexion->prepare($sql);
             $fila = $consulta->fetch();
-            $_SESSION['IDUsuario'] = $fila['ID_Usuario'];
-            $id =  $_SESSION['IDUsuarioBitacoraUP'];
-            $user = $_SESSION['UsuarioBitacoraUP'];
-            $Descripcion = "Se modifico el usuario: " .$user;
+            $userName = $_SESSION['UsuarioBitUP'];
+            $Descripcion = "Se modifico el usuario: ".$userName;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de usuario', '$Descripcion')";
+            VALUES (NULL,'$fecha', $IDGlobal , '1', 'Modificacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
     
@@ -287,17 +288,16 @@ class EVENT_BITACORA{
 ##Insert fondos
 public function RegaInsertFondo(){
     session_start();
-    $Fondo=$_SESSION['IDFondoBitacora'];
+
     $IDGlobal=$_SESSION['ID_User'];
+    $idFondo=$_SESSION['IDFondoBitacora'];
         $model = new conexion();
         $conexion = $model->conectar();
         $sql = "SELECT * FROM tbl_ms_usuario";
         $consulta = $conexion->prepare($sql);
         $fila = $consulta->fetch();
         $Accion = "Creacion de usuario";
-
-        $Usuario = $_SESSION['UsuarioBitacora'];
-        $Descripcion = "Se registro el fondo: " .$Fondo;
+        $Descripcion = "Se registro el fondo: " .$idFondo;
         $fecha = date("Y-m-d h:i:s");
         $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
         VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Registro de fondo', '$Descripcion')";
@@ -422,6 +422,31 @@ public function RegUptFondo(){
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
         
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+    #update voluntario
+    public function RegUptVol(){
+        session_start();
+
+        $IDGlobal=$_SESSION['ID_User'];
+       $Voluntarioup= $_SESSION['VOLBitacoraUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();
+            $sql = "SELECT * FROM tbl_ms_usuario";
+            $consulta = $conexion->prepare($sql);
+            $fila = $consulta->fetch();
+            
+            $Descripcion = "Se modifico el voluntario: " .$Voluntarioup;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de voluntario', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
     
             
           
@@ -464,34 +489,7 @@ public function RegUptFondo(){
 
      //===================================================================================
     //===================================================================================
-    #update voluntario
-    public function RegUptVol(){
-        session_start();
-
-        $IDGlobal=$_SESSION['ID_User'];
-       $Voluntarioup= $_SESSION['VOLBitacoraUP'];
-            $model = new conexion();
-            $conexion = $model->conectar();
-            $sql = "SELECT * FROM tbl_ms_usuario";
-            $consulta = $conexion->prepare($sql);
-            $fila = $consulta->fetch();
-            
-            $Descripcion = "Se modifico el voluntario: " .$Voluntarioup;
-            $fecha = date("Y-m-d h:i:s");
-            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de voluntario', '$Descripcion')";
-            $consulta2= $conexion->prepare($sql2);
-            $consulta2->execute();
     
-            
-          
-            ?>
-    
-        <?php
-    
-        
-    
-    }
 
      //===================================================================================
     //===================================================================================
@@ -500,14 +498,14 @@ public function RegUptFondo(){
         session_start();
 
         $IDGlobal=$_SESSION['ID_User'];
-       $pago= $_SESSION['pagoBitacoraUP'];
+       $pago= $_SESSION['idpagoBitacoraUP'];
             $model = new conexion();
             $conexion = $model->conectar();
             $sql = "SELECT * FROM tbl_ms_usuario";
             $consulta = $conexion->prepare($sql);
             $fila = $consulta->fetch();
             
-            $Descripcion = "Se modifico el pago: " .$idpago;
+            $Descripcion = "Se modifico el pago: " .$pago;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de pago', '$Descripcion')";
@@ -527,8 +525,9 @@ public function RegUptFondo(){
 #delete pago
     public function DeletePago(){
         session_start();
+
         $IDGlobal=$_SESSION['ID_User'];
-     $idpago=$_SESSION['IDPagoBitacoraDELETE'];
+        $idpago= $_SESSION['idPagoBitdel'];
             $model = new conexion();
             $conexion = $model->conectar();
 
