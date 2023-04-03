@@ -14,12 +14,7 @@ include("../../conexion_BD.php");
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('PreguntasAdm.php');
                 </script>";     
-                require_once "../../EVENT_BITACORA.php";
-                $model = new EVENT_BITACORA;
-                session_start();
-                $_SESSION['idVolBitacoraDELETE']=$ID_Voluntario;
-                $model->DeleteVol();
-        
+
     }else{
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>

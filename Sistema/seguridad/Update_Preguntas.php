@@ -57,13 +57,7 @@
 						</script>";
                     
                    
-                    require_once "../../EVENT_BITACORA.php";
-                            $model = new EVENT_BITACORA;
-                            session_start();
-                            $_SESSION['VOLBitacoraUP']=$Nombre_Voluntario;
-
-                            $model->RegUptVol();
-            }else{
+                  
                 echo "<script language='JavaScript'>
                 alert('Los datos NO se actualizaron');
             location.assign('PreguntaAdm.php');
