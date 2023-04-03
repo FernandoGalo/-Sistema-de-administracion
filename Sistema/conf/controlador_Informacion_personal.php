@@ -1,4 +1,6 @@
 <?php
+session_start();
+$ID_usuario = $_SESSION['ID_User'];
     if(isset($_POST['boton2'])){
       $userName=$_POST['N_U_Imput'];
       $user=$_POST['U_Imput'];
