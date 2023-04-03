@@ -500,7 +500,7 @@ public function RegUptFondo(){
         session_start();
 
         $IDGlobal=$_SESSION['ID_User'];
-       $pago= $_SESSION['pagoBitacoraUP'];
+       $idpago= $_SESSION['pagoBitacoraUP'];
             $model = new conexion();
             $conexion = $model->conectar();
             $sql = "SELECT * FROM tbl_ms_usuario";
@@ -531,9 +531,6 @@ public function RegUptFondo(){
      $idpago=$_SESSION['IDPagoBitacoraDELETE'];
             $model = new conexion();
             $conexion = $model->conectar();
-
-            $consulta = $conexion->prepare($sql);
-            $fila = $consulta->fetch();
             $Descripcion = "Se elimino el Pago: ".$idpago;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
@@ -562,10 +559,6 @@ public function RegUptFondo(){
       $_SESSION['IDdonanteBitacora'];
             $model = new conexion();
             $conexion = $model->conectar();
-
-            $consulta = $conexion->prepare($sql);
-            $fila = $consulta->fetch();
-
             $Descripcion = "Nuevo Donante agregado: ".$donante;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
@@ -591,9 +584,6 @@ public function RegUptFondo(){
       $iddonante=  $_SESSION['IDdonanteBitacoraDELETE'];
             $model = new conexion();
             $conexion = $model->conectar();
-
-            $consulta = $conexion->prepare($sql);
-            $fila = $consulta->fetch();
             $Descripcion = "Se elimino el Donante: ".$iddonante;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
@@ -617,15 +607,10 @@ public function RegUptFondo(){
     #update donante
     public function RegUptdon(){
         session_start();
-
         $IDGlobal=$_SESSION['ID_User'];
         $Nombredonante=$_SESSION['donanteBitacoraUP'];
             $model = new conexion();
             $conexion = $model->conectar();
-            $sql = "SELECT * FROM tbl_ms_usuario";
-            $consulta = $conexion->prepare($sql);
-            $fila = $consulta->fetch();
-            
             $Descripcion = "Se modifico el donante: " .$Nombredonante;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
