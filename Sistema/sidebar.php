@@ -62,6 +62,9 @@ if ($datos=$sql->fetch_object()) { ?>
 							<a href="../seguridad/ParametrosAdm.php"><i class="zmdi zmdi-archive"></i> Parametros </a>
 						</li>
 						<li>
+							<a href="../seguridad/PreguntasAdm.php"><i class="zmdi zmdi-view-list"></i> Preguntas </a>
+						</li>
+						<li>
 							<a href="../seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
 						</li>
 					</ul>
