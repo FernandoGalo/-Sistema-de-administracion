@@ -19,7 +19,7 @@ $ID_Pago = $_GET['ID_de_pago'];
                $model = new EVENT_BITACORA;
                session_start();
                $_SESSION['idPagoBitdel']=$ID_Pago;
-               $model->DeletePago();
+               $model->DeletePagos();
 
         
     }else{

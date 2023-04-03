@@ -110,12 +110,7 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('SAR_Adm.php');
                     </script>";
-                    require_once "EVENT_BITACORA.php";
-                            $model = new EVENT_BITACORA;
-                            session_start();
-                            $_SESSION['UsuarioBitacoraUP']=$user;
-                            $_SESSION['IDUsuarioBitacoraUP']=$id;
-                            $model->RegUpt();
+                    
             }else{
                 echo "<script language='JavaScript'>
                 alert('Los datos NO se actualizaron');
