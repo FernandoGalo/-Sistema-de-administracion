@@ -1,11 +1,8 @@
-
-<link rel="stylesheet" href="../css/main.css">
-
-
-<!--Seccion donde va toda la barra lateral -->
-<?php
-require '../../conexion_BD.php';
-$usuario=$_SESSION['usuario'];
+<?php 
+//Controladores importantes
+ require '../../conexion_BD.php';     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 ?>
 
 <section class="full-box cover dashboard-sideBar" style="overflow-y: auto;">
@@ -37,7 +34,7 @@ $usuario=$_SESSION['usuario'];
 			<!-- Menu de la barra lateral -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 			<li>
-					<a href="../../Pantallas/home.php">
+					<a href="../Home/home.php">
 						<i class="zmdi zmdi-home"></i> Home
 					</a>
 			</li>
