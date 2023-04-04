@@ -50,7 +50,7 @@
                     $model = new EVENT_BITACORA;
                     session_start();
 
-                    $_SESSION['pagoBitacoraUP']=$Monto;
+                    $_SESSION['idpagoBitacoraUP']=$ID_Pago;
                     $model->RegUptpag();
 
             }else{

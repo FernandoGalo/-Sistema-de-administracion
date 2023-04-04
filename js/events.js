@@ -48,7 +48,7 @@ function bloquearEspacio(event) {
         return false;
     }
     }
-  
+
   function mostrarContrasena() {
     var contrasenaInput = document.getElementById("contraseña");
     var botonVerOcultar = document.getElementById("ver-ocultar");

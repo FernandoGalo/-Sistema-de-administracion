@@ -1,8 +1,10 @@
-<?php
-    include("../../conexion_BD.php");
-    require_once "../../EVENT_BITACORA.php";
-    
-    
+<?php 
+//Controladores importantes
+ require '../../conexion_BD.php'; 
+ require_once "../../EVENT_BITACORA.php";
+ session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 ?>
 
 <!DOCTYPE html>

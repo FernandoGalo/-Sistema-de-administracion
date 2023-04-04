@@ -1,18 +1,10 @@
 <?php
 include("../../conexion_BD.php");
-    $id_sar = $_GET['ID_SAR'];
-
-    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
-
-    while($row=mysqli_fetch_array($sql1)){
-       $IDusuarioDel=$row['ID_Usuario'];
-    }
-
-
+    $ID_Pregunta = $_GET['ID_Pregunta'];
     try {
 
-        //DELETE FROM tbl_r_sar WHERE Usuario = $id_sar
-    $sql = "DELETE FROM tbl_r_sar WHERE ID_SAR = $id_sar";
+        //DELETE FROM tbl_ms_usuario WHERE Usuario = $id
+    $sql = "DELETE FROM tbl_preguntas where ID_Pregunta = '$ID_Pregunta'";
     $resultado = mysqli_query($conexion,$sql);
 
 
@@ -20,21 +12,19 @@ include("../../conexion_BD.php");
     if($resultado){
         echo "<script languaje='JavaScript'>
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
-                location.assign('SAR_Adm.php');
+                location.assign('PreguntasAdm.php');
                 </script>";     
-             
 
-                            
     }else{
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>
         alert('No puedes borrar este usuario');
-        location.assign('usuariosAdm.php');
+        location.assign('PreguntasAdm.php');
         </script>";   
         } else {
             echo "<script languaje='JavaScript'>
         alert('Los datos NO se eliminaron de la BD');
-        location.assign('usuariosAdm.php');
+        location.assign('PreguntasAdm.php');
         </script>"; 
         }
           
@@ -51,7 +41,7 @@ include("../../conexion_BD.php");
 
             echo "<script languaje='JavaScript'>
             alert('Los datos NO se eliminaron de la BD por dependencias');
-            location.assign('usuariosAdm.php');
+            location.assign('PreguntasAdm.php');
         </script>";
         }
     

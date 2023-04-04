@@ -7,7 +7,7 @@ require '../../conexion_BD.php';
 require_once "../../EVENT_BITACORA.php";
 session_start();     
 $usuario=$_SESSION['usuario'];
-$ID_Rol = $_GET['ID_Rol'];
+
 ?>
 
 
@@ -45,7 +45,8 @@ $ID_Rol = $_GET['ID_Rol'];
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Permisos del rol <?php echo $ID_Rol; ?></h1>
+                          <h1 class="box-title">Permisos Roles de Usuarios</h1>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Rol</button>
                           <div class="box-tools pull-right">
                         </div>
                         <br>
@@ -56,9 +57,14 @@ $ID_Rol = $_GET['ID_Rol'];
                         <table id="tbllistado" class="table table-bordered table-hover">
                         
                         <!-- Buscar -->
+                        <form action="" method="post">
+                            <label for="campo">Buscar:</label>
+                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
+                        </form>
                         <thead>
                          <tr>
-                            <th>Tablas</th>
+                            <th>#</th>
+                            <th>Modulo</th>
                             <th>Leer</th>
                             <th>Insertar</th>
                             <th>Actualizar</th>
@@ -67,47 +73,132 @@ $ID_Rol = $_GET['ID_Rol'];
                         </thead>
                           <tbody> 
                             <tr>
-                                <?php 
-                                $sql="SELECT o.Objeto,p.Permiso_consultar, p.Permiso_Insercion,
-                                p.Permiso_Actualizacion, p.Permiso_Eliminacion  from tbl_permisos p
-                                JOIN tbl_objetos o ON o.ID_Objeto = p.ID_Objeto
-                                where ID_Rol=$ID_Rol";
-                                $result=mysqli_query($conexion,$sql);
+                                <td>Usuario</td>
+                                <!-- <td>
+                                    <div class="boton">
+                                        <input type="checkbox" id="btn-switch">
+                                        <label for="btn-switch" class="lbl-switch"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="boton">
+                                        <input type="checkbox" id="btn-switch">
+                                        <label for="btn-switch" class="lbl-switch"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="boton">
+                                        <input type="checkbox" id="btn-switch">
+                                        <label for="btn-switch" class="lbl-switch"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="boton">
+                                        <input type="checkbox" id="btn-switch">
+                                        <label for="btn-switch" class="lbl-switch"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="boton">
+                                        <input type="checkbox" id="btn-switch">
+                                        <label for="btn-switch" class="lbl-switch"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="boton">
+                                        <input type="checkbox" id="btn-switch">
+                                        <label for="btn-switch" class="lbl-switch"></label>
+                                    </div>
+                                </td> -->
 
-                               while($mostrar=mysqli_fetch_array($result)){
-                                ?>
-                                <tr>
-                                <td><?php echo $mostrar['Objeto']?></td>
-                                <?php if($mostrar['Permiso_consultar'] == 1){
-                                echo '<td><input type="checkbox" id="switch2" name="switch2"  value="1" checked></td>';
-                                }else{
-                                  echo '<td><input type="checkbox" id="switch2" name="switch2" value="1"></td>';
-                                } 
-                                 ?>
-                                <?php if($mostrar['Permiso_Insercion'] == 1){
-                                echo '<td><input type="checkbox" id="switch2" name="switch2"  value="1" checked></td>';
-                                }else{
-                                  echo '<td><input type="checkbox" id="switch2" name="switch2" value="1"></td>';
-                                }
-                                ?>
-                                <?php if($mostrar['Permiso_Actualizacion'] == 1){
-                                echo '<td><input type="checkbox" id="switch2" name="switch2"  value="1" checked></td>';
-                                }else{
-                                  echo '<td><input type="checkbox" id="switch2" name="switch2" value="1"></td>';
-                                }
-                                ?>
-                                 <?php if($mostrar['Permiso_Eliminacion'] == 1){
-                                echo '<td><input type="checkbox" id="switch2" name="switch2"  value="1" checked></td>';
-                                }else{
-                                  echo '<td><input type="checkbox" id="switch2" name="switch2" value="1"></td>';
-                                }
-                                ?>
-                            </tr>
-                            <?php
-                             }
-                             ?>                            
+
+                                <td>
+                                    <div class="switch">
+                                    <input type="checkbox" id="switch1" name="switch1" class="switch-input">
+                                    <label for="switch1" class="switch-label"></label>
+                                    </div>
+                                </td>
+
+                                <td>
+                                <div class="switch">
+                                    <input type="checkbox" id="switch2" name="switch2" class="switch-input">
+                                    <label for="switch2" class="switch-label"></label>
+                                    </div>
+                                </td>
+
+                                <td>
+                                <div class="switch">
+                                    <input type="checkbox" id="switch3" name="switch3" class="switch-input">
+                                    <label for="switch3" class="switch-label"></label>
+                                    </div>
+                                </td>
+
+                                <td>
+                                <div class="switch">
+                                    <input type="checkbox" id="switch4" name="switch4" class="switch-input">
+                                    <label for="switch4" class="switch-label"></label>
+                                    </div>
+                                </td>
+
+                                <td>
+                                <div class="switch">
+                                    <input type="checkbox" id="switch5" name="switch5" class="switch-input">
+                                    <label for="switch5" class="switch-label"></label>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="switch">
+                                    <input type="checkbox" id="switch6" name="switch6" class="switch-input">
+                                    <label for="switch6" class="switch-label"></label>
+                                    </div>
+                                </td>
+                            </tr>                           
                           </tbody>
                         </table>
+
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                            <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
+                        </div>
+
+
+
+                    </div>
+                    <div class="panel-body" id="formularioregistros">
+                        <form name="formulario" id="formulario" action="Insert_Roles.php" method="POST">
+                        <div class="container">
+                          <div class="row">
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Nombre rol(*):</label>
+                            <input type="hidden" name="Nombre_rol" id="Nombre_rol">
+                            <input type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol" onkeypress="validarMayusculas(event)" required>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Descripcion(*):</label>
+                            <input type="hidden" name="descripcion" id="descripcion">
+                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol" required>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Estado:</label>
+                           <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
+                            <select class="form-control" name="estado" id="estado" required>
+                              <option value="">Selecione un estado</option>
+                              <option value="1" >ACTIVO</option>
+                              <option value="2" >INACTIVO</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                            <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
+                          </div>
+                          </div>
+                          </div>
+                        </form>
+                    </div>
+                    <!--Fin centro -->
                   </div><!-- /.box -->
               </div><!-- /.col -->
           </div><!-- /.row -->
