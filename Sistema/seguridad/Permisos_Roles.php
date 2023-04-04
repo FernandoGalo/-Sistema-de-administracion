@@ -73,50 +73,25 @@ $usuario=$_SESSION['usuario'];
                         </thead>
                           <tbody> 
                             <tr>
-                                <td>Usuario</td>
-                                <!-- <td>
-                                    <div class="boton">
-                                        <input type="checkbox" id="btn-switch">
-                                        <label for="btn-switch" class="lbl-switch"></label>
-                                    </div>
-                                </td>
+                              <td>tbl_Usuario</td>
                                 <td>
-                                    <div class="boton">
-                                        <input type="checkbox" id="btn-switch">
-                                        <label for="btn-switch" class="lbl-switch"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="boton">
-                                        <input type="checkbox" id="btn-switch">
-                                        <label for="btn-switch" class="lbl-switch"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="boton">
-                                        <input type="checkbox" id="btn-switch">
-                                        <label for="btn-switch" class="lbl-switch"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="boton">
-                                        <input type="checkbox" id="btn-switch">
-                                        <label for="btn-switch" class="lbl-switch"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="boton">
-                                        <input type="checkbox" id="btn-switch">
-                                        <label for="btn-switch" class="lbl-switch"></label>
-                                    </div>
-                                </td> -->
+                                <?php 
+                                $sql = ("SELECT * FROM tbl_permisos WHERE ID_Rol=1 and ID_Objeto=3");
+                                $resultado=mysqli_query($conexion,$sql);
 
-
-                                <td>
+                                $row = mysqli_fetch_assoc($resultado);
+                                $LeerV = $row['Permiso_Insercion'];
+                                echo $LeerV;
+                                ?>
+                                       
                                     <div class="switch">
                                     <input type="checkbox" id="switch1" name="switch1" class="switch-input">
                                     <label for="switch1" class="switch-label"></label>
                                     </div>
+                                    <!-- <div class="switch">
+                                    <input type="checkbox" id="switch1" name="switch1" class="switch-input">
+                                    <label for="switch1" class="switch-label"></label>
+                                    </div> -->
                                 </td>
 
                                 <td>

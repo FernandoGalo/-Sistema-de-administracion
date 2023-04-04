@@ -48,16 +48,29 @@ include("../../conexion_BD.php");
 
 
         } catch (Exception $e) {
-            $mensajeError = $e->getMessage();
-            // echo "<script languaje='JavaScript'>
-            //     alert('Excepción capturada: $mensajeError');
-            //     location.assign('usuariosAdm.php');
-            // </script>";
+            //$mensajeError = $e->getMessage();
 
-            echo "<script languaje='JavaScript'>
-            alert('Los datos NO se eliminaron de la BD por dependencias');
-            location.assign('RolesAdm.php');
-        </script>";
+            $errorCode = $e->getCode(); // Almacenar el código de error SQL\
+            $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";
+            $resultado=mysqli_query($conexion,$sql2);
+
+            $row = mysqli_fetch_assoc($resultado);
+            $mensaje = $row['mensaje'];
+            //echo $mensaje;
+
+              echo "<script languaje='JavaScript'>
+              alert('$mensaje Por referencia con la tabla roles');
+              location.assign('RolesAdm.php');
+             </script>";
+
+             //printf("Ha ocurrido un error: %s\n", mysqli_error($conexion));
+
+            $errorMessage = $e->getMessage(); // Almacenar el mensaje de error SQL
+            //echo $errorMessage;
+
+            //echo $errorMessage;
+            //echo $errorCode;
+             exit;
         }
     
 ?>

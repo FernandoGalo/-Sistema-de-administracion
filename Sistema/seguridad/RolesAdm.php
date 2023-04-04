@@ -75,6 +75,11 @@ $usuario=$_SESSION['usuario'];
                           $sql="SELECT * from tbl_ms_roles";
                           $result=mysqli_query($conexion,$sql);
 
+                          if(!$result){
+                            printf("Ha ocurrido un error: %s\n", mysqli_error($conexion));
+                            exit;
+                          }
+
                            while($mostrar=mysqli_fetch_array($result)){
                            ?>
 
