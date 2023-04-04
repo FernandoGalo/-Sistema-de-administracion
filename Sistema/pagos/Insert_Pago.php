@@ -34,7 +34,7 @@
             $Fecha_actual = date('Y-m-d');
             include("../../conexion_BD.php");
             $sql = "INSERT INTO `tbl_pagos_realizados`(`ID_de_pago`, `Monto_pagado`, `ID_T_pago`, `Fecha_de_transaccion`, `ID_de_proyecto`, `ID_Usuario`, `Creado_Por`, `Fecha_Creacion`, `Modificado_por`, `Fecha_Modificacion`)
-            VALUES ($ID_Pago, $Monto, $T_Monto, $Fecha_de_transaccion, '$ID_Proyecto', '$Usuario','$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            VALUES ($ID_Pago, $Monto, $T_Monto, '$Fecha_de_transaccion', '$ID_Proyecto', '$Usuario','$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 

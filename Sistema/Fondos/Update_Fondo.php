@@ -46,6 +46,7 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('FondosAdm.php');
                     </script>";
+                    require_once "../../EVENT_BITACORA.php";
                     $model = new EVENT_BITACORA;
                     session_start();
 

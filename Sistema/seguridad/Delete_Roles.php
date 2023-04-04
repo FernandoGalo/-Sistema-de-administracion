@@ -22,12 +22,6 @@ include("../../conexion_BD.php");
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('RolesAdm.php');
                 </script>";     
-                require_once "../../EVENT_BITACORA.php";
-                $model = new EVENT_BITACORA;
-                session_start();
-                $_SESSION['UsuarioBitacoraDELETE']=$Nombre_Usuario;
-                $_SESSION['IDUsuarioBitacoraDELETE']=$IDusuarioDel;
-                $model->RegDelete();
 
                             
     }else{

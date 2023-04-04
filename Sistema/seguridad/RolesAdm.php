@@ -1,13 +1,10 @@
-<?php
-
-
-require '../../conexion_BD.php';
-/*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
-
-require_once "../../EVENT_BITACORA.php";
-session_start();     
-$usuario=$_SESSION['usuario'];
-
+<?php 
+//Controladores importantes
+ require '../../conexion_BD.php'; 
+ require_once "../../EVENT_BITACORA.php";
+ session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 ?>
 
 

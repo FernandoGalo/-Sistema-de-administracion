@@ -18,7 +18,8 @@ include("../../conexion_BD.php");
                 $model = new EVENT_BITACORA;
                  session_start();
                  $_SESSION['IDdonanteBitacoraDELETE']=$ID_Donante;
-                 $model->DeleteDon();
+                 $model-> DeleteDon();
+
   
         
     }else{

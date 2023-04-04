@@ -16,16 +16,16 @@ $ID_Pago = $_GET['ID_de_pago'];
                 location.assign('PagosAdm.php');
                 </script>";     
                require_once "../../EVENT_BITACORA.php";
-              $model = new EVENT_BITACORA;
+               $model = new EVENT_BITACORA;
                session_start();
-               $_SESSION['IDPagoBitacoraDELETE']=$ID_Pago;
-               $model->DeletePago();
+               $_SESSION['idPagoBitdel']=$ID_Pago;
+               $model->DeletePagos();
 
         
     }else{
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>
-        alert('No puedes borrar este usuario');
+        alert('No puedes borrar este pago');
         location.assign('PagosAdm.php');
         </script>";   
         } else {
@@ -40,7 +40,12 @@ $ID_Pago = $_GET['ID_de_pago'];
 
 
         } catch (Exception $e) {
+<<<<<<< HEAD
             //$mensajeError = $e->getMessage();
+=======
+            $mensajeError = $e->getMessage();
+
+>>>>>>> bac0ebaab7b1febe162e342133123236b6c2705b
 
             $errorCode = $e->getCode(); // Almacenar el código de error SQL\
             $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";

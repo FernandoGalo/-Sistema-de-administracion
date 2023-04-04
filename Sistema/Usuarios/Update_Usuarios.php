@@ -1,8 +1,10 @@
-<?php
-    include("../../conexion_BD.php");
-    require_once "../../EVENT_BITACORA.php";
-    
-    
+<?php 
+//Controladores importantes
+ require '../../conexion_BD.php'; 
+ require_once "../../EVENT_BITACORA.php";
+ session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +57,7 @@
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', ID_Rol ='$Rol', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado' WHERE ID_Usuario='$id';";
+            $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', ID_Rol ='$Rol', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado' WHERE ID_Usuario='$id'";
             $resultado=mysqli_query($conexion,$sql);
 
             if($resultado){
@@ -64,11 +66,11 @@
                     location.assign('usuariosAdm.php');
                     </script>";
                     require_once "../../EVENT_BITACORA.php";
-                            $model = new EVENT_BITACORA;
-                            session_start();
-                            $_SESSION['UsuarioBitacoraUP']=$user;
-                            $_SESSION['IDUsuarioBitacoraUP']=$id;
-                            $model->RegUpt();
+                    $model = new EVENT_BITACORA;
+                     session_start();                       
+                            $_SESSION['UsuarioBitUP']=$userName;
+                            $_SESSION['IDUsuarioBitUP']=$id;
+                            $model->RegUptusu();
             }else{
                 echo "<script language='JavaScript'>
                 alert('Los datos NO se actualizaron');

@@ -1,14 +1,10 @@
-<?php
-
-
-require '../../conexion_BD.php';
-/*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
-
-require_once "../../EVENT_BITACORA.php";
-session_start();     
-$usuario=$_SESSION['user'];
-$ID_Rol=$_SESSION['ID_Rol'];
-
+<?php 
+//Controladores importantes
+ require '../../conexion_BD.php'; 
+ require_once "../../EVENT_BITACORA.php";
+ session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 //Parte 2
                 
 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
@@ -21,11 +17,7 @@ $sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7")
     }
 $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
 //fin parte 2
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
