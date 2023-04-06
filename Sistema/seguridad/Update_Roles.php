@@ -22,9 +22,10 @@
 
 </head>
 <body>
+  <!--Seccion donde va toda la barra lateral -->
+  <?php include '../sidebar.php'; ?>
   
-
-    <?php
+  <?php
         if(isset($_POST['enviar'])){
             //aqui entra sio el usuario ha presionado el boton enviar
             // $id_rol=$_GET['id'];
@@ -90,8 +91,7 @@
             mysqli_close($conexion);
 
     ?>
-    <!--Seccion donde va toda la barra lateral -->
-	  <?php include '../sidebar.php'; ?>
+    
 
     	<!-- Pagina de contenido-->
 	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
@@ -164,10 +164,10 @@
 
 
 	<!--script en java para los efectos-->
-	<script src="./js/jquery-3.1.1.min.js"></script>
-  <script src="./js/events.js"></script>
-	<script src="./js/main.js"></script>
-  <script src="./js/usuario.js"></script>
+	<script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../js/events.js"></script>
+	<script src="../../js/main.js"></script>
+  <script src="../../js/usuario.js"></script>
 
 </body>
 </html>

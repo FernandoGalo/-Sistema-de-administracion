@@ -30,7 +30,7 @@
 }
 /*============ Estilos generales*/
 body, html{
-	background-color: #d6e0d8;
+	background-color: #F4F4F4;
 	width: 100%;
 	height: 100%;
 	margin: 0;
@@ -56,7 +56,7 @@ body, html{
 /*============ LogIn*/
 .logInForm{
 	position: absolute;
-	color: #fff;
+	color: #a1b1db;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -596,7 +596,7 @@ body, html{
 }
 
 /*Boton editar y eliminar*/
-.boton-editar, .boton-eliminar {
+.boton-editar, .boton-eliminar, .boton-permiso {
 	display: inline-block;
 	padding: 10px;
 	border: none;
@@ -617,18 +617,16 @@ body, html{
   .boton-eliminar {
 	background-color: #f44336;
   }
+
+  .boton-permiso {
+	background-color: #9882e7;
+  }
   
-  .boton-editar i, .boton-eliminar i {
+  .boton-editar i, .boton-eliminar i, .boton-permiso i{
 	margin-right: 5px;
   }
   
-  .boton-editar:hover, .boton-eliminar:hover {
+  .boton-editar:hover, .boton-eliminar:hover, .boton-permiso:hover {
 	background-color: #333;
-  }
-
-
-  /* Boton para permisos */
-  .boton-permiso{
-   
   }
 
