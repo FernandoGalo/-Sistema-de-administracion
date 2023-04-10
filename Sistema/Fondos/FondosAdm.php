@@ -149,13 +149,13 @@ if ($datos=$sql->fetch_object()) { ?>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Fondo.php?ID_de_fondo=<?php echo $mostrar['ID_de_fondo']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                                 <?php } ?>
                               </a>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Fondo.php?ID_de_fondo=<?php echo $mostrar['ID_de_fondo']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              <i class='zmdi zmdi-delete'></i>
                               <?php } ?>
                               </a>
                             </td>
