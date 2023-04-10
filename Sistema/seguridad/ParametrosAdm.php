@@ -59,7 +59,7 @@ if ($datos=$sql->fetch_object()) { ?>
                         </form>
                         <thead>
                             <th style="text-align:center">ID</th>
-                            <th style="text-align:center">Paramero</th>
+                            <th style="text-align:center">Descripcion</th>
                             <th style="text-align:center">Valor</th>
 							<th style="text-align:center">Acciones</th>
                         </thead>
@@ -76,14 +76,14 @@ if ($datos=$sql->fetch_object()) { ?>
 
                             <tr>
                               <td><?php echo $mostrar['ID_Parametro']?></td> 
-                              <td><?php echo $mostrar['Parametro']?></td> 
+                              <td><?php echo $mostrar['Descripcion_P']?></td> 
                               <td><?php echo $mostrar['Valor']?></td>
         
                               <td>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
 									if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Parametros.php?ID_Parametro=<?php echo $mostrar['ID_Parametro']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                               <?php } ?>
                               </a>
                             </td>

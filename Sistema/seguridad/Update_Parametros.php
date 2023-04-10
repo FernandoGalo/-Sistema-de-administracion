@@ -105,20 +105,48 @@ $ID_Rol=$_SESSION['ID_Rol'];
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <label>ID Parametros (*):</label>
+                            <label>ID Parametros (*):</label>
                             <input type="hidden" name="ID_Parametro" id="ID_Parametro">
                             <input type="text" class="form-control" name="ID_Parametro" id="ID_Parametro" maxlength="10" value="<?php echo $ID_Parametro; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Parametros (*):</label>
-                            <input type="hidden" name="Parametro" id="Parametro">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Parametro" id="Parametro" maxlength="30" value="<?php echo $Parametro; ?>" readonly>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Valor (*):</label>
-                            <input type="hidden" name="Valor" id="Valor">
-                            <input type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" required>
-                          </div>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <label>Parametros (*):</label>
+                              <input type="hidden" name="Parametro" id="Parametro">
+                              <input style="text-transform:uppercase" type="text" class="form-control" name="Parametro" id="Parametro" maxlength="30" value="<?php echo $Parametro; ?>" readonly>
+                            </div>
+
+                            <?php 
+                            //Permitir solo ingresar numeros
+                          if ($ID_Parametro==1 or $ID_Parametro==2 or $ID_Parametro==4 or $ID_Parametro==7 or $ID_Parametro==9 or $ID_Parametro==10) { ?>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <label>Valor (*):</label>
+                              <input type="hidden" name="Valor" id="Valor">
+                              <input onpaste="return false" onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" class="form-control" name="Valor" id="Valor" maxlength="3" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return bloquearEspacio(event);" required>
+                            </div>
+                          <?php }?>
+
+                          <?php
+                          //Permitir ingresar, caraceres, letras mayusculas y munisculas
+                                if($ID_Parametro==3 or $ID_Parametro==6 ){ ?>
+                                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <label>Valor (*):</label>
+                                        <input type="hidden" name="Valor" id="Valor">
+                                        <input onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return bloquearEspacio(event);" onkeypress="return validateInput(event);"required>
+                                      </div>
+                          <?php }     ?>
+
+                          <?php
+                          //Permitir ingresar, caraceres, letras mayusculas y munisculas
+                                if($ID_Parametro==5 or $ID_Parametro==8 ){ ?>
+                                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <label>Valor (*):</label>
+                                        <input type="hidden" name="Valor" id="Valor">
+                                        <input onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return EspaciosMayus_Y_Minus(event)" required>
+                                      </div>
+                          <?php }     ?>
+
+
+
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="Enviar_P" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
@@ -151,6 +179,25 @@ $ID_Rol=$_SESSION['ID_Rol'];
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
 
+  <script>
+      
+    //Validar Mayusculas, Minusculas, espacios y signo de interrogacion(¿,?)
+    function validateInput(event) {
+      const patron =  /^[a-zA-Z0-9\.\-_]+$/;
+      const tecla = String.fromCharCode(event.keyCode || event.which);
+      return patron.test(tecla);
+      }
+
+</script>
+
+<script>
+    //Validar Mayusculas, Minusculas, espacios
+    function EspaciosMayus_Y_Minus(event) {
+      const patron = /[A-Za-z\s]/;
+      const tecla = String.fromCharCode(event.keyCode || event.which);
+      return patron.test(tecla);
+      }
+  </script>
 
 </body>
 </html>
