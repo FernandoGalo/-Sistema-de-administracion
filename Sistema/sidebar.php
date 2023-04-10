@@ -56,7 +56,7 @@ if ($datos=$sql->fetch_object()) { ?>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../../Controladores/Bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
+							<a href="../Seguridad/bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
 						</li>
 						<li>
 							<a href="../seguridad/ParametrosAdm.php"><i class="zmdi zmdi-archive"></i> Parametros </a>
