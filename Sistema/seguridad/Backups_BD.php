@@ -64,55 +64,64 @@ if(isset($_POST['crear_copia_btn'])) {
 
 // Comprobar si se hizo clic en el botón "Restaurar copia de seguridad"
 if(isset($_POST['restaurar_copia_btn'])) {
-    // Verificación de la existencia del archivo de la copia de seguridad
-    $conn = mysqli_connect($servername, $username, $password, $database);
+  $conn = mysqli_connect($servername, $username, $password, $database);
 
-    // Nombre del archivo de backup
-    $backup_file = $database . '_' . date("YmdHis") . '.sql';
-    
-    // Obtener listado de tablas
-    $tables = array();
-    $result = mysqli_query($conn, "SHOW TABLES");
-    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-      $tables[] = $row[0];
-    }
-    
-    // Generar archivo de backup
-    $handle = fopen($backup_file, 'w');
-    foreach ($tables as $table) {
-      $result = mysqli_query($conn, "SELECT * FROM `$table`");
-      fwrite($handle, "DROP TABLE IF EXISTS `$table`;" . PHP_EOL);
-      fwrite($handle, "CREATE TABLE `$table` (" . PHP_EOL);
-      while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        $fields = array();
-        foreach ($row as $key => $value) {
-          $fields[] = "`$key`='" . mysqli_real_escape_string($conn, $value) . "'";
-        }
-        fwrite($handle, "INSERT INTO `$table` SET " . implode(',', $fields) . ";" . PHP_EOL);
+  // Nombre del archivo de backup
+  $backup_file = $database . '_' . date("YmdHis") . '.sql';
+  
+  // Agregar sentencia SET al inicio del archivo
+  $handle = fopen($backup_file, 'w');
+  fwrite($handle, "SET FOREIGN_KEY_CHECKS = 0;" . PHP_EOL);
+  
+  // Obtener listado de tablas
+  $tables = array();
+  $result = mysqli_query($conn, "SHOW TABLES");
+  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+    $tables[] = $row[0];
+  }
+  
+  // Generar archivo de backup
+  foreach ($tables as $table) {
+    // Obtener definición de la tabla
+    fwrite($handle, "DROP TABLE IF EXISTS `$table`;" . PHP_EOL);
+    $result = mysqli_query($conn, "SHOW CREATE TABLE `$table`");
+    $row = mysqli_fetch_row($result);
+    fwrite($handle, $row[1] . ";" . PHP_EOL);
+  
+    // Obtener contenido de la tabla
+    $result = mysqli_query($conn, "SELECT * FROM `$table`");
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $fields = array();
+      foreach ($row as $key => $value) {
+        $fields[] = "`$key`='" . mysqli_real_escape_string($conn, $value) . "'";
       }
-      fwrite($handle, PHP_EOL);
+      fwrite($handle, "INSERT INTO `$table` SET " . implode(',', $fields) . ";" . PHP_EOL);
     }
-    
-    fclose($handle);
-    
-    // Cerrar conexión
-    mysqli_close($conn);
-    
-    // Descargar archivo
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="' . basename($backup_file) . '"');
-    header('Content-Transfer-Encoding: binary');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($backup_file));
-    ob_clean();
-    flush();
-    readfile($backup_file);
-    unlink($backup_file);
-    
-    exit;
+    fwrite($handle, PHP_EOL);
+  }
+  
+  // Agregar sentencia SET al final del archivo
+  fwrite($handle, "SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL);
+  fclose($handle);
+  
+  // Cerrar conexión
+  mysqli_close($conn);
+  
+  // Descargar archivo
+  header('Content-Description: File Transfer');
+  header('Content-Type: application/octet-stream');
+  header('Content-Disposition: attachment; filename="' . basename($backup_file) . '"');
+  header('Content-Transfer-Encoding: binary');
+  header('Expires: 0');
+  header('Cache-Control: must-revalidate');
+  header('Pragma: public');
+  header('Content-Length: ' . filesize($backup_file));
+  ob_clean();
+  flush();
+  readfile($backup_file);
+  unlink($backup_file);
+  
+  exit;
 }
 ?>
 
