@@ -48,7 +48,7 @@ function exportTableToExcel(tableID, filename = ''){
     var tableSelect = document.getElementById(tableID);
     var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
     // Nombre del archivo
-    filename = filename?filename+'.xls':'Reporte de tabla fondos.xls';
+    filename = filename?filename+'.xls':'Reporte de tabla.xls';
 
     // Crear descarga
     downloadLink = document.createElement("a");
