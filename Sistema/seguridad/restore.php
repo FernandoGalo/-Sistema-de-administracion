@@ -17,7 +17,10 @@ if(isset($_POST["submit"])) {
             location.assign('Backups_BD.php');
             </script>";
   } else {
-    echo "Debe seleccionar un archivo de copia de seguridad.";
+    echo "<script language='JavaScript'>
+    alert('Debe seleccionar un archivo de copia de seguridad.');
+location.assign('Backups_BD.php');
+</script>";
   }
 }
 ?>
