@@ -70,6 +70,12 @@ if ($datos=$sql->fetch_object()) { ?>
                         </div>
                         <br>
                     </div>
+
+<!-- PARA GENERAR LOS REPORTES ====================== -->
+                    <div class="text-right mb-2">
+                      <a href="../../fpdf/ReporteSAR.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf">Generar Reporte SAR</i></a>
+                    </div>
+<!-- ================================================ -->
                     <!-- /.box-header -->
                     <!-- centro -->
                     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol ");

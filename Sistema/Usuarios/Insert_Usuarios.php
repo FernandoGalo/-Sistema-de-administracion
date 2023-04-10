@@ -103,31 +103,51 @@
 
                 
 
-                
-            $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$R_F_Vencida','$R_Fecha_actual', 'NUEVO')";
+            try {
+                $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$R_F_Vencida','$R_Fecha_actual', 'NUEVO')";
 
-            $resultado = mysqli_query($conexion,$sql);
+                $resultado = mysqli_query($conexion,$sql);
+    
+                if($resultado){
+                    //Los datos ingresados a la BD
+                    echo "<script languaje='JavaScript'>
+                            alert('Los datos fueron ingresados correctamente a la BD');
+                                location.assign('usuariosAdm.php');
+                                </script>";     
+                                require_once "../../EVENT_BITACORA.php";
+                                $model = new EVENT_BITACORA;
+                                session_start();
+                                $_SESSION['UsuarioBitacora']=$nombreUsuario;
+                                $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
+                                $model->RegInsert();
+    
+                }else{
+                    // Los dcatos NO ingresaron a la BD
+                    echo "<script languaje='JavaScript'>
+                    alert('Los datos NO fueron ingresados a la BD');
+                        location.assign('usuariosAdm.php');
+                        </script>";
+                }      
+            } catch (Exception $e) {
+                $errorCode = $e->getCode(); // Almacenar el código de error SQL\   
+                $errorMessage = $e->getMessage(); // Almacenar el mensaje de error SQL
 
-            if($resultado){
-                //Los datos ingresados a la BD
+                //echo $errorMessage;
+                //echo $errorCode;
+
+                $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";
+                $resultado=mysqli_query($conexion,$sql2);
+
+                $row = mysqli_fetch_assoc($resultado);
+                $mensaje = $row['mensaje'];
+                //echo $mensaje;
+
                 echo "<script languaje='JavaScript'>
-                        alert('Los datos fueron ingresados correctamente a la BD');
-                            location.assign('usuariosAdm.php');
-                            </script>";     
-                            require_once "../../EVENT_BITACORA.php";
-                            $model = new EVENT_BITACORA;
-                            session_start();
-                            $_SESSION['UsuarioBitacora']=$nombreUsuario;
-                            $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
-                            $model->RegInsert();
-
-            }else{
-                // Los dcatos NO ingresaron a la BD
-                echo "<script languaje='JavaScript'>
-                alert('Los datos NO fueron ingresados a la BD');
+                    alert('Excepción capturada: $mensaje');
                     location.assign('usuariosAdm.php');
-                    </script>";
-            }
+                </script>";
+            }    
+
             mysqli_close($conexion);
             }
         }
