@@ -140,5 +140,11 @@ $ID_Rol=$_SESSION['ID_Rol'];
   <label for="file">Seleccione un archivo de copia de seguridad:</label>
   <input type="file" name="file" id="file">
   <br>
-  <button type="submit" name="submit">Restaurar base de datos</button>
+  <button type="submit" name="submit" onclick='return confirmar()'>Restaurar base de datos</button>
 </form>
+
+<script type="text/javascript">
+    function confirmar(){
+      return confirm('¿Está Seguro de restaurar la Base de datos?');
+    }
+  </script>
