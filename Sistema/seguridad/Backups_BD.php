@@ -23,6 +23,7 @@ if(isset($_POST['crear_copia_btn'])) {
   $handle = fopen($backup_file, 'w');
   foreach ($tables as $table) {
     // Obtener definición de la tabla
+    fwrite($handle, "DROP TABLE IF EXISTS `$table`;" . PHP_EOL); // Agrega la sentencia DROP TABLE
     $result = mysqli_query($conn, "SHOW CREATE TABLE `$table`");
     $row = mysqli_fetch_row($result);
     fwrite($handle, $row[1] . ";" . PHP_EOL);
