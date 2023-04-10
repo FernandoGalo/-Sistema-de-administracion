@@ -12,7 +12,10 @@ if(isset($_POST["submit"])) {
     // Ejecutar una consulta SQL para restaurar la base de datos a partir del archivo de copia de seguridad
     $pdo->exec($file);
     $pdo->exec("SET foreign_key_checks = 1;");
-    echo "La base de datos se ha restaurado exitosamente.";
+    echo "<script language='JavaScript'>
+                alert('La base de datos se ha restaurado exitosamente.');
+            location.assign('Backups_BD.php');
+            </script>";
   } else {
     echo "Debe seleccionar un archivo de copia de seguridad.";
   }

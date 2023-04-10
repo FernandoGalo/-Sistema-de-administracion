@@ -124,7 +124,12 @@ if(isset($_POST['restaurar_copia_btn'])) {
   exit;
 }
 ?>
-
+<?php
+session_start();     
+$usuario=$_SESSION['user'];
+$ID_Rol=$_SESSION['ID_Rol'];
+?>
+<?php include '../sidebar.php'; ?>
 <!-- Formulario para crear y restaurar una copia de seguridad -->
 <form method="post" enctype="multipart/form-data">
 
