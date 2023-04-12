@@ -1,3 +1,21 @@
+<style>
+  .contenedor{
+    text-align: center;
+  }
+.izquierda {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  border: 2px solid black;
+}
+
+.derecha {
+  float: right;
+  width: 50%;
+  padding: 10px;
+  border: 2px solid black;
+}
+</style>
 <?php
 require '../../conexion_BD.php';
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
@@ -51,7 +69,9 @@ function opencontra() {
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
+                      <div class="contenedor">
                           <h1 class="box-title">Gestionar mi perfil</h1>
+                          </div>
                         </div>
                         <br>
                     </div>
@@ -71,6 +91,7 @@ function opencontra() {
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body">
+    <div class="izquierda">             
     <h3>Informacion personal</h3>
     <h3></h3>
     <h3>Nombre del usuario</h3>
@@ -80,7 +101,8 @@ function opencontra() {
     <h3>Correo electronico</h3>
     <input type="text" id="C_E_Imput" name="C_E_Imput" value="<?php echo $Correo_electronico ?>" readonly require>
     <h1></h1>
-  
+    </div>
+    <div class="derecha"> 
     <h3></h3>
     <h3>Seguridad</h3>
     <h3></h3>
@@ -88,6 +110,7 @@ function opencontra() {
     <input type="password" value="<?php echo $Contraseña ?>">
     <h3></h3>
     <button onclick="opencontra()">Cambiar contraseña</button>
+    </div>
 </div>
 
                     </div>
