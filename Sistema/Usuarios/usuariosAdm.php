@@ -141,14 +141,19 @@ if ($datos=$sql->fetch_object()) { ?>
                             <input type="hidden" name="Nombre_Usuario" id="Usuario">
                             <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Rol de usuario:</label>
-                           <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
-                            <select class="form-control" name="Rol" id="Rol" required>
-                              <option value="">Selecione un Rol</option>
-                              <option value= 1 >ADMINISTRADOR</option>
-                              <option value= 2 >EDITOR</option>
-                              <option value= 3 >SUPERVISOR</option>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Rol de usuario:(*):</label>
+                            <?php
+                           $sql=$conexion->query("SELECT * FROM tbl_ms_roles");
+                          ?>
+                            <select class="controls" type="text" name="Rol" id="Rol" required ><br>
+                           <?php
+                            while($row1=mysqli_fetch_array($sql)){
+                            ?>
+                             <option value="<?php echo $row1['ID_Rol'];?>"><?php echo $row1['Rol'];?></option>
+                            <?php
+                             }
+                            ?>
                             </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">

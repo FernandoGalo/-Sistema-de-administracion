@@ -92,13 +92,13 @@
                               ?>
                               <td>
                               <a href='Update_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                               </a>
                               <a href='Delete_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              <i class='zmdi zmdi-delete'></i>
                               </a>
-                              <a href='Permisos_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-permiso'>
-                              <i class='zmdi zmdi-key'></i> Permisos
+                              <a href='PermisosUl.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-permiso'>
+                              <i class='zmdi zmdi-key'></i>
                               </a>
                             </td>
                              </tr>
