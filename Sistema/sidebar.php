@@ -25,7 +25,7 @@
 						</a>
 					</li>
 					<li>
-                        <a href="../../Pantallas/Login.php" class="btn-exit-system">
+					    <a href="#!" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -130,3 +130,4 @@ if ($datos=$sql->fetch_object()) { ?>
 	</section>
 
     <!--script en java para los efectos-->
+	<script src="../../js/sweetalert2.min.js"></script>
