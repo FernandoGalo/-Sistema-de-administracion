@@ -96,9 +96,11 @@ function exportTableToExcel(tableID, filename = ''){
         <option value="5" <?php if ($por_pagina == 5) echo 'selected="selected"'; ?>>5</option>
         <option value="10" <?php if ($por_pagina == 10) echo 'selected="selected"'; ?>>10</option>
         <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
+        
     </select>
+    <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
 </form>
-<button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
+
 <?php
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 if (isset($_GET['pagina'])) {
