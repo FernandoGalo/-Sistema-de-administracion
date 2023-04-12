@@ -55,6 +55,9 @@ if ($datos=$sql->fetch_object()) { ?>
 						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Seguridad <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
+					    <li>
+							<a href="../Seguridad/Backups_BD.php"><i class="zmdi zmdi-folder-outline"></i> Backups </a>
+						</li>
 						<li>
 							<a href="../Seguridad/bitacora.php"><i class="zmdi zmdi-assignment-o"></i> Bitacora </a>
 						</li>
