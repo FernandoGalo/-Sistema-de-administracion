@@ -25,7 +25,7 @@
 						</a>
 					</li>
 					<li>
-					    <a href="#!" class="btn-exit-system">
+					    <a href="../../Pantallas/Login.php" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -75,7 +75,7 @@ if ($datos=$sql->fetch_object()) { ?>
 				<?php } ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-folder-star"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>

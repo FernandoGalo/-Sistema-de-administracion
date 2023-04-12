@@ -123,6 +123,7 @@ if ($datos=$sql->fetch_object()) { ?>
                             <th>proyecto</th>
                             <th>usuario</th>
                             <th>Fecha adquisicion_F</th>
+                            <th>Acciones</th>
                           </thead>
                           <tbody>                            
                           </tbody>

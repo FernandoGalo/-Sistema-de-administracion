@@ -83,10 +83,10 @@
                               <td><?php echo $mostrar['Estado_Proyecto']?></td>
                               <td>
                               <a href='Update_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                               </a>
                               <a href='Delete_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              <i class='zmdi zmdi-delete'></i>
                               </a>
                             </td>
                              </tr>
