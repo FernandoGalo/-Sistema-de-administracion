@@ -81,6 +81,7 @@
 		</div>
 			 <section class="content">
 
+	<!-- Contador de registros -->
     <div class="container-fluid">
         <!-- row -->
         <div class="row">
@@ -152,6 +153,20 @@
                     <input type="text" class="knob" data-readonly="true" value="<?php echo $Voluntarios_cantidad; ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
                     <div class="knob-label">Voluntarios</div>
                   </div>
+
+				  <div class="col-6 col-md-3 text-center">
+				  <?php //TABLA SAR
+						// Consulta SQL para contar la cantidad de registros en la tabla "usuario"
+							$sql = "SELECT COUNT(*) as total FROM tbl_r_sar";
+							// Ejecutar la consulta
+							$resultado=mysqli_query($conexion,$sql);
+							// Obtener el resultado como un array asociativo
+							$datos = mysqli_fetch_array($resultado);
+							$Sar_cantidad = $datos['total'];
+						?>
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $Sar_cantidad; ?>" data-width="90" data-height="90" data-fgColor="#DBDF37">
+                    <div class="knob-label">SAR</div>
+                  </div>
                   <!-- ./col -->
 
                   <!-- ./col -->
@@ -165,11 +180,11 @@
           <!-- /.col -->
    	</div>
 
-	    <div><!-- FONDOS -->
+	<div><!-- FONDOS -->
 			<!-- jQuery Knob -->
 			<div style="margin-top: 30px;" class="card">
 				<div class="card-header" style="background: #A0FF6A;">
-					<h3 class="card-title"><i class="zmdi zmdi-bookmark"></i> Fondos</h3>
+					<h3 class="card-title"><i class="zmdi zmdi-money"></i> Fondos</h3>
 				</div>
 					<?php
 						// Consulta SQL para obtener los datos
@@ -188,13 +203,73 @@
 
 						// Crear el gráfico de barras utilizando Chart.js
 					?>
-					<canvas id="grafico"></canvas>
+					<canvas id="grafico" height="350"></canvas>
 		</div>
 
 	</div>
 
+	<div><!-- PROYECTOS POR CATEGORIA -->
+			<!-- jQuery Knob -->
+			<div style="margin-top: 30px;" class="card">
+				<div class="card-header" style="background: #A0FF6A;">
+					<h3 class="card-title"><i class="zmdi zmdi-chart-donut"></i> Proyectos por Categoria</h3>
+				</div>
+					<?php
+						// Consulta SQL para obtener los datos
+						require '../../conexion_BD.php'; 
+						$sql2 = "SELECT `Estado_Proyecto`, COUNT(*) as Cantidad FROM tbl_proyectos GROUP BY `Estado_Proyecto`;";
 
+						// Ejecutar la consulta
+						$resultado = mysqli_query($conexion, $sql2);
 
+						// crear dos arreglos con los datos
+                        $estados = [];
+                        $cantidades = [];
+
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                        $estados[] = $fila['Estado_Proyecto'];
+                        $cantidades[] = $fila['Cantidad'];
+                        }
+
+                        // generar el gráfico circular
+
+					?>
+						<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+					<canvas id="grafico_cant_proyectos" height="200"></canvas>	
+		</div>
+	</div>
+
+	<div><!-- PROYECTOS POR NOMBRE Y LOS FONDOS DESTINADOS -->
+			<!-- jQuery Knob -->
+			<div style="margin-top: 30px;" class="card">
+				<div class="card-header" style="background: #A0FF6A;">
+					<h3 class="card-title"><i class="zmdi zmdi-chart"></i> Proyectos</h3>
+				</div>
+					<?php
+						// Consulta SQL para obtener los datos
+						require '../../conexion_BD.php'; 
+						// Consulta SQL para obtener los datos
+						$sql2 = "SELECT `Nombre_del_proyecto`, `Fecha_Creacion`, `Fondos_proyecto` FROM tbl_proyectos WHERE `Estado_Proyecto` = 'activo' ORDER BY `Fecha_Creacion` ASC;";
+
+						// Ejecutar la consulta
+						$resultado = mysqli_query($conexion, $sql2);
+
+						// Crear arrays para los datos del gráfico
+						$labels = [];
+						$data = [];
+
+						while ($row = mysqli_fetch_assoc($resultado)) {
+							$labels[] = $row['Fecha_Creacion'];
+							$data[] = $row['Fondos_proyecto'];
+							$nombre[] = $row['Nombre_del_proyecto'];
+						}
+
+						// Crear el gráfico utilizando Chart.js
+					?>
+						
+					<canvas id="grafico_proyectos" height="350" ></canvas>	
+		</div>
+	</div>
 	
 	</section>
 
@@ -208,6 +283,7 @@
 	<script src="../../js/main.js"></script>
 	<script src="../../js/jquery.knob.min.js"></script><!-- jQuery Knob -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
 
 	<!-- Para los graficos de dona-->
 	<script>
@@ -264,6 +340,77 @@
             }
         });
     </script>
+
+	<!-- Para el grafico circular de las categorias de proyectos-->
+	<script>
+		var ctx = document.getElementById('grafico_cant_proyectos').getContext('2d');
+		var grafico = new Chart(ctx, {
+		type: 'pie',
+		data: {
+			labels: <?php echo json_encode($estados); ?>,
+			datasets: [{
+			data: <?php echo json_encode($cantidades); ?>,
+			backgroundColor: [
+				'rgba(255, 99, 132, 0.2)',
+				'rgba(54, 162, 235, 0.2)',
+				'rgba(255, 206, 86, 0.2)'
+			],
+			
+			borderColor: [
+				'rgba(255, 99, 132, 1)',
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 206, 86, 1)'
+			],
+			borderWidth: 1,
+
+			}]
+		},
+		options: {
+			maintainAspectRatio: true,
+			layout: {
+			padding: {
+				bottom: 20
+			}
+			}
+		}
+		});
+	</script>
+
+	<!-- Para el grafico circular de los fondos de proyectos-->
+	<script>
+			var ctx = document.getElementById('grafico_proyectos').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: <?php echo json_encode($nombre); ?>,
+					datasets: [{
+						label: 'Cantidad de fondos',
+						data: <?php echo json_encode($data); ?>,
+						backgroundColor: 'rgba(0, 156, 21, 0.76)',
+						borderColor: 'rgba(82, 5, 0, 1)',
+						borderWidth: 1
+					}]
+				},
+				options: {
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Proyectos Activos'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Fondos'
+                        }
+                    }]
+                }
+            }
+        });
+	</script>
 
 	
 </body>
