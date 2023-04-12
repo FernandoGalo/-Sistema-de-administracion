@@ -17,7 +17,8 @@ include("../../EVENT_BITACORA.PHP");
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
-    <script>
+    
+    <script>//Exportar a excel
 function exportTableToExcel(tableID, filename = ''){
     var downloadLink;
     var dataType = 'application/vnd.ms-excel';
@@ -47,7 +48,8 @@ function exportTableToExcel(tableID, filename = ''){
         downloadLink.click();
     }
 }
-</script>
+//Exportar a excel</script>
+
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
