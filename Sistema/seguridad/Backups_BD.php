@@ -1,3 +1,16 @@
+<style>
+.izquierda {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.derecha {
+  float: right;
+  width: 50%;
+  padding: 10px;
+}
+</style>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -150,29 +163,33 @@ $ID_Rol=$_SESSION['ID_Rol'];
 				</li>
 			</ul>
 		</nav>
-<form method="post" enctype="multipart/form-data">
+    <div class="contenedor">
+  
     <h1>Backups y Restauraciones</h1>
-    <h2></h2>
-    <h1>Descargar copia de seguridad</h1>
+  <div class="izquierda">
+<form method="post" enctype="multipart/form-data">
+    <h3>Descargar copia de seguridad</h3>
     <h2></h2>
     <button class="zmdi zmdi-cloud-download" type="submit" name="crear_copia_btn">Crear copia de seguridad</button>
 </form>
-<h2></h2>
-<h3></h3>
+</div>
+<div class="derecha">
 <form action="restore.php" method="post" enctype="multipart/form-data">
-  <h1>Restaurar copia de seguridad</h1>
+  <h3>Restaurar copia de seguridad</h3>
   <h2></h2>
   <label for="file">Seleccione un archivo de copia de seguridad:</label>
   <input type="file" name="file" id="file">
   <br>
   <button class="zmdi zmdi-cloud-upload" type="submit" name="submit" onclick='return confirmar()'>Restaurar base de datos</button>
 </form>
-
+</div>
+</div>
 <script type="text/javascript">
     function confirmar(){
       return confirm('¿Está Seguro de restaurar la Base de datos?');
     }
   </script>
+  
   </section>
   </body>
   <script src="../../js/Buscador.js"></script>
