@@ -17,6 +17,37 @@ include("../../EVENT_BITACORA.PHP");
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
+    <script>
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    // Nombre del archivo
+    filename = filename?filename+'.xls':'Reporte de tabla.xls';
+
+    // Crear descarga
+    downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Crear enlace para descargar
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        // Establecer nombre de archivo
+        downloadLink.download = filename;
+
+        // Descargar archivo
+        downloadLink.click();
+    }
+}
+</script>
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -67,6 +98,7 @@ include("../../EVENT_BITACORA.PHP");
         <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
     </select>
 </form>
+<button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
 <?php
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 if (isset($_GET['pagina'])) {
