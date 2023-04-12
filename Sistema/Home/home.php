@@ -154,9 +154,9 @@
                     <div class="knob-label">Voluntarios</div>
                   </div>
 
-				  <div class="col-6 col-md-3 text-center">
+				  <div class="col-6 text-center">
 				  <?php //TABLA SAR
-						// Consulta SQL para contar la cantidad de registros en la tabla "usuario"
+						// Consulta SQL para contar la cantidad de registros en la tabla "sar"
 							$sql = "SELECT COUNT(*) as total FROM tbl_r_sar";
 							// Ejecutar la consulta
 							$resultado=mysqli_query($conexion,$sql);
@@ -168,6 +168,19 @@
                     <div class="knob-label">SAR</div>
                   </div>
                   <!-- ./col -->
+				  <div class="col-6 text-center">
+				  <?php //TABLA Pagos
+						// Consulta SQL para contar la cantidad de registros en la tabla "pagos"
+							$sql = "SELECT COUNT(*) as total FROM tbl_pagos_realizados";
+							// Ejecutar la consulta
+							$resultado=mysqli_query($conexion,$sql);
+							// Obtener el resultado como un array asociativo
+							$datos = mysqli_fetch_array($resultado);
+							$pagos_cantidad = $datos['total'];
+						?>
+                    <input type="text" class="knob" data-readonly="true" value="<?php echo $pagos_cantidad; ?>" data-width="90" data-height="90" data-fgColor="#DF37CF">
+                    <div class="knob-label">Pagos</div>
+                  </div>
 
                   <!-- ./col -->
                 </div>
