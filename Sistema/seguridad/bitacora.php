@@ -187,8 +187,9 @@ $resultado = mysqli_query($conexion, $sql);
 	
 	<!--script en java para los efectos-->
     <script src="../../js/Buscador.js"></script>
-	<script src="../js/jquery-3.1.1.min.js"></script>
-	<script src="../js/main.js"></script>
-	<script src="../js/Buscador.js"></script>
+  <script src="../../js/events.js"></script>
+ 	<script src="../../js/jquery-3.1.1.min.js"></script>
+	<script src="../../js/main.js"></script>
+  <script src="../../js/usuario.js"></script>
 </body>
 </html>
