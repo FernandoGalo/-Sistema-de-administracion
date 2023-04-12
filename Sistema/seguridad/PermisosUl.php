@@ -105,8 +105,10 @@ $resPermiso=$conexion->query($Permiso);
 			                	}
 				              ?>
 		                	</table>
-			                <input type="submit" name="actualizar" value="Actualizar Registros" class="btn btn-info col-md-offset-9" />
-		                  </form>
+                      <div class="d-flex justify-content-center align-items-center">
+                        <input type="submit" name="actualizar" value="Actualizar Permisos" class="btn btn-info mr-2">
+                        <a href="RolesAdm.php" class="btn btn-danger">Salir de permisos</a>
+                      </div>
                       <?php
                       include("../../conexion_BD.php");
                       if(isset($_POST['actualizar']))

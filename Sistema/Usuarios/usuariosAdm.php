@@ -109,13 +109,13 @@ if ($datos=$sql->fetch_object()) { ?>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                               <?php } ?>
                               </a>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Usuarios.php?Usuario=<?php echo $mostrar['Usuario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              <i class='zmdi zmdi-delete'></i>
                               <?php } ?>
                               </a>
                             </td>

@@ -89,13 +89,13 @@ $ID_Rol=$_SESSION['ID_Rol'];
                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
                                 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Preguntas.php?ID_Pregunta=<?php echo $mostrar['ID_Pregunta']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                               <?php } ?>
                               </a>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
                                     if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Preguntas.php?ID_Pregunta=<?php echo $mostrar['ID_Pregunta']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              <i class='zmdi zmdi-delete'></i>
                               <?php } ?>
                               </a>
                             </td>

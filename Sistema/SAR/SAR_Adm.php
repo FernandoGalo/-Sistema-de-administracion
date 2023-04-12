@@ -109,6 +109,7 @@ if ($datos=$sql->fetch_object()) { ?>
                             <th>Fecha Limite de Emision</th>
                             <th>Numero Inicial</th>
                             <th> Numero final</th>
+                            <th>Acciones</th>
                           </thead>
                           <tbody>                            
                           </tbody>
@@ -146,13 +147,13 @@ if ($datos=$sql->fetch_object()) { ?>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_SAR.php?id_sar=<?php echo $mostrar['ID_SAR']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i> Editar
+                              <i class='zmdi zmdi-edit'></i>
                                <?php } ?>
                               </a>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_SAR.php?ID_SAR=<?php echo $mostrar['ID_SAR']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i> Eliminar
+                              <i class='zmdi zmdi-delete'></i>
                               <?php } ?>
                               </a>
                             </td>
