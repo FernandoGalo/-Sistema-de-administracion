@@ -40,12 +40,7 @@ $ID_Pago = $_GET['ID_de_pago'];
 
 
         } catch (Exception $e) {
-<<<<<<< HEAD
             //$mensajeError = $e->getMessage();
-=======
-            $mensajeError = $e->getMessage();
-
->>>>>>> bac0ebaab7b1febe162e342133123236b6c2705b
 
             $errorCode = $e->getCode(); // Almacenar el código de error SQL\
             $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";

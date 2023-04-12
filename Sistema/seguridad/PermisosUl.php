@@ -19,6 +19,22 @@ WHERE p.ID_rol = $rol_id";
 $resPermiso=$conexion->query($Permiso);
 ?>
 
+<!-- asfsdfwsdgfsgdsdgsg -->
+<?php
+  $sql="SELECT * FROM tbl_ms_roles where ID_Rol='".$ID_RolPer."'";
+   $resultado=mysqli_query($conexion,$sql);
+
+    $fila=mysqli_fetch_assoc($resultado);
+
+    $nombreRol=$fila['Rol'];
+    //$descripcion=$fila['Descripcion'];/
+     //$estado=$fila['Estado'];//recuperando los datos desde la BD/
+
+    if($fila['ID_Rol'] == $ID_RolPer ){
+      $strRol =  $nombreRol;
+    }
+?>/
+ <!-- fgsdfgsdgsgsgsg -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -51,7 +67,7 @@ $resPermiso=$conexion->query($Permiso);
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Permisos del rol seleccionado</h1>
+                          <h1 class="box-title">Permisos del <?php echo $strRol ?></h1>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar permiso</button>
                           <div class="box-tools pull-right">
                         </div>
@@ -61,7 +77,6 @@ $resPermiso=$conexion->query($Permiso);
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table id="tbllistado" class="table table-bordered table-hover">
-                      
                         <form  method="post">
 			                    <table class="table">
 				                    <tr>
@@ -123,13 +138,16 @@ $resPermiso=$conexion->query($Permiso);
                         </table>
                     </div>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_Permisos.php" method="POST">
                         <div class="container">
                           <div class="row">
+                            <!-- Recuperando el Id Rol -->
+                            <input type="hidden" class="form-control" name="idRol" id="idRol" maxlength="100" placeholder="Ingrese el ID SAR" value= <?php echo  $ID_RolPer ?> required>
+                            <!-- Fin Recuperando Id Rol -->
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Rol(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre del rol" onkeypress="validarMayusculas(event)" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre del rol" onkeypress="validarMayusculas(event)" value=<?php echo  $strRol ?> required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Pantalla(*):</label>
@@ -147,6 +165,25 @@ $resPermiso=$conexion->query($Permiso);
                             </select>
                           </div>
                   
+                          <table class="table">
+				                    <tr>
+                              <th>Insertar</th>
+                              <th>Eliminar</th>
+                              <th>Actualizar</th>
+                              <th>Consultar</th>
+				                    </tr>
+                            <tr>
+						                  <!-- <td><input type="checkbox" name="inser"/></td>
+                              <td><input type="checkbox" name="eli"/></td>
+                              <td><input type="checkbox" name="actu"/></td>
+                              <td><input type="checkbox" name="cons"/></td> -->
+						                  <td><input type="number" min=0 max=1 name="inser"/></td>
+                              <td><input type="number" min=0 max=1 name="eli"/></td>
+                              <td><input type="number" min=0 max=1 name="actu"/></td>
+                              <td><input type="number" min=0 max=1 name="cons"/></td>
+						               </tr>
+                            </table>                        
+
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>

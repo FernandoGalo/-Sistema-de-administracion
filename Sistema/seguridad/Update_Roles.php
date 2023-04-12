@@ -82,9 +82,9 @@
             $estado=$fila['Estado'];//recuperando los datos desde la BD
 
             if($fila['Estado'] == 1){
-                echo "<td>Activo</td>";
+                $strEstado = "Activo";
               }else{
-                echo "<td>Inactivo</td>";
+                $strEstado = "Inactivo";
               } 
               
 
@@ -106,6 +106,16 @@
 		<!-- Muestra el contenido de la pagina -->
 		<div class="container-fluid">
         <div class="row">
+
+        <div class="col-md-12">
+                  <div class="box">
+                    <div class="box-header with-border">
+                          <h1 class="box-title">Editar Roles</h1>
+                        </div>
+                        <br>
+                    </div>
+
+
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>ID ROL(*):</label>
@@ -125,8 +135,7 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                           <label>Estado Actual</label>
-                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $estado ?>" readonly>
-                            <p>1 = Activo, 2 = Inactivo</p>
+                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $strEstado ?>" readonly>
                             <label>Estado(*):</label>
                            <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
                             <select class="form-control" name="estado" id="estado" required>
