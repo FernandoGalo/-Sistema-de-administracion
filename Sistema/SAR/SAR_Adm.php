@@ -71,10 +71,7 @@ if ($datos=$sql->fetch_object()) { ?>
                         <br>
                     </div>
 
-<!-- PARA GENERAR LOS REPORTES ====================== -->
-                    <div class="text-right mb-2">
-                      <a href="../../fpdf/ReporteSAR.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf">Generar Reporte SAR</i></a>
-                    </div>
+
 <!-- ================================================ -->
                     <!-- /.box-header -->
                     <!-- centro -->
@@ -88,7 +85,10 @@ if ($datos=$sql->fetch_object()) { ?>
                             <label for="campo">Buscar:</label>
                             <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
                         </form>
-
+                        <!-- PARA GENERAR LOS REPORTES ====================== -->
+                        <div class="text-right mb-2">
+                          <a href="../../fpdf/ReporteSAR.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf">Generar Reporte SAR</i></a>
+                        </div>
                         <thead>
                             <th>ID SAR</th>
                             <th>RTN</th>
