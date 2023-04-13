@@ -109,6 +109,7 @@ $resPermiso=$conexion->query($Permiso);
                         <input type="submit" name="actualizar" value="Actualizar Permisos" class="btn btn-info mr-2">
                         <a href="RolesAdm.php" class="btn btn-danger">Salir de permisos</a>
                       </div>
+                      </form>
                       <?php
                       include("../../conexion_BD.php");
                       if(isset($_POST['actualizar']))
@@ -123,7 +124,7 @@ $resPermiso=$conexion->query($Permiso);
                         }
                         if($actualizar==true)
                         {
-                        echo "<p>FUNCIONA! <a href='#' id='enlaceClickAqui' onclick='location.reload();'>CLICK AQUÍ</a></p>";
+                        echo "<p>Permisos actualizados! <a href='#' id='enlaceClickAqui' onclick='location.reload();'>CLICK AQUÍ</a></p>";
                         echo "<script>
                         document.getElementById('enlaceClickAqui').addEventListener('click', function() {
                         this.style.display = 'none';
