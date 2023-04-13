@@ -25,7 +25,7 @@
 						</a>
 					</li>
 					<li>
-					    <a href="../../Pantallas/Login.php" class="btn-exit-system">
+					    <a href="#!" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>

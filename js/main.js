@@ -22,6 +22,7 @@ $(document).ready(function(){
 		  	cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Cancelar!'
 		}).then(function () {
 			window.location.href="../../Pantallas/Login.php";
+			session_destroy();
 		});
 	});
 	$('.btn-menu-dashboard').on('click', function(){
