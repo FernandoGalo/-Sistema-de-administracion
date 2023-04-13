@@ -64,7 +64,7 @@
                     $model = new EVENT_BITACORA;
                      session_start();                       
                             $_SESSION['RolBitUP']=$nombreRol;
-                            $model->RegUptRol(
+                            $model->RegUptRol();
 
             }else{
                 echo "<script language='JavaScript'>
