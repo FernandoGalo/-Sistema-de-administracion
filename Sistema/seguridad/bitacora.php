@@ -73,7 +73,8 @@ function exportTableToExcel(tableID, filename = ''){
                     <div class="box-header with-border">
                           <h1 class="box-title">Bitacora principal</h1>
 
-
+                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=2");
+if ($datos=$sql->fetch_object()) { ?>
                           <?php
     // Inicializamos la variable $por_pagina con un valor de 10
     if (isset($_POST['por_pagina'])) {
@@ -100,6 +101,7 @@ function exportTableToExcel(tableID, filename = ''){
         <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
         
     </select>
+
     <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
 </form>
 
@@ -136,6 +138,7 @@ $resultado = mysqli_query($conexion, $sql);
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
+                    
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table id="tbllistado" class="table table-bordered table-hover">
                         
@@ -209,6 +212,9 @@ $resultado = mysqli_query($conexion, $sql);
                           </tfoot>
                         </table>
                     </div>
+                    <?php
+}
+?>
                     <!--Fin centro -->
                   </div><!-- /.box -->
               </div><!-- /.col -->

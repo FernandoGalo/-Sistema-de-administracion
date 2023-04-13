@@ -154,7 +154,8 @@ $ID_Rol=$_SESSION['ID_Rol'];
     <div class="contenedor">
     <h1>Backups y Restauraciones</h1>
     </div>
-   
+    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=12");
+if ($datos=$sql->fetch_object()) { ?>
   <div class="izquierda">
 <form method="post" enctype="multipart/form-data">
     <h3>Descargar copia de seguridad</h3>
@@ -179,6 +180,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
   </script>
   
   </section>
+  <?php } ?>
   </body>
   <script src="../../js/Buscador.js"></script>
   <script src="../../js/jquery-3.1.1.min.js"></script>

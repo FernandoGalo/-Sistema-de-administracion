@@ -38,6 +38,8 @@
 						<i class="zmdi zmdi-home"></i> Home
 					</a>
 			</li>
+			<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -48,6 +50,7 @@
 						</li>
 					</ul>
 				</li>
+				<?php } ?>
 				<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
@@ -116,7 +119,8 @@ if ($datos=$sql->fetch_object()) { ?>
 						</li>
 					</ul>
 				</li>
-
+				<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-money"></i> SAR <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -127,7 +131,7 @@ if ($datos=$sql->fetch_object()) { ?>
 						</li>
 					</ul>
 				</li>
-				
+				<?php } ?>
 			</ul>
 		</div>
 	</section>
