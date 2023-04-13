@@ -68,7 +68,8 @@ function mostrarPassword() {
 }
 </script>
 </head>
-<body>
+<body style="background: rgb(1,5,36);
+            background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
 <section class="f_login">
     <form actions2="../Controladores/controlador_login.php" method="post">
             <h2>Inicio</h2>
@@ -86,7 +87,7 @@ function mostrarPassword() {
     
         <h3>Usuario</h3>
         <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)" style="text-transform:uppercase" placeholder="Ingrese su Usuario"><br> 
-        <h3>contraseña</h3>
+        <h3>Contraseña</h3>
         <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
         <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña"><br>
 

@@ -78,7 +78,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
             $fila=mysqli_fetch_assoc($resultado);
 
             $ID_Parametro=$fila['ID_Parametro'];
-            $Parametro=$fila['Parametro'];
+            $Parametro=$fila['Descripcion_P'];
             $Valor=$fila['Valor'];//recuperando los datos desde la BD
            
             mysqli_close($conexion);
