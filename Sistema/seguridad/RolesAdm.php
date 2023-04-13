@@ -42,13 +42,18 @@
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento roles</h1>
+                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=5");
+if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Rol</button>
                           <div class="box-tools pull-right">
                         </div>
+                        <?php }?>
                         <br>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
+                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=5");
+if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table id="tbllistado" class="table table-bordered table-hover">
                         
@@ -91,14 +96,23 @@
                               } 
                               ?>
                               <td>
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=5");
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
+                              <?php } ?>
                               </a>
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=5");
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Roles.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
+<?php } ?>
                               </a>
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=5");
+if ($datos=$sql->fetch_object()) { ?>
                               <a href='PermisosUl.php?ID_Rol=<?php echo $mostrar['ID_Rol']; ?>' class='boton-permiso'>
                               <i class='zmdi zmdi-key'></i>
+                              <?php } ?>
                               </a>
                             </td>
                              </tr>
@@ -108,6 +122,7 @@
                           </tfoot>
                         </table>
                     </div>
+                    <?php } ?>
                     <div class="panel-body" id="formularioregistros">
                         <form name="formulario" id="formulario" action="Insert_Roles.php" method="POST">
                         <div class="container">

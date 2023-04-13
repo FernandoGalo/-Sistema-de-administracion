@@ -1,3 +1,12 @@
+</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Inicio</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="../../css/main.css">
+
 <?php
 // Datos de conexión a la base de datos
 $servername = "localhost";
@@ -124,6 +133,8 @@ if(isset($_POST['restaurar_copia_btn'])) {
   exit;
 }
 ?>
+</head>
+<body>
 <?php
 session_start();     
 $usuario=$_SESSION['user'];
@@ -131,20 +142,47 @@ $ID_Rol=$_SESSION['ID_Rol'];
 ?>
 <?php include '../sidebar.php'; ?>
 <!-- Formulario para crear y restaurar una copia de seguridad -->
+<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
+		<!-- Barra superior -->
+		<nav class="full-box dashboard-Navbar">
+			<ul class="full-box list-unstyled text-right">
+				<li class="pull-left">
+					<a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
+				</li>
+			</ul>
+		</nav>
+    <div class="contenedor">
+    <h1>Backups y Restauraciones</h1>
+    </div>
+    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=12");
+if ($datos=$sql->fetch_object()) { ?>
+  <div class="izquierda">
 <form method="post" enctype="multipart/form-data">
-
-    <button type="submit" name="crear_copia_btn">Crear copia de seguridad</button>
+    <h3>Descargar copia de seguridad</h3>
+    <h2></h2>
+    <button class="zmdi zmdi-cloud-download" type="submit" name="crear_copia_btn">Crear copia de seguridad</button>
 </form>
-
+</div>
+<div class="derecha">
 <form action="restore.php" method="post" enctype="multipart/form-data">
-  <label for="file">Seleccione un archivo de copia de seguridad:</label>
-  <input type="file" name="file" id="file">
+  <h3>Restaurar copia de seguridad</h3>
+  <h2></h2>
+  <label for="file" text-align=center>Seleccione un archivo de copia de seguridad:</label> <input type="file" name="file" id="file">
   <br>
-  <button type="submit" name="submit" onclick='return confirmar()'>Restaurar base de datos</button>
+  <button class="zmdi zmdi-cloud-upload" type="submit" name="submit" onclick='return confirmar()'>Restaurar base de datos</button>
 </form>
+</div>
 
 <script type="text/javascript">
     function confirmar(){
       return confirm('¿Está Seguro de restaurar la Base de datos?');
     }
   </script>
+  
+  </section>
+  <?php } ?>
+  </body>
+  <script src="../../js/Buscador.js"></script>
+  <script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../js/events.js"></script>
+	<script src="../../js/main.js"></script>

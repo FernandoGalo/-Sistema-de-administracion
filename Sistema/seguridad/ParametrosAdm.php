@@ -47,7 +47,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol ");
+                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
 if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table style="text-align:center" id="tbllistado" class="table table-bordered table-hover">
@@ -80,7 +80,7 @@ if ($datos=$sql->fetch_object()) { ?>
                               <td><?php echo $mostrar['Valor']?></td>
         
                               <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
 									if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Parametros.php?ID_Parametro=<?php echo $mostrar['ID_Parametro']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>

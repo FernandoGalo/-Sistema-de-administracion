@@ -633,4 +633,20 @@ body, html{
   .boton-editar:hover, .boton-eliminar:hover, .boton-permiso:hover {
 	background-color: #333;
   }
+  .contenedor{
+    text-align: center;
+  }
+.izquierda {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  border: 2px solid black;
+}
+
+.derecha {
+  float: right;
+  width: 50%;
+  padding: 10px;
+  border: 2px solid black;
+}
 

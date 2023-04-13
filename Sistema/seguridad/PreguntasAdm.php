@@ -46,7 +46,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento Preguntas</h1>
-                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol ");
+                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=4");
                             if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Preguntas</button>
                           <div class="box-tools pull-right">
@@ -56,7 +56,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol ");
+                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=4");
                             if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table style="text-align:center" id="tbllistado" class="table table-bordered table-hover">
@@ -86,13 +86,13 @@ $ID_Rol=$_SESSION['ID_Rol'];
                               <td><?php echo $mostrar['ID_Pregunta']?></td> 
                               <td><?php echo $mostrar['Pregunta']?></td> 
                               <td>
-                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
+                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=4");
                                 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Preguntas.php?ID_Pregunta=<?php echo $mostrar['ID_Pregunta']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
                               <?php } ?>
                               </a>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=4");
                                     if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Preguntas.php?ID_Pregunta=<?php echo $mostrar['ID_Pregunta']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
