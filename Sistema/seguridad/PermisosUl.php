@@ -9,13 +9,15 @@
 //Consulta permiso
 $rol_id = $ID_RolPer;
 
-$Permiso="SELECT p.*, r.*, o.* 
-from tbl_permisos p
-JOIN tbl_ms_roles r ON p.ID_Rol = r.ID_Rol
-JOIN tbl_objetos o ON p.ID_Objeto = o.ID_Objeto
-WHERE p.ID_rol = $rol_id";
-
-$resPermiso=$conexion->query($Permiso);
+// Utilizar consulta preparada
+$stmt = $conexion->prepare("SELECT p.*, r.*, o.* 
+                           FROM tbl_permisos p
+                           JOIN tbl_ms_roles r ON p.ID_Rol = r.ID_Rol
+                           JOIN tbl_objetos o ON p.ID_Objeto = o.ID_Objeto
+                           WHERE p.ID_rol = ?");
+$stmt->bind_param("i", $rol_id);
+$stmt->execute();
+$resPermiso = $stmt->get_result();
 ?>
 
 <!-- asfsdfwsdgfsgdsdgsg -->
@@ -123,10 +125,10 @@ $resPermiso=$conexion->query($Permiso);
                         }
                         if($actualizar==true)
                         {
-                        echo "<script language='JavaScript'>
-                        alert('Los permisos se actualizaron');
-                    location.assign('RolesAdm.php');
-                    </script>";
+                          echo "<script language='JavaScript'>
+                          alert('Los permisos se actualizaron');
+                      location.assign('PermisosUl.php?ID_Rol=" . $_GET['ID_Rol'] . "');
+                      </script>";
                         }
                         else
                         {
@@ -147,7 +149,7 @@ $resPermiso=$conexion->query($Permiso);
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Rol(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre del rol" onkeypress="validarMayusculas(event)" value=<?php echo  $strRol ?> required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre del rol" onkeypress="validarMayusculas(event)" value=<?php echo  $strRol ?> readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Pantalla(*):</label>

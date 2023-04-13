@@ -1,7 +1,11 @@
-<?php
-    include("../../conexion_BD.php");
+<?php 
+//Controladores importantes
+ require '../../conexion_BD.php'; 
+ require_once "../../EVENT_BITACORA.php";
+ session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +21,8 @@
 
 </head>
 <body>
+  
+<?php include '../sidebar.php'; ?>
     <?php
         if(isset($_POST['enviar_F2'])){
             //aqui entra si el usuario ha presionado el boton enviar
@@ -107,10 +113,10 @@
                           <label>ID del Pago(*):</label>
                             <input type="hidden" name="ID_de_pago" id="ID_de_pago">
                             <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'   value="<?php echo $ID_Pago; ?>" readonly>
-
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           </div>
+                          
                           <?php require '../../conexion_BD.php';?>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           <label>Monto Pagado(*):</label>
                             <input type="hidden" name="Monto_pagado" id="Monto_pagado">
                             <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" value="<?php echo $Monto; ?>" required>
@@ -147,8 +153,6 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario</label>
-                            <?php session_start();     
-                            $usuario=$_SESSION['usuario'];?>
                             <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -185,7 +189,7 @@
 	<script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>
-  <script src="./js/usuario.js"></script>
-  <?php include '../sidebar.php'; ?>
+  <script src="../../js/usuario.js"></script>
+
 </body>
 </html>

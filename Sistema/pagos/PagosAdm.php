@@ -176,9 +176,8 @@ if ($datos=$sql->fetch_object()) { ?>
                             <label>ID del Pago(*):</label>
                             <input type="hidden" name="ID_de_pago" id="ID_de_pago">
                             <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del pago" required>
-
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          </div>
+                           </div>
+                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           <label>Monto Pagado(*):</label>
                             <input type="hidden" name="Monto_pagado" id="Monto_pagado">
                             <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese la cantidad del pago" required>
