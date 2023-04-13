@@ -90,13 +90,13 @@ if ($datos=$sql->fetch_object()) { ?>
                               <td><?php echo $mostrar['Telefono_Voluntario']?></td>
                               <td><?php echo $mostrar['Direccion_Voluntario']?></td>
                               <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Voluntarios.php?ID_Voluntario=<?php echo $mostrar['ID_Voluntario']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
                               <?php } ?>
                               </a>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol ");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Voluntarios.php?ID_Voluntario=<?php echo $mostrar['ID_Voluntario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
