@@ -13,7 +13,7 @@
 <title>Inicio</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="../../css/main.css">
 
 </head>
 <body>
@@ -158,7 +158,7 @@
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
-                          <a href="FondosAdm.php" style="color:white; text-decoration:none;">
+                          <a href="PagosAdm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
                           </a>
                           </button>
@@ -182,10 +182,10 @@
     
 
 	<!--script en java para los efectos-->
-	<script src="./js/jquery-3.1.1.min.js"></script>
-  <script src="./js/events.js"></script>
-	<script src="./js/main.js"></script>
+	<script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../js/events.js"></script>
+	<script src="../../js/main.js"></script>
   <script src="./js/usuario.js"></script>
-
+  <?php include '../sidebar.php'; ?>
 </body>
 </html>

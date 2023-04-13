@@ -21,7 +21,12 @@ include("../../conexion_BD.php");
         echo "<script languaje='JavaScript'>
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('RolesAdm.php');
-                </script>";     
+                </script>";  
+                require_once "../../EVENT_BITACORA.php";
+                $model = new EVENT_BITACORA;
+                session_start();
+                $_SESSION['IDRolDELETE']=$ID_Rol;
+                $model->DeleteRol();   
 
                             
     }else{

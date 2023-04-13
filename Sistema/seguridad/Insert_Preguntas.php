@@ -43,6 +43,11 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('PreguntasAdm.php');
                             </script>";     
+                            require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['pregbit']=$pregunta;
+                            $model->RegInsertpreg(); 
 
 
             }else{

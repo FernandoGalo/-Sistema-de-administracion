@@ -53,6 +53,12 @@ $ID_Rol=$_SESSION['ID_Rol'];
                         alert('Los datos se actualizaron correctamente');
 						location.assign('ParametrosAdm.php');
 						</script>";
+            require_once "../../EVENT_BITACORA.php";
+            $model = new EVENT_BITACORA;
+             session_start();                       
+                    $_SESSION['paraBitUP']=$Parametro;
+                    $_SESSION['IDUsuarioBitUP']=$id;
+                    $model->RegUptpara();
                     
 
             }else{

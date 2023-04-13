@@ -117,6 +117,11 @@
                 alert('Los datos NO fueron ingresados a la BD');
                     location.assign('RolesAdm.php');
                     </script>";
+                    require_once "../../EVENT_BITACORA.php";
+                    $model = new EVENT_BITACORA;
+                    session_start();
+                    $_SESSION['RolBitacora']=$nombreRol;
+                    $model->RegInsertRol();
             }
             mysqli_close($conexion);
             }

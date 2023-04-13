@@ -558,5 +558,194 @@ public function DeleteDon(){
         
     
     }
+
+  //===================================================================================
+#registro SAR   
+public function RegInsertSar(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $ID_SAR= $_SESSION['IDSarBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Registro SAR agregado: ".$ID_SAR;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de registro SAR', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+
+        
+      
+        ?>
+
+    <?php
+  }
+
+   //===================================================================================
+    #update SAR 
+    public function RegUptSar(){
+        session_start();
+
+        $IDGlobal=$_SESSION['ID_User'];
+        $id_sar=$_SESSION['IDsarBitUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();      
+            $Descripcion = "Se modifico el registro SAR: " .$id_sar;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de SAR', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();
+    
+            
+          
+            ?>
+    
+        <?php
+    
+        
+    
+    }
+      //===================================================================================
+#delete SAR 
+public function DeleteSar(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $id_sar=$_SESSION['IDSarBitacoraDELETE'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se elimino el registro SAR: ".$id_sar;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de SAR', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+      
+        ?>
+
+    <?php
+}
+  //===================================================================================
+#registro Rol
+public function RegInsertRol(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $nombreRol= $_SESSION['RolBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Registro Rol agregado: ".$nombreRol;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de Rol', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+   //===================================================================================
+    #update Rol
+    public function RegUptRol(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+        $nombreRol=$_SESSION['RolBitUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();      
+            $Descripcion = "Se modifico el Rol: " .$nombreRol;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de Rol', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();  
+            ?>
+        <?php  
+    }
+   //===================================================================================
+#delete Rol
+public function DeleteRol(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $ID_Rol=$_SESSION['IDRolDELETE'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se elimino el Rol: ".$ID_Rol;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de Rol', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();   
+        ?>
+    <?php
+}
+ //===================================================================================
+#registro preguntas
+public function RegInsertpreg(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $pregunta= $_SESSION['pregbit'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Pregunta agregada: ".$pregunta;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Creacion de pregunta', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+   //===================================================================================
+    #update pregunta
+    public function RegUptpreg(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+        $pregunta=$_SESSION['pregbitUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();      
+            $Descripcion = "Se modifico La pregunta: " .$pregunta;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de pregunta', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();  
+            ?>
+        <?php  
+    }
+          //===================================================================================
+#delete SAR 
+public function Deletepreg(){
+    session_start();
+
+    $IDGlobal=$_SESSION['ID_User'];
+    $ID_Pregunta=$_SESSION['IDpregDELETE'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se elimino la pregunta: ".$ID_Pregunta;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de pregunta', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+      
+        ?>
+
+    <?php
+}
+   //===================================================================================
+    #update parametro
+    public function RegUptpara(){
+        session_start();
+        $IDGlobal=$_SESSION['ID_User'];
+        $Parametro=$_SESSION['paraBitUP'];
+            $model = new conexion();
+            $conexion = $model->conectar();      
+            $Descripcion = "Se modifico el parametro: " .$Parametro;
+            $fecha = date("Y-m-d h:i:s");
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+            VALUES (NULL,'$fecha', '$IDGlobal ', '1', 'Modificacion de parametro', '$Descripcion')";
+            $consulta2= $conexion->prepare($sql2);
+            $consulta2->execute();  
+            ?>
+        <?php  
+    }
 }  
 ?>
