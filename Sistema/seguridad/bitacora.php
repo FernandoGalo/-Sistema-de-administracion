@@ -99,7 +99,7 @@ if ($datos=$sql->fetch_object()) { ?>
         <option value="5" <?php if ($por_pagina == 5) echo 'selected="selected"'; ?>>5</option>
         <option value="10" <?php if ($por_pagina == 10) echo 'selected="selected"'; ?>>10</option>
         <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
-        
+        <option value="10000" <?php if ($por_pagina == 10000) echo 'selected="selected"'; ?>>Todo</option>
     </select>
 
     <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
