@@ -1,20 +1,4 @@
 <style>
-  .contenedor{
-    text-align: center;
-  }
-.izquierda {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  border: 2px solid black;
-}
-
-.derecha {
-  float: right;
-  width: 50%;
-  padding: 10px;
-  border: 2px solid black;
-}
 </style>
 <?php
 require '../../conexion_BD.php';

@@ -1,20 +1,3 @@
-<style>
-  .contenedor{
-    text-align: center;
-  }
-.izquierda {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  text-align: center;
-}
-
-.derecha {
-  float: right;
-  width: 50%;
-  padding: 10px;
-  text-align: center;
-}
 </style>
 <!DOCTYPE html>
 <html lang="es">
