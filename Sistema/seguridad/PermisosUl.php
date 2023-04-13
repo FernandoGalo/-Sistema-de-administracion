@@ -6,7 +6,6 @@
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
  $ID_RolPer = $_GET['ID_Rol'];
-
 //Consulta permiso
 $rol_id = $ID_RolPer;
 
@@ -124,12 +123,10 @@ $resPermiso=$conexion->query($Permiso);
                         }
                         if($actualizar==true)
                         {
-                        echo "<p>Permisos actualizados! <a href='#' id='enlaceClickAqui' onclick='location.reload();'>CLICK AQUÍ</a></p>";
-                        echo "<script>
-                        document.getElementById('enlaceClickAqui').addEventListener('click', function() {
-                        this.style.display = 'none';
-                        });
-                        </script>";
+                        echo "<script language='JavaScript'>
+                        alert('Los permisos se actualizaron');
+                    location.assign('RolesAdm.php');
+                    </script>";
                         }
                         else
                         {
