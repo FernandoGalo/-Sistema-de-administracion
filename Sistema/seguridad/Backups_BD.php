@@ -143,7 +143,7 @@ if ($datos=$sql->fetch_object()) { ?>
         ?>
     </select>
     <br><br>
-    <button class="zmdi zmdi-close" type="submit"> Eliminar Backup</button>
+    <button class="zmdi zmdi-close" type="submit"> Eliminar archivo del Backup</button>
 </form>
   
   </section>
