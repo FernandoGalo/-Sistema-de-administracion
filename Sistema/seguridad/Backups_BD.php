@@ -98,13 +98,13 @@ $ID_Rol=$_SESSION['ID_Rol'];
 if ($datos=$sql->fetch_object()) { ?>
   <div class="izquierda">
 <form method="post" enctype="multipart/form-data">
-    <h3>Guardar copia de seguridad</h3>
+    <h3>Guardar una copia de seguridad</h3>
     <h2></h2>
     <button class="zmdi zmdi-cloud-download" type="submit" name="crear_copia_btn">Crear copia de seguridad</button>
 </form>
 </div>
 <div class="derecha">
-<h1>Seleccionar Backup</h1>
+<h1>Restaurar una copia de seguridad</h1>
   <form action="restore.php" method="post">
     <label for="backup_file">Seleccione un archivo de backup:</label>
     <select id="backup_file" name="backup_file">
@@ -125,7 +125,7 @@ if ($datos=$sql->fetch_object()) { ?>
     <button class="zmdi zmdi-cloud-upload" type="submit" > Restaurar Backup</button>
   </form>
 </div>
-<h1>Eliminar Backup</h1>
+<h1>Eliminar un archivo de copia de seguridad</h1>
 <form action="Eliminar_backup.php" method="post">
     <label for="backup_file">Seleccione un archivo de backup para eliminar:</label>
     <select id="backup_file" name="backup_file">
@@ -143,7 +143,7 @@ if ($datos=$sql->fetch_object()) { ?>
         ?>
     </select>
     <br><br>
-    <button class="zmdi zmdi-close" type="submit"> Eliminar archivo del Backup</button>
+    <button class="zmdi zmdi-close" type="submit"> Eliminar Backup</button>
 </form>
   
   </section>
