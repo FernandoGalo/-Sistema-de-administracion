@@ -124,11 +124,6 @@ if ($datos=$sql->fetch_object()) { ?>
     <br><br>
     <button class="zmdi zmdi-cloud-upload" type="submit" > Restaurar Backup</button>
   </form>
-  <script type="text/javascript">
-    function confirmar(){
-      return confirm('¿Está Seguro de restaurar la Base de datos?');
-    }
-  </script>
 </div>
 <h1>Eliminar Backup</h1>
 <form action="Eliminar_backup.php" method="post">
@@ -150,11 +145,6 @@ if ($datos=$sql->fetch_object()) { ?>
     <br><br>
     <button class="zmdi zmdi-close" type="submit"> Eliminar Backup</button>
 </form>
-<script type="text/javascript">
-    function confirmar(){
-      return confirm('¿Está Seguro de restaurar la Base de datos?');
-    }
-  </script>
   
   </section>
   <?php } ?>
