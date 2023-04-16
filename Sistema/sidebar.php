@@ -95,6 +95,9 @@ if ($datos=$sql->fetch_object()) { ?>
 							<a href="../Fondos/FondosAdm.php"><i class="zmdi zmdi-assignment-returned"></i> Mantenimiento Fondos </a>
 						</li>
 						<li>
+							<a href="../Fondos/Tipo_Fondo_Adm.php"><i class="zmdi zmdi-assignment-returned"></i> Mantenimiento de Tipos de Fondos </a>
+						</li>
+						<li>
 							<a href="../Fondos/DonacAdm.php"><i class="zmdi zmdi-favorite"></i> Donaciones </a>
 						</li>
 					</ul>

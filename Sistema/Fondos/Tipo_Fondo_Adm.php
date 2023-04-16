@@ -49,16 +49,8 @@ function redirigirProyectos() {
   }
 }
 
-function redirigirDonaciones() {
-  var url = "DonacAdm.php";
-  if (url) {
-    window.location.href = url;
-  }
-}
-
-
-function redirigirTFondos() {
-  var url = "Tipo_Fondo_Adm.php";
+function redirigirFondos() {
+  var url = "FondosAdm.php";
   if (url) {
     window.location.href = url;
   }
@@ -91,8 +83,7 @@ if ($datos=$sql->fetch_object()) { ?>
 
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Fondo</button>
                           <button id="proyectos-btn" onclick="redirigirProyectos()">Ir a Proyectos</button>
-<button id="donaciones-btn" onclick="redirigirDonaciones()">Ir a Donaciones</button>
-<button id="T_Fondos-btn" onclick="redirigirTFondos()">Ir a Tipos de Fondos</button>
+                          <button id="Fondos-btn" onclick="redirigirFondos()">Ir a Fondos</button>
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
@@ -111,14 +102,8 @@ if ($datos=$sql->fetch_object()) { ?>
                             <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
                         </form>
                         <thead>
-                            <th>ID fondo</th>
+                            <th>ID Tipo fondo</th>
                             <th>Tipo de fondo</th>
-                            <th>Nombre_del_Objeto</th>
-                            <th>Cantidad_Recibida</th>
-                            <th>valor monetario</th>
-                            <th>Proyecto</th>
-                            <th>Donante </th>
-                            <th>Fecha de aquisicion </th>
                             <th>acciones </th>
                           </thead>
                           <tbody>                            
@@ -126,36 +111,26 @@ if ($datos=$sql->fetch_object()) { ?>
                           <tfoot>
 
                           <?php
-                          $sql="SELECT f.ID_de_fondo,tf.nombre_T_Fondo,f.Nombre_del_Objeto,f.Cantidad_Rec,f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
-                          FROM tbl_fondos f
-                          JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
-                          JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
-                          JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto";
+                          $sql="SELECT ID_tipo_fondo ,nombre_T_Fondo
+                          FROM tbl_tipos_de_fondos ";
                           $result=mysqli_query($conexion,$sql);
 
                            while($mostrar=mysqli_fetch_array($result)){
                            ?>
 
                             <tr>
-                              <td><?php echo $mostrar['ID_de_fondo']?></td> 
+                              <td><?php echo $mostrar['ID_tipo_fondo']?></td> 
                               <td><?php echo $mostrar['nombre_T_Fondo']?></td>
-                              <td><?php echo $mostrar['Nombre_del_Objeto']?></td>
-                              <td><?php echo $mostrar['Cantidad_Rec']?></td>
-                              <td><?php echo $mostrar['Valor_monetario']?></td>
-                              
-                              <td><?php echo $mostrar['Nombre_del_proyecto']?></td>
-                              <td><?php echo $mostrar['Nombre_D']?></td> 
-                              <td><?php echo $mostrar['Fecha_de_adquisicion_F']?></td>
                               <td>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Update_Fondo.php?ID_de_fondo=<?php echo $mostrar['ID_de_fondo']; ?>' class='boton-editar'>
+                              <a href='Update_Tipo_Fondo_Adm.php?ID_tipo_fondo=<?php echo $mostrar['ID_tipo_fondo']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
                                 <?php } ?>
                               </a>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Delete_Fondo.php?ID_de_fondo=<?php echo $mostrar['ID_de_fondo']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <a href='Delete_Tipo_Fondo.php?ID_tipo_fondo=<?php echo $mostrar['ID_tipo_fondo']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
                               <?php } ?>
                               </a>
@@ -169,73 +144,12 @@ if ($datos=$sql->fetch_object()) { ?>
                     </div>
                     <?php } ?>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Insert_Fondo.php" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_Tipo_Fondo.php" method="POST">
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Tipo de Fondo(*):</label>
-                            <?php
-                           $sql=$conexion->query("SELECT * FROM tbl_tipos_de_fondos");
-                          ?>
-                            <select class="controls" type="text" name="tipos_de_fondos" id="tipos_de_fondos" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql)){
-                            ?>
-                             <option value="<?php echo $row1['ID_tipo_fondo'];?>"><?php echo $row1['nombre_T_Fondo'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Nombre del Objeto</label>
-                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" placeholder="Ingrese el nombre del objeto" require>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Cantidad recibida</label>
-                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" placeholder="Ingrese la cantidad de fondos recibidos" require>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Valor monetario</label>
-                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" placeholder="Ingrese el Valor monetario" require>
-                          </div>	
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Donante del fondo:</label>
-                            <?php
-                           $sql=$conexion->query("SELECT * FROM tbl_donantes");
-                          ?>
-                            <select class="controls" type="text" name="Donante" id="Donante" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql)){
-                            ?>
-                             <option value="<?php echo $row1['ID_Donante'];?>"><?php echo $row1['Nombre_D'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Proyecto al que esta siendo donado:</label>
-                            <?php
-                           $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
-                          ?>
-                            <select class="controls" type="text" name="Proyecto" id="Proyecto" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql2)){
-                            ?>
-                             <option value="<?php echo $row1['ID_proyecto'];?>"><?php echo $row1['Nombre_del_proyecto'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Usuario</label>
-                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" placeholder="<?php echo $usuario?>" style="text-transform:uppercase" readonly>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Fecha de Adquisicion:</label>
-                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" placeholder="Ingrese la Fecha de Adquisicion" require>
+                            <label>nombre Tipo Fondo</label>
+                            <input type="text" class="form-control"  name="nombre_T_Fondo" id="nombre_T_Fondo" placeholder="Ingrese el Tipo de Fondo" require>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
