@@ -77,7 +77,7 @@ function redirigirFondos() {
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento de fondos</h1>
+                          <h1 class="box-title">Mantenimiento de Tipo de fondos</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
 

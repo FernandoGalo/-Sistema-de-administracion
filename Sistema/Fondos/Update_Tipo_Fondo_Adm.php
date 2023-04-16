@@ -69,7 +69,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar Fondos</h1>
+                          <h1 class="box-title">Editar Tipos de Fondos</h1>
                         </div>
                         <br>
                     </div>
