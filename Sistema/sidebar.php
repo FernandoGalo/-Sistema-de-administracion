@@ -110,6 +110,9 @@ if ($datos=$sql->fetch_object()) { ?>
 						<li>
 							<a href="../Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento voluntarios </a>
 						</li>
+						<li>
+							<a href="../Voluntarios/area_trabajo_Adm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento del Area de Trabajo </a>
+						</li>
 					</ul>
 				</li>
 				<li>

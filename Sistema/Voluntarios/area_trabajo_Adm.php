@@ -1,17 +1,31 @@
 <?php
 
-
 require '../../conexion_BD.php';
+
 /*esta variable impide que se pueda entrar al sistema principal si no se entra por login (crea un usuario global) */
 
 require_once "../../EVENT_BITACORA.php";
+
+
+
+
+//Parte 2
+                
+$R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
 session_start();     
 $usuario=$_SESSION['user'];
 $ID_Rol=$_SESSION['ID_Rol'];
 
+$sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
+
+    while($row=mysqli_fetch_array($sql1)){
+    $diasV=$row['Valor'];
+    }
+$R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le suma 1 mes a la fecha actual*/
+//fin parte 2
+
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,12 +33,15 @@ $ID_Rol=$_SESSION['ID_Rol'];
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript">
     function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el usuario');
+      return confirm('¿Está Seguro?, se eliminará el area trabajo');
     }
   </script>
-    <script>
+<script>
 function redirigirProyectos() {
   var url = "../Proyectos/ProyectosAdm.php";
   if (url) {
@@ -32,8 +49,8 @@ function redirigirProyectos() {
   }
 }
 
-function redirigirarea_trabajo() {
-  var url = "area_trabajo_Adm.php";
+function redirigirVoluntarios() {
+  var url = "VoluntariosAdm.php";
   if (url) {
     window.location.href = url;
   }
@@ -60,12 +77,13 @@ function redirigirarea_trabajo() {
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento Voluntarios</h1>
-                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+                          <h1 class="box-title">Mantenimiento de las areas de trabajos</h1>
+                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Voluntario</button>
+
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Fondo</button>
                           <button id="proyectos-btn" onclick="redirigirProyectos()">Ir a Proyectos</button>
-                          <button id="area_trabajo-btn" onclick="redirigirarea_trabajo()">Ir a el area de trabajo</button> 
+                          <button id="Voluntarios-btn" onclick="redirigirVoluntarios()">Ir a Voluntarios</button>
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
@@ -73,7 +91,7 @@ if ($datos=$sql->fetch_object()) { ?>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=7 ");
 if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table id="tbllistado" class="table table-bordered table-hover">
@@ -84,38 +102,37 @@ if ($datos=$sql->fetch_object()) { ?>
                             <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
                         </form>
                         <thead>
-                            <th>ID</th>
-                            <th>Nombre voluntario</th>
-                            <th>Telefono voluntario</th>
-                            <th>Direccion voluntario</th>
-                            <th>Acciones</th>
-                        </thead>
+                            <th>ID del Area de Trabajo</th>
+                            <th>nombre del Area de Trabajo</th>
+                            <th>descripcion del Area de trabajo</th>
+                            <th>acciones </th>
+                          </thead>
                           <tbody>                            
                           </tbody>
                           <tfoot>
 
                           <?php
-                          $sql="SELECT * from tbl_voluntarios";
+                          $sql="SELECT ID_Area_Trabajo ,nombre_Area_Trabajo, descripcion_A_Trabajo
+                          FROM tbl_area_trabajo ";
                           $result=mysqli_query($conexion,$sql);
 
                            while($mostrar=mysqli_fetch_array($result)){
                            ?>
 
                             <tr>
-                              <td><?php echo $mostrar['ID_Voluntario']?></td> 
-                              <td><?php echo $mostrar['Nombre_Voluntario']?></td> 
-                              <td><?php echo $mostrar['Telefono_Voluntario']?></td>
-                              <td><?php echo $mostrar['Direccion_Voluntario']?></td>
+                              <td><?php echo $mostrar['ID_Area_Trabajo']?></td> 
+                              <td><?php echo $mostrar['nombre_Area_Trabajo']?></td>
+                              <td><?php echo $mostrar['descripcion_A_Trabajo']?></td>
                               <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Update_Voluntarios.php?ID_Voluntario=<?php echo $mostrar['ID_Voluntario']; ?>' class='boton-editar'>
+                              <a href='Update_area_trabajo_Adm.php?ID_Area_Trabajo=<?php echo $mostrar['ID_Area_Trabajo']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
-                              <?php } ?>
+                                <?php } ?>
                               </a>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Delete_Voluntarios.php?ID_Voluntario=<?php echo $mostrar['ID_Voluntario']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <a href='Delete_area_trabajo.php?ID_Area_Trabajo=<?php echo $mostrar['ID_Area_Trabajo']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
                               <?php } ?>
                               </a>
@@ -129,32 +146,19 @@ if ($datos=$sql->fetch_object()) { ?>
                     </div>
                     <?php } ?>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Insert_Voluntarios.php" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_area_trabajo.php" method="POST">
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>ID Voluntario(*):</label>
-                            <input type="hidden" name="ID_Voluntario" id="ID_Voluntario">
-                            <input onpaste="return false" style="text-transform:uppercase" style="text" type="text" class="form-control" name="ID_Voluntario" id="ID_Voluntario" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del Voluntario" required>
+                            <label>nombre del Area de Trabajo</label>
+                            <input type="text" class="form-control"  name="nombre_Area_Trabajo" id="nombre_Area_Trabajo" placeholder="Ingrese el nombre del Area de Trabajo" require>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Nombre Voluntario(*):</label>
-                            <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario" onkeypress="validarMayusculas(event)" required>
+                            <label>descripcion del Area de Trabajo</label>
+                            <input type="text" class="form-control"  name="descripcion_A_Trabajo" id="descripcion_A_Trabajo" placeholder="Ingrese la descripcion del Area de Trabajo" require>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Telefono(*):</label>
-                            <input type="hidden" name="Telefono_Voluntario" id="Telefono_Voluntario">
-                            <input style="text-transform:uppercase" style="text" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" required>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Direccion Voluntario(*):</label>
-                            <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
-                            <textarea style="text-transform:uppercase" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion voluntario"  required></textarea>
-                          </div>
-                        
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar_V" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar_F" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
@@ -176,11 +180,6 @@ if ($datos=$sql->fetch_object()) { ?>
  	<script src="../../js/jquery-3.1.1.min.js"></script>
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
-
   
-
-
-
-
 </body>
 </html>
