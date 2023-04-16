@@ -13,8 +13,6 @@
                         /*despues de haber validad todo el documento y que se haya cumplido todo comienza esta seccion */
     //====================================================
         if(isset($_POST['enviar_F'])){
-
-
             session_start();     
             $Usuario=$_SESSION['usuario'];
             
@@ -25,18 +23,18 @@
     while($row=mysqli_fetch_array($sql1)){
         $ID_Usuario=$row['ID_Usuario'];
     }
-            $ID_Tipo_Fondo=$_POST["tipos_de_fondos"];
-            $Nombre_del_Objeto=$_POST["Nombre_del_Objeto"];;
-            $Cantidad_Rec=$_POST["Cantidad_Rec"];;
-            $Valor_monetario=$_POST["Valor_monetario"];;
-            $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
-            $ID_Proyecto=$_POST["Proyecto"];
-            $ID_Donador=$_POST["Donante"];
-            
-            $Fecha_actual = date('Y-m-d');
+    $Fecha_actual = date('Y-m-d');
+
+            $ID_Voluntario=$_POST["ID_Voluntario"];
+            $ID_proyecto=$_POST["ID_proyecto"];
+            $ID_Area_Trabajo=$_POST["ID_Area_Trabajo"];
+            $Fecha_Vinculacion_P=$_POST["Fecha_Vinculacion_P"];
             include("../../conexion_BD.php");
-            $sql = "INSERT INTO tbl_fondos (ID_de_Fondo, ID_Tipo_Fondo,Nombre_del_Objeto,Cantidad_Rec,Valor_monetario,Fecha_de_adquisicion_F, ID_Proyecto, ID_Donante , ID_usuario, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES (NULL,$ID_Tipo_Fondo, '$Nombre_del_Objeto',$Cantidad_Rec,$Valor_monetario, '$Fecha_Adquisicion', $ID_Proyecto,$ID_Donador, $ID_Usuario, '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+
+
+            $sql = "INSERT INTO tbl_voluntarios_proyectos (ID_Vinculacion_Proy, ID_Voluntario, ID_proyecto, ID_Area_Trabajo, Fecha_Vinculacion_P, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion	
+            ) 
+            VALUES (NULL,'$ID_Voluntario','$ID_proyecto','$ID_Area_Trabajo','$Fecha_Vinculacion_P', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 
@@ -44,20 +42,14 @@
                 //Los datos ingresados a la BD
                 echo "<script languaje='JavaScript'>
                         alert('Los datos fueron ingresados correctamente a la BD');
-                            location.assign('FondosAdm.php');
+                            location.assign('voluntarios_proyectos_Adm.php');
                             </script>";     
-                            require_once "../../EVENT_BITACORA.php";
-                            $model = new EVENT_BITACORA;
-                            session_start();
-                            $_SESSION['IDFondoBitacora']=$ID_Fondo;
-                            $model->RegaInsertFondo();  
-
 
             }else{
                 // Los dcatos NO ingresaron a la BD
                 echo "<script languaje='JavaScript'>
                 alert('Los datos NO fueron ingresados a la BD');
-                    location.assign('FondosAdm.php');
+                    location.assign('voluntarios_proyectos_Adm.php');
                     </script>";
             }
             mysqli_close($conexion);
