@@ -9,129 +9,69 @@
 
 <?php
 // Datos de conexión a la base de datos
-$servername = "localhost";
-$username = 'root';
+
+$host = "localhost";
+$user = 'root';
 $password = '';
 $database = 'bd_asociacion_creo_en_ti';
 
 // Comprobar si se hizo clic en el botón "Crear copia de seguridad"
 if(isset($_POST['crear_copia_btn'])) {
-  $conn = mysqli_connect($servername, $username, $password, $database);
+  // Nombre del archivo de backup
+  $conn = mysqli_connect($host, $user, $password, $database);
+  $backups_folder = "C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/";
 
   // Nombre del archivo de backup
-  $backup_file = $database . '_' . date("YmdHis") . '.sql';
+  $backup_file = $backups_folder . $database ."-" . date("Y-m-d_H-i-s") . ".sql";
   
-  // Obtener listado de tablas
-  $tables = array();
-  $result = mysqli_query($conn, "SHOW TABLES");
-  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-    $tables[] = $row[0];
+  // Comando de MySQL para hacer el backup
+ // Obtener listado de tablas
+ $tables = array();
+ $result = mysqli_query($conn, "SHOW TABLES");
+ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+   $tables[] = $row[0];
+ }
+ 
+ // Generar archivo de backup
+ $handle = fopen($backup_file, 'w');
+ foreach ($tables as $table) {
+   // Obtener definición de la tabla
+   fwrite($handle, "DROP TABLE IF EXISTS `$table`;" . PHP_EOL); // Agrega la sentencia DROP TABLE
+   $result = mysqli_query($conn, "SHOW CREATE TABLE `$table`");
+   $row = mysqli_fetch_row($result);
+   fwrite($handle, $row[1] . ";" . PHP_EOL);
+ 
+   // Obtener contenido de la tabla
+   $result = mysqli_query($conn, "SELECT * FROM `$table`");
+   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+     $fields = array();
+     foreach ($row as $key => $value) {
+       $fields[] = "`$key`='" . mysqli_real_escape_string($conn, $value) . "'";
+     }
+     fwrite($handle, "INSERT INTO `$table` SET " . implode(',', $fields) . ";" . PHP_EOL);
+   }
+   fwrite($handle, PHP_EOL);
+ }
+ 
+ fclose($handle);
+ 
+ // Cerrar conexión
+ mysqli_close($conn);
+ 
+  // Comprobación de errores
+  if (file_exists($backup_file)) {
+    echo "<script language='JavaScript'>
+                alert('Backup Creado con éxito.');
+            location.assign('Backups_BD.php');
+            </script>";
+  } else {
+    echo "<script language='JavaScript'>
+                alert('Error al Crear el backup.');
+            location.assign('Backups_BD.php');
+            </script>";
   }
-  
-  // Generar archivo de backup
-  $handle = fopen($backup_file, 'w');
-  foreach ($tables as $table) {
-    // Obtener definición de la tabla
-    fwrite($handle, "DROP TABLE IF EXISTS `$table`;" . PHP_EOL); // Agrega la sentencia DROP TABLE
-    $result = mysqli_query($conn, "SHOW CREATE TABLE `$table`");
-    $row = mysqli_fetch_row($result);
-    fwrite($handle, $row[1] . ";" . PHP_EOL);
-  
-    // Obtener contenido de la tabla
-    $result = mysqli_query($conn, "SELECT * FROM `$table`");
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-      $fields = array();
-      foreach ($row as $key => $value) {
-        $fields[] = "`$key`='" . mysqli_real_escape_string($conn, $value) . "'";
-      }
-      fwrite($handle, "INSERT INTO `$table` SET " . implode(',', $fields) . ";" . PHP_EOL);
-    }
-    fwrite($handle, PHP_EOL);
-  }
-  
-  fclose($handle);
-  
-  // Cerrar conexión
-  mysqli_close($conn);
-  
-  // Descargar archivo
-  header('Content-Description: File Transfer');
-  header('Content-Type: application/octet-stream');
-  header('Content-Disposition: attachment; filename="' . basename($backup_file) . '"');
-  header('Content-Transfer-Encoding: binary');
-  header('Expires: 0');
-  header('Cache-Control: must-revalidate');
-  header('Pragma: public');
-  header('Content-Length: ' . filesize($backup_file));
-  ob_clean();
-  flush();
-  readfile($backup_file);
-  unlink($backup_file);
-  
-  exit;
 }
 
-// Comprobar si se hizo clic en el botón "Restaurar copia de seguridad"
-if(isset($_POST['restaurar_copia_btn'])) {
-  $conn = mysqli_connect($servername, $username, $password, $database);
-
-  // Nombre del archivo de backup
-  $backup_file = $database . '_' . date("YmdHis") . '.sql';
-  
-  // Agregar sentencia SET al inicio del archivo
-  $handle = fopen($backup_file, 'w');
-  fwrite($handle, "SET FOREIGN_KEY_CHECKS = 0;" . PHP_EOL);
-  
-  // Obtener listado de tablas
-  $tables = array();
-  $result = mysqli_query($conn, "SHOW TABLES");
-  while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-    $tables[] = $row[0];
-  }
-  
-  // Generar archivo de backup
-  foreach ($tables as $table) {
-    // Obtener definición de la tabla
-    fwrite($handle, "DROP TABLE IF EXISTS `$table`;" . PHP_EOL);
-    $result = mysqli_query($conn, "SHOW CREATE TABLE `$table`");
-    $row = mysqli_fetch_row($result);
-    fwrite($handle, $row[1] . ";" . PHP_EOL);
-  
-    // Obtener contenido de la tabla
-    $result = mysqli_query($conn, "SELECT * FROM `$table`");
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-      $fields = array();
-      foreach ($row as $key => $value) {
-        $fields[] = "`$key`='" . mysqli_real_escape_string($conn, $value) . "'";
-      }
-      fwrite($handle, "INSERT INTO `$table` SET " . implode(',', $fields) . ";" . PHP_EOL);
-    }
-    fwrite($handle, PHP_EOL);
-  }
-  
-  // Agregar sentencia SET al final del archivo
-  fwrite($handle, "SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL);
-  fclose($handle);
-  
-  // Cerrar conexión
-  mysqli_close($conn);
-  
-  // Descargar archivo
-  header('Content-Description: File Transfer');
-  header('Content-Type: application/octet-stream');
-  header('Content-Disposition: attachment; filename="' . basename($backup_file) . '"');
-  header('Content-Transfer-Encoding: binary');
-  header('Expires: 0');
-  header('Cache-Control: must-revalidate');
-  header('Pragma: public');
-  header('Content-Length: ' . filesize($backup_file));
-  ob_clean();
-  flush();
-  readfile($backup_file);
-  unlink($backup_file);
-  
-  exit;
-}
 ?>
 </head>
 <body>
@@ -158,26 +98,53 @@ $ID_Rol=$_SESSION['ID_Rol'];
 if ($datos=$sql->fetch_object()) { ?>
   <div class="izquierda">
 <form method="post" enctype="multipart/form-data">
-    <h3>Descargar copia de seguridad</h3>
+    <h3>Guardar una copia de seguridad</h3>
     <h2></h2>
     <button class="zmdi zmdi-cloud-download" type="submit" name="crear_copia_btn">Crear copia de seguridad</button>
 </form>
 </div>
 <div class="derecha">
-<form action="restore.php" method="post" enctype="multipart/form-data">
-  <h3>Restaurar copia de seguridad</h3>
-  <h2></h2>
-  <label for="file" text-align=center>Seleccione un archivo de copia de seguridad:</label> <input type="file" name="file" id="file">
-  <br>
-  <button class="zmdi zmdi-cloud-upload" type="submit" name="submit" onclick='return confirmar()'>Restaurar base de datos</button>
-</form>
-</div>
+<h1>Restaurar una copia de seguridad</h1>
+  <form action="restore.php" method="post">
+    <label for="backup_file">Seleccione un archivo de backup:</label>
+    <select id="backup_file" name="backup_file">
+      <?php
+      // Ruta absoluta de la carpeta de backups
+      $backups_folder = "C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/";
 
-<script type="text/javascript">
-    function confirmar(){
-      return confirm('¿Está Seguro de restaurar la Base de datos?');
-    }
-  </script>
+      // Obtener la lista de archivos de backup disponibles
+      $backup_files = glob($backups_folder . "*.sql");
+
+      // Mostrar la lista de archivos de backup en el formulario
+      foreach ($backup_files as $backup_file) {
+        echo "<option value=\"" . basename($backup_file) . "\">" . basename($backup_file) . "</option>";
+      }
+      ?>
+    </select>
+    <br><br>
+    <button class="zmdi zmdi-cloud-upload" type="submit" > Restaurar Backup</button>
+  </form>
+</div>
+<h1>Eliminar un archivo de copia de seguridad</h1>
+<form action="Eliminar_backup.php" method="post">
+    <label for="backup_file">Seleccione un archivo de backup para eliminar:</label>
+    <select id="backup_file" name="backup_file">
+        <?php
+        // Ruta absoluta de la carpeta de backups
+        $backups_folder = "C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/";
+
+        // Obtener la lista de archivos de backup disponibles
+        $backup_files = glob($backups_folder . "*.sql");
+
+        // Mostrar la lista de archivos de backup en el formulario
+        foreach ($backup_files as $backup_file) {
+            echo "<option value=\"" . basename($backup_file) . "\">" . basename($backup_file) . "</option>";
+        }
+        ?>
+    </select>
+    <br><br>
+    <button class="zmdi zmdi-close" type="submit"> Eliminar Backup</button>
+</form>
   
   </section>
   <?php } ?>
