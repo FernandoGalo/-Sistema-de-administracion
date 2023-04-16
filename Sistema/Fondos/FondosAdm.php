@@ -41,38 +41,21 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
       return confirm('¿Está Seguro?, se eliminará el Fondo');
     }
   </script>
-  <script>
-function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    // Nombre del archivo
-    filename = filename?filename+'.xls':'Reporte de tabla.xls';
+<script>
+function redirigirProyectos() {
+  var url = "../Proyectos/ProyectosAdm.php";
+  if (url) {
+    window.location.href = url;
+  }
+}
 
-    // Crear descarga
-    downloadLink = document.createElement("a");
-
-    document.body.appendChild(downloadLink);
-
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        // Crear enlace para descargar
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-        // Establecer nombre de archivo
-        downloadLink.download = filename;
-
-        // Descargar archivo
-        downloadLink.click();
-    }
+function redirigirDonaciones() {
+  var url = "DonacAdm.php";
+  if (url) {
+    window.location.href = url;
+  }
 }
 </script>
-
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -97,9 +80,10 @@ function exportTableToExcel(tableID, filename = ''){
                           <h1 class="box-title">Mantenimiento de fondos</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
 if ($datos=$sql->fetch_object()) { ?>
-                          
+<button id="proyectos-btn" onclick="redirigirProyectos()">Ir a Proyectos</button>
+<button id="donaciones-btn" onclick="redirigirDonaciones()">Ir a Donaciones</button>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Fondo</button>
-                          <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
+
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
