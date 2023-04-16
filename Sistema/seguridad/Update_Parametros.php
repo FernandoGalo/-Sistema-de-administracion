@@ -14,24 +14,23 @@ $ID_Rol=$_SESSION['ID_Rol'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Parametros</title>
 
-<title>Inicio</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="../../css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="../../css/main.css">
 
 </head>
 <body>
-	<!--Seccion donde va toda la barra lateral -->
-	<?php include '../sidebar.php'; ?>
-
+  <!--Seccion donde va toda la barra lateral -->
+  <?php include '../sidebar.php'; ?>
 
     <?php
         if(isset($_POST['Enviar_P'])){        
             //aqui entra sio el usuario ha presionado el boton enviar
             $ID_Parametro=$_POST['ID_Parametro'];
             $Parametro=$_POST['Parametro'];
+            $Descripcion_Parametro=$_POST['Descrip_Parametro'];
             $Valor=$_POST['Valor'];
             $Fecha_actual = date('Y-m-d');
 
@@ -43,16 +42,15 @@ $ID_Rol=$_SESSION['ID_Rol'];
 
 
 
-
             //UPDATE tbl_voluntarios SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_ms_parametros SET Valor = '$Valor', ID_Usuario='$ID_Rol', Fecha_Modificacion='$Fecha_actual' WHERE ID_Parametro='$ID_Parametro';";
+            $sql="UPDATE tbl_ms_parametros SET Descripcion_P = '$Descripcion_Parametro' ,Valor = '$Valor', ID_Usuario='$ID_Rol', Fecha_Modificacion='$Fecha_actual' WHERE ID_Parametro='$ID_Parametro';";
             $resultado=mysqli_query($conexion,$sql);
 
             if($resultado){
                 echo "<script language='JavaScript'>
                         alert('Los datos se actualizaron correctamente');
-						location.assign('ParametrosAdm.php');
-						</script>";
+            location.assign('ParametrosAdm.php');
+            </script>";
             require_once "../../EVENT_BITACORA.php";
             $model = new EVENT_BITACORA;
              session_start();                       
@@ -78,24 +76,25 @@ $ID_Rol=$_SESSION['ID_Rol'];
             $fila=mysqli_fetch_assoc($resultado);
 
             $ID_Parametro=$fila['ID_Parametro'];
-            $Parametro=$fila['Descripcion_P'];
+            $Parametro=$fila['Parametro'];
+            $Descripcion_Parametro=$fila['Descripcion_P'];
             $Valor=$fila['Valor'];//recuperando los datos desde la BD
            
             mysqli_close($conexion);
 
     ?>
-    	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
-		<!-- Barra superior -->
-		<nav class="full-box dashboard-Navbar">
-			<ul class="full-box list-unstyled text-right">
-				<li class="pull-left">
-					<a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
-				</li>
-			</ul>
-		</nav>
-		<!-- Muestra el contenido de la pagina -->
-		<div class="container-fluid">
+      <!-- Pagina de contenido-->
+  <section class="full-box dashboard-contentPage" style="overflow-y: auto;">
+    <!-- Barra superior -->
+    <nav class="full-box dashboard-Navbar">
+      <ul class="full-box list-unstyled text-right">
+        <li class="pull-left">
+          <a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Muestra el contenido de la pagina -->
+    <div class="container-fluid">
         <div class="row">
               <div class="col-md-12">
                   <div class="box">
@@ -118,7 +117,12 @@ $ID_Rol=$_SESSION['ID_Rol'];
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                               <label>Parametros (*):</label>
                               <input type="hidden" name="Parametro" id="Parametro">
-                              <input style="text-transform:uppercase" type="text" class="form-control" name="Parametro" id="Parametro" maxlength="30" value="<?php echo $Parametro; ?>" readonly>
+                              <input style="text-transform:uppercase" type="text" class="form-control" name="Parametro" id="Parametro" maxlength="50" value="<?php echo $Parametro; ?>" readonly>
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <label>Descripcion (*):</label>
+                              <input type="hidden" name="Descrip_Parametro" id="Descrip_Parametro">
+                              <input style="text-transform:uppercase" type="text" class="form-control" name="Descrip_Parametro" id="Descrip_Parametro" maxlength="80" value="<?php echo $Descripcion_Parametro; ?>" onkeypress="this.value = this.value.toUpperCase();" require>
                             </div>
 
                             <?php 
@@ -151,6 +155,17 @@ $ID_Rol=$_SESSION['ID_Rol'];
                                       </div>
                           <?php }     ?>
 
+                          <?php
+                          $allowed_ids = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10); // Arreglo con los valores
+
+                                if(!in_array($ID_Parametro, $allowed_ids)){ ?>
+                                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <label>Valor (*):</label>
+                                        <input type="hidden" name="Valor" id="Valor">
+                                        <input onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="this.value = this.value.toUpperCase();" required>
+                                      </div>
+                          <?php }     ?>
+
 
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -169,8 +184,8 @@ $ID_Rol=$_SESSION['ID_Rol'];
                   </div><!-- /.box -->
               </div><!-- /.col -->
           </div><!-- /.row -->
-		</div>
-	</section>
+    </div>
+  </section>
                         
 
     <?php
@@ -178,11 +193,10 @@ $ID_Rol=$_SESSION['ID_Rol'];
     ?>
 
 
-
-	<!--script en java para los efectos-->
+  <!--script en java para los efectos-->
   <script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
-	<script src="../../js/main.js"></script>
+  <script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
 
   <script>
