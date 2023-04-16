@@ -18,24 +18,28 @@ $stmt = $conexion->prepare("SELECT p.*, r.*, o.*
 $stmt->bind_param("i", $rol_id);
 $stmt->execute();
 $resPermiso = $stmt->get_result();
-?>
 
-<!-- asfsdfwsdgfsgdsdgsg -->
-<?php
+//Los que faltan
+$stmt = $conexion->prepare("SELECT o.*
+                           FROM tbl_objetos o
+                           LEFT JOIN tbl_permisos p ON p.ID_Objeto = o.ID_Objeto AND p.ID_rol = ?
+                           WHERE p.ID_Permiso IS NULL");
+$stmt->bind_param("i", $rol_id);
+$stmt->execute();
+$resObjetosFaltantes = $stmt->get_result();
+
   $sql="SELECT * FROM tbl_ms_roles where ID_Rol='".$ID_RolPer."'";
    $resultado=mysqli_query($conexion,$sql);
 
     $fila=mysqli_fetch_assoc($resultado);
 
     $nombreRol=$fila['Rol'];
-    //$descripcion=$fila['Descripcion'];/
-     //$estado=$fila['Estado'];//recuperando los datos desde la BD/
 
     if($fila['ID_Rol'] == $ID_RolPer ){
       $strRol =  $nombreRol;
     }
-?>/
- <!-- fgsdfgsdgsgsgsg -->
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,7 +49,7 @@ $resPermiso = $stmt->get_result();
 	<link rel="stylesheet" href="../../css/main.css">
   <script type="text/javascript">
     function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el proyecto');
+      return confirm('¿Está Seguro?, se eliminará el permiso');
     }
   </script>
 </head>
@@ -86,7 +90,13 @@ $resPermiso = $stmt->get_result();
                               <th>Eliminar</th>
                               <th>Actualizar</th>
                               <th>Consultar</th>
+                              <th>Estado</th>
+                              <th>Acciones</th>
 				                    </tr>
+                            <tfoot>
+
+
+                            
                       <?php
 			                  	while ($mostrar = $resPermiso->fetch_array(MYSQLI_BOTH))
 				                    {
@@ -102,9 +112,16 @@ $resPermiso = $stmt->get_result();
                           <td><input type="checkbox" name="eli['.$mostrar['ID_permiso'].']"'.($mostrar['Permiso_Eliminacion'] == 1 ? 'checked' : '').' /></td>
                           <td><input type="checkbox" name="actu['.$mostrar['ID_permiso'].']"'.($mostrar['Permiso_Actualizacion'] == 1 ? 'checked' : '').' /></td>
                           <td><input type="checkbox" name="cons['.$mostrar['ID_permiso'].']"'.($mostrar['Permiso_consultar'] == 1 ? 'checked' : '').' /></td>
-						             </tr>';
+                          <td><input type="checkbox" name="est['.$mostrar['ID_permiso'].']"'.($mostrar['Estad'] == 1 ? 'checked' : '').' /></td>
+                          <td>
+                             <a href="DeletePerm.php?ID_permiso='.$mostrar['ID_permiso'].'" onclick="return confirmar()" class="boton-eliminar">
+                              <i class="zmdi zmdi-delete"></i>
+                            </a>
+                          </td>
+                          </tr>';
 			                	}
 				              ?>
+                      </tfoot>
 		                	</table>
                       <div class="d-flex justify-content-center align-items-center">
                         <input type="submit" name="actualizar" value="Actualizar Permisos" class="btn btn-info mr-2">
@@ -121,7 +138,8 @@ $resPermiso = $stmt->get_result();
                         $edit3 = isset($_POST['eli'][$ids]) ? 1 : 0;
                         $edit4 = isset($_POST['actu'][$ids]) ? 1 : 0;
                         $edit5 = isset($_POST['cons'][$ids]) ? 1 : 0;
-                            $actualizar=$conexion->query("UPDATE tbl_permisos SET Permiso_Insercion='$edit2', Permiso_Eliminacion='$edit3', Permiso_Actualizacion='$edit4', Permiso_consultar='$edit5' WHERE ID_permiso='$ids'");
+                        $edit6 = isset($_POST['est'][$ids]) ? 1 : 0;
+                            $actualizar=$conexion->query("UPDATE tbl_permisos SET Permiso_Insercion='$edit2', Permiso_Eliminacion='$edit3', Permiso_Actualizacion='$edit4', Permiso_consultar='$edit5' ,Estad='$edit6' WHERE ID_permiso='$ids'");
                         }
                         if($actualizar==true)
                         {
@@ -184,7 +202,28 @@ $resPermiso = $stmt->get_result();
                               <td><input type="number" min=0 max=1 name="actu"/></td>
                               <td><input type="number" min=0 max=1 name="cons"/></td>
 						               </tr>
-                            </table>                        
+                            </table>
+                            
+                            <table class="table">
+				                    <tr>
+                              <th>Pantallas sin permisos</th>
+				                    </tr>
+                            <tfoot>
+
+                            <?php
+			                  	while ($mostrar = $resObjetosFaltantes->fetch_array(MYSQLI_BOTH))
+				                    {
+                              $id_objeto = $mostrar['ID_Objeto'];
+                              $sql_objeto = "SELECT * FROM tbl_objetos WHERE ID_Objeto = $id_objeto";
+                              $result_objeto = mysqli_query($conexion, $sql_objeto);
+                              $objeto = mysqli_fetch_array($result_objeto);
+					              echo'<tr>
+						              <td>'.$mostrar['Objeto'].'</td>
+                          </tr>';
+			                	}
+				              ?>
+                      </tfoot>
+		                	</table>
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>

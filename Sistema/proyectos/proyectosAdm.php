@@ -82,11 +82,14 @@
                               <td><?php echo $mostrar['Fondos_proyecto']?></td>
                               <td><?php echo $mostrar['Estado_Proyecto']?></td>
                               <td>
-                              <a href='Update_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' class='boton-editar'>
+                              <a href='Update_Donan.php?ID_proyecto=<?php echo $mostrar['ID_proyecto']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
                               </a>
-                              <a href='Delete_Donan.php?ID_Donante=<?php echo $mostrar['ID_Donante']; ?>' onclick='return confirmar()' class='boton-eliminar'>
+                              <a href='Delete_Donan.php?ID_proyecto=<?php echo $mostrar['ID_proyecto']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
+                              </a>
+                              <a href='ProyectosGest.php?ID_proyecto=<?php echo $mostrar['ID_proyecto']; ?>' class='boton-ver'>
+                              <i class='zmdi zmdi-eye'></i>
                               </a>
                             </td>
                              </tr>

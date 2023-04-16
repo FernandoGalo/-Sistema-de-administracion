@@ -33,12 +33,15 @@
 			</div>
 			<!-- Menu de la barra lateral -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=0");
+if ($datos=$sql->fetch_object()) { ?>
 			<li>
 					<a href="../Home/home.php">
 						<i class="zmdi zmdi-home"></i> Home
 					</a>
 			</li>
-			<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+			<?php } ?>
+			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=1");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
@@ -51,7 +54,7 @@ if ($datos=$sql->fetch_object()) { ?>
 					</ul>
 				</li>
 				<?php } ?>
-				<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=2");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
@@ -76,6 +79,8 @@ if ($datos=$sql->fetch_object()) { ?>
 					</ul>
 				</li>
 				<?php } ?>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
+if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-folder-star"></i> Proyectos <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -86,6 +91,7 @@ if ($datos=$sql->fetch_object()) { ?>
 						</li>
 					</ul>
 				</li>
+				<?php } ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-money-box"></i> Fondos <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -102,6 +108,8 @@ if ($datos=$sql->fetch_object()) { ?>
 						</li>
 					</ul>
 				</li>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-accounts"></i> Voluntarios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -114,7 +122,11 @@ if ($datos=$sql->fetch_object()) { ?>
 							<a href="../Voluntarios/area_trabajo_Adm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento del Area de Trabajo </a>
 						</li>
 					</ul>
+
 				</li>
+				<?php } ?>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-money"></i> Pagos <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -125,7 +137,8 @@ if ($datos=$sql->fetch_object()) { ?>
 						</li>
 					</ul>
 				</li>
-				<?php $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Usuario='$usuario' and ID_Rol=1 ");
+				<?php } ?>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">

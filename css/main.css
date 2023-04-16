@@ -600,7 +600,7 @@ body, html{
 }
 
 /*Boton editar y eliminar*/
-.boton-editar, .boton-eliminar, .boton-permiso {
+.boton-editar, .boton-eliminar, .boton-permiso, .boton-ver {
 	display: inline-block;
 	padding: 10px;
 	border: none;
@@ -625,12 +625,16 @@ body, html{
   .boton-permiso {
 	background-color: #9882e7;
   }
+
+  .boton-ver {
+	background-color: #dfb05a;
+  }
   
-  .boton-editar i, .boton-eliminar i, .boton-permiso i{
+  .boton-editar i, .boton-eliminar i, .boton-permiso i, .boton-ver i{
 	margin-right: 5px;
   }
   
-  .boton-editar:hover, .boton-eliminar:hover, .boton-permiso:hover {
+  .boton-editar:hover, .boton-eliminar:hover, .boton-permiso:hover, .boton-ver:hover {
 	background-color: #333;
   }
   .contenedor{
