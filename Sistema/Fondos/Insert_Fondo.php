@@ -26,14 +26,18 @@
         $ID_Usuario=$row['ID_Usuario'];
     }
     
-            $ID_Fondo=$_POST["ID_Fondo"];
+            $ID_Tipo_Fondo=$_POST["tipos_de_fondos"];
+            $Nombre_del_Objeto=$_POST["Nombre_del_Objeto"];;
+            $Cantidad_Rec=$_POST["Cantidad_Rec"];;
+            $Valor_monetario=$_POST["Valor_monetario"];;
+            $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
             $ID_Proyecto=$_POST["Proyecto"];
             $ID_Donador=$_POST["Donante"];
-            $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
+            
             $Fecha_actual = date('Y-m-d');
             include("../../conexion_BD.php");
-            $sql = "INSERT INTO tbl_fondos (ID_de_fondo, ID_Donante, ID_de_proyecto, ID_usuario, Fecha_de_adquisicion_F, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES ($ID_Fondo, $ID_Donador, $ID_Proyecto, $ID_Usuario, '$Fecha_Adquisicion', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_fondos (ID_de_Fondo, ID_Tipo_Fondo,Nombre_del_Objeto,Cantidad_Rec,Valor_monetario,Fecha_de_adquisicion_F, ID_Proyecto, ID_Donante , ID_usuario, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
+            VALUES (NULL,$ID_Tipo_Fondo, '$Nombre_del_Objeto',$Cantidad_Rec,$Valor_monetario, '$Fecha_Adquisicion', $ID_Proyecto,$ID_Donador, $ID_Usuario, '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 

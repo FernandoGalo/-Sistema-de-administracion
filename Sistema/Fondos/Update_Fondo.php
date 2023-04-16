@@ -1,5 +1,6 @@
 <?php
     include("../../conexion_BD.php");
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@
     <?php
         if(isset($_POST['enviar_F2'])){
             //aqui entra si el usuario ha presionado el boton enviar
-            session_start();
+            
             $Usuario=$_SESSION['usuario'];       
     include("../../conexion_BD.php");
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Usuario'");
@@ -29,16 +30,18 @@
     while($row=mysqli_fetch_array($sql1)){
         $ID_Usuario=$row['ID_Usuario'];
     }
-    
-            $ID_Fondo=$_POST["ID_Fondo"];
-            $ID_Proyecto=$_POST["Proyecto"];
-            $ID_Donador=$_POST["Donante"];
-            $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
-            $Fecha_actual = date('Y-m-d');
+    $ID_Fondo=$_POST["ID_Fondo"];
+    $ID_Tipo_Fondo=$_POST["tipos_de_fondos"];
+    $Nombre_del_Objeto=$_POST["Nombre_del_Objeto"];
+    $Cantidad_Rec=$_POST["Cantidad_Rec"];
+    $Valor_monetario=$_POST["Valor_monetario"];
+    $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
+    $ID_Proyecto=$_POST["Proyecto"];
+    $ID_Donador=$_POST["Donante"];
+    $Fecha_actual = date('Y-m-d');
             //si lo que esta en el form esta vacio
 
-            //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_fondos SET ID_Donante = $ID_Donador, ID_de_proyecto = $ID_Proyecto, ID_usuario = $ID_Usuario, Fecha_de_adquisicion_F  ='$Fecha_Adquisicion', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_fondo = $ID_Fondo";
+            $sql="UPDATE tbl_fondos SET ID_Tipo_Fondo=$ID_Tipo_Fondo, Nombre_del_Objeto='$Nombre_del_Objeto', Cantidad_Rec=$Cantidad_Rec ,Valor_monetario=$Valor_monetario, Fecha_de_adquisicion_F  ='$Fecha_Adquisicion', ID_Donante = $ID_Donador, ID_Proyecto = $ID_Proyecto, ID_usuario = $ID_Usuario, Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_fondo = $ID_Fondo";
             $resultado = mysqli_query($conexion,$sql);
 
             if($resultado){
@@ -68,11 +71,16 @@
 
             $fila=mysqli_fetch_assoc($resultado);
 
-            $ID_Fondo=$fila['ID_de_fondo'];
-            $ID_Donador=$fila['ID_Donante'];
-            $ID_Proyecto=$fila['ID_de_proyecto'];
-            $ID_Usuario=$fila['ID_usuario'];
+            $ID_Fondo=$fila['ID_de_Fondo'];
+            $ID_Tipo_Fondo=$fila['ID_Tipo_Fondo'];
+            $Nombre_del_Objeto=$fila['Nombre_del_Objeto'];
+            $Cantidad_Rec=$fila['Cantidad_Rec'];
+            $Valor_monetario=$fila['Valor_monetario'];
             $Fecha_Adquisicion=$fila['Fecha_de_adquisicion_F'];
+            $ID_Proyecto=$fila['ID_Proyecto'];
+            $ID_Donador=$fila['ID_Donante'];
+            $ID_Usuario=$fila['ID_Usuario'];
+            
             mysqli_close($conexion);
             
     ?>
@@ -109,7 +117,35 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           <?php require '../../conexion_BD.php';?>
-                            <label>Donante(*):</label>
+                            <label>Tipo de Fondo(*):</label>
+                            <?php
+
+                           $sql=$conexion->query("SELECT * FROM tbl_tipos_de_fondos");
+                          ?>
+                            <select class="controls" type="text" name="tipos_de_fondos" id="tipos_de_fondos" value="<?php echo $ID_Tipo_Fondo; ?>" required ><br>
+                           <?php
+                            while($row1=mysqli_fetch_array($sql)){
+                            ?>
+                             <option value="<?php echo $row1['ID_tipo_fondo'];?>"><?php echo $row1['nombre_T_Fondo'];?></option>
+                            <?php
+                             }
+                            ?>
+                            </select>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Nombre del Objeto</label>
+                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" placeholder="Ingrese el nombre del objeto" value="<?php echo $Nombre_del_Objeto; ?>" require>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Cantidad recibida</label>
+                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" placeholder="Ingrese la cantidad de fondos recibidos" value="<?php echo $Cantidad_Rec; ?>" require>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Valor monetario</label>
+                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" placeholder="Ingrese el Valor monetario" value="<?php echo $Valor_monetario; ?>" require>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Donante del fondo(*):</label>
 
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_donantes");
@@ -125,7 +161,7 @@
                             </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Proyecto(*):</label>
+                            <label>Proyecto al que esta siendo donado:</label>
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
                           ?>
@@ -141,7 +177,7 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario</label>
-                            <?php session_start();     
+                            <?php     
                             $usuario=$_SESSION['usuario'];?>
                             <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" style="text-transform:uppercase" readonly>
                           </div>

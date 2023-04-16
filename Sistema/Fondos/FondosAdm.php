@@ -119,22 +119,25 @@ if ($datos=$sql->fetch_object()) { ?>
                         </form>
                         <thead>
                             <th>ID fondo</th>
-                            <th>Donante</th>
-                            <th>proyecto</th>
-                            <th>usuario</th>
-                            <th>Fecha adquisicion_F</th>
-                            <th>Acciones</th>
+                            <th>Tipo de fondo</th>
+                            <th>Nombre_del_Objeto</th>
+                            <th>Cantidad_Recibida</th>
+                            <th>valor monetario</th>
+                            <th>Proyecto</th>
+                            <th>Donante </th>
+                            <th>Fecha de aquisicion </th>
+                            <th>acciones </th>
                           </thead>
                           <tbody>                            
                           </tbody>
                           <tfoot>
 
                           <?php
-                          $sql="SELECT f.ID_de_fondo, d.Nombre_D, p.Nombre_del_proyecto, u.Nombre_Usuario, f.Fecha_de_adquisicion_F
+                          $sql="SELECT f.ID_de_fondo,tf.nombre_T_Fondo,f.Nombre_del_Objeto,f.Cantidad_Rec,f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
                           FROM tbl_fondos f
+                          JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
                           JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
-                          JOIN tbl_proyectos p ON f.ID_de_proyecto = p.ID_proyecto
-                          JOIN tbl_ms_usuario u ON f.ID_usuario = u.ID_Usuario";
+                          JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto";
                           $result=mysqli_query($conexion,$sql);
 
                            while($mostrar=mysqli_fetch_array($result)){
@@ -142,9 +145,13 @@ if ($datos=$sql->fetch_object()) { ?>
 
                             <tr>
                               <td><?php echo $mostrar['ID_de_fondo']?></td> 
-                              <td><?php echo $mostrar['Nombre_D']?></td> 
+                              <td><?php echo $mostrar['nombre_T_Fondo']?></td>
+                              <td><?php echo $mostrar['Nombre_del_Objeto']?></td>
+                              <td><?php echo $mostrar['Cantidad_Rec']?></td>
+                              <td><?php echo $mostrar['Valor_monetario']?></td>
+                              
                               <td><?php echo $mostrar['Nombre_del_proyecto']?></td>
-                              <td><?php echo $mostrar['Nombre_Usuario']?></td>
+                              <td><?php echo $mostrar['Nombre_D']?></td> 
                               <td><?php echo $mostrar['Fecha_de_adquisicion_F']?></td>
                               <td>
                               <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
@@ -173,12 +180,34 @@ if ($datos=$sql->fetch_object()) { ?>
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>ID del fondo(*):</label>
-                            <input type="hidden" name="ID_Fondo" id="ID_Fondo">
-                            <input style="text" type="text" class="form-control" name="ID_Fondo" id="ID_Fondo" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del fondo" required>
+                            <label>Tipo de Fondo(*):</label>
+                            <?php
+                           $sql=$conexion->query("SELECT * FROM tbl_tipos_de_fondos");
+                          ?>
+                            <select class="controls" type="text" name="tipos_de_fondos" id="tipos_de_fondos" required ><br>
+                           <?php
+                            while($row1=mysqli_fetch_array($sql)){
+                            ?>
+                             <option value="<?php echo $row1['ID_tipo_fondo'];?>"><?php echo $row1['nombre_T_Fondo'];?></option>
+                            <?php
+                             }
+                            ?>
+                            </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Donante(*):</label>
+                            <label>Nombre del Objeto</label>
+                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" placeholder="Ingrese el nombre del objeto" require>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Cantidad recibida</label>
+                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" placeholder="Ingrese la cantidad de fondos recibidos" require>
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Valor monetario</label>
+                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" placeholder="Ingrese el Valor monetario" require>
+                          </div>	
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Donante del fondo:</label>
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_donantes");
                           ?>
@@ -193,7 +222,7 @@ if ($datos=$sql->fetch_object()) { ?>
                             </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Proyecto(*):</label>
+                            <label>Proyecto al que esta siendo donado:</label>
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
                           ?>
@@ -213,7 +242,7 @@ if ($datos=$sql->fetch_object()) { ?>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha de Adquisicion:</label>
-                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" placeholder="Ingrese la Fecha de Adquisicion">
+                            <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" placeholder="Ingrese la Fecha de Adquisicion" require>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
