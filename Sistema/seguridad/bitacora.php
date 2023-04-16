@@ -6,7 +6,8 @@ $usuario=$_SESSION['user'];
 $ID_Rol=$_SESSION['ID_Rol'];
 include("../../EVENT_BITACORA.PHP");
 // Definir la página actual. Si $_GET['pagina'] no está definido, se establece en 1
-
+$fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
+$fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
 
 ?>
 
@@ -95,16 +96,26 @@ if ($datos=$sql->fetch_object()) { ?>
 
 <form action="" method="POST">
     <label for="por_pagina">Cantidad de registros por página:</label>
+
     <select name="por_pagina" id="por_pagina" onchange="this.form.submit()">
         <option value="5" <?php if ($por_pagina == 5) echo 'selected="selected"'; ?>>5</option>
         <option value="10" <?php if ($por_pagina == 10) echo 'selected="selected"'; ?>>10</option>
         <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
         <option value="10000" <?php if ($por_pagina == 10000) echo 'selected="selected"'; ?>>Todo</option>
+
+<form method="POST" action="">
+  <label for="fecha_inicio">Fecha de inicio:</label>
+  <input type="date" name="fecha_inicio" id="fecha_inicio">
+  <label for="fecha_fin">Fecha de fin:</label>
+  <input type="date" name="fecha_fin" id="fecha_fin">
+  <button type="submit" name="buscar">Buscar</button>
+  
+  
+</form>
     </select>
 
     <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
 </form>
-
 <?php
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 if (isset($_GET['pagina'])) {
@@ -113,8 +124,33 @@ if (isset($_GET['pagina'])) {
     $pagina_actual = 1;
 }
 
+
 // Calcular el número de filas de la tabla
 $sql_contar = "SELECT COUNT(*) as total FROM tbl_ms_bitacora";
+$resultado_contar = mysqli_query($conexion, $sql_contar);
+$total_filas = mysqli_fetch_assoc($resultado_contar)['total'];
+
+// Calcular el número total de páginas
+$total_paginas = ceil($total_filas / $por_pagina);
+
+// Calcular el registro inicial para la consulta LIMIT
+$inicio_limit = ($pagina - 1) * $por_pagina;
+$fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
+$fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
+
+
+$sql = "SELECT * FROM tbl_ms_bitacora";
+
+// Construir la condición de búsqueda
+$condicion = '';
+if (!empty($fecha_inicio) && !empty($fecha_fin)) {
+    $fecha_inicio = date('Y-m-d', strtotime($fecha_inicio));
+    $fecha_fin = date('Y-m-d', strtotime($fecha_fin));
+    $condicion = " WHERE Fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+}
+
+// Contar el número total de registros
+$sql_contar = "SELECT COUNT(*) as total FROM tbl_ms_bitacora $condicion";
 $resultado_contar = mysqli_query($conexion, $sql_contar);
 $total_filas = mysqli_fetch_assoc($resultado_contar)['total'];
 
@@ -129,9 +165,15 @@ $sql = "SELECT b.ID_Bitacora, b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripc
         FROM tbl_ms_bitacora b
         JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
         JOIN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-        ORDER BY fecha DESC
+        $condicion
+        ORDER BY Fecha DESC
         LIMIT $inicio_limit, $por_pagina";
+
+// Mostrar los resultados
 $resultado = mysqli_query($conexion, $sql);
+if (!empty($fecha_inicio) && !empty($fecha_fin)) {
+    echo '<p>Mostrando los resultados entre las fechas: ' . $fecha_inicio . ' y ' . $fecha_fin . '</p>';
+}
 ?>
                         </div>
                         <br>
@@ -161,6 +203,7 @@ $resultado = mysqli_query($conexion, $sql);
                           <tfoot>
 
                           <?php
+                         
            $sql="SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
 		   from tbl_ms_bitacora b
 		   JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
@@ -169,6 +212,7 @@ $resultado = mysqli_query($conexion, $sql);
 		   LIMIT $por_pagina OFFSET " . ($pagina_actual - 1) * $por_pagina;
 
             while($mostrar=mysqli_fetch_array($resultado)){
+                
                 ?>
 
                 <tr> 
@@ -188,6 +232,7 @@ $resultado = mysqli_query($conexion, $sql);
     $fila_total=mysqli_fetch_assoc($resultado_total);
     $total_registros=$fila_total['total'];
     $total_paginas=ceil($total_registros/$por_pagina);
+    
 ?>
 
 <nav>
