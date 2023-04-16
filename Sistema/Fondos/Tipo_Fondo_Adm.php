@@ -78,7 +78,7 @@ function redirigirFondos() {
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Mantenimiento de Tipo de fondos</h1>
-                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
+                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
 if ($datos=$sql->fetch_object()) { ?>
 
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Fondo</button>
@@ -91,7 +91,7 @@ if ($datos=$sql->fetch_object()) { ?>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=7 ");
+                    <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=13 ");
 if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
                         <table id="tbllistado" class="table table-bordered table-hover">
@@ -122,13 +122,13 @@ if ($datos=$sql->fetch_object()) { ?>
                               <td><?php echo $mostrar['ID_tipo_fondo']?></td> 
                               <td><?php echo $mostrar['nombre_T_Fondo']?></td>
                               <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Update_Tipo_Fondo_Adm.php?ID_tipo_fondo=<?php echo $mostrar['ID_tipo_fondo']; ?>' class='boton-editar'>
                               <i class='zmdi zmdi-edit'></i>
                                 <?php } ?>
                               </a>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
 if ($datos=$sql->fetch_object()) { ?>
                               <a href='Delete_Tipo_Fondo.php?ID_tipo_fondo=<?php echo $mostrar['ID_tipo_fondo']; ?>' onclick='return confirmar()' class='boton-eliminar'>
                               <i class='zmdi zmdi-delete'></i>
