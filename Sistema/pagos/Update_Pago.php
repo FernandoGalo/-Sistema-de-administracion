@@ -22,7 +22,7 @@
 </head>
 <body>
   
-<?php include '../sidebar.php'; ?>
+<?php include '../sidebarpro.php'; ?>
     <?php
         if(isset($_POST['enviar_F2'])){
             //aqui entra si el usuario ha presionado el boton enviar

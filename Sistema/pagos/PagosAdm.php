@@ -74,7 +74,7 @@ function exportTableToExcel(tableID, filename = ''){
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
-	<?php include '../sidebar.php'; ?>
+	<?php include '../sidebarpro.php'; ?>
 
 	<!-- Pagina de contenido-->
 	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">

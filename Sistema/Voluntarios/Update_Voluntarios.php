@@ -23,7 +23,7 @@ $usuario=$_SESSION['usuario'];
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
-	<?php include '../sidebar.php'; ?>
+	<?php include '../sidebarpro.php'; ?>
 
 
     <?php

@@ -79,7 +79,7 @@ if ($datos=$sql->fetch_object()) { ?>
 					</ul>
 				</li>
 				<?php } ?>
-				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
+                <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
@@ -101,6 +101,55 @@ if ($datos=$sql->fetch_object()) { ?>
 					<ul class="list-unstyled full-box">
 						<li>
 							<a href="../proyectos/proyectosAdm.php"><i class="zmdi zmdi-markunread-mailbox"></i> Mantenimiento Proyectos </a>
+						</li>
+					</ul>
+				</li>
+				<?php } ?>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money-box"></i> Fondos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Fondos/FondosAdm.php"><i class="zmdi zmdi-assignment-returned"></i> Mantenimiento Fondos </a>
+						</li>
+						<li>
+							<a href="../Fondos/Tipo_Fondo_Adm.php"><i class="zmdi zmdi-assignment-returned"></i> Mantenimiento de Tipos de Fondos </a>
+						</li>
+						<li>
+							<a href="../Fondos/DonacAdm.php"><i class="zmdi zmdi-favorite"></i> Donaciones </a>
+						</li>
+					</ul>
+				</li>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+if ($datos=$sql->fetch_object()) { ?>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-accounts"></i> Voluntarios <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../Voluntarios/VoluntariosAdm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento voluntarios </a>
+						</li>
+						<li>
+							<a href="../Voluntarios/area_trabajo_Adm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Mantenimiento del Area de T. </a>
+						</li>
+						<li>
+							<a href="../Voluntarios/voluntarios_proyectos_Adm.php"><i class="zmdi zmdi-accounts-list-alt"></i> Vinculacion p. de v. </a>
+						</li>
+					</ul>
+
+				</li>
+				<?php } ?>
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+if ($datos=$sql->fetch_object()) { ?>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-money"></i> Pagos <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="../pagos/PagosAdm.php"><i class="zmdi zmdi-money-box"></i> Mantenimiento pagos </a>
 						</li>
 					</ul>
 				</li>

@@ -6,6 +6,8 @@
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
  $ID_Proyect = $_GET['ID_proyecto'];
+ $_SESSION['ID_Proyect']= $ID_Proyect;
+
 
 
  $sql = "SELECT Nombre_del_proyecto FROM tbl_proyectos WHERE ID_proyecto = '$ID_Proyect'";
@@ -37,7 +39,7 @@
   </script>
 </head>
 
-<?php include '../sidebar.php'; ?>
+<?php include '../sidebarpro.php'; ?>
 
 	<!-- Pagina de contenido-->
 	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">

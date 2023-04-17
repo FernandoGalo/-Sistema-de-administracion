@@ -125,6 +125,6 @@
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>
   <script src="./js/usuario.js"></script>
-  <?php include '../sidebar.php'; ?>
+  <?php include '../sidebarpro.php'; ?>
 </body>
 </html>
