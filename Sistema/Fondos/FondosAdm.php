@@ -16,6 +16,12 @@ session_start();
 $usuario=$_SESSION['user'];
 $ID_Rol=$_SESSION['ID_Rol'];
 $IDProyecto=$_SESSION['ID_Proyect'];
+include("../../conexion_BD.php");
+    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+
+    while($row=mysqli_fetch_array($sql1)){
+        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+    }
 $sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
 
     while($row=mysqli_fetch_array($sql1)){
@@ -127,10 +133,11 @@ if ($datos=$sql->fetch_object()) { ?>
 
                           <?php
                           $sql="SELECT f.ID_de_fondo,tf.nombre_T_Fondo,f.Nombre_del_Objeto,f.Cantidad_Rec,f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
-                          FROM tbl_fondos f
+                          FROM tbl_fondos f 
                           JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
                           JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
-                          JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto";
+                          JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto 
+                          where f.ID_proyecto=$IDProyecto";
                           $result=mysqli_query($conexion,$sql);
 
                            while($mostrar=mysqli_fetch_array($result)){
@@ -216,12 +223,6 @@ if ($datos=$sql->fetch_object()) { ?>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Proyecto al que esta siendo donado:</label>
-                            <?php include("../../conexion_BD.php");
-    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
-
-    while($row=mysqli_fetch_array($sql1)){
-        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
-    }?>
                             <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
