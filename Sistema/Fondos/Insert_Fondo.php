@@ -17,26 +17,25 @@
 
             session_start();     
             $Usuario=$_SESSION['usuario'];
-            
-            echo $Usuario;        
+            $ID_Proyecto=$_SESSION['ID_Proyect'];       
     include("../../conexion_BD.php");
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Usuario'");
 
     while($row=mysqli_fetch_array($sql1)){
         $ID_Usuario=$row['ID_Usuario'];
     }
+    
             $ID_Tipo_Fondo=$_POST["tipos_de_fondos"];
             $Nombre_del_Objeto=$_POST["Nombre_del_Objeto"];;
             $Cantidad_Rec=$_POST["Cantidad_Rec"];;
             $Valor_monetario=$_POST["Valor_monetario"];;
             $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
-            $ID_Proyecto=$_POST["Proyecto"];
             $ID_Donador=$_POST["Donante"];
             
             $Fecha_actual = date('Y-m-d');
             include("../../conexion_BD.php");
             $sql = "INSERT INTO tbl_fondos (ID_de_Fondo, ID_Tipo_Fondo,Nombre_del_Objeto,Cantidad_Rec,Valor_monetario,Fecha_de_adquisicion_F, ID_Proyecto, ID_Donante , ID_usuario, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES (NULL,$ID_Tipo_Fondo, '$Nombre_del_Objeto',$Cantidad_Rec,$Valor_monetario, '$Fecha_Adquisicion', $ID_Proyecto,$ID_Donador, $ID_Usuario, '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            VALUES (NULL,$ID_Tipo_Fondo, '$Nombre_del_Objeto',$Cantidad_Rec,$Valor_monetario, '$Fecha_Adquisicion',$ID_Proyecto,$ID_Donador, $ID_Usuario, '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 

@@ -1,6 +1,7 @@
 <?php
     include("../../conexion_BD.php");
     session_start();
+    $IDProyecto=$_SESSION['ID_Proyect'];
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
     $Cantidad_Rec=$_POST["Cantidad_Rec"];
     $Valor_monetario=$_POST["Valor_monetario"];
     $Fecha_Adquisicion=$_POST["FechaAdquisicion"];
-    $ID_Proyecto=$_POST["Proyecto"];
+    $ID_Proyecto=$IDProyecto;
     $ID_Donador=$_POST["Donante"];
     $Fecha_actual = date('Y-m-d');
             //si lo que esta en el form esta vacio
@@ -162,18 +163,13 @@
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Proyecto al que esta siendo donado:</label>
-                            <?php
-                           $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
-                          ?>
-                            <select class="controls" type="text" name="Proyecto" id="Proyecto" value="<?php echo $$ID_Proyecto; ?>" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql2)){
-                            ?>
-                             <option value="<?php echo $row1['ID_proyecto'];?>"><?php echo $row1['Nombre_del_proyecto'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
+                            <?php include("../../conexion_BD.php");
+    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+
+    while($row=mysqli_fetch_array($sql1)){
+        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+    }?>
+                            <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario</label>
