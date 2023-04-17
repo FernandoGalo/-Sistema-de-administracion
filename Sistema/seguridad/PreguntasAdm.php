@@ -48,7 +48,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                           <h1 class="box-title">Mantenimiento Preguntas</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=4");
                             if ($datos=$sql->fetch_object()) { ?>
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Preguntas</button>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-collection-plus"></i> Agregar Preguntas</button>
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>

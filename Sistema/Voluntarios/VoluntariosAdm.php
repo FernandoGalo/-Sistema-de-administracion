@@ -76,19 +76,19 @@ if ($datos=$sql->fetch_object()) { ?>
                     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
 if ($datos=$sql->fetch_object()) { ?>
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-bordered table-hover">
+                        <table style="text-align:center" id="tbllistado" class="table table-bordered table-hover">
                         
                         <!-- Buscar -->
                         <form action="" method="post">
                             <label for="campo">Buscar:</label>
-                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
+                            <input style="margin-bottom: 20px; margin-left: 10px; display: inline-block;"  type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
                         </form>
-                        <thead>
-                            <th>ID</th>
-                            <th>Nombre voluntario</th>
-                            <th>Telefono voluntario</th>
-                            <th>Direccion voluntario</th>
-                            <th>Acciones</th>
+                        <thead accept-charset="UTF-8">
+                        <th style="text-align:center">ID</th>
+                            <th style="text-align:center">Nombre voluntario</th>
+                            <th style="text-align:center">Telefono voluntario</th>
+                            <th style="text-align:center">Direccion voluntario</th>
+                            <th style="text-align:center">Acciones</th>
                         </thead>
                           <tbody>                            
                           </tbody>
@@ -132,22 +132,34 @@ if ($datos=$sql->fetch_object()) { ?>
                         <form name="formulario" id="formulario" action="Insert_Voluntarios.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            
+                            <?php //Me trae el ultimo ID y me suma 1
+                                
+                                // Conectar a la base de datos
+                                require '../../conexion_BD.php';
+                                // Crear una consulta para obtener el próximo valor AUTO_INCREMENT para la columna id_parametro
+                                $query = "SHOW TABLE STATUS LIKE 'tbl_voluntarios';";
+                                $result = mysqli_query($conexion, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                $next_id = $row['Auto_increment'];
+
+                            ?>
                             <label>ID Voluntario(*):</label>
                             <input type="hidden" name="ID_Voluntario" id="ID_Voluntario">
-                            <input onpaste="return false" style="text-transform:uppercase" style="text" type="text" class="form-control" name="ID_Voluntario" id="ID_Voluntario" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del Voluntario" required>
+                            <input class="form-control" name="ID_Voluntario" id="ID_Voluntario" value="<?php echo $next_id; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Voluntario(*):</label>
                             <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario" onkeypress="validarMayusculas(event)" required>
+                            <input onpaste="return false" style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="39" placeholder="Ingrese el nombre del voluntario" onkeypress="this.value = this.value.toUpperCase();" require>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telefono_Voluntario" id="Telefono_Voluntario">
                             <input style="text-transform:uppercase" style="text" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Direccion Voluntario(*):</label>
                             <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
                             <textarea style="text-transform:uppercase" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion voluntario"  required></textarea>
@@ -165,22 +177,21 @@ if ($datos=$sql->fetch_object()) { ?>
                   </div><!-- /.box -->
               </div><!-- /.col -->
           </div><!-- /.row -->
-		</div>
-	</section>
+    </div>
+  </section>
 
-
-	
-	<!--script en java para los efectos-->
+  
+  <!--script en java para los efectos-->
   <script src="../../js/Buscador.js"></script>
   <script src="../../js/events.js"></script>
- 	<script src="../../js/jquery-3.1.1.min.js"></script>
-	<script src="../../js/main.js"></script>
+  <script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
 
   
 
 
 
-
 </body>
 </html>
+
