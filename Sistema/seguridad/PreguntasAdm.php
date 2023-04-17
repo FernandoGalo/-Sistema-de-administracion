@@ -112,16 +112,20 @@ $ID_Rol=$_SESSION['ID_Rol'];
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                            <?php //Me trae el ultimo ID y me suma 1
-                                $sql=$conexion->query("SELECT * FROM tbl_preguntas ORDER BY `ID_Pregunta` DESC LIMIT 1;");
-                                while($row=mysqli_fetch_array($sql)){
-                                    $ID_Pregunta=$row['ID_Pregunta'];
-                                }
-                                $ID_Pregunta= $ID_Pregunta + 1;
+                          <?php //Me trae el ultimo ID y me suma 1
+                                
+                                // Conectar a la base de datos
+                                require '../../conexion_BD.php';
+                                // Crear una consulta para obtener el próximo valor AUTO_INCREMENT para la columna id_parametro
+                                $query = "SHOW TABLE STATUS LIKE 'tbl_preguntas'";
+                                $result = mysqli_query($conexion, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                $next_id = $row['Auto_increment'];
+
                             ?>
                             <label>ID Pregunta(*):</label>
                             <input type="hidden" name="ID_Pregunta" id="ID_VID_Preguntaoluntario">
-                            <input class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $ID_Pregunta; ?>" readonly>
+                            <input class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $next_id; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Pregunta(*):</label>

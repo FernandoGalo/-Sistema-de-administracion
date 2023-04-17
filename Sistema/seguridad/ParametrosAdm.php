@@ -61,7 +61,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                             <label for="campo">Buscar: </label>
                             <input style="margin-bottom: 20px; margin-left: 10px; display: inline-block;"type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
                         </form>
-                        <thead>
+                        <thead accept-charset="UTF-8">
                             <th style="text-align:center">ID</th>
                             <th style="text-align:center">Nombre del parametro</th>
                             <th style="text-align:center">Descripcion</th>

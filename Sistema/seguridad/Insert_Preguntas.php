@@ -25,15 +25,15 @@
                 $ID_Usuario=$row['ID_Usuario'];
             }
     
-            $ID_Pregunta=$_POST["ID_Pregunta"];
+            
             $pregunta=$_POST["Pregunta"];
             $Fecha_actual = date('Y-m-d');
             include("../../conexion_BD.php");
             // Los dcatos NO ingresaron a la BD
             $Pregunta = mysqli_real_escape_string($conexion, $pregunta);
             
-            $sql = "INSERT INTO tbl_preguntas (ID_Pregunta, Pregunta, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES ('$ID_Pregunta', '$Pregunta', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_preguntas (Pregunta, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
+            VALUES ('$Pregunta', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 
