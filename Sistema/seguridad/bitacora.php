@@ -17,19 +17,19 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
 <head>
 
 	<title>Inicio</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
     
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 
 </head>
 <body>
-	<!--Seccion donde va toda la barra lateral -->
-    <?php include '../sidebar.php'; ?>
-
-	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
+<body>
+<?php include '../sidebar.php'; ?>
+<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
 		<!-- Barra superior -->
 		<nav class="full-box dashboard-Navbar">
 			<ul class="full-box list-unstyled text-right">
@@ -44,206 +44,159 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Bitacora principal</h1>
+                          <h1 class="box-title">Bitacora</h1>
+    <main>
+        <div class="container py-4 text-center">
 
-                          <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=2");
-if ($datos=$sql->fetch_object()) { ?>
-                          <?php
-    // Inicializamos la variable $por_pagina con un valor de 10
-    if (isset($_POST['por_pagina'])) {
-        $_SESSION['por_pagina'] = $_POST['por_pagina'];
-    }
-    
-    if (isset($_SESSION['por_pagina'])) {
-        $por_pagina = $_SESSION['por_pagina'];
-    } else {
-        $por_pagina = 10;
-    }
+            <div class="row g-4">
 
-    // Si se envió el formulario, actualizamos la variable con el valor seleccionado
-    if (isset($_POST['por_pagina'])) {
-        $por_pagina = $_POST['por_pagina'];
-    }
-?>
+                <div class="col-auto">
+                    <label for="num_registros" class="col-form-label">Mostrar: </label>
+                </div>
 
-<div style="display: flex;">
-    <form action="" method="POST">
-        <label for="por_pagina">Cantidad de registros por página:</label>
-        <select name="por_pagina" id="por_pagina" onchange="this.form.submit()">
-            <option value="5" <?php if ($por_pagina == 5) echo 'selected="selected"'; ?>>5</option>
-            <option value="10" <?php if ($por_pagina == 10) echo 'selected="selected"'; ?>>10</option>
-            <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
-            <option value="10000" <?php if ($por_pagina == 10000) echo 'selected="selected"'; ?>>Todo</option>
-        </select>
-    </form>
-    <form method="GET" style="margin-left: 400px;">
-        <div class="form-group">
-            <label for="buscar">Buscar:</label>
-            <input type="text" id="buscar" name="buscar">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+                <div class="col-auto">
+                    <select name="num_registros" id="num_registros" class="form-select">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <div class="col-auto">
+                    <label for="num_registros" class="col-form-label">registros </label>
+                </div>
+
+                <div class="col-5"></div>
+
+                <div class="col-auto">
+                    <label for="campo" class="col-form-label">Buscar: </label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="campo" id="campo" class="form-control">
+                </div>
+            </div>
+
+            <div class="row py-4">
+                <div class="col">
+                    <table class="table table-sm table-bordered table-striped">
+                        <thead>
+                            <th class="sort asc">ID</th>
+                            <th class="sort asc">fecha</th>
+                            <th class="sort asc">Usuario</th>
+                            <th class="sort asc">Objeto</th>
+                            <th class="sort asc">Accion</th>
+                            <th class="sort asc">Descripcion</th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+
+                        <!-- El id del cuerpo de la tabla. -->
+                        <tbody id="content">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label id="lbl-total"></label>
+                </div>
+
+                <div class="col-6" id="nav-paginacion"></div>
+
+                <input type="hidden" id="pagina" value="1">
+                <input type="hidden" id="orderCol" value="0">
+                <input type="hidden" id="orderType" value="asc">
+            </div>
         </div>
-    </form>
-</div>
+    </main>
+
+    <script>
+        /* Llamando a la función getData() */
+        getData()
+
+        /* Escuchar un evento keyup en el campo de entrada y luego llamar a la función getData. */
+        document.getElementById("campo").addEventListener("keyup", function() {
+            getData()
+        }, false)
+        document.getElementById("num_registros").addEventListener("change", function() {
+            getData()
+        }, false)
 
 
-<?php
-$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-if (isset($_GET['pagina'])) {
-    $pagina_actual = $_GET['pagina'];
-} else {
-    $pagina_actual = 1;
-}
+        /* Peticion AJAX */
+        function getData() {
+            let input = document.getElementById("campo").value
+            let num_registros = document.getElementById("num_registros").value
+            let content = document.getElementById("content")
+            let pagina = document.getElementById("pagina").value
+            let orderCol = document.getElementById("orderCol").value
+            let orderType = document.getElementById("orderType").value
 
+            if (pagina == null) {
+                pagina = 1
+            }
 
-// Calcular el número de filas de la tabla
-$sql_contar = "SELECT COUNT(*) as total FROM tbl_ms_bitacora";
-$resultado_contar = mysqli_query($conexion, $sql_contar);
-$total_filas = mysqli_fetch_assoc($resultado_contar)['total'];
+            let url = "Gestor_tbl_Bitacora.php"
+            let formaData = new FormData()
+            formaData.append('campo', input)
+            formaData.append('registros', num_registros)
+            formaData.append('pagina', pagina)
+            formaData.append('orderCol', orderCol)
+            formaData.append('orderType', orderType)
 
-// Calcular el número total de páginas
-$total_paginas = ceil($total_filas / $por_pagina);
-
-// Calcular el registro inicial para la consulta LIMIT
-$inicio_limit = ($pagina - 1) * $por_pagina;
-$fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
-$fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
-
-
-$sql = $conexion->query("SELECT * FROM tbl_ms_bitacora");
-
-// Construir la condición de búsqueda
-$condicion = '';
-if (!empty($fecha_inicio) && !empty($fecha_fin)) {
-    $fecha_inicio = date('Y-m-d', strtotime($fecha_inicio));
-    $fecha_fin = date('Y-m-d', strtotime($fecha_fin));
-    $condicion = " WHERE Fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'";
-}
-
-// Contar el número total de registros
-$sql_contar = "SELECT COUNT(*) as total FROM tbl_ms_bitacora $condicion";
-$resultado_contar = mysqli_query($conexion, $sql_contar);
-$total_filas = mysqli_fetch_assoc($resultado_contar)['total'];
-
-// Calcular el número total de páginas
-$total_paginas = ceil($total_filas / $por_pagina);
-
-// Calcular el registro inicial para la consulta LIMIT
-$inicio_limit = ($pagina - 1) * $por_pagina;
-
-// Consultar los registros para la página actual
-$sql = "SELECT b.ID_Bitacora, b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
-        FROM tbl_ms_bitacora b
-        JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-        JOIN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-        $condicion
-        ORDER BY Fecha DESC
-        LIMIT $inicio_limit, $por_pagina";
-
-// Mostrar los resultados
-$resultado = mysqli_query($conexion, $sql);
-if (!empty($fecha_inicio) && !empty($fecha_fin)) {
-    echo '<p>Mostrando los resultados entre las fechas: ' . $fecha_inicio . ' y ' . $fecha_fin . '</p>';
-}
-?>
-                        </div>
-                        <br>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- centro -->
-                    
-                    <div class="panel-body table-responsive" id="listadoregistros">
-
-          
-    <table id="tbllistado" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>ID bitacora</th>
-                <th>fecha</th>
-                <th>Usuario</th>
-                <th>Objeto</th>
-                <th>Accion</th>
-                <th>Descripcion</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        // Procesar criterios de búsqueda
-        $busqueda = '';
-        if (isset($_GET['buscar'])) {
-            $busqueda = $_GET['buscar'];
-            $sql = "SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
-                    FROM tbl_ms_bitacora b
-                    JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-                    JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-                    WHERE b.ID_Bitacora LIKE '%$busqueda%' OR u.Usuario LIKE '%$busqueda%' OR o.Objeto LIKE '%$busqueda%' OR b.Accion LIKE '%$busqueda%' OR b.Descripcion LIKE '%$busqueda%'
-                    ORDER BY fecha DESC
-                    LIMIT $por_pagina OFFSET " . ($pagina_actual - 1) * $por_pagina;
-        } else {
-            $sql = "SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
-                    FROM tbl_ms_bitacora b
-                    JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-                    JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-                    ORDER BY fecha DESC
-                    LIMIT $por_pagina OFFSET " . ($pagina_actual - 1) * $por_pagina;
+            fetch(url, {
+                    method: "POST",
+                    body: formaData
+                }).then(response => response.json())
+                .then(data => {
+                    content.innerHTML = data.data
+                    document.getElementById("lbl-total").innerHTML = 'Mostrando ' + data.totalFiltro +
+                        ' de ' + data.totalRegistros + ' registros'
+                    document.getElementById("nav-paginacion").innerHTML = data.paginacion
+                }).catch(err => console.log(err))
         }
 
-        $resultado = mysqli_query($conexion,$sql);
-
-        while($mostrar=mysqli_fetch_array($resultado)){
-            ?>
-            <tr> 
-                <td><?php echo $mostrar['ID_Bitacora']?></td>
-                <td><?php echo $mostrar['Fecha']?></td>
-                <td><?php echo $mostrar['Usuario']?></td>
-                <td><?php echo $mostrar['Objeto']?></td>
-                <td><?php echo $mostrar['Accion']?></td>
-                <td><?php echo $mostrar['Descripcion']?></td>
-            </tr>
-            <?php
+        function nextPage(pagina){
+            document.getElementById('pagina').value = pagina
+            getData()
         }
-        ?>   
-			 <?php
-   $sql_total = "SELECT COUNT(*) as total FROM tbl_ms_bitacora";
-   $resultado_total = mysqli_query($conexion, $sql_total);
-   $datos_total = mysqli_fetch_assoc($resultado_total);
-   $total_filas = $datos_total['total'];
-    
-?>
 
-<nav>
-    <ul class="pagination">
-        <?php if($pagina_actual != 1): ?>
-            <li><a href="?pagina=<?php echo $pagina_actual - 1; ?>">Anterior</a></li>
-        <?php endif; ?>
+        let columns = document.getElementsByClassName("sort")
+        let tamanio = columns.length
+        for(let i = 0; i < tamanio; i++){
+            columns[i].addEventListener("click", ordenar)
+        }
 
-        <?php for($i = 1; $i <= $total_paginas; $i++): ?>
-            <?php if($i == $pagina_actual): ?>
-                <li class="active"><a href="#"><?php echo $i; ?></a></li>
-            <?php else: ?>
-                <li><a href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-            <?php endif; ?>
-        <?php endfor; ?>
+        function ordenar(e){
+            let elemento = e.target
 
-        <?php if($pagina_actual != $total_paginas): ?>
-            <li><a href="?pagina=<?php echo $pagina_actual + 1; ?>">Siguiente</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>  
-                          </tfoot>
-                        </table>
-  
-                    </div>
-                    <?php
-}
-?>
-                    <!--Fin centro -->
-                  </div><!-- /.box -->
+            document.getElementById('orderCol').value = elemento.cellIndex
+
+            if(elemento.classList.contains("asc")){
+                document.getElementById("orderType").value = "asc"
+                elemento.classList.remove("asc")
+                elemento.classList.add("desc")
+            } else {
+                document.getElementById("orderType").value = "desc"
+                elemento.classList.remove("desc")
+                elemento.classList.add("asc")
+            }
+
+            getData()
+        }
+
+    </script>
+<!--Fin centro -->
+</div><!-- /.box -->
               </div><!-- /.col -->
           </div><!-- /.row -->
 		</div>
 	</section>
-
-
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<!--script en java para los efectos-->
 
   <script src="../../js/events.js"></script>

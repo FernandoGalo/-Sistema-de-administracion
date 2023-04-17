@@ -109,7 +109,6 @@
             if (pagina == null) {
                 pagina = 1
             }
-
             let url = "prueba2.php"
             let formaData = new FormData()
             formaData.append('campo', input)
