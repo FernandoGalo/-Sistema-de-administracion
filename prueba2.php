@@ -60,11 +60,14 @@ $sLimit = "LIMIT $inicio , $limit";
 
 
 /* Consulta */
-$sql = "SELECT SQL_CALC_FOUND_ROWS " . implode(", ", $columns) . "
-FROM $table
-$where
-$sOrder
-$sLimit";
+
+$sql="SELECT SQL_CALC_FOUND_ROWS b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
+FROM tbl_ms_bitacora b
+JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
+JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
+WHERE b.ID_Bitacora LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR o.Objeto LIKE '%{$campo}%' OR b.Accion LIKE '%{$campo}%' OR b.Descripcion LIKE '%{$campo}%'
+ORDER BY {$columns[$orderCol]} {$oderType}
+LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
 $num_rows = $resultado->num_rows;
 
@@ -92,8 +95,8 @@ if ($num_rows > 0) {
         $output['data'] .= '<tr>';
         $output['data'] .= '<td>' . $row['ID_Bitacora'] . '</td>';
         $output['data'] .= '<td>' . $row['Fecha'] . '</td>';
-        $output['data'] .= '<td>' . $row['ID_Usuario'] . '</td>';
-        $output['data'] .= '<td>' . $row['ID_Objeto'] . '</td>';
+        $output['data'] .= '<td>' . $row['Usuario'] . '</td>';
+        $output['data'] .= '<td>' . $row['Objeto'] . '</td>';
         $output['data'] .= '<td>' . $row['Accion'] . '</td>';
         $output['data'] .= '<td>' . $row['Descripcion'] . '</td>';
         $output['data'] .= '<td><a class="btn btn-warning btn-sm" href="editar.php?id=' . $row['ID_Bitacora'] . '">Editar</a></td>';
