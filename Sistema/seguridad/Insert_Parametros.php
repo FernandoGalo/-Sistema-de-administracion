@@ -45,7 +45,7 @@
                             require_once "../../EVENT_BITACORA.php";
                             $model = new EVENT_BITACORA;
                             session_start();
-                            $_SESSION['parabit']=$Valor_Parametro;
+                            $_SESSION['parabit']=$Nombre_Parametro;
                             $model->RegInsertpara(); 
 
             }else{

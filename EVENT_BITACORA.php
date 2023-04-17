@@ -730,6 +730,24 @@ public function Deletepreg(){
 
     <?php
 }
+
+#registro parametro
+public function RegInsertpara(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $Nombre_Parametro= $_SESSION['parabit'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Agrego el parametro: ".$Nombre_Parametro;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '4', 'Creacion de parametro', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+   //=======
    //===================================================================================
     #update parametro
     public function RegUptpara(){

@@ -9,47 +9,19 @@ include("../../EVENT_BITACORA.PHP");
 $fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
 $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
 
-?>
 
+?>
+                      
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 	<title>Inicio</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
     
-    <script>//Exportar a excel
-function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    // Nombre del archivo
-    filename = filename?filename+'.xls':'Reporte de tabla Bitacora.xls';
-
-    // Crear descarga
-    downloadLink = document.createElement("a");
-
-    document.body.appendChild(downloadLink);
-
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        // Crear enlace para descargar
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-        // Establecer nombre de archivo
-        downloadLink.download = filename;
-
-        // Descargar archivo
-        downloadLink.click();
-    }
-}
-//Exportar a excel</script>
+    
 
 </head>
 <body>
@@ -94,28 +66,26 @@ if ($datos=$sql->fetch_object()) { ?>
     }
 ?>
 
-<form action="" method="POST">
-    <label for="por_pagina">Cantidad de registros por página:</label>
+<div style="display: flex;">
+    <form action="" method="POST">
+        <label for="por_pagina">Cantidad de registros por página:</label>
+        <select name="por_pagina" id="por_pagina" onchange="this.form.submit()">
+            <option value="5" <?php if ($por_pagina == 5) echo 'selected="selected"'; ?>>5</option>
+            <option value="10" <?php if ($por_pagina == 10) echo 'selected="selected"'; ?>>10</option>
+            <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
+            <option value="10000" <?php if ($por_pagina == 10000) echo 'selected="selected"'; ?>>Todo</option>
+        </select>
+    </form>
+    <form method="GET" style="margin-left: 400px;">
+        <div class="form-group">
+            <label for="buscar">Buscar:</label>
+            <input type="text" id="buscar" name="buscar">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+</div>
 
-    <select name="por_pagina" id="por_pagina" onchange="this.form.submit()">
-        <option value="5" <?php if ($por_pagina == 5) echo 'selected="selected"'; ?>>5</option>
-        <option value="10" <?php if ($por_pagina == 10) echo 'selected="selected"'; ?>>10</option>
-        <option value="20" <?php if ($por_pagina == 20) echo 'selected="selected"'; ?>>20</option>
-        <option value="10000" <?php if ($por_pagina == 10000) echo 'selected="selected"'; ?>>Todo</option>
 
-<form method="POST" action="">
-  <label for="fecha_inicio">Fecha de inicio:</label>
-  <input type="date" name="fecha_inicio" id="fecha_inicio">
-  <label for="fecha_fin">Fecha de fin:</label>
-  <input type="date" name="fecha_fin" id="fecha_fin">
-  <button type="submit" name="buscar">Buscar</button>
-  
-  
-</form>
-    </select>
-
-    <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
-</form>
 <?php
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 if (isset($_GET['pagina'])) {
@@ -139,7 +109,7 @@ $fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
 $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
 
 
-$sql = "SELECT * FROM tbl_ms_bitacora";
+$sql = $conexion->query("SELECT * FROM tbl_ms_bitacora");
 
 // Construir la condición de búsqueda
 $condicion = '';
@@ -182,56 +152,61 @@ if (!empty($fecha_inicio) && !empty($fecha_fin)) {
                     <!-- centro -->
                     
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-bordered table-hover">
-                        
-                        <!-- Buscar -->
-						<form action="" method="post">
-                            <label for="campo">Buscar:</label>
-                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
-                        </form>
 
-                        <thead>
-                            <th>ID bitacora</th>
-                            <th>fecha</th>
-                            <th>Usuario</th>
-                            <th>Objeto</th>
-                            <th>Accion</th>
-                            <th>Descripcion</th>
-                          </thead>
-                          <tbody>                            
-                          </tbody>
-                          <tfoot>
+          
+    <table id="tbllistado" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID bitacora</th>
+                <th>fecha</th>
+                <th>Usuario</th>
+                <th>Objeto</th>
+                <th>Accion</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Procesar criterios de búsqueda
+        $busqueda = '';
+        if (isset($_GET['buscar'])) {
+            $busqueda = $_GET['buscar'];
+            $sql = "SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
+                    FROM tbl_ms_bitacora b
+                    JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
+                    JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
+                    WHERE b.ID_Bitacora LIKE '%$busqueda%' OR u.Usuario LIKE '%$busqueda%' OR o.Objeto LIKE '%$busqueda%' OR b.Accion LIKE '%$busqueda%' OR b.Descripcion LIKE '%$busqueda%'
+                    ORDER BY fecha DESC
+                    LIMIT $por_pagina OFFSET " . ($pagina_actual - 1) * $por_pagina;
+        } else {
+            $sql = "SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
+                    FROM tbl_ms_bitacora b
+                    JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
+                    JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
+                    ORDER BY fecha DESC
+                    LIMIT $por_pagina OFFSET " . ($pagina_actual - 1) * $por_pagina;
+        }
 
-                          <?php
-                         
-           $sql="SELECT b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
-		   from tbl_ms_bitacora b
-		   JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-		   JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-		   ORDER BY fecha DESC
-		   LIMIT $por_pagina OFFSET " . ($pagina_actual - 1) * $por_pagina;
+        $resultado = mysqli_query($conexion,$sql);
 
-            while($mostrar=mysqli_fetch_array($resultado)){
-                
-                ?>
-
-                <tr> 
-                    <td><?php echo $mostrar['ID_Bitacora']?></td>
-                    <td><?php echo $mostrar['Fecha']?></td>
-                    <td><?php echo $mostrar['Usuario']?></td>
-                    <td><?php echo $mostrar['Objeto']?></td>
-                    <td><?php echo $mostrar['Accion']?></td>
-                    <td><?php echo $mostrar['Descripcion']?></td>
-                </tr>
-             <?php
-            }
-             ?>   
+        while($mostrar=mysqli_fetch_array($resultado)){
+            ?>
+            <tr> 
+                <td><?php echo $mostrar['ID_Bitacora']?></td>
+                <td><?php echo $mostrar['Fecha']?></td>
+                <td><?php echo $mostrar['Usuario']?></td>
+                <td><?php echo $mostrar['Objeto']?></td>
+                <td><?php echo $mostrar['Accion']?></td>
+                <td><?php echo $mostrar['Descripcion']?></td>
+            </tr>
+            <?php
+        }
+        ?>   
 			 <?php
-    $sql_total="SELECT COUNT(*) as total FROM tbl_ms_bitacora";
-    $resultado_total=mysqli_query($conexion,$sql_total);
-    $fila_total=mysqli_fetch_assoc($resultado_total);
-    $total_registros=$fila_total['total'];
-    $total_paginas=ceil($total_registros/$por_pagina);
+   $sql_total = "SELECT COUNT(*) as total FROM tbl_ms_bitacora";
+   $resultado_total = mysqli_query($conexion, $sql_total);
+   $datos_total = mysqli_fetch_assoc($resultado_total);
+   $total_filas = $datos_total['total'];
     
 ?>
 
@@ -256,6 +231,7 @@ if (!empty($fecha_inicio) && !empty($fecha_fin)) {
 </nav>  
                           </tfoot>
                         </table>
+  
                     </div>
                     <?php
 }
@@ -267,13 +243,9 @@ if (!empty($fecha_inicio) && !empty($fecha_fin)) {
 		</div>
 	</section>
 
-	<script src="../js/jquery-3.5.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/sweetalert2.all.min.js"></script>
-<script src="../js/app.js"></script>
-	
+
 	<!--script en java para los efectos-->
-    <script src="../../js/Buscador.js"></script>
+
   <script src="../../js/events.js"></script>
  	<script src="../../js/jquery-3.1.1.min.js"></script>
 	<script src="../../js/main.js"></script>
