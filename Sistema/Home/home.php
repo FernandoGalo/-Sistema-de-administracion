@@ -202,7 +202,7 @@
 					<?php
 						// Consulta SQL para obtener los datos
 						require '../../conexion_BD.php'; 
-						$sql = "SELECT `Fecha_Creacion`, SUM(`Fondos_proyecto`) AS Total_Fondos FROM tbl_proyectos GROUP BY `Fecha_Creacion`;";
+						$sql = "SELECT `Fecha_de_adquisicion_F`, SUM(`Valor_monetario`) AS Total_Fondos FROM tbl_fondos GROUP BY `Fecha_de_adquisicion_F`;";
 
 						// Ejecutar la consulta
 						$resultado = mysqli_query($conexion, $sql);
@@ -210,7 +210,7 @@
 						// Formatear los datos en formato JSON
 						$data = array();
 						while ($fila = mysqli_fetch_assoc($resultado)) {
-						$data[] = array('Fecha_Creacion' => $fila['Fecha_Creacion'], 'Total_Tondos' => $fila['Total_Fondos']);
+						$data[] = array('Fecha_de_adquisicion_F' => $fila['Fecha_de_adquisicion_F'], 'Total_Tondos' => $fila['Total_Fondos']);
 						}
 						$json_data = json_encode($data);
 
@@ -317,7 +317,7 @@
         var labels = [];
         var valores = [];
         data.forEach(function(item) {
-            labels.push(item.Fecha_Creacion);
+            labels.push(item.Fecha_de_adquisicion_F);
             valores.push(item.Total_Tondos);
         });
         var ctx = document.getElementById("grafico").getContext("2d");

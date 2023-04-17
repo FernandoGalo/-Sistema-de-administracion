@@ -122,23 +122,23 @@
 
 
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
-        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>ID ROL(*):</label>
                             <input type="hidden" name="id" id="id">
                             <input type="text" class="form-control" name="id" id="id" maxlength="100" placeholder="Ingrese la descripcion del rol" value="<?php echo $id?>"  readonly required>
                           </div>
 
-        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre rol(*):</label>
                             <input type="hidden" name="Nombre_rol" id="Nombre_rol">
                             <input type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol" onkeypress="validarMayusculas(event)" value="<?php echo $nombreRol?>" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Descripcion(*):</label>
                             <input type="hidden" name="descripcion" id="descripcion">
                             <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol" value="<?php echo $descripcion ?>" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Estado Actual</label>
                             <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $strEstado ?>" readonly>
                             <label>Estado(*):</label>
@@ -152,7 +152,7 @@
 
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
                           <a href="RolesAdm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar

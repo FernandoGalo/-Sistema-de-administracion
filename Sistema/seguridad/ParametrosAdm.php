@@ -20,7 +20,6 @@ $ID_Rol=$_SESSION['ID_Rol'];
   </script>
 </head>
 
-<?php include '../sidebar.php'; ?>
 
   <!--Seccion donde va toda la barra lateral -->
   <?php include '../sidebar.php'; ?>
@@ -106,7 +105,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                         <form name="formulario" id="formulario" action="Insert_Parametros.php" method="POST" accept-charset="UTF-8">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <?php //Me trae el ultimo ID y me suma 1
                                 
                                 // Conectar a la base de datos
@@ -125,20 +124,20 @@ $ID_Rol=$_SESSION['ID_Rol'];
                             <input type="hidden" name="ID_Pregunta" id="ID_VID_Preguntaoluntario">
                             <input class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $next_id; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre del parametro(*):</label>
                             <input type="hidden" name="Nombre_Parametro" id="Nombre_Parametro">
                             <input onpaste="return false" type="text" class="form-control" name="Nombre_Parametro" id="Nombre_Parametro" maxlength="50" placeholder="Ingrese el Nombre del Parametro" onkeypress="return /[a-zA-Z_]/i.test(event.key) && (event.key === '_' || /^[a-z0-9_]*$/i.test(event.target.value));" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Descripcion(*):</label>
                             <input type="hidden" name="Descrip_Parametro" id="Descrip_Parametro">
                             <input onpaste="return false" type="text" class="form-control" name="Descrip_Parametro" id="Descrip_Parametro" maxlength="80" placeholder="Ingrese la descripcion" onkeypress="this.value = this.value.toUpperCase();" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div  class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Valor(*):</label>
                             <input type="hidden" name="Valor_Parametro" id="Valor_Parametro">
-                            <input onpaste="return false" type="text" class="form-control" name="Valor_Parametro" id="Valor_Parametro" maxlength="50" placeholder="Ingrese el valor del parametro" onkeypress="this.value = this.value.toUpperCase();" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Valor_Parametro" id="Valor_Parametro" maxlength="50" placeholder="Valor del parametro" onkeypress="this.value = this.value.toUpperCase();" required>
                           </div>
                         
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

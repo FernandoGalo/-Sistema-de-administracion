@@ -172,17 +172,17 @@ if ($datos=$sql->fetch_object()) { ?>
                         <form name="formulario" id="formulario" action="Insert_Pago.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-1 col-md-1 col-sm-1 col-xs-12">
                             <label>ID del Pago(*):</label>
                             <input type="hidden" name="ID_de_pago" id="ID_de_pago">
                             <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del pago" required>
                            </div>
-                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                           <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                           <label>Monto Pagado(*):</label>
                             <input type="hidden" name="Monto_pagado" id="Monto_pagado">
                             <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese la cantidad del pago" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Tipo de Pago(*):</label>
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_tipo_pago_r");

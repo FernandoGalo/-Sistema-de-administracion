@@ -110,18 +110,18 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                           <label>ID Pregunta(*):</label>
                             <input type="hidden" name="ID_Pregunta" id="ID_VID_Preguntaoluntario">
                             <input class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $ID_Pregunta; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                           <label>Pregunta(*):</label>
                             <input type="hidden" name="Pregunta" id="Pregunta">
                             <input onpaste="return false" type="text" class="form-control" name="Pregunta" id="Pregunta" value="<?php echo $Pregunta; ?>" maxlength="50" placeholder="Ingrese una pregunta" onkeypress="return validarEspaciosMayus_Y_Minus(event)" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="Enviar_Pregunta" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="Enviar_Pregunta" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
                           <a href="PreguntasAdm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar

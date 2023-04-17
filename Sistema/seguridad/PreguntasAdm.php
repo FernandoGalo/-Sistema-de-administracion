@@ -64,7 +64,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                         <!-- Buscar -->
                         <form action="" method="post">
                             <label for="campo">Buscar:</label>
-                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
+                            <input style="margin-bottom: 20px; margin-left: 10px; display: inline-block;" type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
                         </form>
                         <thead accept-charset="UTF-8">
                             <th style="text-align:center">ID</th>
@@ -111,7 +111,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                         <form name="formulario" id="formulario" action="Insert_Preguntas.php" method="POST" accept-charset="UTF-8">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                             <?php //Me trae el ultimo ID y me suma 1
                                 $sql=$conexion->query("SELECT * FROM tbl_preguntas ORDER BY `ID_Pregunta` DESC LIMIT 1;");
                                 while($row=mysqli_fetch_array($sql)){
@@ -123,7 +123,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
                             <input type="hidden" name="ID_Pregunta" id="ID_VID_Preguntaoluntario">
                             <input class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $ID_Pregunta; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Pregunta(*):</label>
                             <input type="hidden" name="Pregunta" id="Pregunta">
                             <input onpaste="return false" type="text" class="form-control" name="Pregunta" id="Pregunta" maxlength="50" placeholder="Ingrese una pregunta" onkeypress="return validarEspaciosMayus_Y_Minus(event)" required>

@@ -164,24 +164,31 @@ $resObjetosFaltantes = $stmt->get_result();
                             <!-- Recuperando el Id Rol -->
                             <input type="hidden" class="form-control" name="idRol" id="idRol" maxlength="100" placeholder="Ingrese el ID SAR" value= <?php echo  $ID_RolPer ?> required>
                             <!-- Fin Recuperando Id Rol -->
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Rol(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
                             <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre del rol" onkeypress="validarMayusculas(event)" value=<?php echo  $strRol ?> readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Pantalla(*):</label>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Pantallas(*):</label>
                             <?php
-                           $sql=$conexion->query("SELECT * FROM tbl_objetos");
-                          ?>
-                            <select class="controls" type="text" name="Objeto" id="Objeto" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql)){
+                           $sql = $conexion->query("SELECT * FROM tbl_objetos");
                             ?>
-                             <option value="<?php echo $row1['ID_Objeto'];?>"><?php echo $row1['Objeto'];?></option>
-                            <?php
-                             }
-                            ?>
+                            <select class="form-control" name="Objeto" id="Objeto" required>
+                               <option value="">Seleccione una pantalla</option>
+                               <?php
+                                while ($mostrar = $resObjetosFaltantes->fetch_array(MYSQLI_BOTH))
+                                {
+                                  $id_objeto = $mostrar['ID_Objeto'];
+                                  $sql_objeto = "SELECT * FROM tbl_objetos WHERE ID_Objeto = $id_objeto";
+                                  $result_objeto = mysqli_query($conexion, $sql_objeto);
+                                  $objeto = mysqli_fetch_array($result_objeto); 
+                               ?>
+                               
+                               <option value="<?php echo $mostrar['ID_Objeto']; ?>"><?php echo $mostrar['Objeto']; ?></option>
+                               <?php
+                               }
+                               ?>
                             </select>
                           </div>
                   
@@ -191,42 +198,19 @@ $resObjetosFaltantes = $stmt->get_result();
                               <th>Eliminar</th>
                               <th>Actualizar</th>
                               <th>Consultar</th>
+                              <th>Estado</th>
 				                    </tr>
                             <tr>
-						                  <!-- <td><input type="checkbox" name="inser"/></td>
+						                  <td><input type="checkbox" name="inser"/></td>
                               <td><input type="checkbox" name="eli"/></td>
                               <td><input type="checkbox" name="actu"/></td>
-                              <td><input type="checkbox" name="cons"/></td> -->
-						                  <td><input type="number" min=0 max=1 name="inser"/></td>
-                              <td><input type="number" min=0 max=1 name="eli"/></td>
-                              <td><input type="number" min=0 max=1 name="actu"/></td>
-                              <td><input type="number" min=0 max=1 name="cons"/></td>
+                              <td><input type="checkbox" name="cons"/></td>
+                              <td><input type="checkbox" name="est"/></td>
 						               </tr>
                             </table>
-                            
-                            <table class="table">
-				                    <tr>
-                              <th>Pantallas sin permisos</th>
-				                    </tr>
-                            <tfoot>
-
-                            <?php
-			                  	while ($mostrar = $resObjetosFaltantes->fetch_array(MYSQLI_BOTH))
-				                    {
-                              $id_objeto = $mostrar['ID_Objeto'];
-                              $sql_objeto = "SELECT * FROM tbl_objetos WHERE ID_Objeto = $id_objeto";
-                              $result_objeto = mysqli_query($conexion, $sql_objeto);
-                              $objeto = mysqli_fetch_array($result_objeto);
-					              echo'<tr>
-						              <td>'.$mostrar['Objeto'].'</td>
-                          </tr>';
-			                	}
-				              ?>
-                      </tfoot>
-		                	</table>
-
+                        
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>

@@ -12,20 +12,20 @@
     include("../../conexion_BD.php");
     //====================================================
         if(isset($_POST['enviar'])){
-
             $ID_RolPer = $_POST['idRol'];
             $idObj = $_POST['Objeto'];
-            $perInser = $_POST['inser'];
-            $perDel = $_POST['eli'];
-            $perUp = $_POST['actu'];
-            $perSel = $_POST['cons'];
+            $perInser = isset($_POST['inser']) ? 1 : 0;
+            $perDel = isset($_POST['eli']) ? 1 : 0;
+            $perUp = isset($_POST['actu']) ? 1 : 0;
+            $perSel = isset($_POST['cons']) ? 1 : 0;
+            $est = isset($_POST['est']) ? 1 : 0;
 
 
             include("../../conexion_BD.php");
 
                 
             try {
-                $sql = "INSERT INTO tbl_permisos (ID_Rol, ID_Objeto, Permiso_Insercion, Permiso_Eliminacion, Permiso_Actualizacion, Permiso_consultar) VALUES ($ID_RolPer, $idObj,'$perInser', '$perDel','$perUp',' $perSel')";
+                $sql = "INSERT INTO tbl_permisos (ID_Rol, ID_Objeto, Permiso_Insercion, Permiso_Eliminacion, Permiso_Actualizacion, Permiso_consultar, Estad) VALUES ($ID_RolPer, $idObj,'$perInser', '$perDel','$perUp',' $perSel',' $est')";
 
                 $resultado = mysqli_query($conexion,$sql);
     

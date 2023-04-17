@@ -125,38 +125,44 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>ID_Usuario(*):</label>
                             <input type="hidden" name="IDusuario" id="IDusuario">
                             <input type="text" class="form-control" name="IDusuario" id="IDusuario" maxlength="100" value="<?php echo $idUser; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Usuario(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
                             <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100"  value="<?php echo $usuario; ?>" placeholder="Ingrese el usuario" onkeypress="validarMayusculas(event)" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Usuario(*):</label>
                             <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
                             <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" onkeypress="validarMayusculas(event);" value="<?php echo $nombreUsuario; ?>" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Rol de Usuario(*):</label>
-                            <!-- <input type="hidden" name="Rol" id="Rol"> -->
-                            <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:admin 2:Editor 3:Super"value=""required> -->
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                          <?php require '../../conexion_BD.php';?>
+                            <label>Rol de usuario:(*):</label>
+                            <?php
+                           $sql = $conexion->query("SELECT * FROM tbl_ms_roles");
+                            ?>
                             <select class="form-control" name="Rol" id="Rol" required>
-                              <option value="">Selecione un Rol</option>
-                              <option value= 1 >ADMINISTRADOR</option>
-                              <option value= 2 >EDITOR</option>
-                              <option value= 3 >SUPERVISOR</option>
+                            <option value="">Seleccione un rol</option>
+                               <?php
+                               while ($row1 = mysqli_fetch_array($sql)) {
+                               ?>
+                               <option value="<?php echo $row1['ID_Rol']; ?>"><?php echo $row1['Rol']; ?></option>
+                               <?php
+                               }
+                               ?>
                             </select>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Correo electrónico (*):</label>
                            <input type="hidden" name="Correo_electronico" id="Correo_electronico">
                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electrónico" value="<?php echo $correo; ?>" onkeypress="validarCorreo(event)" required>
                             </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label for="contraseña">Contraseña</label>
                           <div class="input-group">
                           <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" maxlength="8" onkeypress="return bloquearEspacio(event);" value="<?php echo $pass; ?>" required>
@@ -167,12 +173,12 @@
                          </div>
                          </div>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Vencimiento(*):</label>
                             <input type="hidden" name="FechaVencimiento" id="FechaVencimiento">
                             <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de vencimiento" value="<?php echo $vencimiento; ?>" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Estado Actual(*)</label>
                             <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $Estado; ?>" readonly>
                             <label>Estado usuario(*)</label>
@@ -185,7 +191,7 @@
                             </select>
                         </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
                           <a href="usuariosAdm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
