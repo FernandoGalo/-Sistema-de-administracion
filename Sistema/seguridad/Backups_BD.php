@@ -7,6 +7,21 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
 
+<!-- Funcion Confirmar para eliminar-->
+  <script type="text/javascript">
+    function confirmar(){
+      return confirm('¿Está Seguro?, se eliminará la copia de seguridad del sistema');
+    }
+  </script>
+
+<!-- Funcion confirmar para restarurar -->
+<script type="text/javascript">
+    function confirmar1(){
+      return confirm('¿Está Seguro?, se restaurará la copia de seguridad del sistema');
+    }
+  </script>
+
+
 <?php
 // Datos de conexión a la base de datos
 
@@ -122,7 +137,7 @@ if ($datos=$sql->fetch_object()) { ?>
       ?>
     </select>
     <br><br>
-    <button class="zmdi zmdi-cloud-upload" type="submit" > Restaurar Backup</button>
+    <button class="zmdi zmdi-cloud-upload" type="submit" onclick='return confirmar1()'> Restaurar Backup</button>
   </form>
 </div>
 <h1>Eliminar un archivo de copia de seguridad</h1>
@@ -143,7 +158,7 @@ if ($datos=$sql->fetch_object()) { ?>
         ?>
     </select>
     <br><br>
-    <button class="zmdi zmdi-close" type="submit"> Eliminar Backup</button>
+    <button class="zmdi zmdi-close" type="submit" onclick='return confirmar()'> Eliminar Backup</button>
 </form>
   
   </section>
