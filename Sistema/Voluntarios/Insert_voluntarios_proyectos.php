@@ -15,7 +15,7 @@
         if(isset($_POST['enviar_F'])){
             session_start();     
             $Usuario=$_SESSION['usuario'];
-            
+            $IDProyecto=$_SESSION['ID_Proyect'];
             echo $Usuario;        
     include("../../conexion_BD.php");
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Usuario'");
@@ -26,7 +26,7 @@
     $Fecha_actual = date('Y-m-d');
 
             $ID_Voluntario=$_POST["ID_Voluntario"];
-            $ID_proyecto=$_POST["ID_proyecto"];
+            $ID_proyecto=$IDProyecto;
             $ID_Area_Trabajo=$_POST["ID_Area_Trabajo"];
             $Fecha_Vinculacion_P=$_POST["Fecha_Vinculacion_P"];
             include("../../conexion_BD.php");

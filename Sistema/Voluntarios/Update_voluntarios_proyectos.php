@@ -2,6 +2,7 @@
     include("../../conexion_BD.php");
     session_start();
     $usuario=$_SESSION['usuario'];
+    $IDProyecto=$_SESSION['ID_Proyect'];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
           $Fecha_actual = date('Y-m-d');
           $ID_Vinculacion_Proy=$_POST["ID_Vinculacion_Proy"];
           $ID_Voluntario=$_POST["ID_Voluntario"];
-          $ID_proyecto=$_POST["ID_proyecto"];
+          $ID_proyecto=$IDProyecto;
           $ID_Area_Trabajo=$_POST["ID_Area_Trabajo"];
           $Fecha_Vinculacion_P=$_POST["Fecha_Vinculacion_P"];
             //si lo que esta en el form esta vacio
@@ -107,19 +108,14 @@
                             </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Proyecto al que se esta vinculando:</label>
-                            <?php
-                           $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
-                          ?>
-                            <select class="controls" type="text" name="ID_proyecto" id="ID_proyecto" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql2)){
-                            ?>
-                             <option value="<?php echo $row1['ID_proyecto'];?>"><?php echo $row1['Nombre_del_proyecto'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
+                            <label>Proyecto al que esta siendo donado:</label>
+                            <?php include("../../conexion_BD.php");
+    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+
+    while($row=mysqli_fetch_array($sql1)){
+        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+    }?>
+                            <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Voluntario:</label>
@@ -143,7 +139,7 @@
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
-                          <a href="FondosAdm.php" style="color:white; text-decoration:none;">
+                          <a href="voluntarios_proyectos_Adm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
                           </a>
                           </button>

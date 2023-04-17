@@ -96,7 +96,7 @@
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
-                          <a href="FondosAdm.php" style="color:white; text-decoration:none;">
+                          <a href="area_trabajo_Adm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
                           </a>
                           </button>

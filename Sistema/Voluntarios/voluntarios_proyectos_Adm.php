@@ -5,6 +5,13 @@
  session_start();     
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
+ $IDProyecto=$_SESSION['ID_Proyect'];
+include("../../conexion_BD.php");
+    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+
+    while($row=mysqli_fetch_array($sql1)){
+        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+    }
 //Parte 2
                 
 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
@@ -89,7 +96,8 @@ if ($datos=$sql->fetch_object()) { ?>
                           $sql="SELECT * FROM tbl_voluntarios_proyectos vp 
                           LEFT JOIN tbl_voluntarios v ON vp.ID_Voluntario = v.ID_Voluntario
                           LEFT JOIN tbl_proyectos p ON vp.ID_proyecto = p.ID_proyecto
-                          LEFT JOIN tbl_area_trabajo a ON vp.ID_Area_Trabajo = a.ID_Area_Trabajo;";
+                          LEFT JOIN tbl_area_trabajo a ON vp.ID_Area_Trabajo = a.ID_Area_Trabajo
+                          where vp.ID_proyecto=$IDProyecto";
 
                           $result=mysqli_query($conexion,$sql);
 
@@ -145,18 +153,7 @@ if ($datos=$sql->fetch_object()) { ?>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Proyecto al que se esta vinculando:</label>
-                            <?php
-                           $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
-                          ?>
-                            <select class="controls" type="text" name="ID_proyecto" id="ID_proyecto" required ><br>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql2)){
-                            ?>
-                             <option value="<?php echo $row1['ID_proyecto'];?>"><?php echo $row1['Nombre_del_proyecto'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
+                            <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Voluntario:</label>
