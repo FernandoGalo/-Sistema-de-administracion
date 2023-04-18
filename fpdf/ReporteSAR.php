@@ -12,12 +12,12 @@ class PDF extends FPDF
 
       $consulta_info = $conexion->query(" select * from tbl_datos_asociacion ");//traemos datos de la empresa desde BD
       $dato_info = $consulta_info->fetch_object();
-      $this->Image('asociacion.jpg', 270, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
+      $this->Image('asociacion.jpg', 250, 5, 40); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
       $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
       $this->Cell(95); // Movernos a la derecha
       $this->SetTextColor(0, 0, 0); //color
       //creamos una celda o fila
-      $this->Cell(110, 15, utf8_decode($dato_info -> nombre), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
+      $this->Cell(110, 15, utf8_decode($dato_info -> nombre), 0, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
       $this->Ln(3); // Salto de línea
       $this->SetTextColor(103); //color
 
@@ -37,7 +37,7 @@ class PDF extends FPDF
       $this->Cell(1);  // mover a la derecha
       $this->SetFont('Arial', 'B', 10);
       $this->Cell(85, 10, utf8_decode("Correo : " . $dato_info -> correo), 0, 0, '', 0);
-      $this->Ln(10); //SERIA EL ESPACIADO ENTRE ESTE CAMPO Y EL TITULO DEL REPORTE
+      $this->Ln(15); //SERIA EL ESPACIADO ENTRE ESTE CAMPO Y EL TITULO DEL REPORTE
 
       /* SUCURSAL */
       // $this->Cell(180);  // mover a la derecha
@@ -50,23 +50,23 @@ class PDF extends FPDF
       $this->SetTextColor(0, 95, 189);
       $this->Cell(100); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE SAR "), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE DECLARACIONES AL SAR "), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
       //color
-      $this->SetFillColor(228, 100, 0); //colorFondo
-      $this->SetTextColor(255, 255, 255); //colorTexto
-      $this->SetDrawColor(163, 163, 163); //colorBorde
+      $this->SetFillColor(255, 255, 255); //colorFondo
+      $this->SetTextColor(000, 000, 000); //colorTexto
+      $this->SetDrawColor(255, 255, 255); //colorBorde 163 163 163
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(30, 10, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(35, 10, utf8_decode('RTN'), 1, 0, 'C', 1);
       $this->Cell(70, 10, utf8_decode('NÚMERO DECLARACION'), 1, 0, 'C', 1);
       $this->Cell(40, 10, utf8_decode('RAZÓN SOCIAL'), 1, 0, 'C', 1);
-      // $this->Cell(50, 10, utf8_decode('DEPARTAMENTO'), 1, 0, 'C', 1);
-      // $this->Cell(50, 10, utf8_decode('MUNICIPIO'), 1, 0, 'C', 1);
+      $this->Cell(50, 10, utf8_decode('DEPARTAMENTO'), 1, 0, 'C', 1);
+      $this->Cell(50, 10, utf8_decode('MUNICIPIO'), 1, 1, 'C', 1);
       // $this->Cell(50, 10, utf8_decode('CAI'), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('Estado'), 1, 1, 'C', 1);
+      // $this->Cell(20, 10, utf8_decode('Estado'), 1, 1, 'C', 1);
    }
 
    // Pie de página
@@ -97,22 +97,19 @@ $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-$consulta_reporte_alquiler = $conexion->query(" SELECT * FROM tbl_r_sar WHERE estado = 1");
+$consulta_reporte_alquiler = $conexion->query(" SELECT * FROM tbl_r_sar");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
       /* TABLA */
-      $pdf->Cell(30, 10, utf8_decode($i), 1, 0, 'C', 0);
-      $pdf->Cell(35, 10, utf8_decode($datos_reporte -> RTN), 1, 0, 'C', 0);
-      $pdf->Cell(70, 10, utf8_decode($datos_reporte -> num_declaracion), 1, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> nombre_razonSocial), 1, 0, 'C', 0);
-      // $pdf->Cell(50, 10, utf8_decode($datos_reporte -> departamento), 1, 0, 'C', 0);
-      // $pdf->Cell(50, 10, utf8_decode($datos_reporte -> municipio), 1, 0, 'C', 0);
+      $pdf->Cell(30, 10, utf8_decode($i), 0, 0, 'C', 0);
+      $pdf->Cell(35, 10, utf8_decode($datos_reporte -> RTN), 0, 0, 'C', 0);
+      $pdf->Cell(70, 10, utf8_decode($datos_reporte -> num_declaracion), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> nombre_razonSocial), 0, 0, 'C', 0);
+      $pdf->Cell(50, 10, utf8_decode($datos_reporte -> departamento), 0, 0, 'C', 0);
+      $pdf->Cell(50, 10, utf8_decode($datos_reporte -> municipio), 0, 1, 'C', 0);
       // $pdf->Cell(100, 10, utf8_decode($datos_reporte -> cai), 1, 0, 'C', 0);   
-      $pdf->Cell(20, 10, utf8_decode($datos_reporte -> estado), 1, 1, 'C', 0);   
+      // $pdf->Cell(20, 10, utf8_decode($datos_reporte -> estado), 0, 1, 'C', 0);   
    }
 
-$sql="UPDATE tbl_r_sar SET estado = 0";
-$resultado=mysqli_query($conexion,$sql);
-
-$pdf->Output('Prueba2.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('ReporteDecSAR.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)

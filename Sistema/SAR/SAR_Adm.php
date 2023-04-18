@@ -37,7 +37,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 	<link rel="stylesheet" href="../../css/main.css">
   <script type="text/javascript">
     function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el usuario');
+      return confirm('¿Está Seguro?, se eliminará el registro');
     }
   </script>
     <script>
@@ -203,11 +203,11 @@ if ($datos=$sql->fetch_object()) { ?>
                         <form name="formulario" id="formulario" action="Insert_SAR.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>ID SAR:</label>
                             <input type="hidden" name="id_sar" id="id_sar">
                             <input type="number" class="form-control" name="id_sar" id="id_sar" maxlength="100" placeholder="Ingrese el ID SAR"  required>
-                          </div>
+                          </div> -->
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>RTN(*):</label>
                             <input type="hidden" name="rtn" id="rtn">
@@ -231,7 +231,7 @@ if ($datos=$sql->fetch_object()) { ?>
                             <label>Departamento(*):</label>
                               <select class="form-control" name="departamento" id="departamento" onchange="cargarOpciones()">
                                 <option value="">Selecione un departamento</option>
-                                <option value="atlantida">Atlántida</option>
+                                <option value="Atlántida">Atlántida</option>
                                 <option value="Colón">Colón</option>
                                 <option value="Comayagua">Comayagua</option>
                                 <option value="Copán">Copán</option>
@@ -293,13 +293,13 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Telefono Fijo:</label>
                             <input type="hidden" name="telFijo" id="telFijo">
-                            <input type="text" class="form-control" name="telFijo" id="telFijo" maxlength="100" placeholder="Ingrese el Telefono Fijo" required>
+                            <input type="text" class="form-control" name="telFijo" id="telFijo" maxlength="8" placeholder="Ingrese el Telefono Fijo" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Celular(*):</label>
                             <input type="hidden" name="telCelular" id="telCelular">
-                            <input type="text" class="form-control" name="telCelular" id="telCelular" maxlength="100" placeholder="Ingrese el Telefono Celular" required>
+                            <input type="text" class="form-control" name="telCelular" id="telCelular" maxlength="8" placeholder="Ingrese el Telefono Celular" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -383,8 +383,8 @@ if ($datos=$sql->fetch_object()) { ?>
   municipio.innerHTML = "";
   
   // Agregar opciones según la opción seleccionada en el primer combobox
-  if (departamento.value === "atlantida") {
-    municipio.add(new Option("La Ceiba", "la Ceiba"));
+  if (departamento.value === "Atlántida") {
+    municipio.add(new Option("La Ceiba", "La Ceiba"));
     municipio.add(new Option("El Porvenir", "El Porvenir"));
     municipio.add(new Option("Tela", "Tela"));
     municipio.add(new Option("Jutiapa", "Jutiapa"));
