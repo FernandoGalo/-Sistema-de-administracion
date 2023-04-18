@@ -11,12 +11,12 @@ session_start();
 require '../../conexion_BD.php';
 
 /* Un arreglo de las columnas a mostrar en la tabla */
-$columns = ['ID_Area_Trabajo', 'nombre_Area_Trabajo', 'descripcion_A_Trabajo'];
+$columns = ['ID_Voluntario', 'Nombre_Voluntario', 'Telefono_Voluntario', 'Direccion_Voluntario'];
 
 /* Nombre de la tabla */
-$table = "tbl_area_trabajo";
+$table = "tbl_voluntarios";
 
-$id = 'ID_Area_Trabajo';
+$id = 'ID_Voluntario';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
 
@@ -63,9 +63,8 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT SQL_CALC_FOUND_ROWS ID_Area_Trabajo ,nombre_Area_Trabajo, descripcion_A_Trabajo
-FROM tbl_area_trabajo
-WHERE ID_Area_Trabajo LIKE '%{$campo}%' OR nombre_Area_Trabajo LIKE '%{$campo}%'
+$sql="SELECT * from tbl_voluntarios
+WHERE ID_Voluntario LIKE '%{$campo}%' OR Nombre_Voluntario LIKE '%{$campo}%' OR Telefono_Voluntario LIKE '%{$campo}%' OR Direccion_Voluntario LIKE '%{$campo}%'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
@@ -93,16 +92,17 @@ $output['paginacion'] = '';
 if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
         $output['data'] .= '<tr>';
-        $output['data'] .= '<td>' . $row['ID_Area_Trabajo'] . '</td>';
-        $output['data'] .= '<td>' . $row['nombre_Area_Trabajo'] . '</td>';
-        $output['data'] .= '<td>' . $row['descripcion_A_Trabajo'] . '</td>';
-         $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=14");
+        $output['data'] .= '<td>' . $row['ID_Voluntario'] . '</td>';
+        $output['data'] .= '<td>' . $row['Nombre_Voluntario'] . '</td>';
+        $output['data'] .= '<td>' . $row['Telefono_Voluntario'] . '</td>';
+        $output['data'] .= '<td>' . $row['Direccion_Voluntario'] . '</td>';
+         $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
 if ($datos=$sql->fetch_object()) {
-        $output['data'] .= '<td><a class="boton-editar" href="Update_area_trabajo_Adm.php?ID_Area_Trabajo=' . $row['ID_Area_Trabajo'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
+        $output['data'] .= '<td><a class="boton-editar" href="Update_Voluntarios.php?ID_Voluntario=' . $row['ID_Voluntario'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
 }
-$sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=14");
+$sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
 if ($datos=$sql->fetch_object()) { 
-        $output['data'] .= '<td><a class="boton-eliminar" href="Delete_area_trabajo.php?ID_Area_Trabajo=' . $row['ID_Area_Trabajo'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
+        $output['data'] .= '<td><a class="boton-eliminar" href="Delete_Voluntarios.php?ID_Voluntario=' . $row['ID_Voluntario'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
 }
         $output['data'] .= '</tr>';
     }

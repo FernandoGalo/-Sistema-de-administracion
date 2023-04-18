@@ -25,7 +25,12 @@
         $ID_Usuario=$row['ID_Usuario'];
     }
     
-            
+    $sql = "SELECT MAX(ID_Voluntario) AS max_id FROM tbl_voluntarios";
+    $resultado = mysqli_query($conexion, $sql);
+    $row = mysqli_fetch_assoc($resultado);
+    $ultimo_id = $row['max_id'];
+    $nuevo_id = $ultimo_id + 1;
+
             $Nombre_Voluntario=$_POST["Nombre_Voluntario"];
             $Telefono_Voluntario=$_POST["Telefono_Voluntario"];
             $Direccion_Voluntario=$_POST["Direccion_Voluntario"];
@@ -34,8 +39,8 @@
             // Los dcatos NO ingresaron a la BD
 
             
-            $sql = "INSERT INTO tbl_voluntarios (Nombre_Voluntario, Telefono_Voluntario, Direccion_Voluntario, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES ('$Nombre_Voluntario', '$Telefono_Voluntario', '$Direccion_Voluntario', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_voluntarios (ID_Voluntario, Nombre_Voluntario, Telefono_Voluntario, Direccion_Voluntario, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
+            VALUES ($nuevo_id, '$Nombre_Voluntario', '$Telefono_Voluntario', '$Direccion_Voluntario', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 
