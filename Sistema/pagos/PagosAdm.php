@@ -252,8 +252,9 @@ if ($datos=$sql->fetch_object()) { ?>
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_tipo_pago_r");
                           ?>
-                            <select class="controls" type="text" name="Pago" id="Pago" required ><br>
-                           <?php
+                            <select class="form-control" name="Pago" id="Pago" required ><br>
+                            <option value="">Seleccione un tipo de pago</option>
+                          <?php
                             while($row1=mysqli_fetch_array($sql)){
                             ?>
                              <option value="<?php echo $row1['ID_T_pago'];?>"><?php echo $row1['Nombre'];?></option>
@@ -262,12 +263,13 @@ if ($datos=$sql->fetch_object()) { ?>
                             ?>
                             </select>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Proyecto(*):</label>
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
                           ?>
-                            <select class="controls" type="text" name="Proyecto" id="Proyecto" required ><br>
+                            <select class="form-control" name="Proyecto" id="Proyecto" required ><br>
+                            <option value="">Seleccione un proyecto</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql2)){
                             ?>
@@ -277,11 +279,11 @@ if ($datos=$sql->fetch_object()) { ?>
                             ?>
                             </select>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Usuario</label>
                             <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" placeholder="<?php echo $usuario?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Transaccion:</label>
                             <input type="date" class="form-control" name="FechaTransaccion" id="FechaTransaccion" maxlength="100" placeholder="Ingrese la Fecha de Transaccion">
                           </div>

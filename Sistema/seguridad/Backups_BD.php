@@ -1,4 +1,3 @@
-</style>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -121,8 +120,8 @@ if ($datos=$sql->fetch_object()) { ?>
 <div class="derecha">
 <h1>Restaurar una copia de seguridad</h1>
   <form action="restore.php" method="post">
-    <label for="backup_file">Seleccione un archivo de backup:</label>
-    <select id="backup_file" name="backup_file">
+    <select class="form-control" id="backup_file" name="backup_file">
+    <option value="">Seleccione un archivo de backup:</option>
       <?php
       // Ruta absoluta de la carpeta de backups
       $backups_folder = "C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/";
@@ -142,8 +141,8 @@ if ($datos=$sql->fetch_object()) { ?>
 </div>
 <h1>Eliminar un archivo de copia de seguridad</h1>
 <form action="Eliminar_backup.php" method="post">
-    <label for="backup_file">Seleccione un archivo de backup para eliminar:</label>
-    <select id="backup_file" name="backup_file">
+<select class="form-control" id="backup_file" name="backup_file" style="max-width: 300px;">
+        <option value="">Seleccione un archivo para eliminar:</option>
         <?php
         // Ruta absoluta de la carpeta de backups
         $backups_folder = "C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/";
@@ -158,7 +157,7 @@ if ($datos=$sql->fetch_object()) { ?>
         ?>
     </select>
     <br><br>
-    <button class="zmdi zmdi-close" type="submit" onclick='return confirmar()'> Eliminar Backup</button>
+    <button class="zmdi zmdi-close" type="submit" onclick='return confirmar()'>Eliminar Backup</button>
 </form>
   
   </section>

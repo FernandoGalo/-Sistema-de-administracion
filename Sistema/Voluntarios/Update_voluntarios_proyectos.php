@@ -97,7 +97,8 @@
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_voluntarios");
                           ?>
-                            <select class="controls" type="text" name="ID_Voluntario" id="ID_Voluntario" required ><br>
+                            <select class="form-control" name="ID_Voluntario" id="ID_Voluntario" required ><br>
+                            <option value="">Seleccione un voluntario</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql2)){
                             ?>
@@ -118,11 +119,12 @@
                             <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Voluntario:</label>
+                            <label>Area de trabajo:</label>
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_area_trabajo");
                           ?>
-                            <select class="controls" type="text" name="ID_Area_Trabajo" id="ID_Area_Trabajo" required ><br>
+                            <select class="form-control" name="ID_Area_Trabajo" id="ID_Area_Trabajo" required ><br>
+                            <option value="">Seleccione el area de trabajoo</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql2)){
                             ?>

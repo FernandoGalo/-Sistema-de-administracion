@@ -93,7 +93,7 @@ if ($datos=$sql->fetch_object()) { ?>
                             <th class="sort asc">Proyecto</th>
                             <th class="sort asc">Fecha de Inicio</th>
                             <th class="sort asc">Fecha de finalización</th>
-                            <th class="sort asc">Fondos proyecto</th>
+                            <th class="sort asc">Fondos proyectados</th>
                             <th class="sort asc">Estado Proyecto</th>
 
                             <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");

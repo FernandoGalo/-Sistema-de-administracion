@@ -86,7 +86,7 @@
                                     <div class="icon">
                                       <i class="ion-android-contacts"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="../Voluntarios/voluntarios_proyectos_Adm.php" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
                                   </div>
                                 </div>
                                 <!-- ./col -->
@@ -111,7 +111,7 @@
                                     <div class="icon">
                                       <i class="ion-arrow-graph-up-right"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="../Fondos/FondosAdm.php" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
                                   </div>
                                 </div>
                                 
