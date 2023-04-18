@@ -35,42 +35,13 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script type="text/javascript">
     function confirmar(){
       return confirm('¿Está Seguro?, se eliminará el pago');
     }
   </script>
-  <script>
-function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    // Nombre del archivo
-    filename = filename?filename+'.xls':'Reporte de tabla.xls';
-
-    // Crear descarga
-    downloadLink = document.createElement("a");
-
-    document.body.appendChild(downloadLink);
-
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        // Crear enlace para descargar
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-        // Establecer nombre de archivo
-        downloadLink.download = filename;
-
-        // Descargar archivo
-        downloadLink.click();
-    }
-}
-</script>
+ 
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -96,7 +67,7 @@ function exportTableToExcel(tableID, filename = ''){
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Pago</button>
-                          <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
+                         
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
@@ -106,83 +77,177 @@ if ($datos=$sql->fetch_object()) { ?>
                     <!-- centro -->
                     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
 if ($datos=$sql->fetch_object()) { ?>
-                    <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-bordered table-hover">
-                        
-                        <!-- Buscar -->
-                        <form action="" method="post">
-                            <label for="campo">Buscar:</label>
-                            <input type="text" name="campo" id="campo">
-                          </form>
+                    <div class="panel-body" id="listadoregistros">
+<main>
+        <div class="container py-4 text-center">
 
+            <div class="row g-4">
+
+                <div class="col-auto">
+                    <label for="num_registros" class="col-form-label">Mostrar: </label>
+                </div>
+
+                <div class="col-auto">
+                    <select name="num_registros" id="num_registros" class="form-select">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <div class="col-auto">
+                    <label for="num_registros" class="col-form-label">registros </label>
+                </div>
+
+                <div class="col-5"></div>
+
+                <div class="col-auto">
+                    <label for="campo" class="col-form-label">Buscar: </label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="campo" id="campo" class="form-control">
+                </div>
+            </div>
+
+            <div class="row py-4">
+                <div class="col">
+                    <table class="table table-sm table-bordered table-striped">
                         <thead>
-                            <th>ID pago</th>
-                            <th>Monto pagado</th>
-                            <th>Tipo pago</th>
-                            <th>proyecto</th>
-                            <th>Usuario</th>
-                            <th>Fecha de Transaccion</th>
-                            <th>Acciones</th>
-                          </thead>
-                          <tbody>                            
-                          </tbody>
-                          <tfoot>
+                            <th class="sort asc">ID pago</th>
+                            <th class="sort asc">Monto pagado</th>
+                            <th class="sort asc">Tipo pago</th>
+                            <th class="sort asc">Proyecto</th>
+                            <th class="sort asc">Usuario</th>
+                            <th class="sort asc">Fecha de Transaccion</th>
 
-                          <?php
-                          $sql="SELECT s.ID_de_pago, s.Monto_pagado, t.nombre,p.Nombre_del_proyecto, u.Nombre_Usuario,s.Fecha_de_transaccion
-                          FROM tbl_pagos_realizados s
-                          JOIN tbl_tipo_pago_r t ON s.ID_T_pago = t.ID_T_pago
-                          JOIN tbl_proyectos p ON s.ID_de_proyecto = p.ID_proyecto
-                          JOIN tbl_ms_usuario u ON s.ID_usuario = u.ID_Usuario";
-                          $result=mysqli_query($conexion,$sql);
-
-                           while($mostrar=mysqli_fetch_array($result)){
-                           ?>
-
-                            <tr>
-                              <td><?php echo $mostrar['ID_de_pago']?></td> 
-                              <td><?php echo $mostrar['Monto_pagado']?></td> 
-                              <td><?php echo $mostrar['nombre']?></td>
-                              <td><?php echo $mostrar['Nombre_del_proyecto']?></td>
-                              <td><?php echo $mostrar['Nombre_Usuario']?></td>
-                              <td><?php echo $mostrar['Fecha_de_transaccion']?></td>
-                              <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
 if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Update_Pago.php?ID_de_pago=<?php echo $mostrar['ID_de_pago']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i>
-                              <?php } ?>
-                              </a>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+                            <th></th>
+                            <?php } ?>
+                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
 if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Delete_Pago.php?ID_de_pago=<?php echo $mostrar['ID_de_pago']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i>
-                              <?php } ?>
-                              </a>
-                            </td>
-                             </tr>
-                            <?php
-                             }
-                             ?>     
-                          </tfoot>
-                        </table>
-                    </div>
+                            <th></th>
+                            <?php } ?>
+                        </thead>
+                        <!-- El id del cuerpo de la tabla. -->
+                        <tbody id="content">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label id="lbl-total"></label>
+                </div>
+
+                <div class="col-6" id="nav-paginacion"></div>
+
+                <input type="hidden" id="pagina" value="1">
+                <input type="hidden" id="orderCol" value="0">
+                <input type="hidden" id="orderType" value="asc">
+            </div>
+        </div>
+    </main>
+</div>
+    <script>
+        /* Llamando a la función getData() */
+        getData()
+
+        /* Escuchar un evento keyup en el campo de entrada y luego llamar a la función getData. */
+        document.getElementById("campo").addEventListener("keyup", function() {
+            getData()
+        }, false)
+        document.getElementById("num_registros").addEventListener("change", function() {
+            getData()
+        }, false)
+
+
+        /* Peticion AJAX */
+        function getData() {
+            let input = document.getElementById("campo").value
+            let num_registros = document.getElementById("num_registros").value
+            let content = document.getElementById("content")
+            let pagina = document.getElementById("pagina").value
+            let orderCol = document.getElementById("orderCol").value
+            let orderType = document.getElementById("orderType").value
+
+            if (pagina == null) {
+                pagina = 1
+            }
+            let url = "Gestor_tbl_Pago.php"
+            let formaData = new FormData()
+            formaData.append('campo', input)
+            formaData.append('registros', num_registros)
+            formaData.append('pagina', pagina)
+            formaData.append('orderCol', orderCol)
+            formaData.append('orderType', orderType)
+
+            fetch(url, {
+                    method: "POST",
+                    body: formaData
+                }).then(response => response.json())
+                .then(data => {
+                    content.innerHTML = data.data
+                    document.getElementById("lbl-total").innerHTML = 'Mostrando ' + data.totalFiltro +
+                        ' de ' + data.totalRegistros + ' registros'
+                    document.getElementById("nav-paginacion").innerHTML = data.paginacion
+                }).catch(err => console.log(err))
+        }
+
+        function nextPage(pagina){
+            document.getElementById('pagina').value = pagina
+            getData()
+        }
+
+        let columns = document.getElementsByClassName("sort")
+        let tamanio = columns.length
+        for(let i = 0; i < tamanio; i++){
+            columns[i].addEventListener("click", ordenar)
+        }
+
+        function ordenar(e){
+            let elemento = e.target
+
+            document.getElementById('orderCol').value = elemento.cellIndex
+
+            if(elemento.classList.contains("asc")){
+                document.getElementById("orderType").value = "asc"
+                elemento.classList.remove("asc")
+                elemento.classList.add("desc")
+            } else {
+                document.getElementById("orderType").value = "desc"
+                elemento.classList.remove("desc")
+                elemento.classList.add("asc")
+            }
+
+            getData()
+        }
+
+    </script>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
                     <?php } ?>
                     <div class="panel-body" id="formularioregistros">
                         <form name="formulario" id="formulario" action="Insert_Pago.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>ID del Pago(*):</label>
                             <input type="hidden" name="ID_de_pago" id="ID_de_pago">
                             <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del pago" required>
                            </div>
-                           <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Monto Pagado(*):</label>
                             <input type="hidden" name="Monto_pagado" id="Monto_pagado">
                             <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese la cantidad del pago" required>
                           </div>
-                          <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Tipo de Pago(*):</label>
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_tipo_pago_r");
