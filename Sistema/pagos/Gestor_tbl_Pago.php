@@ -4,7 +4,9 @@
 * Autor: Marco Robles
 * Team: Códigos de Programación
 */
-
+session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 
 require '../../conexion_BD.php';
 
@@ -98,9 +100,15 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['nombre'] . '</td>';
         $output['data'] .= '<td>' . $row['Nombre_del_proyecto'] . '</td>';
         $output['data'] .= '<td>' . $row['Nombre_Usuario'] . '</td>';
-        $output['data'] .= '<td>' . $row['Fecha_de_transaccion'] . '</td>';  
-        $output['data'] .= '<td><a class="btn btn-warning btn-sm" href="Update_Pago.php?ID_de_pago=' . $row['ID_de_pago'] . '">Editar</a></td>';
-        $output['data'] .= "<td><a class='btn btn-danger btn-sm' href='Delete_Pago.php?ID_de_pago=" . $row['ID_de_pago'] . "'>Eliminar</a></td>";
+        $output['data'] .= '<td>' . $row['Fecha_de_transaccion'] . '</td>';
+        $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
+if ($datos=$sql->fetch_object()) {  
+        $output['data'] .= '<td><a class="boton-editar" href="Update_Pago.php?ID_de_pago=' . $row['ID_de_pago'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
+}
+$sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
+if ($datos=$sql->fetch_object()) { 
+        $output['data'] .= "<td><a class='boton-eliminar' href='Delete_Pago.php?ID_de_pago=" . $row['ID_de_pago'] . "'><i class='zmdi zmdi-delete'></i></a></td>";
+}
         $output['data'] .= '</tr>';
     }
 } else {
