@@ -1,18 +1,18 @@
 <?php
 include("../../conexion_BD.php");
-    $Nombre_Usuario = $_GET['Usuario'];
+    $ID_Usuario = $_GET['ID_Usuario'];
 
-    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
+    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE ID_Usuario='$ID_Usuario'");
 
                  while($row=mysqli_fetch_array($sql1)){
-                    $IDusuarioDel=$row['ID_Usuario'];
+                    $Nombre_Usuario=$row['ID_Usuario'];
                  }
 
 
     try {
 
         //DELETE FROM tbl_ms_usuario WHERE Usuario = $id
-    $sql = "DELETE FROM tbl_ms_usuario WHERE Usuario = '$Nombre_Usuario'";
+    $sql = "DELETE FROM tbl_ms_usuario WHERE ID_Usuario = '$ID_Usuario'";
     $resultado = mysqli_query($conexion,$sql);
 
 
@@ -26,7 +26,7 @@ include("../../conexion_BD.php");
                 $model = new EVENT_BITACORA;
                 session_start();
                 $_SESSION['UsuarioBitacoraDELETE']=$Nombre_Usuario;
-                $_SESSION['IDUsuarioBitacoraDELETE']=$IDusuarioDel;
+                $_SESSION['IDUsuarioBitacoraDELETE']=$ID_Usuario;
                 $model->RegDelete();
 
                             

@@ -65,6 +65,7 @@ if ($datos=$sql->fetch_object()) { ?>
                     <!-- centro -->
                     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=1");
 if ($datos=$sql->fetch_object()) { ?>
+<div class="panel-body" id="listadoregistros">
 <main>
         <div class="container py-4 text-center">
 
@@ -109,8 +110,14 @@ if ($datos=$sql->fetch_object()) { ?>
                             <th class="sort asc">Fecha Creacion</th>
                             <th class="sort asc">Fecha Vencimiento</th>
                             <th class="sort asc">Estado del usuario</th>
+                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=1");
+if ($datos=$sql->fetch_object()) {?>
                             <th></th>
+                            <?php } ?>
+                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=1");
+if ($datos=$sql->fetch_object()) { ?>
                             <th></th>
+                            <?php } ?>
                         </thead>
                         <!-- El id del cuerpo de la tabla. -->
                         <tbody id="content">
@@ -133,7 +140,7 @@ if ($datos=$sql->fetch_object()) { ?>
             </div>
         </div>
     </main>
-
+</div>
     <script>
         /* Llamando a la función getData() */
         getData()

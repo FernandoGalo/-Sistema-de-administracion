@@ -11,12 +11,12 @@ session_start();
 require '../../conexion_BD.php';
 
 /* Un arreglo de las columnas a mostrar en la tabla */
-$columns = ['ID_Usuario', 'Usuario', 'Nombre_Usuario', 'ID_Rol', 'Correo_electronico', 'Fecha_Creacion', 'Fecha_Vencimiento', 'Estado_Usuario'];
+$columns = ['ID_Area_Trabajo', 'nombre_Area_Trabajo', 'descripcion_A_Trabajo'];
 
 /* Nombre de la tabla */
-$table = "tbl_ms_usuario";
+$table = "tbl_area_trabajo";
 
-$id = 'ID_Usuario';
+$id = 'ID_Area_Trabajo';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
 
@@ -63,10 +63,9 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT SQL_CALC_FOUND_ROWS u.ID_Usuario, u.Usuario, u.Nombre_Usuario, r.Rol, u.Correo_electronico, u.Fecha_Creacion, u.Fecha_Vencimiento, u.Estado_Usuario
-FROM tbl_ms_usuario u
-JOIN tbl_ms_roles r ON u.ID_Rol = r.ID_Rol
-WHERE u.ID_Usuario LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR r.Rol LIKE '%{$campo}%' OR u.Correo_electronico LIKE '%{$campo}%' OR u.Estado_Usuario LIKE '%{$campo}%'
+$sql="SELECT ID_Area_Trabajo ,nombre_Area_Trabajo, descripcion_A_Trabajo
+FROM tbl_area_trabajo
+WHERE ID_Area_Trabajo LIKE '%{$campo}%' OR nombre_Area_Trabajo LIKE '%{$campo}%'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
@@ -94,21 +93,16 @@ $output['paginacion'] = '';
 if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
         $output['data'] .= '<tr>';
-        $output['data'] .= '<td>' . $row['ID_Usuario'] . '</td>';
-        $output['data'] .= '<td>' . $row['Usuario'] . '</td>';
-        $output['data'] .= '<td>' . $row['Nombre_Usuario'] . '</td>';
-        $output['data'] .= '<td>' . $row['Rol'] . '</td>';
-        $output['data'] .= '<td>' . $row['Correo_electronico'] . '</td>';
-        $output['data'] .= '<td>' . $row['Fecha_Creacion'] . '</td>';  
-        $output['data'] .= '<td>' . $row['Fecha_Vencimiento'] . '</td>';
-        $output['data'] .= '<td>' . $row['Estado_Usuario'] . '</td>';
+        $output['data'] .= '<td>' . $row['ID_Area_Trabajo'] . '</td>';
+        $output['data'] .= '<td>' . $row['nombre_Area_Trabajo'] . '</td>';
+        $output['data'] .= '<td>' . $row['descripcion_A_Trabajo'] . '</td>';
          $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=1");
 if ($datos=$sql->fetch_object()) {
-        $output['data'] .= '<td><a class="boton-editar" href="Update_Usuarios.php?ID_Usuario=' . $row['ID_Usuario'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
+        $output['data'] .= '<td><a class="boton-editar" href="Update_area_trabajo_Adm.php?ID_Area_Trabajo=' . $row['ID_Area_Trabajo'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
 }
 $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=1");
 if ($datos=$sql->fetch_object()) { 
-        $output['data'] .= '<td><a class="boton-eliminar" href="Delete_Usuarios.php?ID_Usuario=' . $row['ID_Usuario'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
+        $output['data'] .= '<td><a class="boton-eliminar" href="Delete_area_trabajo.php?ID_Area_Trabajo=' . $row['ID_Area_Trabajo'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
 }
         $output['data'] .= '</tr>';
     }
