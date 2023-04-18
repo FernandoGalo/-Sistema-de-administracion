@@ -4,7 +4,9 @@
 * Autor: Marco Robles
 * Team: Códigos de Programación
 */
-
+session_start();     
+ $usuario=$_SESSION['user'];
+ $ID_Rol=$_SESSION['ID_Rol'];
 
 require '../../conexion_BD.php';
 
@@ -92,8 +94,14 @@ if ($num_rows > 0) {
         $output['data'] .= '<tr>';
         $output['data'] .= '<td>' . $row['ID_tipo_fondo'] . '</td>';
         $output['data'] .= '<td>' . $row['nombre_T_Fondo'] . '</td>';
-        $output['data'] .= '<td><a class="btn btn-warning btn-sm" href="Update_Tipo_Fondo_Adm.php?ID_tipo_fondo=' . $row['ID_tipo_fondo'] . '">Editar</a></td>';
-        $output['data'] .= "<td><a class='btn btn-danger btn-sm' href='Delete_Tipo_Fondo.php?ID_tipo_fondo=" . $row['ID_tipo_fondo'] . "'>Eliminar</a></td>";
+        $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
+if ($datos=$sql->fetch_object()) {
+        $output['data'] .= '<td><a class="boton-editar" href="Update_Tipo_Fondo_Adm.php?ID_tipo_fondo=' . $row['ID_tipo_fondo'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
+}
+$sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
+if ($datos=$sql->fetch_object()) { 
+        $output['data'] .= '<td><a class="boton-eliminar" href="Delete_Tipo_Fondo.php?ID_tipo_fondo=' . $row['ID_tipo_fondo'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
+}
         $output['data'] .= '</tr>';
     }
 } else {
