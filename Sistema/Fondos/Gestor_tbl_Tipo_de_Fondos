@@ -9,12 +9,12 @@
 require '../../conexion_BD.php';
 
 /* Un arreglo de las columnas a mostrar en la tabla */
-$columns = ['ID_Bitacora', 'Fecha', 'ID_Usuario ', 'ID_Objeto ', 'Accion', 'Descripcion'];
+$columns = ['ID_tipo_fondo', 'nombre_T_Fondo'];
 
 /* Nombre de la tabla */
-$table = "tbl_ms_bitacora";
+$table = "tbl_tipos_de_fondos";
 
-$id = 'ID_Bitacora';
+$id = 'ID_tipo_fondo';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
 
@@ -61,11 +61,9 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT SQL_CALC_FOUND_ROWS b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
-FROM tbl_ms_bitacora b
-JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-WHERE b.ID_Bitacora LIKE '%{$campo}%' OR b.Fecha LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR o.Objeto LIKE '%{$campo}%' OR b.Accion LIKE '%{$campo}%' OR b.Descripcion LIKE '%{$campo}%'
+$sql="SELECT ID_tipo_fondo ,nombre_T_Fondo
+FROM tbl_tipos_de_fondos
+WHERE ID_tipo_fondo LIKE '%{$campo}%' OR nombre_T_Fondo LIKE '%{$campo}%' 
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
@@ -89,16 +87,13 @@ $output['totalRegistros'] = $totalRegistros;
 $output['totalFiltro'] = $totalFiltro;
 $output['data'] = '';
 $output['paginacion'] = '';
-
 if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
         $output['data'] .= '<tr>';
-        $output['data'] .= '<td>' . $row['ID_Bitacora'] . '</td>';
-        $output['data'] .= '<td>' . $row['Fecha'] . '</td>';
-        $output['data'] .= '<td>' . $row['Usuario'] . '</td>';
-        $output['data'] .= '<td>' . $row['Objeto'] . '</td>';
-        $output['data'] .= '<td>' . $row['Accion'] . '</td>';
-        $output['data'] .= '<td>' . $row['Descripcion'] . '</td>';
+        $output['data'] .= '<td>' . $row['ID_tipo_fondo'] . '</td>';
+        $output['data'] .= '<td>' . $row['nombre_T_Fondo'] . '</td>';
+        $output['data'] .= '<td><a class="btn btn-warning btn-sm" href="Update_Tipo_Fondo_Adm.php?ID_tipo_fondo=' . $row['ID_tipo_fondo'] . '">Editar</a></td>';
+        $output['data'] .= "<td><a class='btn btn-danger btn-sm' href='Delete_Tipo_Fondo.php?ID_tipo_fondo=" . $row['ID_tipo_fondo'] . "'>Eliminar</a></td>";
         $output['data'] .= '</tr>';
     }
 } else {
