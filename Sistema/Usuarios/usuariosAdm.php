@@ -67,7 +67,6 @@ if ($datos=$sql->fetch_object()) { ?>
 if ($datos=$sql->fetch_object()) { ?>
 <main>
         <div class="container py-4 text-center">
-            <h2>prueba</h2>
 
             <div class="row g-4">
 
@@ -106,6 +105,7 @@ if ($datos=$sql->fetch_object()) { ?>
                             <th class="sort asc">Usuario</th>
                             <th class="sort asc">Nombre</th>
                             <th class="sort asc">Rol</th>
+                            <th class="sort asc">Correo electronico</th>
                             <th class="sort asc">Fecha Creacion</th>
                             <th class="sort asc">Fecha Vencimiento</th>
                             <th class="sort asc">Estado del usuario</th>

@@ -100,8 +100,8 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['Fecha_Creacion'] . '</td>';  
         $output['data'] .= '<td>' . $row['Fecha_Vencimiento'] . '</td>';
         $output['data'] .= '<td>' . $row['Estado_Usuario'] . '</td>';
-        $output['data'] .= '<td><a class="btn btn-warning btn-sm" href="editar.php?id=' . $row['ID_Bitacora'] . '">Editar</a></td>';
-        $output['data'] .= "<td><a class='btn btn-danger btn-sm' href='elimiar.php?id=" . $row['ID_Bitacora'] . "'>Eliminar</a></td>";
+        $output['data'] .= '<td><a class="btn btn-warning btn-sm" href='Update_Usuarios.php?ID_Usuario=<?php echo $mostrar['ID_Usuario']; ?>' . $row['ID_Usuario'] . '">Editar</a></td>';
+        $output['data'] .= "<td><a class='btn btn-danger btn-sm' href='Delete_Usuarios.php?Usuario=<?php echo $mostrar['Usuario']; ?>' . $row['ID_Usuario'] . "'>Eliminar</a></td>";
         $output['data'] .= '</tr>';
     }
 } else {
