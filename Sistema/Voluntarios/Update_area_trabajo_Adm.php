@@ -86,11 +86,11 @@
                             <input style="text" type="text" class="form-control" name="ID_Area_Trabajo" id="ID_Area_Trabajo" maxlength="10"  value="<?php echo $ID_Area_Trabajo; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>nombre del Area de Trabajo</label>
+                            <label>Nombre del Area de Trabajo</label>
                             <input type="text" class="form-control"  name="nombre_Area_Trabajo" id="nombre_Area_Trabajo" placeholder="Ingrese el nombre del Area de Trabajo" value="<?php echo $nombre_Area_Trabajo; ?>" require>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>descripcion del Area de Trabajo</label>
+                            <label>Descripcion del Area de Trabajo</label>
                             <input type="text" class="form-control"  name="descripcion_A_Trabajo" id="descripcion_A_Trabajo" placeholder="Ingrese la descripcion del Area de Trabajo" value="<?php echo $descripcion_A_Trabajo; ?>" require>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
