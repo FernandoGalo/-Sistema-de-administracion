@@ -141,7 +141,7 @@
                             <?php
                            $sql2=$conexion->query("SELECT * FROM tbl_proyectos");
                           ?>
-                            <select class="controls" type="text" name="Proyecto" id="Proyecto"  value="<?php echo $$ID_Proyecto; ?>" required ><br>
+                            <select class="controls" type="text" name="Proyecto" id="Proyecto"  value="<?php echo $ID_Proyecto; ?>" required ><br>
                            <?php
                             while($row1=mysqli_fetch_array($sql2)){
                             ?>

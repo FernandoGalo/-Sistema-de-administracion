@@ -53,8 +53,7 @@
                     require_once "../../EVENT_BITACORA.php";
                     $model = new EVENT_BITACORA;
                     session_start();
-
-                    $_SESSION['IDFondoBitacoraUP']=$ID_Fondo;
+                    $_SESSION['IDFondoBitacoraUP']=$Nombre_del_Objeto;
                     $model->RegUptFondo();
 
             }else{

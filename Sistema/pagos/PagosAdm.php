@@ -237,11 +237,7 @@ if ($datos=$sql->fetch_object()) { ?>
                         <form name="formulario" id="formulario" action="Insert_Pago.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>ID del Pago(*):</label>
-                            <input type="hidden" name="ID_de_pago" id="ID_de_pago">
-                            <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el ID del pago" required>
-                           </div>
+                          
                            <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Monto Pagado(*):</label>
                             <input type="hidden" name="Monto_pagado" id="Monto_pagado">

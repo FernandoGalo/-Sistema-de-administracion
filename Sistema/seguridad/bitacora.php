@@ -82,7 +82,7 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
                     <table class="table table-sm table-bordered table-striped">
                         <thead>
                             <th class="sort asc">ID</th>
-                            <th class="sort asc">fecha</th>
+                            <th class="sort asc">Fecha</th>
                             <th class="sort asc">Usuario</th>
                             <th class="sort asc">Objeto</th>
                             <th class="sort asc">Accion</th>

@@ -38,6 +38,12 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('voluntarios_proyectos_Adm.php');
                     </script>";
+                    require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['IDvolproBitacora']=$ID_Vinculacion_Proy;
+                            $model->UPVOLPRO();  
+ 
 
             }else{
                 echo "<script language='JavaScript'>

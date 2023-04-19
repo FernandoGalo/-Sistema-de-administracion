@@ -44,6 +44,12 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('voluntarios_proyectos_Adm.php');
                             </script>";     
+                            require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['IDvolproBitacora']=$ID_Voluntario;
+                            $model->InsertVOLPRO();  
+ 
 
             }else{
                 // Los dcatos NO ingresaron a la BD

@@ -139,7 +139,7 @@
                             require_once "../../EVENT_BITACORA.php";
                             $model = new EVENT_BITACORA;
                             session_start();
-                            $_SESSION['IDSarBitacora']=$ID_SAR;
+                            $_SESSION['RTNSarBitacora']=$RTN;
                             $model->RegInsertSar();
  
                          

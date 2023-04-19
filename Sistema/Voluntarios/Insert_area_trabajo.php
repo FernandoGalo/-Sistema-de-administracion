@@ -34,6 +34,11 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('area_trabajo_Adm.php');
                             </script>";     
+                            require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['nareaBitacora']=$nombre_Area_Trabajo;
+                            $model->InsertAreaT();  
 
             }else{
                 // Los dcatos NO ingresaron a la BD

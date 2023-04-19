@@ -48,7 +48,7 @@
                             require_once "../../EVENT_BITACORA.php";
                             $model = new EVENT_BITACORA;
                             session_start();
-                            $_SESSION['IDFondoBitacora']=$ID_Fondo;
+                            $_SESSION['nFondoBitacora']=$Nombre_del_Objeto;
                             $model->RegaInsertFondo();  
 
 

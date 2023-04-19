@@ -14,6 +14,12 @@ include("../../conexion_BD.php");
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('voluntarios_proyectos_Adm.php');
                 </script>";    
+                require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['IDvolproBitacora']=$ID_Vinculacion_Proy;
+                            $model->DELVOLPRO();  
+ 
  
     }else{
         if (mysqli_errno($conexion)) {

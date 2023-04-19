@@ -14,6 +14,12 @@ include("../../conexion_BD.php");
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
                 location.assign('Tipo_Fondo_Adm.php');
                 </script>";    
+                require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['IDTFondoBitacora']=$ID_T_Fondo;
+                            $model->DELInsertTFondo();
+
  
     }else{
         if (mysqli_errno($conexion)) {
