@@ -7,9 +7,13 @@
 session_start();     
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
-
+ $IDProyecto=$_SESSION['ID_Proyect'];
 require '../../conexion_BD.php';
+$sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
+while($row=mysqli_fetch_array($sql1)){
+    $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+}
 /* Un arreglo de las columnas a mostrar en la tabla */
 $columns = ['ID_de_Fondo', 'nombre_T_Fondo', 'Nombre_del_Objeto', 'Cantidad_Rec', 'Valor_monetario','Nombre_del_proyecto','Nombre_D','Fecha_de_adquisicion_F'];
 
@@ -63,13 +67,13 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT f.ID_de_fondo,tf.nombre_T_Fondo,f.Nombre_del_Objeto,f.Cantidad_Rec,f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
+$sql = "SELECT f.ID_de_fondo, tf.nombre_T_Fondo, f.Nombre_del_Objeto, f.Cantidad_Rec, f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
 FROM tbl_fondos f 
 JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
 JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
 JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto
-WHERE f.ID_de_fondo LIKE '%{$campo}%' OR tf.nombre_T_Fondo LIKE '%{$campo}%' OR f.Nombre_del_Objeto LIKE '%{$campo}%' OR f.Cantidad_Rec LIKE '%{$campo}%' OR f.Valor_monetario LIKE '%{$campo}%'
-OR p.Nombre_del_proyecto LIKE '%{$campo}%' OR d.Nombre_D LIKE '%{$campo}%' OR f.Fecha_de_adquisicion_F LIKE '%{$campo}%'
+WHERE (f.ID_de_fondo LIKE '%{$campo}%' OR tf.nombre_T_Fondo LIKE '%{$campo}%' OR f.Nombre_del_Objeto LIKE '%{$campo}%' OR f.Cantidad_Rec LIKE '%{$campo}%' OR f.Valor_monetario LIKE '%{$campo}%' OR d.Nombre_D LIKE '%{$campo}%' OR f.Fecha_de_adquisicion_F LIKE '%{$campo}%')
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);

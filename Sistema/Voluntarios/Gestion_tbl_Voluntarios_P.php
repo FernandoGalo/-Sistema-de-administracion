@@ -8,8 +8,12 @@ session_start();
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
  $IDProyecto=$_SESSION['ID_Proyect'];
-require '../../conexion_BD.php';
+ require '../../conexion_BD.php';
+ $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
+ while($row=mysqli_fetch_array($sql1)){
+     $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+ }
 /* Un arreglo de las columnas a mostrar en la tabla */
 $columns = ['ID_Vinculacion_Proy', 'ID_Voluntario', 'ID_proyecto', 'ID_Area_Trabajo', 'Fecha_Vinculacion_P'];
 
@@ -67,7 +71,8 @@ $sql="SELECT SQL_CALC_FOUND_ROWS vp.ID_Vinculacion_Proy, v.Nombre_Voluntario, p.
 LEFT JOIN tbl_voluntarios v ON vp.ID_Voluntario = v.ID_Voluntario
 LEFT JOIN tbl_proyectos p ON vp.ID_proyecto = p.ID_proyecto
 LEFT JOIN tbl_area_trabajo a ON vp.ID_Area_Trabajo = a.ID_Area_Trabajo
-WHERE vp.ID_Vinculacion_Proy LIKE '%{$campo}%' OR v.Nombre_Voluntario LIKE '%{$campo}%' OR p.Nombre_del_proyecto LIKE '%{$campo}%' OR a.nombre_Area_Trabajo LIKE '%{$campo}%' OR vp.Fecha_Vinculacion_P LIKE '%{$campo}%' 
+WHERE (vp.ID_Vinculacion_Proy LIKE '%{$campo}%' OR v.Nombre_Voluntario LIKE '%{$campo}%' OR a.nombre_Area_Trabajo LIKE '%{$campo}%' OR vp.Fecha_Vinculacion_P LIKE '%{$campo}%') 
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);

@@ -7,9 +7,13 @@
 session_start();     
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
+ $IDProyecto=$_SESSION['ID_Proyect'];
+ require '../../conexion_BD.php';
+ $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
-require '../../conexion_BD.php';
-
+ while($row=mysqli_fetch_array($sql1)){
+     $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+ }
 /* Un arreglo de las columnas a mostrar en la tabla */
 $columns = ['ID_de_pago ', 'Monto_pagado', 'ID_T_pago', 'Fecha_de_transaccion', 'ID_de_proyecto', 'ID_Usuario', 'Creado_Por', 'Fecha_Creacion', 'Modificado_por', 'Fecha_Modificacion'];
 
@@ -68,7 +72,8 @@ FROM tbl_pagos_realizados s
 JOIN tbl_tipo_pago_r t ON s.ID_T_pago = t.ID_T_pago
 JOIN tbl_proyectos p ON s.ID_de_proyecto = p.ID_proyecto
 JOIN tbl_ms_usuario u ON s.ID_usuario = u.ID_Usuario
-WHERE s.ID_de_pago LIKE '%{$campo}%' OR s.Monto_pagado LIKE '%{$campo}%' OR t.nombre LIKE '%{$campo}%' OR p.Nombre_del_proyecto LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR s.Fecha_de_transaccion LIKE '%{$campo}%'
+WHERE (s.ID_de_pago LIKE '%{$campo}%' OR s.Monto_pagado LIKE '%{$campo}%' OR t.nombre LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR s.Fecha_de_transaccion LIKE '%{$campo}%')
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
