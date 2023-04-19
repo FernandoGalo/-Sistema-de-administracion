@@ -137,7 +137,7 @@
                                     <div class="icon">
                                       <i class="ion-cash"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="../pagos/PagosAdm.php" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
                                   </div>
                                 </div>
                                 <!-- ./col -->

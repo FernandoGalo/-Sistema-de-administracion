@@ -96,7 +96,7 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['Nombre_del_proyecto'] . '</td>';
         $output['data'] .= '<td>' . $row['Fecha_de_inicio_P'] . '</td>';
         $output['data'] .= '<td>' . $row['Fecha_final_P'] . '</td>';
-        $output['data'] .= '<td>' . $row['Fondos_proyecto'] . '</td>';
+        $output['data'] .= '<td>L.' . number_format($row['Fondos_proyecto'], 2) . '</td>';
         $output['data'] .= '<td>' . $row['Estado_Proyecto'] . '</td>';
          $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
 if ($datos=$sql->fetch_object()) {

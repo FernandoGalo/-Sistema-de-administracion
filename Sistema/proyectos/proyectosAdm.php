@@ -208,53 +208,39 @@ if ($datos=$sql->fetch_object()) { ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <?php } ?>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Insert_Usuarios.php" method="POST">
+                        <form name="formulario" id="formulario" action="insertproyec.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Usuario(*):</label>
-                            <input type="hidden" name="Usuario" id="Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100" placeholder="Ingrese el nombre de Usuario" onkeypress="validarMayusculas(event)" required>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Id proyecto(*):</label>
+                            <input type="hidden" name="proyecto" id="proyecto">
+                            <input type="text" class="form-control" name="proyecto" id="proyecto" maxlength="100" placeholder="Ingrese el id proyecto" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Nombre Usuario(*):</label>
-                            <input type="hidden" name="Nombre_Usuario" id="Usuario">
-                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre usuario" required>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Nombre del proyecto(*):</label>
+                            <input type="hidden" name="Nombre_proyecto" id="Nombre_proyecto">
+                            <input type="text" class="form-control" name="Nombre_proyecto" id="Nombre_proyecto" maxlength="100" placeholder="Ingrese el nombre del proyecto:" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Rol de usuario:</label>
-                           <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
-                            <select class="form-control" name="Rol" id="Rol" required>
-                              <option value="">Selecione un Rol</option>
-                              <option value= 1 >ADMINISTRADOR</option>
-                              <option value= 2 >EDITOR</option>
-                              <option value= 3 >SUPERVISOR</option>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Fecha de Inicio:</label>
+                            <input type="date" class="form-control" name="Fechaini" id="Fechaini" maxlength="100" placeholder="Ingrese la Fecha de inicio">
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Fecha final:</label>
+                            <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha de inicio">
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                          <label>Fondos proyectados(*):</label>
+                            <input type="hidden" name="Monto_proyectados" id="Monto_proyectados">
+                            <input style="text" type="text" class="form-control" name="Monto_proyectados" id="Monto_proyectados" maxlength="10"  placeholder="Ingrese los fondos proyectados:" required>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Estado:</label>
+                            <select class="form-control" name="estado" id="estado" required>
+                              <option value="">Selecione un estado</option>
+                              <option value="ACTIVO">ACTIVO</option>
+                              <option value="INACTIVO">INACTIVO</option>
                             </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Correo electronico(*):</label>
-                            <input type="hidden" name="Correo_electronico" id="Correo_electronico">
-                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electronico" onkeypress="validarCorreo(event)" required>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                          <label for="contraseña">Contraseña</label>
-                          <div class="input-group">
-                          <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" onkeypress="return bloquearEspacio(event);" required>
-                           <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="button" id="ver-ocultar" onclick="mostrarContrasena()">
-                          <i class="zmdi zmdi-eye"></i>
-                          </button>
-                         </div>
-                         </div>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Fecha de Vencimiento(*):</label>
-                            <input type="hidden" name="FechaVencimiento" id="FechaVencimiento">
-                            <input type="date" value="<?php echo $R_F_Vencida?>" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de Vencimiento" readonly>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Estado(*)</label>
-                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="NUEVO" readonly>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>

@@ -248,7 +248,8 @@ if ($datos=$sql->fetch_object()) { ?>
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_tipos_de_fondos");
                           ?>
-                            <select class="controls" type="text" name="tipos_de_fondos" id="tipos_de_fondos" required ><br>
+                            <select class="form-control" name="tipos_de_fondos" id="tipos_de_fondos" required ><br>
+                            <option value="">Seleccione un tipo de fondo:</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql)){
                             ?>
@@ -275,7 +276,8 @@ if ($datos=$sql->fetch_object()) { ?>
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_donantes");
                           ?>
-                            <select class="controls" type="text" name="Donante" id="Donante" required ><br>
+                            <select class="form-control" name="Donante" id="Donante" required ><br>
+                            <option value="">Seleccione un Donante:</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql)){
                             ?>

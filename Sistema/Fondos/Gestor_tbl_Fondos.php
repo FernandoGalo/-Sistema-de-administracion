@@ -105,7 +105,7 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['nombre_T_Fondo'] . '</td>';
         $output['data'] .= '<td>' . $row['Nombre_del_Objeto'] . '</td>';
         $output['data'] .= '<td>' . $row['Cantidad_Rec'] . '</td>'; 
-        $output['data'] .= '<td>' . $row['Valor_monetario'] . '</td>';
+        $output['data'] .= '<td>L.' . number_format($row['Valor_monetario'], 2) . '</td>';
         $output['data'] .= '<td>' . $row['Nombre_del_proyecto'] . '</td>';
         $output['data'] .= '<td>' . $row['Nombre_D'] . '</td>';
         $output['data'] .= '<td>' . $row['Fecha_de_adquisicion_F'] . '</td>';
