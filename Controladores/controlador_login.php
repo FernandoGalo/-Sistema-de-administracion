@@ -43,7 +43,8 @@ if (!empty($_POST["btn_Login"])) {
     
     
                 if ($datos=$sql->fetch_object()) {
-                     $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Intentos='0' WHERE Usuario='$usuario'");
+                    $Fecha_actual = date('Y-m-d');
+                     $sql1=$conexion->query("UPDATE tbl_ms_usuario SET Intentos='0', Fecha_Ultima_conexion='$Fecha_actual' WHERE Usuario='$usuario'");
                     
                         session_start();
                     $_SESSION['user']=$usuario;
