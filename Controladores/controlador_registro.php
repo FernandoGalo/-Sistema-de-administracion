@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../conexion_BD.php';
 /*cuando se presiona el boton enviar registro */ 
 if (!empty($_POST["btn_enviar_R"])) {
@@ -82,14 +83,12 @@ if (mysqli_num_rows($sql2) >= 1) {
                 $nombreUsuario=$R_usuario;
                 require_once "../EVENT_BITACORA.php";
                             $model = new EVENT_BITACORA;
-                            session_start();
                             $_SESSION['UsuarioBitacora']=$nombreUsuario;
                             $_SESSION['IDUsuarioBitacora']=$ID_Usuario;
                             $model->RegautoInsert();
 
                 
                 //regNuevoUser();
-                session_start();
                 $_SESSION['user']=$R_usuario;
                 $_SESSION['ID_User']=$ID_Usuario;
                 header("location:../Pantallas/Preguntas_RAI.php"); /*como esto es autoregistro el usuario debe configurar las preguntas secretas */
