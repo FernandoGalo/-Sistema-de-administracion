@@ -93,8 +93,23 @@
 
             include("../../conexion_BD.php");
 
-                if (strlen($contraseña) < 8 || !preg_match('/[a-z]/', $contraseña) || !preg_match('/[A-Z]/', $contraseña) || !preg_match('/[0-9]/', $contraseña) ) {
-                    echo'<script>alert("Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
+$sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in (9,10)");
+// Verificar si la consulta devolvió resultados
+if (mysqli_num_rows($sql2) >= 1) {
+    // Recorrer los resultados y mostrarlos en pantalla
+    while($row = mysqli_fetch_array($sql2)) {
+      if ($row['ID_Parametro'] == 9) {
+        $Min_Pass=$row['Valor'];
+    } 
+
+        if ($row['ID_Parametro'] == 10) {
+            $Max_Pass=$row['Valor'];
+        }     
+    }
+}
+
+                if (strlen($contraseña) < $Min_Pass || !preg_match('/[a-z]/', $contraseña) || !preg_match('/[A-Z]/', $contraseña) || !preg_match('/[0-9]/', $contraseña) ) {
+                    echo'<script>alert("Contraseña poco segura. Debe contener al menos ' .$Min_Pass. ' caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
                     header("refresh:0;url=usuariosAdm.php");
                     //echo '<div class="alert_danger">Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula</div>';
 
