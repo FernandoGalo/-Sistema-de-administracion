@@ -4,9 +4,23 @@ require '../conexion_BD.php';
 if (!empty($_POST["btn_enviar_R"])) {
     /*si el campo usuario o contraseña o nombre completo o contraseña no tiene datos envia una alterta*/
     $Contra=$_POST["R_contra"];
-    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W]).{8,}$/', $Contra)) {
+$sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in (9,10)");
+// Verificar si la consulta devolvió resultados
+if (mysqli_num_rows($sql2) >= 1) {
+    // Recorrer los resultados y mostrarlos en pantalla
+    while($row = mysqli_fetch_array($sql2)) {
+      if ($row['ID_Parametro'] == 9) {
+        $Min_Pass=$row['Valor'];
+    } 
+
+        if ($row['ID_Parametro'] == 10) {
+            $Max_Pass=$row['Valor'];
+        }     
+    }
+}
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W]).{'.$Min_Pass.',}$/', $Contra)) {
         echo "La contraseña debe tener al menos una letra minúscula, una letra mayúscula, un carácter especial y un número.";
-        echo"ingrese una contraseña de 8 digitos";
+        echo"ingrese una contraseña de $Min_Pass  digitos";
     } else {
     if (empty($_POST["R_usuario"]) and empty($_POST["R_contra"])and empty($_POST["R_correo"]) and empty($_POST["R_Nombre"])) 
     {

@@ -12,6 +12,22 @@
      $model->regNuevoUser();
  };
 ?>
+<?php 
+$sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in (9,10)");
+// Verificar si la consulta devolvió resultados
+if (mysqli_num_rows($sql2) >= 1) {
+    // Recorrer los resultados y mostrarlos en pantalla
+    while($row = mysqli_fetch_array($sql2)) {
+      if ($row['ID_Parametro'] == 9) {
+        $Min_Pass=$row['Valor'];
+    } 
+
+        if ($row['ID_Parametro'] == 10) {
+            $Max_Pass=$row['Valor'];
+        }     
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
