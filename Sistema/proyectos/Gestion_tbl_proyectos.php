@@ -104,7 +104,7 @@ if ($datos=$sql->fetch_object()) {
 }
 $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
 if ($datos=$sql->fetch_object()) { 
-        $output['data'] .= '<td><a class="boton-eliminar" href="Delete_proyecto.php?ID_proyecto=' . $row['ID_proyecto'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
+        $output['data'] .= '<td><a onclick="return confirmar()" class="boton-eliminar" href="Delete_proyecto.php?ID_proyecto=' . $row['ID_proyecto'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
 }
 $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
 if ($datos=$sql->fetch_object()) { 
