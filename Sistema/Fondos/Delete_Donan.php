@@ -52,7 +52,7 @@ include("../../conexion_BD.php");
 
              echo "<script languaje='JavaScript'>
              alert('$mensaje');
-             location.assign('FondosAdm.php');
+             location.assign('DonacAdm.php');
             </script>";
 
              //printf("Ha ocurrido un error: %s\n", mysqli_error($conexion));
