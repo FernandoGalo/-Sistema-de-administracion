@@ -12,24 +12,6 @@ if(isset($_POST['btn_Login'])){
 
 
 ?>
-<?php 
-$sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in (9,10)");
-// Verificar si la consulta devolvió resultados
-if (mysqli_num_rows($sql2) >= 1) {
-    // Recorrer los resultados y mostrarlos en pantalla
-    while($row = mysqli_fetch_array($sql2)) {
-      if ($row['ID_Parametro'] == 9) {
-        $Min_Pass=$row['Valor'];
-    } 
-
-        if ($row['ID_Parametro'] == 10) {
-            $Max_Pass=$row['Valor'];
-        }     
-    }
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +88,7 @@ function mostrarPassword() {
         <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)" style="text-transform:uppercase" placeholder="Ingrese su Usuario"><br> 
         <h3>Contraseña</h3>
         <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
-        <input class="controls" maxlength="<?php echo $Max_Pass ?>" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña">
+        <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña">
 
         <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Sesion" >
         <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" >
