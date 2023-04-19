@@ -42,7 +42,7 @@
                           <h1 class="box-title">Gestion Proyectos</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
 if ($datos=$sql->fetch_object()) { ?>
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Proyecto</button>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-calendar-note"></i> Agregar Proyecto</button>
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
