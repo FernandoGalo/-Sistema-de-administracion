@@ -79,7 +79,7 @@ function redirigirFondos() {
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
 if ($datos=$sql->fetch_object()) { ?>
 
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Fondo</button>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money-box"></i> Agregar Tipo de Fondo</button>
                           <button id="proyectos-btn" onclick="redirigirProyectos()">Ir a Proyectos</button>
                           <button id="Fondos-btn" onclick="redirigirFondos()">Ir a Fondos</button>
                           <div class="box-tools pull-right">

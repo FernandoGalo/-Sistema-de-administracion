@@ -64,7 +64,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=14");
 if ($datos=$sql->fetch_object()) { ?>
 
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-asignación"></i> Agregar Area de trabajo</button>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-assignment"></i> Agregar Area de trabajo</button>
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
