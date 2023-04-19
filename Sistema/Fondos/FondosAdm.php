@@ -45,6 +45,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
       return confirm('¿Está Seguro?, se eliminará el Fondo');
     }
   </script>
+  
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
