@@ -31,7 +31,7 @@ if (!empty($_POST["btn_enviar_N_Contra"])){
     $usuario = $_SESSION['user'];   
     $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where ID_Usuario='$ID_usuario' and Contraseña='$contraseña_A'");
     if ($datos=$sql->fetch_object()) {
-        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W])./', $contraseña_Nueva)) {
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W]).{'.$Min_Pass.',}$/', $contraseña_Nueva)) {
             echo '<div class="alert alert-danger">La contraseña debe tener al menos una letra minúscula, una letra mayúscula, un carácter especial y un número.</div>';
             echo '<div class="alert alert-warning">Ingrese Una Contraseña de '. $Min_Pass . ' digitos</div>';
             

@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Registro de usuario </title>
+<title> Registro de Usuario </title>
     <link rel="stylesheet" href="css/normalize.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,8 +84,9 @@ function mostrarContrasena() {
   }
 </script>
 </head>
-<body>
-    <section class="f_login">
+<body style="background: rgb(1,5,36);
+            background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">>
+    <section style="width: 470px; height: auto; margin-bottom:35px; margin-top:35px;" class="f_login">
             
     <form actions2="../Controladores/controlador_registro.php" method="post"> <!--envia datos de tipo post -->
             <h2>Registro</h2>
@@ -95,18 +96,28 @@ function mostrarContrasena() {
             <?php
     include ("../conexion_BD.php");
     include ("../Controladores/controlador_registro.php"); /*incluyo los controladores que necesita para funcionar */
+    $sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro`=10");
+              // Verificar si la consulta devolvió resultados
+              if (mysqli_num_rows($sql2) >= 1) {
+                  // Recorrer los resultados y mostrarlos en pantalla
+                  while($row = mysqli_fetch_array($sql2)) {
+                      if ($row['ID_Parametro'] == 10) {
+                          $Max_Pass=$row['Valor'];
+                      }     
+                  }
+              }
     ?>
             <?php if(isset($_GET['error'])) { ?>
              <p class="error"><?php echo $_GET['error']; ?></p> <!-- esto manda los errores php que esten sucediendo -->
             <?php } ?>
-            <h3>Nombre completo</h3>
+            <h3>Nombre Completo</h3>
         <input class="controls" type="text" name="R_Nombre" onkeypress="return soloLetras(event);" placeholder="Ingrese su Nombre completo"><br> <!--text de nombre completo -->
-        <h3>Nombre de usuario</h3>
+        <h3>Nombre de Usuario</h3>
         <input class="controls" type="text" maxlength="15" name="R_usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)" style="text-transform:uppercase" placeholder="Ingrese su Usuario"><br>
-        <h3>contraseña</h3> <button type="button" class="fa fa-eye" onclick="mostrarContrasena()"></button>
-        <input class="controls" type="password" maxlength="8" name="R_contra" id="R_contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña"><br>
+        <h3>Contraseña </h3> <button type="button" class="fa fa-eye" onclick="mostrarContrasena()"></button>
+        <input class="controls" type="password" maxlength="<?php echo $Max_Pass ?>" name="R_contra" id="R_contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña"><br>
         <h3>Confirmar Contraseña</h3>
-        <input class="controls" type="password" maxlength="8" name="R_contra_2" id="R_contra_2" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese nuevamente la Contraseña"><br>
+        <input class="controls" type="password" maxlength="<?php echo $Max_Pass ?>" name="R_contra_2" id="R_contra_2" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese nuevamente la Contraseña"><br>
         <h3>Correo Electronico</h3>
         <input class="controls" type="text" name="R_correo" placeholder="Ingrese su Correo Electronico"><br>
 
@@ -114,7 +125,7 @@ function mostrarContrasena() {
        
     </form>
     <section>
-    <li><a href="../Pantallas/Login.php">volver atras</a></li> <!-- text que te manda a login-->
+    <li><a href="../Pantallas/Login.php">Volver Atras</a></li> <!-- text que te manda a login-->
 </body>
 
 </html>

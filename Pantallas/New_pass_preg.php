@@ -26,9 +26,9 @@
 </head>
 <body  style="background: rgb(1,5,36);
             background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
-        <section class="primer_i">
+        <section style="width: 400px; height: auto; margin-bottom:35px; margin-top:35px; " class="primer_i">
 
-        <form class="contra1" method="POST" action="../Controladores/New_pass_pregun.php" enctype="multipart/form-data"  onsubmit="return validarFormulario()">
+        <form id="formulario_contra" class="contra1" method="POST" action="../Controladores/New_pass_pregun.php" enctype="multipart/form-data"  onsubmit="return validarFormulario()">
           <?php 
               if(isset($_GET['error'])) { ?>
               <p class="error"><?php echo $_GET['error']; ?></p>
@@ -37,20 +37,37 @@
               <?php
               include ("../conexion_BD.php");
               //include("../Controladores/New_pass_pregun.php")
-          
-          ?>
+              
+                $sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in (9,10)");
+                // Verificar si la consulta devolvió resultados
+                if (mysqli_num_rows($sql2) >= 1) {
+                    // Recorrer los resultados y mostrarlos en pantalla
+                    while($row = mysqli_fetch_array($sql2)) {
+                      if ($row['ID_Parametro'] == 9) {
+                        $Min_Pass=$row['Valor'];
+                    } 
+
+                        if ($row['ID_Parametro'] == 10) {
+                            $Max_Pass=$row['Valor'];
+                        }     
+                    }
+                }
+              ?>
 
       
 
           <span class="fas fa-user-lock"></span>
           <h2> Es necesario un cambio de contraseña</h2>
          <!--  <small id="passwordHelp" class="form-text text-muted">La contraseña debe tener al menos 8 caracteres, una letra minúscula, una letra mayúscula y un número.</small>-->
+         <?php
+         include("../Controladores/New_pass_pregun.php");
+         ?>
           
           <h3>Ingrese una nueva contraseña</h3>
-          <input class="controls" type="password" name="p_contranueva" id="contranueva" placeholder="Ingrese la Contraseña Nueva" onpaste="return false" oncopy="return false" onkeypress="return bloquearEspacio(event);" required><br>
+          <input class="controls" type="password" name="p_contranueva" id="contranueva" maxlength="<?php echo $Max_Pass ?>" placeholder="Ingrese la Contraseña Nueva" onpaste="return false" oncopy="return false" onkeypress="return bloquearEspacio(event);" required><br>
 
           <h3>Confirma tu nueva contraseña</h3>
-          <input onpaste="return false" oncopy="return false" class="controls" type="password" name="p_confir_contranueva" id="confir_contranueva" placeholder="Confirmacion de la nueva contraseña" onkeypress="return bloquearEspacio(event);" required><br>
+          <input onpaste="return false" oncopy="return false" class="controls" type="password" name="p_confir_contranueva" id="confir_contranueva" maxlength="<?php echo $Max_Pass ?>" placeholder="Confirmacion de la nueva contraseña" onkeypress="return bloquearEspacio(event);" required><br>
           
           <input type="checkbox" id="mostrar_contrasena">
             <label for="mostrar_contrasena">Mostrar contraseñas</label>
@@ -223,27 +240,6 @@
 
  
 </script>
-
-<script>//Exigir contraseña robusta
-  // Agregar validación de contraseña
-  document.getElementById('contranueva').addEventListener('input', function() {
-    var password = this.value;
-    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-
-    if (!regex.test(password)) {
-      this.setCustomValidity('La contraseña debe tener al menos 8 caracteres, una letra minúscula, una letra mayúscula y un número.');
-      this.classList.add('is-invalid');
-    } else {
-      this.setCustomValidity('');
-      this.classList.remove('is-invalid');
-    }
-  });
-
-
-
-</script>
-
-
 
 
 </html>

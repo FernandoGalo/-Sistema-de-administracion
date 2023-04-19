@@ -9,10 +9,6 @@
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
     
-    <!--Libreria de bosstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Preload -->
     <link rel="preload" href="../css/normalize.css">
@@ -35,7 +31,7 @@ function bloquearEspacio(event) {
 
 
   
-    <section class="f_login">
+    <section style="width: 400px; height: auto; margin-bottom:35px; margin-top:35px;" class="f_login">
 
         <form class="New-Pass"  action="../Controladores/controlador_nueva_contra.php" method="post" enctype="multipart/form-data">
 
@@ -46,7 +42,17 @@ function bloquearEspacio(event) {
             
               <?php
               include ("../conexion_BD.php");
-              //include ("../Controladores/controlador_nueva_contra.php");
+              
+              $sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro`=10");
+              // Verificar si la consulta devolvió resultados
+              if (mysqli_num_rows($sql2) >= 1) {
+                  // Recorrer los resultados y mostrarlos en pantalla
+                  while($row = mysqli_fetch_array($sql2)) {
+                      if ($row['ID_Parametro'] == 10) {
+                          $Max_Pass=$row['Valor'];
+                      }     
+                  }
+              }
               ?>
 
             <?php 
@@ -60,9 +66,9 @@ function bloquearEspacio(event) {
           <input class="controls" maxlength="20" type="text" id="token" name="token" onkeypress="return bloquearEspacio(event)" placeholder="Ingrese su Token" required><br>
         
           <h3>Nueva Contraseña</h3>
-          <input class="controls" maxlength="20" type="password" id="contrasena_nueva" name="contrasena_nueva" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese su Nueva Contraseña" onpaste="return false" oncopy="return false"  required><br>
+          <input class="controls" maxlength="<?php echo $Max_Pass ?>" type="password" id="contrasena_nueva" name="contrasena_nueva" onkeypress="return bloquearEspacio(event)"  placeholder="Ingrese su Nueva Contraseña" onpaste="return false" oncopy="return false"  required><br>
           <h3>Confirmar Nueva contraseña</h3>
-          <input class="controls" maxlength="20" type="password" id="confirmar_contrasena" name="confirmar_contrasena" onkeypress="return bloquearEspacio(event)"  placeholder="Confirme su nueva Contraseña" onpaste="return false" oncopy="return false"  required><br>
+          <input class="controls" maxlength="<?php echo $Max_Pass ?>" type="password" id="confirmar_contrasena" name="confirmar_contrasena" onkeypress="return bloquearEspacio(event)"  placeholder="Confirme su nueva Contraseña" onpaste="return false" oncopy="return false"  required><br>
 
           
           <input type="checkbox" id="mostrar_contrasena">

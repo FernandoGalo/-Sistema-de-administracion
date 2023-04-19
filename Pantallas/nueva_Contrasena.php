@@ -26,7 +26,7 @@
 </head>
 <body  style="background: rgb(1,5,36);
             background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
-        <section class="primer_i">
+        <section style="width: 400px; height: auto; margin-bottom:35px; margin-top:35px;" class="primer_i">
 
         <form  class="contra1" action="../Controladores/controlador_N_Contra.php" method="post" enctype="multipart/form-data"  onsubmit="return validarFormulario()">
         <?php 
@@ -36,16 +36,25 @@
 
             <?php
              include ("../conexion_BD.php");
-             //include ("controlador_N_Contra");
+             $sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro`=10");
+              // Verificar si la consulta devolvió resultados
+              if (mysqli_num_rows($sql2) >= 1) {
+                  // Recorrer los resultados y mostrarlos en pantalla
+                  while($row = mysqli_fetch_array($sql2)) {
+                      if ($row['ID_Parametro'] == 10) {
+                          $Max_Pass=$row['Valor'];
+                      }     
+                  }
+              }
         ?>
         <span class="fas fa-user-lock"></span>
          <h2> Es necesario un cambio de contraseña</h2>
          
          <h3>Ingrese una nueva contraseña</h3>
-         <input onpaste="return false" oncopy="return false" class="controls" type="password" name="contranueva" id="contranueva" placeholder="Ingrese la Contraseña Nueva" onpaste="return false" oncopy="return false" onkeypress="return bloquearEspacio(event);" required><br>
+         <input maxlength="<?php echo $Max_Pass ?>" onpaste="return false" oncopy="return false" class="controls" type="password" name="contranueva" id="contranueva" placeholder="Ingrese la Contraseña Nueva" onpaste="return false" oncopy="return false" onkeypress="return bloquearEspacio(event);" required><br>
 
          <h3>Confirma tu nueva contraseña</h3>
-         <input onpaste="return false" oncopy="return false" class="controls" type="password" name="confir_contranueva" id="confir_contranueva" placeholder="Confirmacion de la nueva contraseña" onkeypress="return bloquearEspacio(event);" required><br>
+         <input maxlength="<?php echo $Max_Pass ?>" onpaste="return false" oncopy="return false" class="controls" type="password" name="confir_contranueva" id="confir_contranueva" placeholder="Confirmacion de la nueva contraseña" onkeypress="return bloquearEspacio(event);" required><br>
          
          <input type="checkbox" id="mostrar_contrasena">
           <label for="mostrar_contrasena">Mostrar contraseñas</label>

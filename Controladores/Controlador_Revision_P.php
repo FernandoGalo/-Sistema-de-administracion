@@ -22,7 +22,7 @@ $sql=$conexion->query("SELECT Preguntas_Contestadas FROM `tbl_ms_usuario` WHERE 
 if ($C_preguntas_respondidas >= $parametro_preguntas) {
    $sql=$conexion->query("SELECT * FROM tbl_ms_usuario where Estado_Usuario='NUEVO' and ID_Usuario='$idUser' ");
             if ($datos=$sql->fetch_object()) {
-               header("location:../Pantallas/nueva_Contraseña.php");
+               header("location:../Pantallas/nueva_Contrasena.php");
             }else {
                header("location:../Pantallas/login.php");
             }

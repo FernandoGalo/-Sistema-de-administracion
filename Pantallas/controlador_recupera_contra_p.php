@@ -21,7 +21,7 @@
 <body style="background: rgb(1,5,36);
             background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
     
-    <section class="f_login">
+    <section style="width: 400px; height: auto; margin-bottom:35px" class="f_login">
             
     <form  class="contra1" action="../Controladores/recupera_contra_pregunta.php" method="post" enctype="multipart/form-data" onsubmit="return validarFormulario()">
             <h2>Recuperacion de Contraseña</h2><div class="log_R">

@@ -70,7 +70,7 @@ function mostrarPassword() {
 </head>
 <body style="background: rgb(1,5,36);
             background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
-<section class="f_login">
+<section style="height: auto; margin-bottom:35px; margin-top:35px;" class="f_login">
     <form actions2="../Controladores/controlador_login.php" method="post">
             <h2>Inicio</h2>
             <div class="logo_l">
@@ -89,14 +89,14 @@ function mostrarPassword() {
         <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)" style="text-transform:uppercase" placeholder="Ingrese su Usuario"><br> 
         <h3>Contraseña</h3>
         <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
-        <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña"><br>
+        <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña">
 
-        <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Sesion" ></br>
-        <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" ></br>
-        <p><a href="../Pantallas/renovar-Contra.php">¿Olvidaste la Contraseña?</a><p>
+        <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Sesion" >
+        <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" >
+        <p><a href="../Pantallas/renovar-Contra.php">¿Olvidaste la Contraseña?</a>
         
     </form>
-    <li><a href="../Pagina/index.html">Pagina Web</a></li><!--texto que te manda ala pagina web -->
+    <li style="margin-top:10px;"><a href="../Pagina/index.html">Pagina Web</a></li><!--texto que te manda ala pagina web -->
 </body>
 
 </html>

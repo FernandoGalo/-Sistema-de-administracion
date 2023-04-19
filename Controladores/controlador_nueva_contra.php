@@ -35,20 +35,28 @@ include ("../conexion_BD.php");
     
                     //Se le permite hacer el cambio de contraseña
                         //Trae el parametro de vencimiento DE CONTRASEÑA
-                        $sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
-                                        
-                        while($row=mysqli_fetch_array($sql2)){
-                            $diasV=$row['Valor'];
+                        $sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in(7,9)");
+                        // Verificar si la consulta devolvió resultados
+                        if (mysqli_num_rows($sql2) >= 1) {
+                            // Recorrer los resultados y mostrarlos en pantalla
+                            while($row = mysqli_fetch_array($sql2)) {
+                                if ($row['ID_Parametro'] == 7) {
+                                    $diasV=$row['Valor'];
+                                } 
+
+                                if ($row['ID_Parametro'] == 9) {
+                                    $Min_Pass=$row['Valor'];
+                                }     
+                            }
                         }
 
                         $F_Vencida= date("Y-m-d",strtotime($Fecha_Actual."+ ".$diasV." days"));
                         
 
-                        if (strlen($contra_new) < 8 || !preg_match('/[a-z]/', $contra_new) || !preg_match('/[A-Z]/', $contra_new) || !preg_match('/[0-9]/', $contra_new) ) {
-                            echo'<script>alert("Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
+                        if (strlen($contra_new) < $Min_Pass || !preg_match('/[a-z]/', $contra_new) || !preg_match('/[A-Z]/', $contra_new) || !preg_match('/[0-9]/', $contra_new) ) {
+                            echo'<script>alert("Contraseña poco segura. Debe contener al menos \'' . $Min_Pass . '\' caracteres , 1 numero, 1 Mayuscula y 1 minuscula")</script>';
                             header("refresh:0;url=../Pantallas/Nueva_Contra.php");
-                            //echo '<div class="alert_danger">Contraseña poco segura. Debe contener al menos 8 caracteres , 1 numero, 1 Mayuscula y 1 minuscula</div>';
-        
+                           
     
                         }else {
                             if ($contra_new === $contra_confir_new) {

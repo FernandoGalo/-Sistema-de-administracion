@@ -21,9 +21,10 @@
     <!-- Para Tablet -->
     <link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 1024px)' href='../css/medium-style.css' />
 </head>
-<body>
+<body style="background: rgb(1,5,36);
+            background: radial-gradient(circle, rgba(1,5,36,1) 0%, rgba(50,142,190,1) 100%);">
 
-<section class="primer_i">
+<section style="width: 400px; height: 400px; margin-bottom:40px; margin-top:70px;" class="primer_i">
 
 <form class="content" action="../Controladores/Mas_Preguntas.php" method="post" enctype="multipart/form-data">
 <?php 
@@ -37,7 +38,7 @@
 $sql=$conexion->query("SELECT * FROM tbl_preguntas");
 ?>
 
-<h3>Seleccione una pregunta</h3>
+<h3 style="margin-top:40px; margin-bottom:30px; text-align:center ">Seleccione una pregunta</h3>
 <select class="controls" type="text" name="Pregunta" required ><br>
     <?php
 while($row=mysqli_fetch_array($sql)){
