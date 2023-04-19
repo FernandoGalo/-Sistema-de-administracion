@@ -11,6 +11,7 @@ $database = 'bd_asociacion_creo_en_ti';
 $backup_file = "C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/" . $_POST['backup_file'];
 
 // Crear la conexión PDO
+if (file_exists($backup_file) && pathinfo($backup_file, PATHINFO_EXTENSION) == 'sql') {
 try {
   $dsn = "mysql:host={$host};dbname={$database};charset=utf8mb4";
   $options = [
@@ -51,5 +52,10 @@ try {
             location.assign('Backups_BD.php');
             </script>";
 }
-
+}else{
+  echo "<script language='JavaScript'>
+                alert('El archivo de backup seleccionado no es valido, Eliga un archivo valido.');
+            location.assign('Backups_BD.php');
+            </script>";
+}
 ?>
