@@ -110,6 +110,8 @@ $ID_Rol=$_SESSION['ID_Rol'];
     </div>
     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=12");
 if ($datos=$sql->fetch_object()) { ?>
+<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=12");
+if ($datos=$sql->fetch_object()) { ?>
   <div class="izquierda">
 <form method="post" enctype="multipart/form-data">
     <h3>Guardar una copia de seguridad</h3>
@@ -117,6 +119,9 @@ if ($datos=$sql->fetch_object()) { ?>
     <button class="zmdi zmdi-cloud-download" type="submit" name="crear_copia_btn">Crear copia de seguridad</button>
 </form>
 </div>
+<?php } ?>
+<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=12");
+if ($datos=$sql->fetch_object()) { ?>
 <div class="derecha">
 <h1>Restaurar una copia de seguridad</h1>
   <form action="restore.php" method="post">
@@ -139,6 +144,9 @@ if ($datos=$sql->fetch_object()) { ?>
     <button class="zmdi zmdi-cloud-upload" type="submit" onclick='return confirmar1()'> Restaurar Backup</button>
   </form>
 </div>
+<?php } ?>
+<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=12");
+if ($datos=$sql->fetch_object()) { ?>
 <h1>Eliminar un archivo de copia de seguridad</h1>
 <form action="Eliminar_backup.php" method="post">
 <select class="form-control" id="backup_file" name="backup_file" style="max-width: 300px;">
@@ -159,7 +167,7 @@ if ($datos=$sql->fetch_object()) { ?>
     <br><br>
     <button class="zmdi zmdi-close" type="submit" onclick='return confirmar()'>Eliminar Backup</button>
 </form>
-  
+  <?php } ?>
   </section>
   <?php } ?>
   </body>
