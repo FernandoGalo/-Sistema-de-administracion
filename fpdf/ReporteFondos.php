@@ -70,7 +70,7 @@ class PDF extends FPDF
       $this->SetTextColor(0, 95, 189);
       $this->Cell(100); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE VOLUNTARIOS"), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE FONDOS"), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
@@ -79,10 +79,14 @@ class PDF extends FPDF
       $this->SetTextColor(000, 000, 000); //colorTexto
       $this->SetDrawColor(255, 255, 255); //colorBorde 163 163 163
       $this->SetFont('Arial', 'B', 11);
-      $this->Cell(70, 10, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(60, 10, utf8_decode('NOMBRE DEL VOLUNTARIO'), 1, 0, 'C', 1);
-      $this->Cell(70, 10, utf8_decode('NÚMERO DE TELÉFONO'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('DIRECCIÓN'), 1, 1, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('N°'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Tipo de Fondo'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('Nombre del Objeto'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('Cantidad recibida'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Valor_monetario'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Donante'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Fecha de Adquisicion'), 1, 1, 'C', 1);
     //   $this->Cell(50, 10, utf8_decode('DEPARTAMENTO'), 1, 0, 'C', 1);
     //   $this->Cell(50, 10, utf8_decode('MUNICIPIO'), 1, 1, 'C', 1);
       // $this->Cell(50, 10, utf8_decode('CAI'), 1, 0, 'C', 1);
@@ -119,24 +123,29 @@ $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
 
-$consulta_reporte_alquiler = $conexion->query("SELECT SQL_CALC_FOUND_ROWS vp.ID_Vinculacion_Proy, v.Nombre_Voluntario, p.Nombre_del_proyecto, a.nombre_Area_Trabajo, vp.Fecha_Vinculacion_P FROM tbl_voluntarios_proyectos vp 
-LEFT JOIN tbl_voluntarios v ON vp.ID_Voluntario = v.ID_Voluntario
-LEFT JOIN tbl_proyectos p ON vp.ID_proyecto = p.ID_proyecto
-LEFT JOIN tbl_area_trabajo a ON vp.ID_Area_Trabajo = a.ID_Area_Trabajo
-WHERE (vp.ID_Vinculacion_Proy LIKE '%{$campo}%' OR v.Nombre_Voluntario LIKE '%{$campo}%' OR a.nombre_Area_Trabajo LIKE '%{$campo}%' OR vp.Fecha_Vinculacion_P LIKE '%{$campo}%') 
+$consulta_reporte_alquiler = $conexion->query("SELECT f.ID_de_fondo, tf.nombre_T_Fondo, f.Nombre_del_Objeto, f.Cantidad_Rec, f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
+FROM tbl_fondos f 
+JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
+JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
+JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto
+WHERE (f.ID_de_fondo LIKE '%{$campo}%' OR tf.nombre_T_Fondo LIKE '%{$campo}%' OR f.Nombre_del_Objeto LIKE '%{$campo}%' OR f.Cantidad_Rec LIKE '%{$campo}%' OR f.Valor_monetario LIKE '%{$campo}%' OR d.Nombre_D LIKE '%{$campo}%' OR f.Fecha_de_adquisicion_F LIKE '%{$campo}%')
 AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
       /* TABLA */
-      $pdf->Cell(70, 10, utf8_decode($i), 0, 0, 'C', 0);
-      $pdf->Cell(60, 10, utf8_decode($datos_reporte -> Nombre_Voluntario), 0, 0, 'C', 0);
-      $pdf->Cell(70, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> nombre_Area_Trabajo), 0, 1, 'C', 0);
+      $pdf->Cell(20, 10, utf8_decode($i), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> nombre_T_Fondo), 0, 0, 'C', 0);
+      $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Nombre_del_Objeto), 0, 0, 'C', 0);
+      $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Cantidad_Rec), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Valor_monetario), 0, 0, 'C', 0);
+      $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Nombre_D), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_de_adquisicion_F), 0, 1, 'C', 0);
     //   $pdf->Cell(50, 10, utf8_decode($datos_reporte -> departamento), 0, 0, 'C', 0);
     //   $pdf->Cell(50, 10, utf8_decode($datos_reporte -> municipio), 0, 1, 'C', 0);
       // $pdf->Cell(100, 10, utf8_decode($datos_reporte -> cai), 1, 0, 'C', 0);   
       // $pdf->Cell(20, 10, utf8_decode($datos_reporte -> estado), 0, 1, 'C', 0);   
    }
 
-$pdf->Output('ReporteDecSAR.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('ReporteDeFondos.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
