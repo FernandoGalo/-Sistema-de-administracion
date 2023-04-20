@@ -45,6 +45,9 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">Bitacora</h1>
+                          <!-- PARA GENERAR LOS REPORTES ====================== -->
+                <a href="../../fpdf/ReporteBitacora.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Bitacora</i></a>               
+                <!-- Fin Generar Reporte -->
     <main>
         <div class="container py-4 text-center">
 
@@ -76,7 +79,16 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
                     <input type="text" name="campo" id="campo" class="form-control">
                 </div>
             </div>
+            <script>
+document.getElementById("campo").addEventListener("keyup", function(event) {
+  // Obtener el valor del input
+  var campo = document.getElementById("campo").value;
 
+  // Actualizar el valor del enlace
+  var link = document.getElementById("generar-reporte");
+  link.setAttribute("href", "../../fpdf/ReporteBitacora.php?campo=" + encodeURIComponent(campo));
+});
+  </script>
             <div class="row py-4">
                 <div class="col">
                     <table class="table table-sm table-bordered table-striped">
