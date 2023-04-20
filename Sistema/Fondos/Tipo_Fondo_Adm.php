@@ -39,21 +39,6 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
       return confirm('¿Está Seguro?, se eliminará el Tipo de Fondo');
     }
   </script>
-<script>
-function redirigirProyectos() {
-  var url = "../Proyectos/ProyectosAdm.php";
-  if (url) {
-    window.location.href = url;
-  }
-}
-
-function redirigirFondos() {
-  var url = "FondosAdm.php";
-  if (url) {
-    window.location.href = url;
-  }
-}
-</script>
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -80,8 +65,6 @@ function redirigirFondos() {
 if ($datos=$sql->fetch_object()) { ?>
 
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money-box"></i> Agregar Tipo de Fondo</button>
-                          <button id="proyectos-btn" onclick="redirigirProyectos()">Ir a Proyectos</button>
-                          <button id="Fondos-btn" onclick="redirigirFondos()">Ir a Fondos</button>
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
