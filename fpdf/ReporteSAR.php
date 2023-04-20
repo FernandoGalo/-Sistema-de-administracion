@@ -78,7 +78,7 @@ class PDF extends FPDF
 
       $this->SetY(-15); // Posición: a 1,5 cm del final
       $this->SetFont('Arial', 'I', 8); //tipo fuente, cursiva, tamañoTexto
-      $hoy = date('d/m/Y');
+      $hoy = date('d/m/Y h:m:s');
       $this->Cell(540, 10, utf8_decode($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
    }
 }
