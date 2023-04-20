@@ -72,9 +72,9 @@ class PDF extends FPDF
       $this->SetDrawColor(255, 255, 255); //colorBorde 163 163 163
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(70, 10, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(60, 10, utf8_decode('NOMBRE DEL VOLUNTARIO'), 1, 0, 'C', 1);
-      $this->Cell(70, 10, utf8_decode('NÚMERO DE TELÉFONO'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('DIRECCIÓN'), 1, 1, 'C', 1);
+      $this->Cell(60, 10, utf8_decode('Nombre voluntario'), 1, 0, 'C', 1);
+      $this->Cell(70, 10, utf8_decode('Telefono'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Direccion'), 1, 1, 'C', 1);
     //   $this->Cell(50, 10, utf8_decode('DEPARTAMENTO'), 1, 0, 'C', 1);
     //   $this->Cell(50, 10, utf8_decode('MUNICIPIO'), 1, 1, 'C', 1);
       // $this->Cell(50, 10, utf8_decode('CAI'), 1, 0, 'C', 1);
@@ -108,8 +108,9 @@ $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
-
-$consulta_reporte_alquiler = $conexion->query("SELECT * FROM tbl_voluntarios");
+$campo = $_GET["campo"];
+$consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_voluntarios
+WHERE ID_Voluntario LIKE '%{$campo}%' OR Nombre_Voluntario LIKE '%{$campo}%' OR Telefono_Voluntario LIKE '%{$campo}%' OR Direccion_Voluntario LIKE '%{$campo}%'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
@@ -124,4 +125,4 @@ while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
       // $pdf->Cell(20, 10, utf8_decode($datos_reporte -> estado), 0, 1, 'C', 0);   
    }
 
-$pdf->Output('ReporteDecSAR.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('ReporteDeVoluntarios.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)

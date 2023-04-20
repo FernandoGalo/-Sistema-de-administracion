@@ -103,7 +103,7 @@ $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
-
+$campo = $_GET["campo"];
 $consulta_reporte_alquiler = $conexion->query("SELECT * FROM tbl_area_trabajo");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
