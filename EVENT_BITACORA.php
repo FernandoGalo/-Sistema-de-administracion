@@ -179,7 +179,7 @@ class EVENT_BITACORA{
             $conexion = $model->conectar();
             $IDDEL= $_SESSION['IDUsuarioBitacoraDELETE'];
             $Nombre_Usuario = $_SESSION['UsuarioBitacoraDELETE'];
-            $Descripcion = "Se elimino el usuario: " .$Nombre_Usuario;
+            $Descripcion = "Se elimino el usuario con ID: " .$Nombre_Usuario;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de usuario', '$Descripcion')";
