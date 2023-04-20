@@ -105,6 +105,11 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 $campo = $_GET["campo"];
 $consulta_reporte_alquiler = $conexion->query("SELECT * FROM tbl_area_trabajo");
+$campo = $_GET["campo"];
+
+$consulta_reporte_alquiler = $conexion->query("SELECT SQL_CALC_FOUND_ROWS ID_Area_Trabajo ,nombre_Area_Trabajo, descripcion_A_Trabajo
+FROM tbl_area_trabajo
+WHERE ID_Area_Trabajo LIKE '%{$campo}%' OR nombre_Area_Trabajo LIKE '%{$campo}%'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;

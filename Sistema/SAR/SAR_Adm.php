@@ -123,6 +123,7 @@ if ($datos=$sql->fetch_object()) { ?>
                         <div class="text-right mb-2">
                           <a href="../../fpdf/ReporteSAR.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf">Generar Reporte SAR</i></a>
                         </div>
+                        <!-- Fin Generar Reporte -->
                         <thead>
                             <th>ID SAR</th>
                             <th>RTN</th>
