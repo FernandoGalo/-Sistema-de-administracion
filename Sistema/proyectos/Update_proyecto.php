@@ -126,7 +126,7 @@
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Fondos proyectados(*):</label>
                             <input type="hidden" name="Monto_proyectados" id="Monto_proyectados">
-                            <input style="text" type="text" class="form-control" name="Monto_proyectados" id="Monto_proyectados" maxlength="10"  placeholder="Ingrese los fondos proyectados:" value="<?php echo $Fondos_proyec; ?>"required>
+                            <input style="text" type="text" class="form-control" name="Monto_proyectados" id="Monto_proyectados" maxlength="10"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese los fondos proyectados:" value="<?php echo $Fondos_proyec; ?>"required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Estado Actual(*)</label>
