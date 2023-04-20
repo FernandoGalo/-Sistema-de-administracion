@@ -119,4 +119,4 @@ while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
       $pdf->Cell(140, 10, utf8_decode($datos_reporte -> descripcion_A_Trabajo), 0, 1, 'C', 0);
    }
 
-$pdf->Output('ReporteDecSAR.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('ReporteAreasTrabajo.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
