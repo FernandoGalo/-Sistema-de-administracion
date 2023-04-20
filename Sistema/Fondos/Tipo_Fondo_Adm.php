@@ -66,7 +66,7 @@ if ($datos=$sql->fetch_object()) { ?>
 
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money-box"></i> Agregar Tipo de Fondo</button>
                                                   <!-- PARA GENERAR LOS REPORTES ====================== -->
-                <a href="../../fpdf/ReporteTipoFondos.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios por Proyectos</i></a>               
+                <a href="../../fpdf/ReporteTipoFondos.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Tipo de Fondos</i></a>               
                 <!-- Fin Generar Reporte -->
   
                           <div class="box-tools pull-right">
