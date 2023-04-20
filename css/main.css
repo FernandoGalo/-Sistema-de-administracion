@@ -629,7 +629,9 @@ body, html{
   .boton-ver {
 	background-color: #dfb05a;
   }
-  
+  .boton-pdf{
+	background-color: #8a0900;
+  }
   .boton-editar i, .boton-eliminar i, .boton-permiso i, .boton-ver i{
 	margin-right: 5px;
   }

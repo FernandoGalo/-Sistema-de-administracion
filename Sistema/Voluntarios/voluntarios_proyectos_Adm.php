@@ -63,6 +63,9 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=15 ");
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-link"></i> Agregar Vinculacion a proyecto</button>
+                          <!-- PARA GENERAR LOS REPORTES ====================== -->
+                <a href="../../fpdf/ReporteVolProy.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios por Proyectos</i></a>               
+                <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">
                           <?php } ?>
                         </div>
@@ -103,8 +106,19 @@ if ($datos=$sql->fetch_object()) { ?>
                 <div class="col-auto">
                     <input type="text" name="campo" id="campo" class="form-control">
                 </div>
-            </div>
+                
+                <script>
+document.getElementById("campo").addEventListener("keyup", function(event) {
+  // Obtener el valor del input
+  var campo = document.getElementById("campo").value;
 
+  // Actualizar el valor del enlace
+  var link = document.getElementById("generar-reporte");
+  link.setAttribute("href", "../../fpdf/ReporteVolProy.php?campo=" + encodeURIComponent(campo));
+});
+  </script>   
+                
+            </div>
             <div class="row py-4">
                 <div class="col">
                     <table class="table table-sm table-bordered table-striped">
