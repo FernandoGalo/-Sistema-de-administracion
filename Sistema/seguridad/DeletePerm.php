@@ -1,7 +1,6 @@
 <?php
 include("../../conexion_BD.php");
     $ID_Per = $_GET['ID_permiso'];
-    $ID_Rol = $_GET['ID_Rol'];
 
     // $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
 
@@ -21,7 +20,7 @@ include("../../conexion_BD.php");
     if($resultado){
         echo "<script languaje='JavaScript'>
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
-                location.assign('PermisosUl.php');
+                location.assign('RolesAdm.php');
                 </script>";  
                 require_once "../../EVENT_BITACORA.php";
                 $model = new EVENT_BITACORA;
@@ -35,12 +34,12 @@ include("../../conexion_BD.php");
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>
         alert('No puedes borrar este usuario');
-        location.assign('PermisosUl.php');
+        location.assign('RolesAdm.php');
         </script>";   
         } else {
             echo "<script languaje='JavaScript'>
         alert('Los datos NO se eliminaron de la BD');
-        location.assign('PermisosUl.php');
+        location.assign('RolesAdm.php');
         </script>"; 
         }
           

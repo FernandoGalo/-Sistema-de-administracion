@@ -126,10 +126,10 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
                     <table class="table table-sm table-bordered table-striped">
                         <thead>
                             <th class="sort asc">ID</th>
-                            <th class="sort asc">Nombre_Voluntario</th>
-                            <th class="sort asc">ID_proyecto</th>
-                            <th class="sort asc">ID_Area_Trabajo</th>
-                            <th class="sort asc">Fecha_Vinculacion_P</th>
+                            <th class="sort asc">Nombre del voluntario</th>
+                            <th class="sort asc">Nombre proyecto</th>
+                            <th class="sort asc">Area de trabajo</th>
+                            <th class="sort asc">Fecha de Vinculacion</th>
                             <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=15");
 if ($datos=$sql->fetch_object()) { ?>
                             <th></th>

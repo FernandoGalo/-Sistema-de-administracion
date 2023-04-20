@@ -6,6 +6,7 @@
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
  $ID_RolPer = $_GET['ID_Rol'];
+ $_SESSION['ID_RolPer']= $ID_RolPer;
 //Consulta permiso
 $rol_id = $ID_RolPer;
 
