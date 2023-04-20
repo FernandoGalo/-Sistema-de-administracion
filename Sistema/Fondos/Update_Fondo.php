@@ -13,13 +13,14 @@
     <title>Document</title>
 
 <title>Inicio</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="../../css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../css/main.css">
 
 </head>
 <body>
 
+    <?php include '../sidebarpro.php'; ?>
     <?php
         if(isset($_POST['enviar_F2'])){
             //aqui entra si el usuario ha presionado el boton enviar
@@ -84,18 +85,18 @@
             mysqli_close($conexion);
             
     ?>
-    	<!-- Pagina de contenido-->
+        <!-- Pagina de contenido-->
       <section class="full-box dashboard-contentPage" style="overflow-y: auto;">
-		<!-- Barra superior -->
-		<nav class="full-box dashboard-Navbar">
-			<ul class="full-box list-unstyled text-right">
-				<li class="pull-left">
-					<a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
-				</li>
-			</ul>
-		</nav>
-		<!-- Muestra el contenido de la pagina -->
-		<div class="container-fluid">
+        <!-- Barra superior -->
+        <nav class="full-box dashboard-Navbar">
+            <ul class="full-box list-unstyled text-right">
+                <li class="pull-left">
+                    <a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Muestra el contenido de la pagina -->
+        <div class="container-fluid">
         <div class="row">
               <div class="col-md-12">
                   <div class="box">
@@ -122,7 +123,8 @@
 
                            $sql=$conexion->query("SELECT * FROM tbl_tipos_de_fondos");
                           ?>
-                            <select class="controls" type="text" name="tipos_de_fondos" id="tipos_de_fondos" value="<?php echo $ID_Tipo_Fondo; ?>" required ><br>
+                            <select  class="form-control" name="tipos_de_fondos" id="tipos_de_fondos" value="<?php echo $ID_Tipo_Fondo; ?>" required ><br>
+                            <option value="">Seleccione un tipo de fondo:</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql)){
                             ?>
@@ -150,7 +152,8 @@
                             <?php
                            $sql=$conexion->query("SELECT * FROM tbl_donantes");
                           ?>
-                            <select class="controls" type="text" name="Donante" id="Donante" value="<?php echo $ID_Donador; ?>" required ><br>
+                            <select  class="form-control" name="Donante" id="Donante" value="<?php echo $ID_Donador; ?>" required ><br>
+                            <option value="">Seleccione un Donante:</option>
                            <?php
                             while($row1=mysqli_fetch_array($sql)){
                             ?>
@@ -163,12 +166,11 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Proyecto al que esta siendo donado:</label>
                             <?php include("../../conexion_BD.php");
-    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
-
-    while($row=mysqli_fetch_array($sql1)){
-        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
-    }?>
-                            <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
+                            $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+                            while($row=mysqli_fetch_array($sql1)){
+                            $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+                             }?>
+                            <input class="form-control" name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Usuario</label>
@@ -196,8 +198,8 @@
                   </div><!-- /.box -->
               </div><!-- /.col -->
           </div><!-- /.row -->
-		</div>
-	</section>
+        </div>
+    </section>
                         
 
     <?php
@@ -206,12 +208,12 @@
 
 
 
-	<!--script en java para los efectos-->
+    <!--script en java para los efectos-->
   
-	<script src="../../js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
-	<script src="../../js/main.js"></script>
+    <script src="../../js/main.js"></script>
   <script src="./js/usuario.js"></script>
-  <?php include '../sidebarpro.php'; ?>
+
 </body>
 </html>
