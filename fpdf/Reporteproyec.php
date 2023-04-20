@@ -1,7 +1,6 @@
 <?php
 
 require('./fpdf.php');
-
 class PDF extends FPDF
 {
 
@@ -63,9 +62,9 @@ class PDF extends FPDF
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(30, 10, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(35, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
-      $this->Cell(70, 10, utf8_decode('Fecha de Inicio'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Fecha de Inicio'), 1, 0, 'C', 1);
       $this->Cell(40, 10, utf8_decode('Fecha de finalización'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('Fondos proyectados'), 1, 0, 'C', 1);
+      $this->Cell(70, 10, utf8_decode('Fondos proyectados'), 1, 0, 'C', 1);
       $this->Cell(50, 10, utf8_decode('Estado Proyecto'), 1, 1, 'C', 1);
       // $this->Cell(50, 10, utf8_decode('CAI'), 1, 0, 'C', 1);
       // $this->Cell(20, 10, utf8_decode('Estado'), 1, 1, 'C', 1);
@@ -109,9 +108,9 @@ while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
       /* TABLA */
       $pdf->Cell(30, 10, utf8_decode($i), 0, 0, 'C', 0);
       $pdf->Cell(35, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
-      $pdf->Cell(70, 10, utf8_decode($datos_reporte -> Fecha_de_inicio_P), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_de_inicio_P), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_final_P), 0, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fondos_proyecto), 0, 0, 'C', 0);
+      $pdf->Cell(70, 10, 'L' . number_format($datos_reporte->Fondos_proyecto, 2), 0, 0, 'C', 0);
       $pdf->Cell(50, 10, utf8_decode($datos_reporte -> Estado_Proyecto), 0, 1, 'C', 0);
       // $pdf->Cell(100, 10, utf8_decode($datos_reporte -> cai), 1, 0, 'C', 0);   
       // $pdf->Cell(20, 10, utf8_decode($datos_reporte -> estado), 0, 1, 'C', 0);   
