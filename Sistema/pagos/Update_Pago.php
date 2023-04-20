@@ -109,7 +109,7 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                           <label>ID del Pago(*):</label>
                             <input type="hidden" name="ID_de_pago" id="ID_de_pago">
-                            <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'   value="<?php echo $ID_Pago; ?>" readonly>
+                            <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'   value="<?php echo $ID_Pago; ?>" readonly>
                           </div>
                           
                           <?php require '../../conexion_BD.php';?>
