@@ -265,11 +265,11 @@ if ($datos=$sql->fetch_object()) { ?>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Cantidad recibida</label>
-                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" placeholder="Ingrese la cantidad de fondos recibidos" require>
+                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" onkeypress='return event.charCode >= 48 && event.charCode <= 57' pattern="^\d+(\.\d{1,2})?$" placeholder="Ingrese la cantidad de fondos recibidos" require>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Valor monetario</label>
-                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" placeholder="Ingrese el Valor monetario" require>
+                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese el Valor monetario" require>
                           </div>	
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Donante del fondo:</label>
