@@ -43,7 +43,7 @@
                 //fin parte 2
     //====================================================
         if(isset($_POST['enviar'])){
-            $nombreDonante = strtoupper($_POST['Nombre_Donante']);
+            $nombreDonante = $_POST['Nombre_Donante'];
             $telefono = $_POST['Telef'];
             $Direccion = $_POST['Direccion'];
             $email = $_POST['Correo_electronico'];

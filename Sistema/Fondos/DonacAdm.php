@@ -48,7 +48,7 @@ if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Donante</button>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
                           <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/Reportedonaciones.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
-                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Donaciones
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte de Donantes
                           </button>
                 <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">

@@ -233,17 +233,17 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Voluntario(*):</label>
                             <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
-                            <input onpaste="return false" style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="39" placeholder="Ingrese el nombre del voluntario" onkeypress="this.value = this.value.toUpperCase();" require>
+                            <input onpaste="return false"  type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="39" placeholder="Ingrese el nombre del voluntario" require>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telefono_Voluntario" id="Telefono_Voluntario">
-                            <input style="text-transform:uppercase" style="text" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" required>
+                            <input  style="text" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Direccion Voluntario(*):</label>
                             <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
-                            <textarea style="text-transform:uppercase" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion voluntario"  required></textarea>
+                            <textarea type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion voluntario"  required></textarea>
                           </div>
                         
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

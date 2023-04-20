@@ -127,7 +127,7 @@ $usuario=$_SESSION['usuario'];
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Voluntario(*):</label>
                             <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario"  onkeypress="validarMayusculas(event)"  value="<?php echo $Nombre_Voluntario; ?>"required>
+                            <input  type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario"  value="<?php echo $Nombre_Voluntario; ?>"required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Telefono(*):</label>
@@ -137,7 +137,7 @@ $usuario=$_SESSION['usuario'];
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Direccion Voluntario(*):</label>
                             <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion del voluntario" value="<?php echo $Direccion_Voluntario; ?>" required>
+                            <input type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion del voluntario" value="<?php echo $Direccion_Voluntario; ?>" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="Enviar_V" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>

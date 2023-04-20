@@ -138,7 +138,7 @@ while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> nombre_T_Fondo), 0, 0, 'C', 0);
       $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Nombre_del_Objeto), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Cantidad_Rec), 0, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte ->Valor_monetario), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, 'L' . number_format($datos_reporte->Valor_monetario, 2), 0, 0, 'C', 0);
       $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Nombre_D), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_de_adquisicion_F), 0, 1, 'C', 0);
