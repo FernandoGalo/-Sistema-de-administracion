@@ -27,7 +27,7 @@
 <?php include '../sidebarpro.php'; ?>
     <?php
         if(isset($_POST['enviar_F2'])){
-    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Usuario'");
+    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
 
     while($row=mysqli_fetch_array($sql1)){
         $ID_Usuario=$row['ID_Usuario'];
@@ -52,8 +52,8 @@
                     require_once "../../EVENT_BITACORA.php";
                     $model = new EVENT_BITACORA;
                     session_start();
-
                     $_SESSION['idpagoBitacoraUP']=$ID_Pago;
+                    $_SESSION['pagoBitacoraUP']=$Monto;
                     $model->RegUptpag();
 
             }else{

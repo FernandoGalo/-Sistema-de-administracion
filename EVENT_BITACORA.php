@@ -425,12 +425,12 @@ public function RegUptFondo(){
     #update pago
     public function RegUptpag(){
         session_start();
-
         $IDGlobal=$_SESSION['ID_User'];
-       $pago= $_SESSION['idpagoBitacoraUP'];
+        $ID_Pago=$_SESSION['idpagoBitacoraUP'];
+        $Monto= $_SESSION['pagoBitacoraUP'];
             $model = new conexion();
             $conexion = $model->conectar();       
-            $Descripcion = "Se modifico el pago con ID: " .$pago;
+            $Descripcion = "Se modifico el pago a: " . $Monto ." con ID: ".$ID_Pago;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDGlobal ', '10', 'Modificacion de pago', '$Descripcion')";
@@ -565,23 +565,18 @@ public function RegInsertSar(){
     #update SAR 
     public function RegUptSar(){
         session_start();
-        $_SESSION['$RTNsarBitUP']= $RTN;
-        
+        $IDGlobal=$_SESSION['ID_User'];
         $RTN=$_SESSION['$RTNsarBitUP'];
             $model = new conexion();
             $conexion = $model->conectar();      
-            $Descripcion = "Se modifico el registro SAR con RTN: " .$RTN;
+            $Descripcion = "Se modifico el registro SAR con RTN: ".$RTN;
             $fecha = date("Y-m-d h:i:s");
             $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
             VALUES (NULL,'$fecha', '$IDGlobal ', '11', 'Modificacion de SAR', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
             ?>
-    
-        <?php
-    
-        
-    
+        <?php    
     }
       //===================================================================================
 #delete SAR 
