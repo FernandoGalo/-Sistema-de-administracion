@@ -933,7 +933,7 @@ public function UPTProjec(){
   }
 
      #Insert Projecto
-public function UPTProj(){
+public function DELProj(){
     session_start();
     $IDGlobal=$_SESSION['ID_User'];
     $ID_proyecto= $_SESSION['IDprojectBitacora'];

@@ -26,7 +26,7 @@ include("../../conexion_BD.php");
                 $model = new EVENT_BITACORA;
                 session_start();
                 $_SESSION['IDprojectBitacora']=$ID_proyecto;
-                $model->UPTProj();  
+                $model->DELProj();  
 
                             
     }else{
