@@ -81,9 +81,9 @@ class PDF extends FPDF
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(20, 10, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(40, 10, utf8_decode('Tipo de Fondo'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('Nombre del Objeto'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('Cantidad recibida'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('Valor_monetario'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('Nombre Objeto'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Cantidad recibida'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('Valor monetario'), 1, 0, 'C', 1);
       $this->Cell(30, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
       $this->Cell(40, 10, utf8_decode('Donante'), 1, 0, 'C', 1);
       $this->Cell(40, 10, utf8_decode('Fecha de Adquisicion'), 1, 1, 'C', 1);
@@ -137,8 +137,8 @@ while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
       $pdf->Cell(20, 10, utf8_decode($i), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> nombre_T_Fondo), 0, 0, 'C', 0);
       $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Nombre_del_Objeto), 0, 0, 'C', 0);
-      $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Cantidad_Rec), 0, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Valor_monetario), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Cantidad_Rec), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($datos_reporte ->Valor_monetario), 0, 0, 'C', 0);
       $pdf->Cell(30, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Nombre_D), 0, 0, 'C', 0);
       $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_de_adquisicion_F), 0, 1, 'C', 0);
