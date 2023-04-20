@@ -57,7 +57,9 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Usuario</button>
                         <!-- PARA GENERAR LOS REPORTES ====================== -->
-                            <a href="../../fpdf/ReporteUsuario.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Usuarios</i></a>               
+                        <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteUsuario.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Usuarios
+                          </button>              
                             <!-- Fin Generar Reporte -->
   
                           <div class="box-tools pull-right">

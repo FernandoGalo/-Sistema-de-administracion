@@ -34,12 +34,12 @@ function mostrarform(flag) {
         $("#formularioregistros").show();
         $("#btnGuardar").prop("disabled", false);
         $("#btnagregar").hide();
-        $("#reporte").hide();
+        $("#generar-reporte").hide();
     } else {
         $("#listadoregistros").show();
         $("#formularioregistros").hide();
         $("#btnagregar").show();
-        $("#reporte").show();
+        $("#generar-reporte").show();
     }
 }
 

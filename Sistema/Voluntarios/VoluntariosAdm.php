@@ -51,7 +51,9 @@ $ID_Rol=$_SESSION['ID_Rol'];
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i> Agregar Voluntario</button>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
-                <a href="../../fpdf/ReporteVoluntarios.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios por Proyectos</i></a>               
+                          <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteVoluntarios.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios
+                          </button>              
                 <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">
                             <?php } ?>

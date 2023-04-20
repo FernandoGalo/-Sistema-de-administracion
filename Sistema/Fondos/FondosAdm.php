@@ -73,7 +73,10 @@ if ($datos=$sql->fetch_object()) { ?>
 
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money-box"></i> Agregar Fondo</button>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
-                <a href="../../fpdf/ReporteFondos.php?campo=" id="generar-reporte" target="_blank" class="boton-pdf"><i class="fas fa-file-pdf"><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios por Proyectos</i></a>               
+                          <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteFondos.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Fondos
+                          </button>
+               
                 <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">
                             <?php } ?>
@@ -126,6 +129,7 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
   link.setAttribute("href", "../../fpdf/ReporteFondos.php?campo=" + encodeURIComponent(campo));
 });
   </script>
+  
             <div class="row py-4">
                 <div class="col">
                     <table class="table table-sm table-bordered table-striped">

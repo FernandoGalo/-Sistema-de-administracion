@@ -44,7 +44,9 @@
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-calendar-note"></i> Agregar Proyecto</button>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
-                          <button class="btn btn-warning" id="reporte" name="reporte" onclick="window.open('../../fpdf/Reporteproyec.php?campo=', '_blank')" ><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios por Proyectos</button>               
+                          <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/Reporteproyec.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Proyectos
+                          </button>
                 <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">
                             <?php } ?>
@@ -88,15 +90,18 @@ if ($datos=$sql->fetch_object()) { ?>
                 </div>
             </div>
             <script>
-document.getElementById("campo").addEventListener("keyup", function(event) {
-  // Obtener el valor del input
-  var campo = document.getElementById("campo").value;
+  document.getElementById("campo").addEventListener("keyup", function(event) {
+    // Obtener el valor del input
+    var campo = document.getElementById("campo").value;
 
-  // Actualizar el valor del enlace
-  var link = document.getElementById("generar-reporte");
-  link.setAttribute("href", "../../fpdf/Reporteproyec.php?campo=" + encodeURIComponent(campo));
-});
-  </script>
+    // Actualizar el valor del botón
+    var btn = document.getElementById("generar-reporte");
+    btn.onclick = function() {
+      window.open('../../fpdf/Reporteproyec.php?campo=' + encodeURIComponent(campo), '_blank');
+    };
+  });
+</script>
+  
 
             <div class="row py-4">
                 <div class="col">
