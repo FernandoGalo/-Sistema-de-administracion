@@ -37,12 +37,11 @@
                         alert('Los datos fueron ingresados correctamente a la BD');
                             location.assign('proyectosAdm.php');
                             </script>";     
-                            //require_once "../../EVENT_BITACORA.php";
-                            //$model = new EVENT_BITACORA;
-                            //session_start();
-                            //$_SESSION['IDFondoBitacora']=$ID_Fondo;
-                            //$model->RegaInsertFondo();  
-
+                            require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['projectBitacora']=$nomb_proyec;
+                            $model->InsertProj();  
 
             }else{
                 // Los dcatos NO ingresaron a la BD

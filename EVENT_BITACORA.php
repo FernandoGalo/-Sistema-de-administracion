@@ -31,7 +31,7 @@ class EVENT_BITACORA{
             
             $fila = $consulta->fetch();
 
-            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."', 1 ,'Inicio de sesion','Entro al sistema')";
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."',16,'Inicio de sesion','Entro al sistema')";
             #$sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['ID_Objeto']."','Inicio de secion','Entro al sistema')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
@@ -66,7 +66,7 @@ class EVENT_BITACORA{
             
             $fila = $consulta->fetch();
 
-            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','1','Salida de sesion','Salio del sistema sistema')";
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','16','Salida de sesion','Salio del sistema sistema')";
             #$sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['ID_Objeto']."','Inicio de secion','Entro al sistema')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
@@ -185,28 +185,13 @@ class EVENT_BITACORA{
             VALUES (NULL,'$fecha', $IDGlobal, '1', 'Eliminacion de usuario', '$Descripcion')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
-        
-    
-            
           
             ?>
     
         <?php
-    
-        
-
     }
 
-
-
     //===================================================================================
-    //===================================================================================
-        #atributos para Registrar Nuevo Usuario
-        //public $R_Nombre;
-        //public $R_usuario;
-        //public $R_contra;
-        //public $R_contra_2;
-        //public $R_correo;
 
     public function regNuevoUser(){
         $model = new conexion();
@@ -228,7 +213,7 @@ class EVENT_BITACORA{
             
             $fila = $consulta->fetch();
 
-            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['0']."','Creacion de Usuario Nuevo','El usuario fue creado')";
+            $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['16']."','Creacion de Usuario Nuevo','El usuario fue creado')";
             #$sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha,ID_Usuario,ID_Objeto,Accion,Descripcion) VALUES(NULL,'$fecha', '".$fila['ID_Usuario']."','".$fila['ID_Objeto']."','Inicio de secion','Entro al sistema')";
             $consulta2= $conexion->prepare($sql2);
             $consulta2->execute();
@@ -733,7 +718,7 @@ public function RegInsertpara(){
         $Descripcion = "Agrego el parametro: ".$Nombre_Parametro;
         $fecha = date("Y-m-d h:i:s");
         $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-        VALUES (NULL,'$fecha', '$IDGlobal', '4', 'Creacion de parametro', '$Descripcion')";
+        VALUES (NULL,'$fecha', '$IDGlobal', '3', 'Creacion de parametro', '$Descripcion')";
         $consulta2= $conexion->prepare($sql2);
         $consulta2->execute();
         ?>
@@ -907,6 +892,57 @@ public function DELVOLPRO(){
         $fecha = date("Y-m-d h:i:s");
         $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
         VALUES (NULL,'$fecha', '$IDGlobal', '15', 'Eliminacion voluntario vinculado', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+  #Insert Projecto
+public function InsertProj(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $nomb_proyec= $_SESSION['projectBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se creo el proyecto: ".$nomb_proyec;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '6', 'Creacion de proyecto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+   #Insert Projecto
+public function UPTProjec(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $nomb_proyec= $_SESSION['projectBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se modificó el proyecto: ".$nomb_proyec;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '6', 'Modificacion de proyecto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+     #Insert Projecto
+public function UPTProj(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $ID_proyecto= $_SESSION['IDprojectBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se eliminó el proyecto con ID: ".$ID_proyecto;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '6', 'Eliminacion de proyecto', '$Descripcion')";
         $consulta2= $conexion->prepare($sql2);
         $consulta2->execute();
         ?>

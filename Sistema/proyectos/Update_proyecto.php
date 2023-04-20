@@ -47,12 +47,11 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('proyectosAdm.php');
                     </script>";
-                    //require_once "../../EVENT_BITACORA.php";
-                    //$model = new EVENT_BITACORA;
-                    //session_start();
-
-                    //$_SESSION['IDFondoBitacoraUP']=$ID_Fondo;
-                    //$model->RegUptFondo();
+                    require_once "../../EVENT_BITACORA.php";
+                            $model = new EVENT_BITACORA;
+                            session_start();
+                            $_SESSION['projectBitacora']=$nomb_proyec;
+                            $model->UPTProjec(); 
 
             }else{
                 echo "<script language='JavaScript'>
