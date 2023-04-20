@@ -17,7 +17,6 @@
     while($row=mysqli_fetch_array($sql1)){
         $ID_Usuario=$row['ID_Usuario'];
     }
-            $ID_proyecto =$_POST["proyecto"];
             $nomb_proyec=$_POST["Nombre_proyecto"];
             $Fecha_ini=$_POST["Fechaini"];
             $Fecha_final=$_POST["Fechafinal"];
@@ -26,8 +25,8 @@
             $Fecha_actual = date('Y-m-d');
             
             include("../../conexion_BD.php");
-            $sql = "INSERT INTO tbl_proyectos (ID_proyecto , ID_usuario ,Nombre_del_proyecto ,Fecha_de_inicio_P ,Fecha_final_P ,Fondos_proyecto , Estado_Proyecto , Creado_Por, Fecha_Creacion) 
-            VALUES ($ID_proyecto, '$ID_Usuario', '$nomb_proyec' , '$Fecha_ini' ,'$Fecha_final' ,$Fondos_proyec, '$estado' , '$Usuario','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_proyectos ( ID_usuario ,Nombre_del_proyecto ,Fecha_de_inicio_P ,Fecha_final_P ,Fondos_proyecto , Estado_Proyecto , Creado_Por, Fecha_Creacion) 
+            VALUES ('$ID_Usuario', '$nomb_proyec' , '$Fecha_ini' ,'$Fecha_final' ,$Fondos_proyec, '$estado' , '$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 

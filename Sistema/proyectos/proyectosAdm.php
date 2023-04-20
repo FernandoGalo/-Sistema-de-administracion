@@ -43,6 +43,9 @@
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-calendar-note"></i> Agregar Proyecto</button>
+                          <!-- PARA GENERAR LOS REPORTES ====================== -->
+                          <button class="btn btn-warning" id="reporte" name="reporte" onclick="window.open('../../fpdf/Reporteproyec.php?campo=', '_blank')" ><i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Voluntarios por Proyectos</button>               
+                <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
@@ -84,6 +87,16 @@ if ($datos=$sql->fetch_object()) { ?>
                     <input type="text" name="campo" id="campo" class="form-control">
                 </div>
             </div>
+            <script>
+document.getElementById("campo").addEventListener("keyup", function(event) {
+  // Obtener el valor del input
+  var campo = document.getElementById("campo").value;
+
+  // Actualizar el valor del enlace
+  var link = document.getElementById("generar-reporte");
+  link.setAttribute("href", "../../fpdf/Reporteproyec.php?campo=" + encodeURIComponent(campo));
+});
+  </script>
 
             <div class="row py-4">
                 <div class="col">
@@ -211,11 +224,6 @@ if ($datos=$sql->fetch_object()) { ?>
                         <form name="formulario" id="formulario" action="insertproyec.php" method="POST">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Id proyecto(*):</label>
-                            <input type="hidden" name="proyecto" id="proyecto">
-                            <input type="text" class="form-control" name="proyecto" id="proyecto" maxlength="100" placeholder="Ingrese el id proyecto" required>
-                          </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre del proyecto(*):</label>
                             <input type="hidden" name="Nombre_proyecto" id="Nombre_proyecto">
