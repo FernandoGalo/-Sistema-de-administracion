@@ -37,13 +37,21 @@ class PDF extends FPDF
       $this->Cell(1);  // mover a la derecha
       $this->SetFont('Arial', 'B', 10);
       $this->Cell(85, 10, utf8_decode("Correo : " . $dato_info -> correo), 0, 0, '', 0);
-      $this->Ln(15); //SERIA EL ESPACIADO ENTRE ESTE CAMPO Y EL TITULO DEL REPORTE
+      $this->Ln(5); //SERIA EL ESPACIADO ENTRE ESTE CAMPO Y EL TITULO DEL REPORTE
 
       /* SUCURSAL */
       // $this->Cell(180);  // mover a la derecha
       // $this->SetFont('Arial', 'B', 10);
       // $this->Cell(85, 10, utf8_decode("Sucursal : "), 0, 0, '', 0);
       // $this->Ln(10);
+
+      // Obtener la fecha actual
+      $fecha_actual = date('d/m/Y h:m:s');
+      $fecha_actual = date('d/m/Y H:i:s');
+      // Escribir la fecha en el reporte
+       $this->Cell(1);  // mover a la derecha
+       $this->Cell(85,10,'Fecha: '.$fecha_actual,0,0,'', 0);
+       $this->Ln(7); //SERIA EL ESPACIADO ENTRE ESTE CAMPO Y EL TITULO DEL REPORTE
 
       /* TITULO DE LA TABLA */
       //color
