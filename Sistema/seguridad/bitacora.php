@@ -52,7 +52,7 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
                 <!-- Fin Generar Reporte -->
     <main>
         <div class="container py-4 text-center">
-
+            
             <div class="row g-4">
 
                 <div class="col-auto">
@@ -67,26 +67,29 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
                         <option value="100">100</option>
                     </select>
                 </div>
-
+                
                 <div class="col-auto">
                     <label for="num_registros" class="col-form-label">registros </label>
                 </div>
-
                 <div class="col-5"></div>
-                <div class="col-auto">
-                <label for="fechaInicio" class="col-form-label">Fecha Inicio: </label>
-                <input type="date" name="fechaInicio" id="fechaInicio" class="form-control">
-</div>
-<div class="col-auto">
-<label for="fechaFinal" class="col-form-label">Fecha Final: </label>
-<input type="date" name="fechaFinal" id="fechaFinal" class="form-control">
-</div>
                 <div class="col-auto">
                     <label for="campo" class="col-form-label">Buscar: </label>
                 </div>
                 <div class="col-auto">
                     <input type="text" name="campo" id="campo" class="form-control">
                 </div>
+                <div class="col-auto">
+                <label for="fechaInicio" class="col-form-label">Fecha Inicio </label>
+</div>
+                <div class="col-auto">
+                <input type="date" name="fechaInicio" id="fechaInicio" class="form-control">
+</div>
+<div class="col-auto">
+<label for="fechaFinal" class="col-form-label">Fecha Final </label>
+</div>
+<div class="col-auto">
+<input type="date" name="fechaFinal" id="fechaFinal" class="form-control">
+</div>
             </div>
             <script>
 document.getElementById("campo").addEventListener("keyup", function(event) {
@@ -139,7 +142,9 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
         document.getElementById("campo").addEventListener("keyup", function() {
     getData()
 }, false)
-
+document.getElementById("fechaInicio").addEventListener("change", function() {
+    getData();
+}, false);
 document.getElementById("fechaFinal").addEventListener("change", function() {
     if (document.getElementById("fechaFinal").value == '') {
         document.getElementById("fechaFinal").value = document.getElementById("fechaInicio").value= null;
