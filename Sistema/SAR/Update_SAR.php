@@ -299,12 +299,6 @@
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Fecha Limite de Emision(ACTUAL):</label>
-                            <input type="hidden" name="fechaEmision" id="fechaEmision">
-                            <input type="input" class="form-control" name="fechaEmision" id="fechaEmision" maxlength="100" placeholder="Ingrese la fecha de emision" value="<?php echo $fecha_limite_emision; ?>" readonly required>
-                          </div>
-
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Fecha Limite de Emision(*):</label>
                             <input type="hidden" name="fechaEmision" id="fechaEmision">
                             <input type="date" class="form-control" name="fechaEmision" id="fechaEmision" maxlength="100" placeholder="Ingrese la fecha de emision" value="<?php echo $fecha_limite_emision; ?>" required>
