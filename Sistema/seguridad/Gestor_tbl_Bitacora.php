@@ -7,7 +7,7 @@
 
 
 require '../../conexion_BD.php';
-
+session_start();
 /* Un arreglo de las columnas a mostrar en la tabla */
 $columns = ['ID_Bitacora', 'Fecha', 'ID_Usuario ', 'ID_Objeto ', 'Accion', 'Descripcion'];
 
@@ -17,7 +17,8 @@ $table = "tbl_ms_bitacora";
 $id = 'ID_Bitacora';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
-
+$fechaInicio = isset($_POST['fechaInicio']) ? $conexion->real_escape_string($_POST['fechaInicio']) : null;
+$fechaFinal = isset($_POST['fechaFinal']) ? $conexion->real_escape_string($_POST['fechaFinal']) : null;
 
 /* Filtrado */
 $where = '';
@@ -33,6 +34,17 @@ if ($campo != null) {
     $where .= ")";
 }
 
+if ($fechaInicio != null && $fechaFinal != null) {
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}elseif($fechaInicio == null || $fechaFinal == null) {
+    $fechaInicio = '2023-01-01';
+    $fechaFinal = date('Y-m-d');
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}
+$_SESSION['fechaInicio']=$fechaInicio;
+$_SESSION['$fechaFinal']=$fechaFinal;
 /* Limit */
 $limit = isset($_POST['registros']) ? $conexion->real_escape_string($_POST['registros']) : 10;
 $pagina = isset($_POST['pagina']) ? $conexion->real_escape_string($_POST['pagina']) : 0;
@@ -61,11 +73,12 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT SQL_CALC_FOUND_ROWS b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
+$sql = "SELECT SQL_CALC_FOUND_ROWS b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
 FROM tbl_ms_bitacora b
 JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-WHERE b.ID_Bitacora LIKE '%{$campo}%' OR b.Fecha LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR o.Objeto LIKE '%{$campo}%' OR b.Accion LIKE '%{$campo}%' OR b.Descripcion LIKE '%{$campo}%'
+JOIN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
+WHERE (b.ID_Bitacora LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR o.Objeto LIKE '%{$campo}%' OR b.Accion LIKE '%{$campo}%' OR b.Descripcion LIKE '%{$campo}%')
+AND b.Fecha BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);

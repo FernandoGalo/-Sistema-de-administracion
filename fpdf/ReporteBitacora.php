@@ -1,14 +1,7 @@
 <?php
 
 require('./fpdf.php');
-require '../conexion_BD.php';
 session_start();
-$IDProyecto=$_SESSION['ID_Proyect'];
-$sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
-
-while($row=mysqli_fetch_array($sql1)){
-    $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
-}
 
 class PDF extends FPDF
 {
@@ -120,12 +113,15 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
+$fechaInicio = $_SESSION['fechaInicio'];
+$fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT SQL_CALC_FOUND_ROWS b.ID_Bitacora,b.Fecha, u.Usuario, o.Objeto, b.Accion, b.Descripcion 
 FROM tbl_ms_bitacora b
 JOIN tbl_objetos o ON b.ID_Objeto = o.ID_Objeto
-JOiN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
-WHERE b.ID_Bitacora LIKE '%{$campo}%' OR b.Fecha LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR o.Objeto LIKE '%{$campo}%' OR b.Accion LIKE '%{$campo}%' OR b.Descripcion LIKE '%{$campo}%'");
+JOIN tbl_ms_usuario u ON b.ID_Usuario = u.ID_Usuario
+WHERE (b.ID_Bitacora LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR o.Objeto LIKE '%{$campo}%' OR b.Accion LIKE '%{$campo}%' OR b.Descripcion LIKE '%{$campo}%')
+AND b.Fecha BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
