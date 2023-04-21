@@ -107,8 +107,6 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
                             <th class="sort asc">Objeto</th>
                             <th class="sort asc">Accion</th>
                             <th class="sort asc">Descripcion</th>
-                            <th></th>
-                            <th></th>
                         </thead>
 
                         <!-- El id del cuerpo de la tabla. -->
