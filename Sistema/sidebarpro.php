@@ -179,16 +179,26 @@ if ($datos=$sql->fetch_object()) { ?>
 
 				</li>
 				<?php } ?>
-				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and (ID_Objeto = 10 OR ID_Objeto = 17)");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-money"></i> Pagos <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
+					<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+if ($datos=$sql->fetch_object()) { ?>
 						<li>
 							<a href="../pagos/PagosAdm.php"><i class="zmdi zmdi-money-box"></i> Mantenimiento pagos </a>
 						</li>
+						<?php } ?>
+
+						<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=17");
+if ($datos=$sql->fetch_object()) { ?>
+						<li>
+							<a href="../pagos/TipoPagosAdm.php"><i class="zmdi zmdi-money-box"></i> Mantenimiento Tipo Pagos </a>
+						</li>
+						<?php } ?>
 					</ul>
 				</li>
 				<?php } ?>
