@@ -26,6 +26,7 @@
   <?php include '../sidebar.php'; ?>
   
   <?php
+  
         if(isset($_POST['enviar'])){
             //aqui entra sio el usuario ha presionado el boton enviar
             // $id_rol=$_GET['id'];
@@ -34,6 +35,7 @@
             $nombreRol=$_POST['Nombre_rol'];
             $descripcion=$_POST['descripcion'];//Obtenidos desde el formulario
             $estado= $_POST['estado'];
+            $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
 
 
 
@@ -52,7 +54,7 @@
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_ms_roles SET Rol = '$nombreRol', Descripcion ='$descripcion', Estado = $estado WHERE ID_ROL = $id_rol2";
+            $sql="UPDATE tbl_ms_roles SET Rol = '$nombreRol', Descripcion ='$descripcion', Estado = $estado, Modificado_Por = '$usuario', Fecha_Modificacion = '$R_Fecha_actual' WHERE ID_ROL = $id_rol2";
             $resultado=mysqli_query($conexion,$sql);
 
             if($resultado){
@@ -87,9 +89,9 @@
             $estado=$fila['Estado'];//recuperando los datos desde la BD
 
             if($fila['Estado'] == 1){
-                $strEstado = "Activo";
+                $strEstado = "ACTIVO";
               }else{
-                $strEstado = "Inactivo";
+                $strEstado = "INACTIVO";
               } 
               
 
@@ -127,30 +129,24 @@
                             <input type="hidden" name="id" id="id">
                             <input type="text" class="form-control" name="id" id="id" maxlength="100" placeholder="Ingrese la descripcion del rol" value="<?php echo $id?>"  readonly required>
                           </div>
-
-        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre rol(*):</label>
                             <input type="hidden" name="Nombre_rol" id="Nombre_rol">
-                            <input type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol" onkeypress="validarMayusculas(event)" value="<?php echo $nombreRol?>" required>
+                            <input type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol" value="<?php echo $nombreRol?>" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Descripcion(*):</label>
                             <input type="hidden" name="descripcion" id="descripcion">
-                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol" value="<?php echo $descripcion ?>" required>
+                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol" value="<?php echo $descripcion ?>" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                          <label>Estado Actual</label>
-                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $strEstado ?>" readonly>
-                            <label>Estado(*):</label>
-                           <!-- <input type="number" min="1" max="3" class="form-control" name="Rol" id="Rol" maxlength="1" placeholder="1:Administrador 2:Editor 3:Supervisor">  -->
+                          <label>Estado usuario(*)</label>
                             <select class="form-control" name="estado" id="estado" required>
-                              <option value="">Selecione un estado</option>
-                              <option value="1" >ACTIVO</option>
-                              <option value="2" >INACTIVO</option>
+                              <option value="">Seleccione un Estado</option>
+                              <option value="1" <?php if ($strEstado == 'ACTIVO') echo 'selected'; ?>>ACTIVO</option>
+                              <option value="2" <?php if ($strEstado == 'INACTIVO') echo 'selected'; ?>>INACTIVO</option>
                             </select>
                           </div>
-
-
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">

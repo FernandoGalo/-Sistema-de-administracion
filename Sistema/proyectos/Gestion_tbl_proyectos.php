@@ -63,7 +63,7 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT * from tbl_proyectos
+$sql="SELECT SQL_CALC_FOUND_ROWS * from tbl_proyectos
 WHERE ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
@@ -118,7 +118,38 @@ $output['data'] .= '</tr>';
     $output['data'] .= '</tr>';
 }
 
-if ($output['totalRegistros'] > 0) {
+if($output['totalFiltro'] > 0){
+    $totalFiltro = ceil($output['totalFiltro'] / $limit);
+
+    $output['paginacion'] .= '<nav>';
+    $output['paginacion'] .= '<ul class="pagination">';
+
+    $numeroInicio = 1;
+
+    if(($pagina - 4) > 1){
+        $numeroInicio = $pagina - 4;
+    }
+
+    $numeroFin = $numeroInicio + 9;
+
+    if($numeroFin > $totalFiltro){
+        $numeroFin = $totalFiltro;
+    }
+
+    for ($i = $numeroInicio; $i <= $numeroFin; $i++) {
+        if ($pagina == $i) {
+            $output['paginacion'] .= '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+        } else {
+            $output['paginacion'] .= '<li class="page-item"><a class="page-link" href="#" onclick="nextPage(' . $i . ')">' . $i . '</a></li>';
+        }
+    }
+
+    $output['paginacion'] .= '</ul>';
+    $output['paginacion'] .= '</nav>';
+}elseif ($output['totalFiltro'] < 1){
+    $pagina="";
+    $output['paginacion'] = "";
+}elseif ($output['totalRegistros'] > 0) {
     $totalPaginas = ceil($output['totalRegistros'] / $limit);
 
     $output['paginacion'] .= '<nav>';
@@ -147,5 +178,6 @@ if ($output['totalRegistros'] > 0) {
     $output['paginacion'] .= '</ul>';
     $output['paginacion'] .= '</nav>';
 }
+
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
