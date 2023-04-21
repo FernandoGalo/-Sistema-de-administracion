@@ -126,7 +126,7 @@
                 
 
                 
-            $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, nombre_razonSocial, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final, estado) VALUES ($RTN, $num_declaracion, '$nombre_razonSocial','$departamento','$municipio', '$barrio_colonia','$calle_avenida', $num_casa, $bloque, $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final, 1)";
+            $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, nombre_razonSocial, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final, estado) VALUES ('$RTN', $num_declaracion, '$nombre_razonSocial','$departamento','$municipio', '$barrio_colonia','$calle_avenida', $num_casa, $bloque, $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final, 1)";
 
             $resultado = mysqli_query($conexion,$sql);
 

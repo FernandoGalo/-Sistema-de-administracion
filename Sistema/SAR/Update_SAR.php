@@ -34,18 +34,18 @@
             //$ID_SAR = $_POST['id_sar'];
             $RTN = $_POST['rtn'];
             $num_declaracion = $_POST['numDeclaracion'];
-            $nombre_razonSocial = $_POST['razonSocial'];
+            $nombre_razonSocial = strtoupper($_POST['razonSocial']);
             $departamento = $_POST['departamento'];
             $municipio = $_POST['municipio'];
-            $barrio_colonia = $_POST['barrioColonia'];
-            $calle_avenida = $_POST['calleAvenida'];
+            $barrio_colonia = strtoupper($_POST['barrioColonia']);
+            $calle_avenida = strtoupper($_POST['calleAvenida']);
             $num_casa = $_POST['numCasa'];
             $bloque = $_POST['bloque'];
             $telefono = $_POST['telFijo'];
             $celular = $_POST['telCelular'];
-            $domicilio = $_POST['domicilio'];
+            $domicilio = strtoupper($_POST['domicilio']);
             $correo = $_POST['Correo_electronico'];
-            $profesion_oficio = $_POST['profesionOficio'];
+            $profesion_oficio = strtoupper($_POST['profesionOficio']);
             $cai = $_POST['cai'];
             $fecha_limite_emision = $_POST['fechaEmision'];
             $num_inicial = $_POST['numeroInicial'];
@@ -99,7 +99,7 @@
             // $sql="UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final = $bloque WHERE ID_SAR='$id_sar';";
 
 
-            $sql = "UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final WHERE ID_SAR = $id_sar;";
+            $sql = "UPDATE tbl_r_sar SET RTN = '$RTN', num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final WHERE ID_SAR = $id_sar;";
 
             $resultado=mysqli_query($conexion,$sql);
 
@@ -153,6 +153,44 @@
             $num_inicial = $fila['num_inicial'];
             $num_final = $fila['num_final'];
 
+            if($fila['departamento'] == "ATLÁNTIDA"){
+              $strDept = "ATLÁNTIDA";
+            }else if($fila['departamento']=="COLÓN"){
+              $strDept = "COLÓN";
+            }else if($fila['departamento']=="COMAYAGUA"){
+              $strDept = "COMAYAGUA"; 
+            }else if($fila['departamento']=="COPÁN"){
+              $strDept = "COPÁN"; 
+            }else if($fila['departamento']=="CORTÉS"){
+              $strDept = "CORTÉS"; 
+            }else if($fila['departamento']=="CHOLUTECA"){
+              $strDept = "CHOLUTECA"; 
+            }else if($fila['departamento']=="EL PARAÍSO"){
+              $strDept = "EL PARAÍSO"; 
+            }else if($fila['departamento']=="FRANCISCO MORAZÁN"){
+              $strDept = "FRANCISCO MORAZÁN"; 
+            }else if($fila['departamento']=="GRACIAS A DIOS"){
+              $strDept = "GRACIAS A DIOS"; 
+            }else if($fila['departamento']=="INTIBUCÁ"){
+              $strDept = "INTIBUCÁ"; 
+            }else if($fila['departamento']=="ISLAS DE LA BAHÍA"){
+              $strDept = "ISLAS DE LA BAHÍA"; 
+            }else if($fila['departamento']=="LA PAZ"){
+              $strDept = "LA PAZ"; 
+            }else if($fila['departamento']=="LEMPIRA"){
+              $strDept = "LEMPIRA"; 
+            }else if($fila['departamento']=="OCOTEPEQUE"){
+              $strDept = "OCOTEPEQUE"; 
+            }else if($fila['departamento']=="OLANCHO"){
+              $strDept = "OLANCHO"; 
+            }else if($fila['departamento']=="SANTA BÁRBARA"){
+              $strDept = "SANTA BÁRBARA"; 
+            }else if($fila['departamento']=="VALLE"){
+              $strDept = "VALLE"; 
+            }else if($fila['departamento']=="YORO"){
+              $strDept = "YORO"; 
+            }
+
 
             mysqli_close($conexion);
 
@@ -193,7 +231,7 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>RTN(*):</label>
                             <input type="hidden" name="rtn" id="rtn">
-                            <input type="text" class="form-control" name="rtn" id="rtn" maxlength="100" placeholder="Ingrese el RTN" value="<?php echo $RTN; ?>" required>
+                            <input type="text" class="form-control" name="rtn" id="rtn" maxlength="14" placeholder="Ingrese el RTN" value="<?php echo $RTN; ?>" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -205,49 +243,51 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre o Razon Social(*):</label>
                             <input type="hidden" name="razonSocial" id="razonSocial">
-                            <input type="text" class="form-control" name="razonSocial" id="razonSocial" maxlength="100" placeholder="Ingrese el nombre o razon social" value="<?php echo $nombre_razonSocial; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="razonSocial" id="razonSocial" maxlength="100" placeholder="Ingrese el nombre o razon social" value="<?php echo $nombre_razonSocial; ?>" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Departamento(*):</label>
                               <select class="form-control" name="departamento" id="departamento" onchange="cargarOpciones()">
-                                <option value="">Selecione un departamento</option>
-                                <option value="Atlántida">Atlántida</option>
-                                <option value="Colón">Colón</option>
-                                <option value="Comayagua">Comayagua</option>
-                                <option value="Copán">Copán</option>
-                                <option value="Cortés">Cortés</option>
-                                <option value="Choluteca">Choluteca</option>
-                                <option value="El Paraíso">El Paraíso</option>
-                                <option value="Francisco Morazán">Francisco Morazán</option>
-                                <option value="Gracias a Dios">Gracias a Dios</option>
-                                <option value="Intibucá">Intibucá</option>
-                                <option value="Islas de la Bahía">Islas de la Bahía</option>
-                                <option value="La Paz">La Paz</option>
-                                <option value="Lempira">Lempira</option>
-                                <option value="Ocotepeque">Ocotepeque</option>
-                                <option value="Olancho">Olancho</option>
-                                <option value="Santa Bárbara">Santa Bárbara</option>
-                                <option value="Valle">Valle</option>
-                                <option value="Yoro">Yoro</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'ATLÁNTIDA') echo 'selected'; ?>>ATLÁNTIDA</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'COLÓN') echo 'selected'; ?>>COLÓN</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'COMAYAGUA') echo 'selected'; ?>>COMAYAGUA</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'COPÁN') echo 'selected'; ?>>COPÁN</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'CORTÉS') echo 'selected'; ?>>CORTÉS</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'CHOLUTECA') echo 'selected'; ?>>CHOLUTECA</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'EL PARAÍSO') echo 'selected'; ?>>EL PARAÍSO</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'FRANCISCO MORAZÁN') echo 'selected'; ?>>FRANCISCO MORAZÁN</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'GRACIAS A DIOS') echo 'selected'; ?>>GRACIAS A DIOS</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'INTIBUCÁ') echo 'selected'; ?>>INTIBUCÁ</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'ISLAS DE LA BAHÍA') echo 'selected'; ?>>ISLAS DE LA BAHÍA</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'LA PAZ') echo 'selected'; ?>>LA PAZ</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'LEMPIRA') echo 'selected'; ?>>LEMPIRA</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'OCOTEPEQUE') echo 'selected'; ?>>OCOTEPEQUE</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'OLANCHO') echo 'selected'; ?>>OLANCHO</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'SANTA BÁRBARA') echo 'selected'; ?>>SANTA BÁRBARA</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'VALLE') echo 'selected'; ?>>VALLE</option>
+                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'YORO') echo 'selected'; ?>>YORO</option>
                               </select>
                           </div>
                              
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Municipio:</label>
-                            <select class="form-control" name="municipio" id="municipio"></select>
-                          </div>
+                            <select class="form-control" name="municipio" id="municipio">
+                            <option value="<?php echo $municipio; ?>"><?php echo $municipio?></option>
+                            </select>                            
+                          </div> 
 
+                          
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Barrio o Colonia(*):</label>
                             <input type="hidden" name="barrioColonia" id="barrioColonia">
-                            <input type="text" class="form-control" name="barrioColonia" id="barrioColonia" maxlength="100" placeholder="Ingrese el Barrio o Colonia" value="<?php echo $barrio_colonia; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="barrioColonia" id="barrioColonia" maxlength="100" placeholder="Ingrese el Barrio o Colonia" value="<?php echo $barrio_colonia; ?>" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Calle o Avenida(*):</label>
                             <input type="hidden" name="calleAvenida" id="calleAvenida">
-                            <input type="text" class="form-control" name="calleAvenida" id="calleAvenida" maxlength="100" placeholder="Ingrese la calle o avenida" value="<?php echo $calle_avenida; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="calleAvenida" id="calleAvenida" maxlength="100" placeholder="Ingrese la calle o avenida" value="<?php echo $calle_avenida; ?>" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -277,7 +317,7 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Domicilio(*):</label>
                             <input type="hidden" name="domicilio" id="domicilio">
-                            <input type="text" class="form-control" name="domicilio" id="domicilio" maxlength="100" placeholder="Ingrese el Domicilio" value="<?php echo $domicilio; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="domicilio" id="domicilio" maxlength="100" placeholder="Ingrese el Domicilio" value="<?php echo $domicilio; ?>" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -289,7 +329,7 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Profesion u Oficio(*):</label>
                             <input type="hidden" name="profesionOficio" id="profesionOficio">
-                            <input type="text" class="form-control" name="profesionOficio" id="profesionOficio" maxlength="100" placeholder="Ingrese la profesion u Oficio" value="<?php echo $profesion_oficio; ?>"required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="profesionOficio" id="profesionOficio" maxlength="100" placeholder="Ingrese la profesion u Oficio" value="<?php echo $profesion_oficio; ?>"required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -354,330 +394,337 @@
 </html>
 
 <script>
+    
+    if (condition) {
+    
+  }
+</script>
+
+
+<script>
   function cargarOpciones() {
   var departamento = document.getElementById("departamento");
   var municipio = document.getElementById("municipio");
   
-  // Vaciar el segundo combobox
   municipio.innerHTML = "";
   
   // Agregar opciones según la opción seleccionada en el primer combobox
-  if (departamento.value === "Atlántida") {
-    municipio.add(new Option("La Ceiba", "La Ceiba"));
-    municipio.add(new Option("El Porvenir", "El Porvenir"));
-    municipio.add(new Option("Tela", "Tela"));
-    municipio.add(new Option("Jutiapa", "Jutiapa"));
-    municipio.add(new Option("La Masica", "La Masica"));
-    municipio.add(new Option("San Francisco", "San Francisco"));
-    municipio.add(new Option("Arizona", "Arizona"));
-    municipio.add(new Option("Esparta", "Esparta"));
-  } else if (departamento.value === "Colón") {
-    municipio.add(new Option("Trujillo", "Trujillo"));
-    municipio.add(new Option("Balfate", "Balfate"));
-    municipio.add(new Option("Iriona", "Iriona"));
-    municipio.add(new Option("Limón", "Limón"));
-    municipio.add(new Option("Sabá", "Sabá"));
-    municipio.add(new Option("Santa Fe", "Santa Fe"));
-    municipio.add(new Option("Santa Rosa de Aguán", "Santa Rosa de Aguán"));
-    municipio.add(new Option("Sonaguera", "Sonaguera"));
-    municipio.add(new Option("Tocoa", "Tocoa"));
-    municipio.add(new Option("Bonito Oriental", "Bonito Oriental"));
-  } else if (departamento.value === "Comayagua") {
-    municipio.add(new Option("Comayagua", "Comayagua"));
-    municipio.add(new Option("Ajuterique", "Ajuterique"));
-    municipio.add(new Option("El Rosario", "El Rosario"));
-    municipio.add(new Option("Esquías", "Esquías"));
-    municipio.add(new Option("Humuya", "Humuya"));
-    municipio.add(new Option("La Libertad", "La Libertad"));
-    municipio.add(new Option("Lamaní", "Lamaní"));
-    municipio.add(new Option("La Trinidad", "La Trinidad"));
-    municipio.add(new Option("Lejamaní", "Lejamaní"));
-    municipio.add(new Option("Meámbar", "Meámbar"));
-    municipio.add(new Option("Minas de Oro", "Minas de Oro"));
-    municipio.add(new Option("Ojos de Agua", "Ojos de Agua"));
-    municipio.add(new Option("San Jerónimo", "San Jerónimo"));
-    municipio.add(new Option("San José de Comayagua", "San José de Comayagua"));
-    municipio.add(new Option("San José del Potrero", "San José del Potrero"));
-    municipio.add(new Option("San Luis", "San Luis"));
-    municipio.add(new Option("San Sebastián", "San Sebastián"));
-    municipio.add(new Option("Siguatepeque", "Siguatepeque"));
-    municipio.add(new Option("Villa de San Antonio", "Villa de San Antonio"));
-    municipio.add(new Option("Las Lajas", "Las Lajas"));
-    municipio.add(new Option("Taulabé", "Taulabé"));
-  } else if (departamento.value === "Copán") {
-    municipio.add(new Option("Santa Rosa de Copán", "Santa Rosa de Copán"));
-    municipio.add(new Option("Cabañas", "Cabañas"));
-    municipio.add(new Option("Concepción", "Concepción"));
-    municipio.add(new Option("Copán Ruinas", "Copán Ruinas"));
-    municipio.add(new Option("Corquín", "Corquín"));
-    municipio.add(new Option("Cucuyagua", "Cucuyagua"));
-    municipio.add(new Option("Dolores", "Dolores"));
-    municipio.add(new Option("Dulce Nombre", "Dulce Nombre"));
-    municipio.add(new Option("El Paraíso", "El Paraíso"));
-    municipio.add(new Option("Florida", "Florida"));
-    municipio.add(new Option("La Jigua", "La Jigua"));
-    municipio.add(new Option("La Unión", "La Unión"));
-    municipio.add(new Option("Nueva Arcadia", "Nueva Arcadia"));
-    municipio.add(new Option("San Agustín", "San Agustín"));
-    municipio.add(new Option("San Antonio", "San Antonio"));
-    municipio.add(new Option("San Jerónimo", "San Jerónimo"));
-    municipio.add(new Option("San José", "San José"));
-    municipio.add(new Option("San Juan de Opoa", "San Juan de Opoa"));
-    municipio.add(new Option("San Nicolás", "San Nicolás"));
-    municipio.add(new Option("San Pedro", "San Pedro"));
-    municipio.add(new Option("Santa Rita", "Santa Rita"));
-    municipio.add(new Option("Trinidad de Copán", "Trinidad de Copán"));
-    municipio.add(new Option("Veracruz", "Veracruz"));
-  }else if (departamento.value === "Cortés") {
-    municipio.add(new Option("San Pedro Sula", "San Pedro Sula"));
-    municipio.add(new Option("Choloma", "Choloma"));
-    municipio.add(new Option("Omoa", "Omoa"));
-    municipio.add(new Option("Pimienta", "Pimienta"));
-    municipio.add(new Option("Potrerillos", "Potrerillos"));
-    municipio.add(new Option("Puerto Cortés", "Puerto Cortés"));
-    municipio.add(new Option("San Antonio de Cortés", "San Antonio de Cortés"));
-    municipio.add(new Option("San Francisco de Yojoa", "San Francisco de Yojoa"));
-    municipio.add(new Option("San Manuel", "San Manuel"));
-    municipio.add(new Option("Santa Cruz de Yojoa", "Santa Cruz de Yojoa"));
-    municipio.add(new Option("Villanueva", "Villanueva"));
-    municipio.add(new Option("La Lima", "La Lima"));
-  }else if (departamento.value === "Choluteca") {
-    municipio.add(new Option("Choluteca", "Choluteca"));
-    municipio.add(new Option("Apacilagua", "Apacilagua"));
-    municipio.add(new Option("Concepción de María", "Concepción de María"));
-    municipio.add(new Option("Duyure", "Duyure"));
-    municipio.add(new Option("El Corpus", "El Corpus"));
-    municipio.add(new Option("El Triunfo", "El Triunfo"));
-    municipio.add(new Option("Marcovia", "Marcovia"));
-    municipio.add(new Option("Morolica", "Morolica"));
-    municipio.add(new Option("Namasigüe", "Namasigüe"));
-    municipio.add(new Option("Orocuina", "Orocuina"));
-    municipio.add(new Option("Pespire", "Pespire"));
-    municipio.add(new Option("San Antonio de Flores", "San Antonio de Flores"));
-    municipio.add(new Option("San Isidro", "San Isidro"));
-    municipio.add(new Option("San José", "San José"));
-    municipio.add(new Option("San Marcos de Colón", "San Marcos de Colón"));
-    municipio.add(new Option("Santa Ana de Yusguare", "Santa Ana de Yusguare"));
-  }else if (departamento.value === "El Paraíso") {
-    municipio.add(new Option("Yuscarán", "Yuscarán"));
-    municipio.add(new Option("Alauca", "Alauca"));
-    municipio.add(new Option("Danlí", "Danlí"));
-    municipio.add(new Option("El Paraíso", "El Paraíso"));
-    municipio.add(new Option("Güinope", "Güinope"));
-    municipio.add(new Option("Jacaleapa", "Jacaleapa"));
-    municipio.add(new Option("Liure", "Liure"));
-    municipio.add(new Option("Morocelí", "Morocelí"));
-    municipio.add(new Option("Oropolí", "Oropolí"));
-    municipio.add(new Option("Potrerillos", "Potrerillos"));
-    municipio.add(new Option("San Antonio de Flores", "San Antonio de Flores"));
-    municipio.add(new Option("San Lucas", "San Lucas"));
-    municipio.add(new Option("San Matías", "San Matías"));
-    municipio.add(new Option("Soledad", "Soledad"));
-    municipio.add(new Option("Teupasenti", "Teupasenti"));
-    municipio.add(new Option("Texiguat", "Texiguat"));
-    municipio.add(new Option("Vado Ancho", "Vado Ancho"));
-    municipio.add(new Option("Yauyupe", "Yauyupe"));
-    municipio.add(new Option("Trojes", "Trojes"));
-  }else if (departamento.value === "Francisco Morazán") {
-    municipio.add(new Option("Distrito Central", "Distrito Central"));
-    municipio.add(new Option("Alubarén", "Alubarén"));
-    municipio.add(new Option("Cedros", "Cedros"));
-    municipio.add(new Option("Curarén", "Curarén"));
-    municipio.add(new Option("El Porvenir", "El Porvenir"));
-    municipio.add(new Option("Guaimaca", "Guaimaca"));
-    municipio.add(new Option("La Libertad", "La Libertad"));
-    municipio.add(new Option("La Venta", "La Venta"));
-    municipio.add(new Option("Lepaterique", "Lepaterique"));
-    municipio.add(new Option("Maraita", "Maraita"));
-    municipio.add(new Option("Marale", "Marale"));
-    municipio.add(new Option("Nueva Armenia", "Nueva Armenia"));
-    municipio.add(new Option("Ojojona", "Ojojona"));
-    municipio.add(new Option("Orica", "Orica"));
-    municipio.add(new Option("Reitoca", "Reitoca"));
-    municipio.add(new Option("Sabanagrande", "Sabanagrande"));
-    municipio.add(new Option("San Antonio de Oriente", "San Antonio de Oriente"));
-    municipio.add(new Option("San Buenaventura", "San Buenaventura"));
-    municipio.add(new Option("San Ignacio", "San Ignacio"));
-    municipio.add(new Option("San Juan de Flores", "San Juan de Flores"));
-    municipio.add(new Option("San Miguelito", "San Miguelito"));
-    municipio.add(new Option("Santa Ana", "Santa Ana"));
-    municipio.add(new Option("Santa Lucía", "Santa Lucía"));
-    municipio.add(new Option("Talanga", "Talanga"));
-    municipio.add(new Option("Tatumbla", "Tatumbla"));
-    municipio.add(new Option("Valle de Ángeles", "Valle de Ángeles"));
-    municipio.add(new Option("Villa de San Francisco", "Villa de San Francisco"));
-    municipio.add(new Option("Vallecillo", "Vallecillo"));
-  }else if (departamento.value === "Gracias a Dios") {
-    municipio.add(new Option("Puerto Lempira", "Puerto Lempira"));
-    municipio.add(new Option("Brus Laguna", "Brus Laguna"));
-    municipio.add(new Option("Ahuas", "Ahuas"));
-    municipio.add(new Option("Juan Francisco Bulnes", "Juan Francisco Bulnes"));
-    municipio.add(new Option("Villeda Morales", "Villeda Morales"));
-    municipio.add(new Option("Wampusirpe", "Wampusirpe"));
-  }else if (departamento.value === "Intibucá") {
-    municipio.add(new Option("La Esperanza", "La Esperanza"));
-    municipio.add(new Option("Camasca", "Camasca"));
-    municipio.add(new Option("Colomoncagua", "Colomoncagua"));
-    municipio.add(new Option("Concepción", "Concepción"));
-    municipio.add(new Option("Dolores", "Dolores"));
-    municipio.add(new Option("Intibucá", "Intibucá"));
-    municipio.add(new Option("Jesús de Otoro", "Jesús de Otoro"));
-    municipio.add(new Option("Magdalena", "Magdalena"));
-    municipio.add(new Option("Masaguara", "Masaguara"));
-    municipio.add(new Option("San Antonio", "San Antonio"));
-    municipio.add(new Option("San Isidro", "San Isidro"));
-    municipio.add(new Option("San Juan", "San Juan"));
-    municipio.add(new Option("San Marcos de la Sierra", "San Marcos de la Sierra"));
-    municipio.add(new Option("San Miguelito", "San Miguelito"));
-    municipio.add(new Option("Santa Lucía", "Santa Lucía"));
-    municipio.add(new Option("Yamaranguila", "Yamaranguila"));
-    municipio.add(new Option("San Francisco de Opalaca", "San Francisco de Opalaca"));
-  }else if (departamento.value === "Islas de la Bahía") {
-    municipio.add(new Option("Roatán", "Roatán"));
-    municipio.add(new Option("Guanaja", "Guanaja"));
-    municipio.add(new Option("José Santos Guardiola", "José Santos Guardiola"));
-    municipio.add(new Option("Utila", "Utila"));
-  }else if (departamento.value === "La Paz") {
-    municipio.add(new Option("La Paz", "La Paz"));
-    municipio.add(new Option("Aguanqueterique", "Aguanqueterique"));
-    municipio.add(new Option("Cabañas", "Cabañas"));
-    municipio.add(new Option("Cane", "Cane"));
-    municipio.add(new Option("Chinacla", "Chinacla"));
-    municipio.add(new Option("Guajiquiro", "Guajiquiro"));
-    municipio.add(new Option("Lauterique", "Lauterique"));
-    municipio.add(new Option("Marcala", "Marcala"));
-    municipio.add(new Option("Mercedes de Oriente", "Mercedes de Oriente"));
-    municipio.add(new Option("Opatoro", "Opatoro"));
-    municipio.add(new Option("San Antonio del Norte", "San Antonio del Norte"));
-    municipio.add(new Option("San José", "San José"));
-    municipio.add(new Option("San Juan", "San Juan"));
-    municipio.add(new Option("San Pedro de Tutule", "San Pedro de Tutule"));
-    municipio.add(new Option("Santa Ana", "Santa Ana"));
-    municipio.add(new Option("Santa Elena", "Santa Elena"));
-    municipio.add(new Option("Santa María", "Santa María"));
-    municipio.add(new Option("Santiago de Puringla", "Santiago de Puringla"));
-    municipio.add(new Option("Yarula", "Yarula"));
-  }else if (departamento.value === "Lempira") {
-    municipio.add(new Option("Gracias", "Gracias"));
-    municipio.add(new Option("Belén", "Belén"));
-    municipio.add(new Option("Candelaria", "Candelaria"));
-    municipio.add(new Option("Cololaca", "Cololaca"));
-    municipio.add(new Option("Erandique", "Erandique"));
-    municipio.add(new Option("Gualcince", "Gualcince"));
-    municipio.add(new Option("Guarita", "Guarita"));
-    municipio.add(new Option("La Campa", "La Campa"));
-    municipio.add(new Option("La Iguala", "La Iguala"));
-    municipio.add(new Option("Las Flores", "Las Flores"));
-    municipio.add(new Option("La Unión", "La Unión"));
-    municipio.add(new Option("La Virtud", "La Virtud"));
-    municipio.add(new Option("Lepaera", "Lepaera"));
-    municipio.add(new Option("Mapulaca", "Mapulaca"));
-    municipio.add(new Option("Piraera", "Piraera"));
-    municipio.add(new Option("San Andrés", "San Andrés"));
-    municipio.add(new Option("San Francisco", "San Francisco"));
-    municipio.add(new Option("San Juan Guarita", "San Juan Guarita"));
-    municipio.add(new Option("San Manuel Colohete", "San Manuel Colohete"));
-    municipio.add(new Option("San Rafael", "San Rafael"));
-    municipio.add(new Option("San Sebastián", "San Sebastián"));
-    municipio.add(new Option("Santa Cruz", "Santa Cruz"));
-    municipio.add(new Option("Talgua", "Talgua"));
-    municipio.add(new Option("Tambla", "Tambla"));
-    municipio.add(new Option("Tomalá", "Tomalá"));
-    municipio.add(new Option("Valladolid", "Valladolid"));
-    municipio.add(new Option("Virginia", "Virginia"));
-    municipio.add(new Option("San Marcos de Caiquín", "San Marcos de Caiquín"));
-  }else if (departamento.value === "Ocotepeque") {
-    municipio.add(new Option("Ocotepeque", "Ocotepeque"));
-    municipio.add(new Option("Belén Gualcho", "Belén Gualcho"));
-    municipio.add(new Option("Concepción", "Concepción"));
-    municipio.add(new Option("Dolores Merendón", "Dolores Merendón"));
-    municipio.add(new Option("Fraternidad", "Fraternidad"));
-    municipio.add(new Option("La Encarnación", "La Encarnación"));
-    municipio.add(new Option("La Labor", "La Labor"));
-    municipio.add(new Option("Lucerna", "Lucerna"));
-    municipio.add(new Option("Mercedes", "Mercedes"));
-    municipio.add(new Option("San Fernando", "San Fernando"));
-    municipio.add(new Option("San Francisco del Valle", "San Francisco del Valle"));
-    municipio.add(new Option("San Jorge", "San Jorge"));
-    municipio.add(new Option("San Marcos", "San Marcos"));
-    municipio.add(new Option("Santa Fe", "Santa Fe"));
-    municipio.add(new Option("Sensenti", "Sensenti"));
-    municipio.add(new Option("Sinuapa", "Sinuapa"));
-  }else if (departamento.value === "Olancho") {
-    municipio.add(new Option("Juticalpa", "Juticalpa"));
-    municipio.add(new Option("Campamento", "Campamento"));
-    municipio.add(new Option("Catacamas", "Catacamas"));
-    municipio.add(new Option("Concordia", "Concordia"));
-    municipio.add(new Option("Dulce Nombre de Culmí", "Dulce Nombre de Culmí"));
-    municipio.add(new Option("El Rosario", "El Rosario"));
-    municipio.add(new Option("Esquipulas del Norte", "Esquipulas del Norte"));
-    municipio.add(new Option("Gualaco", "Gualaco"));
-    municipio.add(new Option("Guarizama", "Guarizama"));
-    municipio.add(new Option("Guata", "Guata"));
-    municipio.add(new Option("Guayape", "Guayape"));
-    municipio.add(new Option("Jano", "Jano"));
-    municipio.add(new Option("La Unión", "La Unión"));
-    municipio.add(new Option("Mangulile", "Mangulile"));
-    municipio.add(new Option("Manto", "Manto"));
-    municipio.add(new Option("Salamá", "Salamá"));
-    municipio.add(new Option("San Esteban", "San Esteban"));
-    municipio.add(new Option("San Francisco de Becerra", "San Francisco de Becerra"));
-    municipio.add(new Option("San Francisco de la Paz", "San Francisco de la Paz"));
-    municipio.add(new Option("Santa María del Real", "Santa María del Real"));
-    municipio.add(new Option("Silca", "Silca"));
-    municipio.add(new Option("Yocón", "Yocón"));
-    municipio.add(new Option("Patuca", "Patuca"));
-  }else if (departamento.value === "Santa Bárbara") {
-    municipio.add(new Option("Santa Bárbara", "Santa Bárbara"));
-    municipio.add(new Option("Arada", "Arada"));
-    municipio.add(new Option("Atima", "Atima"));
-    municipio.add(new Option("Azacualpa", "Azacualpa"));
-    municipio.add(new Option("Ceguaca", "Ceguaca"));
-    municipio.add(new Option("Concepción del Norte", "Concepción del Norte"));
-    municipio.add(new Option("Concepción del Sur", "Concepción del Sur"));
-    municipio.add(new Option("Chinda", "Chinda"));
-    municipio.add(new Option("El Níspero", "El Níspero"));
-    municipio.add(new Option("Gualala", "Gualala"));
-    municipio.add(new Option("Ilama", "Ilama"));
-    municipio.add(new Option("Las Vegas", "Las Vegas"));
-    municipio.add(new Option("Macuelizo", "Macuelizo"));
-    municipio.add(new Option("Naranjito", "Naranjito"));
-    municipio.add(new Option("Nuevo Celilac", "Nuevo Celilac"));
-    municipio.add(new Option("Nueva Frontera", "Nueva Frontera"));
-    municipio.add(new Option("Petoa", "Petoa"));
-    municipio.add(new Option("Protección", "Protección"));
-    municipio.add(new Option("Quimistán", "Quimistán"));
-    municipio.add(new Option("San Francisco de Ojuera", "San Francisco de Ojuera"));
-    municipio.add(new Option("San José de las Colinas", "San José de las Colinas"));
-    municipio.add(new Option("San Luis", "San Luis"));
-    municipio.add(new Option("San Marcos", "San Marcos"));
-    municipio.add(new Option("San Nicolás", "San Nicolás"));
-    municipio.add(new Option("San Pedro Zacapa", "San Pedro Zacapa"));
-    municipio.add(new Option("San Vicente Centenario", "San Vicente Centenario"));
-    municipio.add(new Option("Santa Rita", "Santa Rita"));
-    municipio.add(new Option("Trinidad", "Trinidad"));
-  }else if (departamento.value === "Valle") {
-    municipio.add(new Option("Nacaome", "Nacaome"));
-    municipio.add(new Option("Alianza", "Alianza"));
-    municipio.add(new Option("Amapala", "Amapala"));
-    municipio.add(new Option("Aramecina", "Aramecina"));
-    municipio.add(new Option("Caridad", "Caridad"));
-    municipio.add(new Option("Goascorán", "Goascorán"));
-    municipio.add(new Option("Langue", "Langue"));
-    municipio.add(new Option("San Francisco de Coray", "San Francisco de Coray"));
-    municipio.add(new Option("San Lorenzo", "San Lorenzo"));
-  }else if (departamento.value === "Yoro") {
-    municipio.add(new Option("Yoro", "Yoro"));
-    municipio.add(new Option("Arenal", "Arenal"));
-    municipio.add(new Option("El Negrito", "El Negrito"));
-    municipio.add(new Option("El Progreso", "El Progreso"));
-    municipio.add(new Option("Jocón", "Jocón"));
-    municipio.add(new Option("Morazán", "Morazán"));
-    municipio.add(new Option("Olanchito", "Olanchito"));
-    municipio.add(new Option("Santa Rita", "Santa Rita"));
-    municipio.add(new Option("Sulaco", "Sulaco"));
-    municipio.add(new Option("Victoria", "Victoria"));
-    municipio.add(new Option("Yorito", "Yorito"));
+  if (departamento.value === "ATLÁNTIDA") {
+    municipio.add(new Option("LA CEIBA", "lA CEIBA"));
+    municipio.add(new Option("EL PORVENIR", "EL PORVENIR"));
+    municipio.add(new Option("TELA", "TELA"));
+    municipio.add(new Option("JUTIAPA", "JUTIAPA"));
+    municipio.add(new Option("LA MASICA", "LA MASICA"));
+    municipio.add(new Option("SAN FRANCISCO", "SAN FRANCISCO"));
+    municipio.add(new Option("ARIZONA", "ARIZONA"));
+    municipio.add(new Option("ESPARTA", "ESPARTA"));
+  } else if (departamento.value === "COLÓN") {
+    municipio.add(new Option("TRUJILLO", "TRUJILLO"));
+    municipio.add(new Option("BALFATE", "BALFATE"));
+    municipio.add(new Option("IRIONA", "IRIONA"));
+    municipio.add(new Option("LIMÓN", "LIMÓN"));
+    municipio.add(new Option("SABÁ", "SABÁ"));
+    municipio.add(new Option("SANTA FE", "SANTA FE"));
+    municipio.add(new Option("SANTA ROSA DE AGUÁN", "SANTA ROSA DE AGUÁN"));
+    municipio.add(new Option("SONAGUERA", "SONAGUERA"));
+    municipio.add(new Option("TOCOA", "TOCOA"));
+    municipio.add(new Option("BONITO ORIENTAL", "BONITO ORIENTAL"));
+  } else if (departamento.value === "COMAYAGUA") {
+    municipio.add(new Option("COMAYAGUA", "COMAYAGUA"));
+    municipio.add(new Option("AJUTERIQUE", "AJUTERIQUE"));
+    municipio.add(new Option("EL ROSARIO", "EL ROSARIO"));
+    municipio.add(new Option("ESQUÍAS", "ESQUÍAS"));
+    municipio.add(new Option("HUMUYA", "HUMUYA"));
+    municipio.add(new Option("LA LIBERTAD", "LA LIBERTAD"));
+    municipio.add(new Option("LAMANÍ", "LAMANÍ"));
+    municipio.add(new Option("LA TRINIDAD", "LA TRINIDAD"));
+    municipio.add(new Option("LEJAMANÍ", "LEJAMANÍ"));
+    municipio.add(new Option("MEÁMBAR", "MEÁMBAR"));
+    municipio.add(new Option("MINAS DE ORO", "MINAS DE ORO"));
+    municipio.add(new Option("OJOS DE AGUA", "OJOS DE AGUA"));
+    municipio.add(new Option("SAN JERÓNIMO", "SAN JERÓNIMO"));
+    municipio.add(new Option("SAN JOSÉ DE COMAYAGUA", "SAN JOSÉ DE COMAYAGUA"));
+    municipio.add(new Option("SAN JOSÉ DEL POTRERO", "SAN JOSÉ DEL POTRERO"));
+    municipio.add(new Option("SAN LUIS", "SAN LUIS"));
+    municipio.add(new Option("SAN SEBASTIÁN", "SAN SEBASTIÁN"));
+    municipio.add(new Option("SIGUATEPEQUE", "SIGUATEPEQUE"));
+    municipio.add(new Option("VILLA DE SAN ANTONIO", "VILLA DE SAN ANTONIO"));
+    municipio.add(new Option("LAS LAJAS", "LAS LAJAS"));
+    municipio.add(new Option("TAULABÉ", "TAULABÉ"));
+  } else if (departamento.value === "COPÁN") {
+    municipio.add(new Option("SANTA ROSA DE COPÁN", "SANTA ROSA DE COPÁN"));
+    municipio.add(new Option("CABAÑAS", "CABAÑAS"));
+    municipio.add(new Option("CONCEPCIÓN", "CONCEPCIÓN"));
+    municipio.add(new Option("COPÁN RUINAS", "COPÁN RUINAS"));
+    municipio.add(new Option("CORQUÍN", "CORQUÍN"));
+    municipio.add(new Option("CUCUYAGUA", "CUCUYAGUA"));
+    municipio.add(new Option("DOLORES", "DOLORES"));
+    municipio.add(new Option("DULCE NOMBRE", "DULCE NOMBRE"));
+    municipio.add(new Option("EL PARAÍSO", "EL PARAÍSO"));
+    municipio.add(new Option("FLORIDA", "FLORIDA"));
+    municipio.add(new Option("LA JIGUA", "LA JIGUA"));
+    municipio.add(new Option("LA UNIÓN", "LA UNIÓN"));
+    municipio.add(new Option("NUEVA ARCADIA", "NUEVA ARCADIA"));
+    municipio.add(new Option("SAN AGUSTÍN", "SAN AGUSTÍN"));
+    municipio.add(new Option("SAN ANTONIO", "SAN ANTONIO"));
+    municipio.add(new Option("SAN JERÓNIMO", "SAN JERÓNIMO"));
+    municipio.add(new Option("SAN JOSÉ", "SAN JOSÉ"));
+    municipio.add(new Option("SAN JUAN DE OPOA", "SAN JUAN DE OPOA"));
+    municipio.add(new Option("SAN NICOLÁS", "SAN NICOLÁS"));
+    municipio.add(new Option("SAN PEDRO", "SAN PEDRO"));
+    municipio.add(new Option("SANTA RITA", "SANTA RITA"));
+    municipio.add(new Option("TRINIDAD DE COPÁN", "TRINIDAD DE COPÁN"));
+    municipio.add(new Option("VERACRUZ", "VERACRUZ"));
+  }else if (departamento.value === "CORTÉS") {
+    municipio.add(new Option("SAN PEDRO SULA", "SAN PEDRO SULA"));
+    municipio.add(new Option("CHOLOMA", "CHOLOMA"));
+    municipio.add(new Option("OMOA", "OMOA"));
+    municipio.add(new Option("PIMIENTA", "PIMIENTA"));
+    municipio.add(new Option("POTRERILLOS", "POTRERILLOS"));
+    municipio.add(new Option("PUERTO CORTÉS", "PUERTO CORTÉS"));
+    municipio.add(new Option("SAN ANTONIO DE CORTÉS", "SAN ANTONIO DE CORTÉS"));
+    municipio.add(new Option("SAN FRANCISCO DE YOJOA", "SAN FRANCISCO DE YOJOA"));
+    municipio.add(new Option("SAN MANUEL", "SAN MANUEL"));
+    municipio.add(new Option("SANTA CRUZ DE YOJOA", "SANTA CRUZ DE YOJOA"));
+    municipio.add(new Option("VILLANUEVA", "VILLANUEVA"));
+    municipio.add(new Option("LA LIMA", "LA LIMA"));
+  }else if (departamento.value === "CHOLUTECA") {
+    municipio.add(new Option("CHOLUTECA", "CHOLUTECA"));
+    municipio.add(new Option("APACILAGUA", "APACILAGUA"));
+    municipio.add(new Option("CONCEPCIÓN DE MARÍA", "CONCEPCIÓN DE MARÍA"));
+    municipio.add(new Option("DUYURE", "DUYURE"));
+    municipio.add(new Option("EL CORPUS", "EL CORPUS"));
+    municipio.add(new Option("EL TRIUNFO", "EL TRIUNFO"));
+    municipio.add(new Option("MARCOVIA", "MARCOVIA"));
+    municipio.add(new Option("MOROLICA", "MOROLICA"));
+    municipio.add(new Option("NAMASIGÜE", "NAMASIGÜE"));
+    municipio.add(new Option("OROCUINA", "OROCUINA"));
+    municipio.add(new Option("PESPIRE", "PESPIRE"));
+    municipio.add(new Option("SAN ANTONIO DE FLORES", "SAN ANTONIO DE FLORES"));
+    municipio.add(new Option("SAN ISIDRO", "SAN ISIDRO"));
+    municipio.add(new Option("SAN JOSÉ", "SAN JOSÉ"));
+    municipio.add(new Option("SAN MARCOS DE COLÓN", "SAN MARCOS DE COLÓN"));
+    municipio.add(new Option("SANTA ANA DE YUSGUARE", "SANTA ANA DE YUSGUARE"));
+  }else if (departamento.value === "EL PARAÍSO") {
+    municipio.add(new Option("YUSCARÁN", "YUSCARÁN"));
+    municipio.add(new Option("ALAUCA", "ALAUCA"));
+    municipio.add(new Option("DANLÍ", "DANLÍ"));
+    municipio.add(new Option("EL PARAÍSO", "EL PARAÍSO"));
+    municipio.add(new Option("GÜINOPE", "GÜINOPE"));
+    municipio.add(new Option("JACALEAPA", "JACALEAPA"));
+    municipio.add(new Option("LIURE", "LIURE"));
+    municipio.add(new Option("MOROCELÍ", "MOROCELÍ"));
+    municipio.add(new Option("OROPOLÍ", "OROPOLÍ"));
+    municipio.add(new Option("POTRERILLOS", "POTRERILLOS"));
+    municipio.add(new Option("SAN ANTONIO DE FLORES", "SAN ANTONIO DE FLORES"));
+    municipio.add(new Option("SAN LUCAS", "SAN LUCAS"));
+    municipio.add(new Option("SAN MATÍAS", "SAN MATÍAS"));
+    municipio.add(new Option("SOLEDAD", "SOLEDAD"));
+    municipio.add(new Option("TEUPASENTI", "TEUPASENTI"));
+    municipio.add(new Option("TEXIGUAT", "TEXIGUAT"));
+    municipio.add(new Option("VADO ANCHO", "VADO ANCHO"));
+    municipio.add(new Option("YAUYUPE", "YAUYUPE"));
+    municipio.add(new Option("TROJES", "TROJES"));
+  }else if (departamento.value === "FRANCISCO MORAZÁN") {
+    municipio.add(new Option("DISTRITO CENTRAL", "DISTRITO CENTRAL"));
+    municipio.add(new Option("ALUBARÉN", "ALUBARÉN"));
+    municipio.add(new Option("CEDROS", "CEDROS"));
+    municipio.add(new Option("CURARÉN", "CURARÉN"));
+    municipio.add(new Option("EL PORVENIR", "EL PORVENIR"));
+    municipio.add(new Option("GUAIMACA", "GUAIMACA"));
+    municipio.add(new Option("LA LIBERTAD", "LA LIBERTAD"));
+    municipio.add(new Option("LA VENTA", "LA VENTA"));
+    municipio.add(new Option("LEPATERIQUE", "LEPATERIQUE"));
+    municipio.add(new Option("MARAITA", "MARAITA"));
+    municipio.add(new Option("MARALE", "MARALE"));
+    municipio.add(new Option("NUEVA ARMENIA", "NUEVA ARMENIA"));
+    municipio.add(new Option("OJOJONA", "OJOJONA"));
+    municipio.add(new Option("ORICA", "ORICA"));
+    municipio.add(new Option("REITOCA", "REITOCA"));
+    municipio.add(new Option("SABANAGRANDE", "SABANAGRANDE"));
+    municipio.add(new Option("SAN ANTONIO DE ORIENTE", "SAN ANTONIO DE ORIENTE"));
+    municipio.add(new Option("SAN BUENAVENTURA", "SAN BUENAVENTURA"));
+    municipio.add(new Option("SAN IGNACIO", "SAN IGNACIO"));
+    municipio.add(new Option("SAN JUAN DE FLORES", "SAN JUAN DE FLORES"));
+    municipio.add(new Option("SAN MIGUELITO", "SAN MIGUELITO"));
+    municipio.add(new Option("SANTA ANA", "SANTA ANA"));
+    municipio.add(new Option("SANTA LUCÍA", "SANTA LUCÍA"));
+    municipio.add(new Option("TALANGA", "TALANGA"));
+    municipio.add(new Option("TATUMBLA", "TATUMBLA"));
+    municipio.add(new Option("VALLE DE ÁNGELES", "VALLE DE ÁNGELES"));
+    municipio.add(new Option("VILLA DE SAN FRANCISCO", "VILLA DE SAN FRANCISCO"));
+    municipio.add(new Option("VALLECILLO", "VALLECILLO"));
+  }else if (departamento.value === "GRACIAS A DIOS") {
+    municipio.add(new Option("PUERTO LEMPIRA", "PUERTO LEMPIRA"));
+    municipio.add(new Option("BRUS LAGUNA", "BRUS LAGUNA"));
+    municipio.add(new Option("AHUAS", "AHUAS"));
+    municipio.add(new Option("JUAN FRANCISCO BULNES", "JUAN FRANCISCO BULNES"));
+    municipio.add(new Option("VILLEDA MORALES", "VILLEDA MORALES"));
+    municipio.add(new Option("WAMPUSIRPE", "WAMPUSIRPE"));
+  }else if (departamento.value === "INTIBUCÁ") {
+    municipio.add(new Option("LA ESPERANZA", "LA ESPERANZA"));
+    municipio.add(new Option("CAMASCA", "CAMASCA"));
+    municipio.add(new Option("COLOMONCAGUA", "COLOMONCAGUA"));
+    municipio.add(new Option("CONCEPCIÓN", "CONCEPCIÓN"));
+    municipio.add(new Option("DOLORES", "DOLORES"));
+    municipio.add(new Option("INTIBUCÁ", "INTIBUCÁ"));
+    municipio.add(new Option("JESÚS DE OTORO", "JESÚS DE OTORO"));
+    municipio.add(new Option("MAGDALENA", "MAGDALENA"));
+    municipio.add(new Option("MASAGUARA", "MASAGUARA"));
+    municipio.add(new Option("SAN ANTONIO", "SAN ANTONIO"));
+    municipio.add(new Option("SAN ISIDRO", "SAN ISIDRO"));
+    municipio.add(new Option("SAN JUAN", "SAN JUAN"));
+    municipio.add(new Option("SAN MARCOS DE LA SIERRA", "SAN MARCOS DE LA SIERRA"));
+    municipio.add(new Option("SAN MIGUELITO", "SAN MIGUELITO"));
+    municipio.add(new Option("SANTA LUCÍA", "SANTA LUCÍA"));
+    municipio.add(new Option("YAMARANGUILA", "YAMARANGUILA"));
+    municipio.add(new Option("SAN FRANCISCO DE OPALACA", "SAN FRANCISCO DE OPALACA"));
+  }else if (departamento.value === "ISLAS DE LA BAHÍA") {
+    municipio.add(new Option("ROATÁN", "ROATÁN"));
+    municipio.add(new Option("GUANAJA", "GUANAJA"));
+    municipio.add(new Option("JOSÉ SANTOS GUARDIOLA", "JOSÉ SANTOS GUARDIOLA"));
+    municipio.add(new Option("UTILA", "UTILA"));
+  }else if (departamento.value === "LA PAZ") {
+    municipio.add(new Option("LA PAZ", "LA PAZ"));
+    municipio.add(new Option("AGUANQUETERIQUE", "AGUANQUETERIQUE"));
+    municipio.add(new Option("CABAÑAS", "CABAÑAS"));
+    municipio.add(new Option("CANE", "CANE"));
+    municipio.add(new Option("CHINACLA", "CHINACLA"));
+    municipio.add(new Option("GUAJIQUIRO", "GUAJIQUIRO"));
+    municipio.add(new Option("LAUTERIQUE", "LAUTERIQUE"));
+    municipio.add(new Option("MARCALA", "MARCALA"));
+    municipio.add(new Option("MERCEDES DE ORIENTE", "MERCEDES DE ORIENTE"));
+    municipio.add(new Option("OPATORO", "OPATORO"));
+    municipio.add(new Option("SAN ANTONIO DEL NORTE", "SAN ANTONIO DEL NORTE"));
+    municipio.add(new Option("SAN JOSÉ", "SAN JOSÉ"));
+    municipio.add(new Option("SAN JUAN", "SAN JUAN"));
+    municipio.add(new Option("SAN PEDRO DE TUTULE", "SAN PEDRO DE TUTULE"));
+    municipio.add(new Option("SANTA ANA", "SANTA ANA"));
+    municipio.add(new Option("SANTA ELENA", "SANTA ELENA"));
+    municipio.add(new Option("SANTA MARÍA", "SANTA MARÍA"));
+    municipio.add(new Option("SANTIAGO DE PURINGLA", "SANTIAGO DE PURINGLA"));
+    municipio.add(new Option("YARULA", "YARULA"));
+  }else if (departamento.value === "LEMPIRA") {
+    municipio.add(new Option("GRACIAS", "GRACIAS"));
+    municipio.add(new Option("BELÉN", "BELÉN"));
+    municipio.add(new Option("CANDELARIA", "CANDELARIA"));
+    municipio.add(new Option("COLOLACA", "COLOLACA"));
+    municipio.add(new Option("ERANDIQUE", "ERANDIQUE"));
+    municipio.add(new Option("GUALCINCE", "GUALCINCE"));
+    municipio.add(new Option("GUARITA", "GUARITA"));
+    municipio.add(new Option("LA CAMPA", "LA CAMPA"));
+    municipio.add(new Option("LA IGUALA", "LA IGUALA"));
+    municipio.add(new Option("LAS FLORES", "LAS FLORES"));
+    municipio.add(new Option("LA UNIÓN", "LA UNIÓN"));
+    municipio.add(new Option("LA VIRTUD", "LA VIRTUD"));
+    municipio.add(new Option("LEPAERA", "LEPAERA"));
+    municipio.add(new Option("MAPULACA", "MAPULACA"));
+    municipio.add(new Option("PIRAERA", "PIRAERA"));
+    municipio.add(new Option("SAN ANDRÉS", "SAN ANDRÉS"));
+    municipio.add(new Option("SAN FRANCISCO", "SAN FRANCISCO"));
+    municipio.add(new Option("SAN JUAN GUARITA", "SAN JUAN GUARITA"));
+    municipio.add(new Option("SAN MANUEL COLOHETE", "SAN MANUEL COLOHETE"));
+    municipio.add(new Option("SAN RAFAEL", "SAN RAFAEL"));
+    municipio.add(new Option("SAN SEBASTIÁN", "SAN SEBASTIÁN"));
+    municipio.add(new Option("SANTA CRUZ", "SANTA CRUZ"));
+    municipio.add(new Option("TALGUA", "TALGUA"));
+    municipio.add(new Option("TAMBLA", "TAMBLA"));
+    municipio.add(new Option("TOMALÁ", "TOMALÁ"));
+    municipio.add(new Option("VALLADOLID", "VALLADOLID"));
+    municipio.add(new Option("VIRGINIA", "VIRGINIA"));
+    municipio.add(new Option("SAN MARCOS DE CAIQUÍN", "SAN MARCOS DE CAIQUÍN"));
+  }else if (departamento.value === "OCOTEPEQUE") {
+    municipio.add(new Option("OCOTEPEQUE", "OCOTEPEQUE"));
+    municipio.add(new Option("BELÉN GUALCHO", "BELÉN GUALCHO"));
+    municipio.add(new Option("CONCEPCIÓN", "CONCEPCIÓN"));
+    municipio.add(new Option("DOLORES MERENDÓN", "DOLORES MERENDÓN"));
+    municipio.add(new Option("FRATERNIDAD", "FRATERNIDAD"));
+    municipio.add(new Option("LA ENCARNACIÓN", "LA ENCARNACIÓN"));
+    municipio.add(new Option("LA LABOR", "LA LABOR"));
+    municipio.add(new Option("LUCERNA", "LUCERNA"));
+    municipio.add(new Option("MERCEDES", "MERCEDES"));
+    municipio.add(new Option("SAN FERNANDO", "SAN FERNANDO"));
+    municipio.add(new Option("SAN FRANCISCO DEL VALLE", "SAN FRANCISCO DEL VALLE"));
+    municipio.add(new Option("SAN JORGE", "SAN JORGE"));
+    municipio.add(new Option("SAN MARCOS", "SAN MARCOS"));
+    municipio.add(new Option("SANTA FE", "SANTA FE"));
+    municipio.add(new Option("SENSENTI", "SENSENTI"));
+    municipio.add(new Option("SINUAPA", "SINUAPA"));
+  }else if (departamento.value === "OLANCHO") {
+    municipio.add(new Option("JUTICALPA", "JUTICALPA"));
+    municipio.add(new Option("CAMPAMENTO", "CAMPAMENTO"));
+    municipio.add(new Option("CATACAMAS", "CATACAMAS"));
+    municipio.add(new Option("CONCORDIA", "CONCORDIA"));
+    municipio.add(new Option("DULCE NOMBRE DE CULMÍ", "DULCE NOMBRE DE CULMÍ"));
+    municipio.add(new Option("EL ROSARIO", "EL ROSARIO"));
+    municipio.add(new Option("ESQUIPULAS DEL NORTE", "ESQUIPULAS DEL NORTE"));
+    municipio.add(new Option("GUALACO", "GUALACO"));
+    municipio.add(new Option("GUARIZAMA", "GUARIZAMA"));
+    municipio.add(new Option("GUATA", "GUATA"));
+    municipio.add(new Option("GUAYAPE", "GUAYAPE"));
+    municipio.add(new Option("JANO", "JANO"));
+    municipio.add(new Option("LA UNIÓN", "LA UNIÓN"));
+    municipio.add(new Option("MANGULILE", "MANGULILE"));
+    municipio.add(new Option("MANTO", "MANTO"));
+    municipio.add(new Option("SALAMÁ", "SALAMÁ"));
+    municipio.add(new Option("SAN ESTEBAN", "SAN ESTEBAN"));
+    municipio.add(new Option("SAN FRANCISCO DE BECERRA", "SAN FRANCISCO DE BECERRA"));
+    municipio.add(new Option("SAN FRANCISCO DE LA PAZ", "SAN FRANCISCO DE LA PAZ"));
+    municipio.add(new Option("SANTA MARÍA DEL REAL", "SANTA MARÍA DEL REAL"));
+    municipio.add(new Option("SILCA", "SILCA"));
+    municipio.add(new Option("YOCÓN", "YOCÓN"));
+    municipio.add(new Option("PATUCA", "PATUCA"));
+  }else if (departamento.value === "SANTA BÁRBARA") {
+    municipio.add(new Option("SANTA BÁRBARA", "SANTA BÁRBARA"));
+    municipio.add(new Option("ARADA", "ARADA"));
+    municipio.add(new Option("ATIMA", "ATIMA"));
+    municipio.add(new Option("AZACUALPA", "AZACUALPA"));
+    municipio.add(new Option("CEGUACA", "CEGUACA"));
+    municipio.add(new Option("CONCEPCIÓN DEL NORTE", "CONCEPCIÓN DEL NORTE"));
+    municipio.add(new Option("CONCEPCIÓN DEL SUR", "CONCEPCIÓN DEL SUR"));
+    municipio.add(new Option("CHINDA", "CHINDA"));
+    municipio.add(new Option("EL NÍSPERO", "EL NÍSPERO"));
+    municipio.add(new Option("GUALALA", "GUALALA"));
+    municipio.add(new Option("ILAMA", "ILAMA"));
+    municipio.add(new Option("LAS VEGAS", "LAS VEGAS"));
+    municipio.add(new Option("MACUELIZO", "MACUELIZO"));
+    municipio.add(new Option("NARANJITO", "NARANJITO"));
+    municipio.add(new Option("NUEVO CELILAC", "NUEVO CELILAC"));
+    municipio.add(new Option("NUEVA FRONTERA", "NUEVA FRONTERA"));
+    municipio.add(new Option("PETOA", "PETOA"));
+    municipio.add(new Option("PROTECCIÓN", "PROTECCIÓN"));
+    municipio.add(new Option("QUIMISTÁN", "QUIMISTÁN"));
+    municipio.add(new Option("SAN FRANCISCO DE OJUERA", "SAN FRANCISCO DE OJUERA"));
+    municipio.add(new Option("SAN JOSÉ DE LAS COLINAS", "SAN JOSÉ DE LAS COLINAS"));
+    municipio.add(new Option("SAN LUIS", "SAN LUIS"));
+    municipio.add(new Option("SAN MARCOS", "SAN MARCOS"));
+    municipio.add(new Option("SAN NICOLÁS", "SAN NICOLÁS"));
+    municipio.add(new Option("SAN PEDRO ZACAPA", "SAN PEDRO ZACAPA"));
+    municipio.add(new Option("SAN VICENTE CENTENARIO", "SAN VICENTE CENTENARIO"));
+    municipio.add(new Option("SANTA RITA", "SANTA RITA"));
+    municipio.add(new Option("TRINIDAD", "TRINIDAD"));
+  }else if (departamento.value === "VALLE") {
+    municipio.add(new Option("NACAOME", "NACAOME"));
+    municipio.add(new Option("ALIANZA", "ALIANZA"));
+    municipio.add(new Option("AMAPALA", "AMAPALA"));
+    municipio.add(new Option("ARAMECINA", "ARAMECINA"));
+    municipio.add(new Option("CARIDAD", "CARIDAD"));
+    municipio.add(new Option("GOASCORÁN", "GOASCORÁN"));
+    municipio.add(new Option("LANGUE", "LANGUE"));
+    municipio.add(new Option("SAN FRANCISCO DE CORAY", "SAN FRANCISCO DE CORAY"));
+    municipio.add(new Option("SAN LORENZO", "SAN LORENZO"));
+  }else if (departamento.value === "YORO") {
+    municipio.add(new Option("YORO", "YORO"));
+    municipio.add(new Option("ARENAL", "ARENAL"));
+    municipio.add(new Option("EL NEGRITO", "EL NEGRITO"));
+    municipio.add(new Option("EL PROGRESO", "EL PROGRESO"));
+    municipio.add(new Option("JOCÓN", "JOCÓN"));
+    municipio.add(new Option("MORAZÁN", "MORAZÁN"));
+    municipio.add(new Option("OLANCHITO", "OLANCHITO"));
+    municipio.add(new Option("SANTA RITA", "SANTA RITA"));
+    municipio.add(new Option("SULACO", "SULACO"));
+    municipio.add(new Option("VICTORIA", "VICTORIA"));
+    municipio.add(new Option("YORITO", "YORITO"));
   }
 
 } 
