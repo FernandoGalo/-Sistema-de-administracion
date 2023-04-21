@@ -41,39 +41,6 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
       return confirm('¿Está Seguro?, se eliminará el registro');
     }
   </script>
-    <script>
-function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    // Nombre del archivo
-    filename = filename?filename+'.xls':'Reporte de tabla.xls';
-
-    // Crear descarga
-    downloadLink = document.createElement("a");
-
-    document.body.appendChild(downloadLink);
-
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        // Crear enlace para descargar
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-        // Establecer nombre de archivo
-        downloadLink.download = filename;
-
-        // Descargar archivo
-        downloadLink.click();
-    }
-}
-</script>
-
-
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
@@ -99,110 +66,20 @@ function exportTableToExcel(tableID, filename = ''){
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=11 ");
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-file-text"></i> Agregar Datos</button>
-                          <button class="btn btn-success" id="Excel_Btn" onclick="exportTableToExcel('tbllistado')"><i class="zmdi zmdi-archive"></i> Exportar a Excel</button>
+                          <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteSAR.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Proyectos
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
                         <br>
                     </div>
-
-
 <!-- ================================================ -->
                     <!-- /.box-header -->
                     <!-- centro -->
                     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
 if ($datos=$sql->fetch_object()) { ?>
-                    <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-bordered table-hover">
-                        
-                        <!-- Buscar -->
-                        <form action="" method="post">
-                            <label for="campo">Buscar:</label>
-                            <input type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
-                        </form>
-                        <!-- PARA GENERAR LOS REPORTES ====================== -->
-                        <div class="text-right mb-2">
-                          <a href="../../fpdf/ReporteSAR.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf">Generar Reporte SAR</i></a>
-                        </div>
-                        <!-- Fin Generar Reporte -->
-                        <thead>
-                            <th>ID SAR</th>
-                            <th>RTN</th>
-                            <th>Numero de Declaracion</th>
-                            <th>Nombre o Razon Social</th>
-                            <th>Departamento</th>
-                            <th>Municipio</th>
-                            <th>Barrio o Colonia</th>
-                            <th>Calle o Avenida</th>
-                            <th>Numero de Casa</th>
-                            <th>Bloque</th>
-                            <th>Tel. Fijo</th>
-                            <th>Tel. Celular</th>
-                            <th>Domicilio</th>
-                            <th>Correo</th>
-                            <th>Profesion u oficio</th>
-                            <th>CAI</th>
-                            <th>Fecha Limite de Emision</th>
-                            <th>Numero Inicial</th>
-                            <th> Numero final</th>
-                            <th>Acciones</th>
-                          </thead>
-                          <tbody>                            
-                          </tbody>
-                          <tfoot>
-
-                          <?php
-                          $sql="SELECT ID_SAR, RTN, num_declaracion, nombre_razonSocial, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final
-                          FROM tbl_r_sar";
-                          $result=mysqli_query($conexion,$sql);
-
-                           while($mostrar=mysqli_fetch_array($result)){
-                           ?>
-
-                            <tr>
-                              <td><?php echo $mostrar['ID_SAR']?></td> 
-                              <td><?php echo $mostrar['RTN']?></td> 
-                              <td><?php echo $mostrar['num_declaracion']?></td>
-                              <td><?php echo $mostrar['nombre_razonSocial']?></td>
-                              <td><?php echo $mostrar['departamento']?></td>
-                              <td><?php echo $mostrar['municipio']?></td>
-                              <td><?php echo $mostrar['barrio_colonia']?></td>
-                              <td><?php echo $mostrar['calle_avenida']?></td>
-                              <td><?php echo $mostrar['num_casa']?></td>
-                              <td><?php echo $mostrar['bloque']?></td>
-                              <td><?php echo $mostrar['telefono']?></td>
-                              <td><?php echo $mostrar['celular']?></td>
-                              <td><?php echo $mostrar['domicilio']?></td>
-                              <td><?php echo $mostrar['correo']?></td>
-                              <td><?php echo $mostrar['profesion_oficio']?></td>
-                              <td><?php echo $mostrar['cai']?></td>
-                              <td><?php echo $mostrar['fecha_limite_emision']?></td>
-                              <td><?php echo $mostrar['num_inicial']?></td>
-                              <td><?php echo $mostrar['num_final']?></td>
-                              <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
-if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Update_SAR.php?id_sar=<?php echo $mostrar['ID_SAR']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i>
-                               <?php } ?>
-                              </a>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
-if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Delete_SAR.php?ID_SAR=<?php echo $mostrar['ID_SAR']; ?>' onclick='return confirmar()' class='boton-eliminar'>
-                              <i class='zmdi zmdi-delete'></i>
-                              <?php } ?>
-                              </a>
-                            </td>
-                             </tr>
-                            <?php
-                             }
-                             ?>     
-                          </tfoot>
-                        </table>
-                    </div>
-
-
-                    <main>
+<div class="panel-body" id="listadoregistros">
+<main>
         <div class="container py-4 text-center">
 
             <div class="row g-4">
@@ -229,23 +106,26 @@ if ($datos=$sql->fetch_object()) { ?>
                 <div class="col-auto">
                     <label for="campo" class="col-form-label">Buscar: </label>
                 </div>
+
                 <div class="col-auto">
                     <input type="text" name="campo" id="campo" class="form-control">
                 </div>
             </div>
-            <script>
-document.getElementById("campo").addEventListener("keyup", function(event) {
-  // Obtener el valor del input
-  var campo = document.getElementById("campo").value;
+  <script>
+  document.getElementById("campo").addEventListener("keyup", function(event) {
+    // Obtener el valor del input
+    var campo = document.getElementById("campo").value;
 
-  // Actualizar el valor del enlace
-  var link = document.getElementById("generar-reporte");
-  link.setAttribute("href", "../../fpdf/ReporteSAR.php?campo=" + encodeURIComponent(campo));
-});
+    // Actualizar el valor del botón
+    var btn = document.getElementById("generar-reporte");
+    btn.onclick = function() {
+      window.open('../../fpdf/ReporteSAR.php?campo=' + encodeURIComponent(campo), '_blank');
+    };
+  });
   </script>
             <div class="row py-4">
                 <div class="col">
-                    <table class="table table-sm table-bordered table-striped">
+                <table class="table table-sm table-bordered table-striped">
                         <thead>
                             <th class="sort asc">ID SAR</th>
                             <th class="sort asc">RTN</th>
@@ -267,11 +147,11 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
                             <th class="sort asc">Numero Inicial</th>
                             <th class="sort asc">Numero Final</th>
                             <th class="sort asc">Acciones</th>
-                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
 if ($datos=$sql->fetch_object()) { ?>
                             <th></th>
                             <?php } ?>
-                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=9");
+                            <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=11");
 if ($datos=$sql->fetch_object()) { ?>
                             <th></th>
                             <?php } ?>
@@ -376,8 +256,6 @@ if ($datos=$sql->fetch_object()) { ?>
 
     <!-- Bootstrap core JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
                     <?php } ?>
                     <div class="panel-body" id="formularioregistros">
                         <form name="formulario" id="formulario" action="Insert_SAR.php" method="POST">

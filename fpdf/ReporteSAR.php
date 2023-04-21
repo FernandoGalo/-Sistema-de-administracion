@@ -105,7 +105,13 @@ $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-$consulta_reporte_alquiler = $conexion->query(" SELECT * FROM tbl_r_sar");
+$campo = $_GET["campo"];
+
+$consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_r_sar
+WHERE ID_SAR LIKE '%{$campo}%' OR RTN LIKE '%{$campo}%' OR num_declaracion LIKE '%{$campo}%' OR nombre_razonSocial LIKE '%{$campo}%' OR departamento LIKE '%{$campo}%' OR municipio LIKE '%{$campo}%'
+OR barrio_colonia LIKE '%{$campo}%' OR calle_avenida LIKE '%{$campo}%' OR num_casa LIKE '%{$campo}%' OR bloque LIKE '%{$campo}%' OR telefono LIKE '%{$campo}%' OR celular LIKE '%{$campo}%'
+OR domicilio LIKE '%{$campo}%'OR correo LIKE '%{$campo}%' OR profesion_oficio LIKE '%{$campo}%' OR cai LIKE '%{$campo}%' OR fecha_limite_emision LIKE '%{$campo}%' OR num_inicial LIKE '%{$campo}%'
+OR num_final LIKE '%{$campo}%'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;

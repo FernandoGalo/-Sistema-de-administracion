@@ -126,7 +126,7 @@
         }
         }else{
             //si el usuario NO ha presionado el boton enviar
-            $id_sar=$_GET['id_sar']; //recuperar el id que se envia desde el home.html
+            $id_sar=$_GET['ID_SAR']; //recuperar el id que se envia desde el home.html
             $sql="SELECT * FROM tbl_r_sar where ID_SAR ='".$id_sar."'";
             $resultado=mysqli_query($conexion,$sql);
 
