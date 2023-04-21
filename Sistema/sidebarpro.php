@@ -132,7 +132,7 @@ if ($datos=$sql->fetch_object()) { ?>
 					<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=8");
 if ($datos=$sql->fetch_object()) { ?>
 						<li>
-							<a href="../Fondos/DonacAdm.php"><i class="zmdi zmdi-favorite"></i> Donaciones </a>
+							<a href="../Fondos/DonacAdm.php"><i class="zmdi zmdi-favorite"></i> Donantes </a>
 						</li>
 						<?php } ?>
 						<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=13");

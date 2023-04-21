@@ -138,9 +138,10 @@
                             <input type="hidden" name="Correo_electronico" id="Correo_electronico">
                             <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electronico" onkeypress="validarCorreo(event)" value="<?php echo $correo; ?>"  required>
                           </div>
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
-                          <a href="usuariosAdm.php" style="color:white; text-decoration:none;">
+                          <a href="DonacAdm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
                           </a>
                         </div>

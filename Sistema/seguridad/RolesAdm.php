@@ -90,9 +90,9 @@ if ($datos=$sql->fetch_object()) { ?>
                               <td><?php echo $mostrar['Rol']?></td> 
                               <td><?php echo $mostrar['Descripcion']?></td>
                               <?php if($mostrar['Estado'] == 1){
-                                echo "<td>Activo</td>";
+                                echo "<td>ACTIVO</td>";
                               }else{
-                                echo "<td>Inactivo</td>";
+                                echo "<td>INACTIVO</td>";
                               } 
                               ?>
                               <td>
@@ -127,16 +127,15 @@ if ($datos=$sql->fetch_object()) { ?>
                         <form name="formulario" id="formulario" action="Insert_Roles.php" method="POST">
                         <div class="container">
                           <div class="row">
-
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre rol(*):</label>
                             <input type="hidden" name="Nombre_rol" id="Nombre_rol">
-                            <input type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol" onkeypress="validarMayusculas(event)" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol"oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Descripcion(*):</label>
                             <input type="hidden" name="descripcion" id="descripcion">
-                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol" required>
+                            <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" placeholder="Ingrese la descripcion del rol"  oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Estado:</label>
@@ -147,7 +146,6 @@ if ($datos=$sql->fetch_object()) { ?>
                               <option value="2" >INACTIVO</option>
                             </select>
                           </div>
-
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>

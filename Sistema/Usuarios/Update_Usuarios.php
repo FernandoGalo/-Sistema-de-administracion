@@ -141,20 +141,19 @@
                             <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" onkeypress="validarMayusculas(event);" value="<?php echo $nombreUsuario; ?>" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                          <?php require '../../conexion_BD.php';?>
-                            <label>Rol de usuario:(*):</label>
+                           <?php require '../../conexion_BD.php'; ?>
+                          <label>Rol de usuario:(*):</label>
                             <?php
-                           $sql = $conexion->query("SELECT * FROM tbl_ms_roles");
+                            $sql = $conexion->query("SELECT * FROM tbl_ms_roles");
                             ?>
                             <select class="form-control" name="Rol" id="Rol" required>
                             <option value="">Seleccione un rol</option>
-                               <?php
-                               while ($row1 = mysqli_fetch_array($sql)) {
-                               ?>
-                               <option value="<?php echo $row1['ID_Rol']; ?>"><?php echo $row1['Rol']; ?></option>
-                               <?php
-                               }
-                               ?>
+                            <?php
+                            while ($row1 = mysqli_fetch_array($sql)) {
+                            $selected = ($row1['ID_Rol'] == $Rol) ? 'selected' : '';
+                            echo "<option value='".$row1['ID_Rol']."' ".$selected.">".$row1['Rol']."</option>";
+                            }
+                            ?>
                             </select>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -179,17 +178,15 @@
                             <input type="date" class="form-control" name="FechaVencimiento" id="FechaVencimiento" maxlength="100" placeholder="Ingrese la fecha de vencimiento" value="<?php echo $vencimiento; ?>" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Estado Actual(*)</label>
-                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $Estado; ?>" readonly>
-                            <label>Estado usuario(*)</label>
+                          <label>Estado usuario(*)</label>
                             <select class="form-control" name="Estado" id="Estado" required>
-                              <option value="">Selecione un Estado</option>
-                              <option value="Activo">ACTIVO</option>
-                              <option value="Bloqueado">BLOQUEADO</option>
-                              <option value="Nuevo">NUEVO</option>
-                              <option value="Inactivo">INACTIVO</option>
+                              <option value="">Seleccione un Estado</option>
+                              <option value="ACTIVO" <?php if ($Estado == 'ACTIVO') echo 'selected'; ?>>ACTIVO</option>
+                              <option value="BLOQUEADO" <?php if ($Estado == 'BLOQUEADO') echo 'selected'; ?>>BLOQUEADO</option>
+                              <option value="NUEVO" <?php if ($Estado == 'NUEVO') echo 'selected'; ?>>NUEVO</option>
+                              <option value="INACTIVO" <?php if ($Estado == 'INACTIVO') echo 'selected'; ?>>INACTIVO</option>
                             </select>
-                        </div>
+                          </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
