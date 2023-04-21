@@ -126,7 +126,7 @@
         }
         }else{
             //si el usuario NO ha presionado el boton enviar
-            $id_sar=$_GET['id_sar']; //recuperar el id que se envia desde el home.html
+            $id_sar=$_GET['ID_SAR']; //recuperar el id que se envia desde el home.html
             $sql="SELECT * FROM tbl_r_sar where ID_SAR ='".$id_sar."'";
             $resultado=mysqli_query($conexion,$sql);
 
@@ -296,12 +296,6 @@
                             <label>CAI(*):</label>
                             <input type="hidden" name="cai" id="cai">
                             <input type="text" class="form-control" name="cai" id="cai" maxlength="100" placeholder="Ingrese el codigo CAI" value="<?php echo $cai; ?>" required>
-                          </div>
-
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Fecha Limite de Emision(ACTUAL):</label>
-                            <input type="hidden" name="fechaEmision" id="fechaEmision">
-                            <input type="input" class="form-control" name="fechaEmision" id="fechaEmision" maxlength="100" placeholder="Ingrese la fecha de emision" value="<?php echo $fecha_limite_emision; ?>" readonly required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">

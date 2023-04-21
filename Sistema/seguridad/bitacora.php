@@ -73,7 +73,14 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
                 </div>
 
                 <div class="col-5"></div>
-
+                <div class="col-auto">
+                <label for="fechaInicio" class="col-form-label">Fecha Inicio: </label>
+                <input type="date" name="fechaInicio" id="fechaInicio" class="form-control">
+</div>
+<div class="col-auto">
+<label for="fechaFinal" class="col-form-label">Fecha Final: </label>
+<input type="date" name="fechaFinal" id="fechaFinal" class="form-control">
+</div>
                 <div class="col-auto">
                     <label for="campo" class="col-form-label">Buscar: </label>
                 </div>
@@ -85,7 +92,6 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
 document.getElementById("campo").addEventListener("keyup", function(event) {
   // Obtener el valor del input
   var campo = document.getElementById("campo").value;
-
   // Actualizar el valor del enlace
   var link = document.getElementById("generar-reporte");
   link.setAttribute("href", "../../fpdf/ReporteBitacora.php?campo=" + encodeURIComponent(campo));
@@ -133,33 +139,47 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
 
         /* Escuchar un evento keyup en el campo de entrada y luego llamar a la función getData. */
         document.getElementById("campo").addEventListener("keyup", function() {
-            getData()
-        }, false)
-        document.getElementById("num_registros").addEventListener("change", function() {
-            getData()
-        }, false)
+    getData()
+}, false)
 
+document.getElementById("fechaFinal").addEventListener("change", function() {
+    if (document.getElementById("fechaFinal").value == '') {
+        document.getElementById("fechaFinal").value = document.getElementById("fechaInicio").value= null;
+        getData();
+    } else {
+        getData();
+    }
+}, false);
+
+document.getElementById("num_registros").addEventListener("change", function() {
+    getData()
+}, false)
 
         /* Peticion AJAX */
         function getData() {
             let input = document.getElementById("campo").value
-            let num_registros = document.getElementById("num_registros").value
-            let content = document.getElementById("content")
-            let pagina = document.getElementById("pagina").value
-            let orderCol = document.getElementById("orderCol").value
-            let orderType = document.getElementById("orderType").value
+    let num_registros = document.getElementById("num_registros").value
+    let content = document.getElementById("content")
+    let pagina = document.getElementById("pagina").value
+    let orderCol = document.getElementById("orderCol").value
+    let orderType = document.getElementById("orderType").value
+    let fechaInicio = document.getElementById("fechaInicio").value // Nueva variable
+    let fechaFinal = document.getElementById("fechaFinal").value // Nueva variable
 
-            if (pagina == null) {
-                pagina = 1
-            }
+    if (pagina == null) {
+        pagina = 1
+    }
 
-            let url = "Gestor_tbl_Bitacora.php"
-            let formaData = new FormData()
-            formaData.append('campo', input)
-            formaData.append('registros', num_registros)
-            formaData.append('pagina', pagina)
-            formaData.append('orderCol', orderCol)
-            formaData.append('orderType', orderType)
+    let url = "Gestor_tbl_Bitacora.php"
+    let formaData = new FormData()
+    formaData.append('campo', input)
+    formaData.append('registros', num_registros)
+    formaData.append('pagina', pagina)
+    formaData.append('orderCol', orderCol)
+    formaData.append('orderType', orderType)
+    formaData.append('fechaInicio', fechaInicio) // Nueva variable
+    formaData.append('fechaFinal', fechaFinal) // Nueva variable
+
 
             fetch(url, {
                     method: "POST",
