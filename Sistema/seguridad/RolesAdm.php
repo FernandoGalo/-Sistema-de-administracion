@@ -130,7 +130,7 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre rol(*):</label>
                             <input type="hidden" name="Nombre_rol" id="Nombre_rol">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol"oninput="this.value = this.value.toUpperCase();" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Nombre_rol" id="Nombre_rol" maxlength="100" placeholder="Ingrese el nombre del Rol"oninput="this.value = this.value.toUpperCase();" onkeypress="validarMayusculas(event)" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Descripcion(*):</label>

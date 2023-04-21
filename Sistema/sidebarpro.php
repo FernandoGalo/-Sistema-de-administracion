@@ -35,7 +35,7 @@
 			<?php $sql=$conexion->query("SELECT * FROM tbl_ms_roles where ID_Rol=$ID_Rol and Estado=1");
 if ($datos=$sql->fetch_object()) { ?>
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=0");
+			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=16");
 if ($datos=$sql->fetch_object()) { ?>
 			<li>
 					<a href="../Home/home.php">

@@ -36,6 +36,7 @@
             $email=$_POST['Correo_electronico'];
             $vencimiento = $_POST['FechaVencimiento'];
             $Estado = strtoupper($_POST['Estado']);
+            $R_Fecha_actual = date('Y-m-d'); 
 
 
 
@@ -57,7 +58,7 @@
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', ID_Rol ='$Rol', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado' WHERE ID_Usuario='$id'";
+            $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', ID_Rol ='$Rol', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado', Modificado_Por = '$usuario', Fecha_Modificacion = '$R_Fecha_actual' WHERE ID_Usuario='$id'";
             $resultado=mysqli_query($conexion,$sql);
 
             if($resultado){

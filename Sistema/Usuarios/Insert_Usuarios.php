@@ -6,70 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGREGAR</title>
     <link rel="stylesheet" href="../../css/estilos.css">
-
-    <script>
-        function soloLetras(e) {
-            // Obtener el código ASCII de la tecla presionada
-            var key = e.keyCode || e.which;
-            
-            // Convertir el código ASCII a una letra
-            var letra = String.fromCharCode(key).toLowerCase();
-            
-            // Definir la expresión regular
-            var soloLetras = /[a-z\s]/;
-            
-            // Verificar si la letra es válida
-            if (!soloLetras.test(letra)) {
-                // Si la letra no es válida, cancelar el evento
-                e.preventDefault();
-                return false;
-            }
-        }
-        </script>
-            <script>
-                function validarMayusculas(e) {
-                    var tecla = e.keyCode || e.which;
-                    var teclaFinal = String.fromCharCode(tecla).toUpperCase();
-                    var letras = /^[A-Z]+$/;
-
-                    if(!letras.test(teclaFinal)){
-                        e.preventDefault();
-                    }
-                }
-            </script>
-                    <script>
-        function bloquearEspacio(event) {
-        var tecla = event.keyCode || event.which;
-        if (tecla == 32) {
-            return false;
-        }
-        }
-</script>
-
 </head>
 <body>
     <?php
     include("../../conexion_BD.php");
+    session_start();     
+    $usuario=$_SESSION['user'];
+    $ID_Rol=$_SESSION['ID_Rol'];
 
-    //===================================================
-    
-                        /*despues de haber validad todo el documento y que se haya cumplido todo comienza esta seccion */
-                    /*primero crea un id aleatorio de solo numeros con un tamaño de 5 caracteres */
-                    $caracteres = '0123456789'; /*abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ mantengo esto por si se desea usar varchar*/
-
-	                function generarID($caracteres, $Tamaño= 5)
-	                {
-		                    $Max = strlen($caracteres);
-		                     $ID_A = '';
-		                     for ($c = 0; $c < $Tamaño; $c++) {
-			                 $ID_A .= $caracteres[random_int(0, $Max - 1)];
-		                   }
-		
-		               return $ID_A;
-	                }
-                $ID_Usuario=(generarID($caracteres, $Tamaño= 5));
-    
-                //Parte 2
                 
                 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/
 
@@ -119,7 +63,7 @@ if (mysqli_num_rows($sql2) >= 1) {
                 
 
             try {
-                $sql = "INSERT INTO tbl_ms_usuario (ID_Usuario, ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Fecha_Creacion, Estado_Usuario) VALUES ($ID_Usuario, $Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$R_F_Vencida','$R_Fecha_actual', 'NUEVO')";
+                $sql = "INSERT INTO tbl_ms_usuario ( ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Estado_Usuario, Creado_Por, Fecha_Creacion ) VALUES ($Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$R_F_Vencida', 'NUEVO', '$usuario','$R_Fecha_actual'  )";
 
                 $resultado = mysqli_query($conexion,$sql);
     
