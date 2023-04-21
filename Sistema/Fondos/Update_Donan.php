@@ -42,8 +42,7 @@
                 echo"<p class='error'>* Debes colocar tu password</p>";
             }else if(empty($email)){
                 echo"<p class='error'>* Debes colocar tu correo</p>";
-            }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                echo "<p class='error'> El correo es incorrecto</p>";
+            
             }else{
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
@@ -121,22 +120,22 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Donante(*):</label>
                             <input type="hidden" name="Nombre_Donante" id="Nombre_Donante">
-                            <input type="text" value="<?php echo $Nombre_donan; ?>" class="form-control" name="Nombre_Donante" id="Nombre_Donante" maxlength="100" placeholder="Ingrese el nombre del donante" required>
+                            <input onpaste="return false" type="text" value="<?php echo $Nombre_donan; ?>" class="form-control" name="Nombre_Donante" id="Nombre_Donante" maxlength="39" placeholder="Ingrese el nombre del donante" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telef" id="Telef">
-                            <input type="text" value="<?php echo $Tel_Cel; ?>" class="form-control" name="Telef" id="Telef" pattern="[0-9()+-]{8,20}" maxlength="20" placeholder="Ingrese el número de teléfono" required>
+                            <input onpaste="return false" type="text" value="<?php echo $Tel_Cel; ?>" class="form-control" name="Telef" id="Telef" pattern="[0-9()+-]{8,20}" maxlength="19" placeholder="Ingrese el número de teléfono" oninput="validarTelefono(event)" onkeydown="return evitarEspacios(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Direccion(*):</label>
                             <input type="hidden" name="Direccion" id="Direccion">
-                            <input type="text" class="form-control" name="Direccion" id="Direccion" maxlength="100" placeholder="Ingrese la dirrecion del donante" value="<?php echo $Direcc; ?>" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Direccion" id="Direccion" maxlength="39" placeholder="Ingrese la dirrecion del donante" value="<?php echo $Direcc; ?>" oninput="this.value = this.value.toUpperCase();" require>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Correo electronico(*):</label>
                             <input type="hidden" name="Correo_electronico" id="Correo_electronico">
-                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electronico" onkeypress="validarCorreo(event)" value="<?php echo $correo; ?>"  required>
+                            <input onpaste="return false"  type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="39" placeholder="Ingrese el correo electronico"  value="<?php echo $correo; ?>" onkeypress="validarCorreo(event)" onkeydown="return evitarEspacios(event)" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
@@ -169,5 +168,44 @@
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
 
+  <script>
+    //Validar Telefono
+    function validarTelefono(event) {
+    const telefono = event.target.value.trim();
+    
+    if (telefono.length < 8 || telefono[0] === '0') {
+        event.target.setCustomValidity('El número de teléfono no debe comenzar en 0 y debe tener minimo 8 digitos.');
+    } else {
+        const numeros = telefono.replace(/[^0-9]/g, '');
+        const repetidos = numeros.split('').sort().join('').match(/(.)\1{4}/g);
+        
+        if (repetidos) {
+        event.target.setCustomValidity('El número de teléfono contiene más de 5 dígitos repetidos consecutivos.');
+        } else {
+        const unicos = new Set(numeros);
+        const porcentaje = unicos.size / telefono.length;
+        
+        if (porcentaje < 0.5) {
+            event.target.setCustomValidity('El número de teléfono no cumple los requisitos mínimos.');
+        } else {
+            event.target.setCustomValidity('');
+        }
+        }
+    }
+    }
+  </script>
+
+
+<script>
+  //Evitar espacios
+function evitarEspacios(event) {
+  if (event.keyCode === 32) { // 32 es el código de tecla para el espacio en blanco
+    event.preventDefault(); // Cancelar el evento de pulsación de tecla
+    return false; // Impedir la entrada del espacio en blanco
+  }
+}
+</script>
+
+</script>
 </body>
 </html>

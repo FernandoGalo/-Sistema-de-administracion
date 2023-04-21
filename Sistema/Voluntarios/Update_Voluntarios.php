@@ -127,17 +127,17 @@ $usuario=$_SESSION['usuario'];
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre Voluntario(*):</label>
                             <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
-                            <input  type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario"  value="<?php echo $Nombre_Voluntario; ?>" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
+                            <input onpaste="return false"  type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario"  value="<?php echo $Nombre_Voluntario; ?>" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telefono_Voluntario" id="Telefono_Voluntario">
-                            <input type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" value="<?php echo $Telefono_Voluntario; ?>" oninput="validarTelefono(event)" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" value="<?php echo $Telefono_Voluntario; ?>" oninput="validarTelefono(event)" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Direccion Voluntario(*):</label>
                             <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
-                            <input oninput="this.value = this.value.toUpperCase();" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion del voluntario" value="<?php echo $Direccion_Voluntario; ?>" required>
+                            <input onpaste="return false" oninput="this.value = this.value.toUpperCase();" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion del voluntario" value="<?php echo $Direccion_Voluntario; ?>" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="Enviar_V" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
@@ -173,29 +173,29 @@ $usuario=$_SESSION['usuario'];
 
   <script>
     //Validar Telefono
-function validarTelefono(event) {
-  const telefono = event.target.value.trim();
-  
-  if (telefono.length < 8 || telefono[0] === '0') {
-    event.target.setCustomValidity('El número de teléfono no cumple los requisitos mínimos.');
-  } else {
-    const numeros = telefono.replace(/[^0-9]/g, '');
-    const repetidos = numeros.split('').sort().join('').match(/(.)\1{4}/g);
+    function validarTelefono(event) {
+    const telefono = event.target.value.trim();
     
-    if (repetidos) {
-      event.target.setCustomValidity('El número de teléfono contiene más de 5 dígitos repetidos consecutivos.');
+    if (telefono.length < 8 || telefono[0] === '0') {
+        event.target.setCustomValidity('El número de teléfono no debe comenzar en 0 y debe tener minimo 8 digitos.');
     } else {
-      const unicos = new Set(numeros);
-      const porcentaje = unicos.size / telefono.length;
-      
-      if (porcentaje < 0.6) {
-        event.target.setCustomValidity('El número de teléfono no cumple con el porcentaje mínimo de dígitos únicos.');
-      } else {
-        event.target.setCustomValidity('');
-      }
+        const numeros = telefono.replace(/[^0-9]/g, '');
+        const repetidos = numeros.split('').sort().join('').match(/(.)\1{4}/g);
+        
+        if (repetidos) {
+        event.target.setCustomValidity('El número de teléfono contiene más de 5 dígitos repetidos consecutivos.');
+        } else {
+        const unicos = new Set(numeros);
+        const porcentaje = unicos.size / telefono.length;
+        
+        if (porcentaje < 0.5) {
+            event.target.setCustomValidity('El número de teléfono no cumple los requisitos mínimos.');
+        } else {
+            event.target.setCustomValidity('');
+        }
+        }
     }
-  }
-}
+    }
   </script>
 
 </body>

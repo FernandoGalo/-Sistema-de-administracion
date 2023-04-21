@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Inicio</title>
+	<title>Donantes</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -42,7 +42,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento Donantes</h1>
+                          <h1 class="box-title" style="text-align:center; margin-top:15px; margin-bottom:20px" >Mantenimiento Donantes</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=8");
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar Donante</button>
@@ -232,22 +232,22 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Donante(*):</label>
                             <input type="hidden" name="Nombre_Donante" id="Nombre_Donante">
-                            <input type="text" class="form-control" name="Nombre_Donante" id="Nombre_Donante" maxlength="100" placeholder="Ingrese el nombre del donante" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Nombre_Donante" id="Nombre_Donante" maxlength="39" placeholder="Ingrese el nombre del donante" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telef" id="Telef">
-                            <input type="text" class="form-control" name="Telef" id="Telef" pattern="[0-9()+-]{8,20}" maxlength="20" placeholder="Ingrese el número de teléfono" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Telef" id="Telef" pattern="[0-9()+-]{8,20}" maxlength="19" placeholder="Ingrese el número de teléfono" oninput="validarTelefono(event)" onkeydown="return evitarEspacios(event)" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Direccion(*):</label>
                             <input type="hidden" name="Direccion" id="Direccion">
-                            <input type="text" class="form-control" name="Direccion" id="Direccion" maxlength="100" placeholder="Ingrese la dirrecion del donante" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Direccion" id="Direccion" maxlength="39" placeholder="Ingrese la dirrecion del donante" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Correo electronico(*):</label>
                             <input type="hidden" name="Correo_electronico" id="Correo_electronico">
-                            <input type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="100" placeholder="Ingrese el correo electronico" onkeypress="validarCorreo(event)" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="39" placeholder="Ingrese el correo electronico" onkeypress="validarCorreo(event)" onkeydown="return evitarEspacios(event)"  required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
@@ -272,6 +272,43 @@ if ($datos=$sql->fetch_object()) { ?>
  	<script src="../../js/jquery-3.1.1.min.js"></script>
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
+
+  <script>
+    //Validar Telefono
+    function validarTelefono(event) {
+    const telefono = event.target.value.trim();
+    
+    if (telefono.length < 8 || telefono[0] === '0') {
+        event.target.setCustomValidity('El número de teléfono no debe comenzar en 0 y debe tener minimo 8 digitos.');
+    } else {
+        const numeros = telefono.replace(/[^0-9]/g, '');
+        const repetidos = numeros.split('').sort().join('').match(/(.)\1{4}/g);
+        
+        if (repetidos) {
+        event.target.setCustomValidity('El número de teléfono contiene más de 5 dígitos repetidos consecutivos.');
+        } else {
+        const unicos = new Set(numeros);
+        const porcentaje = unicos.size / telefono.length;
+        
+        if (porcentaje < 0.5) {
+            event.target.setCustomValidity('El número de teléfono no cumple los requisitos mínimos.');
+        } else {
+            event.target.setCustomValidity('');
+        }
+        }
+    }
+    }
+  </script>
+
+<script>
+  //Evitar espacios
+function evitarEspacios(event) {
+  if (event.keyCode === 32) { // 32 es el código de tecla para el espacio en blanco
+    event.preventDefault(); // Cancelar el evento de pulsación de tecla
+    return false; // Impedir la entrada del espacio en blanco
+  }
+}
+</script>
 
 </body>
 </html>
