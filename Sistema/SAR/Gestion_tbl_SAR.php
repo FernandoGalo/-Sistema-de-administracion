@@ -63,7 +63,7 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT * from tbl_r_sar
+$sql="SELECT SQL_CALC_FOUND_ROWS * from tbl_r_sar
 WHERE ID_SAR LIKE '%{$campo}%' OR RTN LIKE '%{$campo}%' OR num_declaracion LIKE '%{$campo}%' OR nombre_razonSocial LIKE '%{$campo}%' OR departamento LIKE '%{$campo}%' OR municipio LIKE '%{$campo}%'
         OR barrio_colonia LIKE '%{$campo}%' OR calle_avenida LIKE '%{$campo}%' OR num_casa LIKE '%{$campo}%' OR bloque LIKE '%{$campo}%' OR telefono LIKE '%{$campo}%' OR celular LIKE '%{$campo}%'
         OR domicilio LIKE '%{$campo}%'OR correo LIKE '%{$campo}%' OR profesion_oficio LIKE '%{$campo}%' OR cai LIKE '%{$campo}%' OR fecha_limite_emision LIKE '%{$campo}%' OR num_inicial LIKE '%{$campo}%'
@@ -126,11 +126,42 @@ $output['data'] .= '</tr>';
     }
 } else {
     $output['data'] .= '<tr>';
-    $output['data'] .= '<td colspan="7">Sin resultados</td>';
+    $output['data'] .= '<td colspan="19">Sin resultados</td>';
     $output['data'] .= '</tr>';
 }
 
-if ($output['totalRegistros'] > 0) {
+if($output['totalFiltro'] > 0){
+    $totalFiltro = ceil($output['totalFiltro'] / $limit);
+
+    $output['paginacion'] .= '<nav>';
+    $output['paginacion'] .= '<ul class="pagination">';
+
+    $numeroInicio = 1;
+
+    if(($pagina - 4) > 1){
+        $numeroInicio = $pagina - 4;
+    }
+
+    $numeroFin = $numeroInicio + 9;
+
+    if($numeroFin > $totalFiltro){
+        $numeroFin = $totalFiltro;
+    }
+
+    for ($i = $numeroInicio; $i <= $numeroFin; $i++) {
+        if ($pagina == $i) {
+            $output['paginacion'] .= '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+        } else {
+            $output['paginacion'] .= '<li class="page-item"><a class="page-link" href="#" onclick="nextPage(' . $i . ')">' . $i . '</a></li>';
+        }
+    }
+
+    $output['paginacion'] .= '</ul>';
+    $output['paginacion'] .= '</nav>';
+}elseif ($output['totalFiltro'] < 1){
+    $pagina="";
+    $output['paginacion'] = "";
+}elseif ($output['totalRegistros'] > 0) {
     $totalPaginas = ceil($output['totalRegistros'] / $limit);
 
     $output['paginacion'] .= '<nav>';

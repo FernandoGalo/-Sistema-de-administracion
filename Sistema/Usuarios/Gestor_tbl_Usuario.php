@@ -114,11 +114,42 @@ if ($datos=$sql->fetch_object()) {
     }
 } else {
     $output['data'] .= '<tr>';
-    $output['data'] .= '<td colspan="7">Sin resultados</td>';
+    $output['data'] .= '<td colspan="8">Sin resultados</td>';
     $output['data'] .= '</tr>';
 }
 
-if ($output['totalRegistros'] > 0) {
+if($output['totalFiltro'] > 0){
+    $totalFiltro = ceil($output['totalFiltro'] / $limit);
+
+    $output['paginacion'] .= '<nav>';
+    $output['paginacion'] .= '<ul class="pagination">';
+
+    $numeroInicio = 1;
+
+    if(($pagina - 4) > 1){
+        $numeroInicio = $pagina - 4;
+    }
+
+    $numeroFin = $numeroInicio + 9;
+
+    if($numeroFin > $totalFiltro){
+        $numeroFin = $totalFiltro;
+    }
+
+    for ($i = $numeroInicio; $i <= $numeroFin; $i++) {
+        if ($pagina == $i) {
+            $output['paginacion'] .= '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+        } else {
+            $output['paginacion'] .= '<li class="page-item"><a class="page-link" href="#" onclick="nextPage(' . $i . ')">' . $i . '</a></li>';
+        }
+    }
+
+    $output['paginacion'] .= '</ul>';
+    $output['paginacion'] .= '</nav>';
+}elseif ($output['totalFiltro'] < 1){
+    $pagina="";
+    $output['paginacion'] = "";
+}elseif ($output['totalRegistros'] > 0) {
     $totalPaginas = ceil($output['totalRegistros'] / $limit);
 
     $output['paginacion'] .= '<nav>';
