@@ -1,10 +1,6 @@
-<?php 
-//Controladores importantes
- require '../../conexion_BD.php'; 
- require_once "../../EVENT_BITACORA.php";
- session_start();     
- $usuario=$_SESSION['user'];
- $ID_Rol=$_SESSION['ID_Rol'];
+<?php
+    include("../../conexion_BD.php");
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -22,58 +18,43 @@
 
 </head>
 <body>
-	<!--Seccion donde va toda la barra lateral -->
-	<?php include '../sidebar.php'; ?>
 
     <?php
-        if(isset($_POST['enviar'])){
-
-
-            //$ID_SAR = $_POST['id_sar'];
-            $idObje = $_POST['idObj'];
-            $objeto = $_POST['objeto'];
-            $descripcion = $_POST['descripcion'];
-            $tipoObj = $_POST['tipoObj'];
-
-
-
-            $sql = "UPDATE tbl_objetos SET Objeto = '$objeto', Descripcion = '$descripcion', Tipo_Objeto = '$tipoObj' WHERE ID_Objeto = $idObje;";
-
-            $resultado=mysqli_query($conexion,$sql);
-
-
+        if(isset($_POST['enviar_F2'])){   
+    $ID_T_pago=$_POST["ID_T_pago"];
+    $Nombre=$_POST["Nombre"];
+            //si lo que esta en el form esta vacio
+            $sql="UPDATE tbl_tipo_pago_r SET Nombre = '$Nombre' where ID_T_pago = $ID_T_pago";
+            $resultado = mysqli_query($conexion,$sql);
 
             if($resultado){
                 echo "<script language='JavaScript'>
                         alert('Los datos se actualizaron correctamente');
-                    location.assign('ObjetosAdm.php');
-                    </script>";                    
+                    location.assign('TipoPagosAdm.php');
+                    </script>";
+
             }else{
                 echo "<script language='JavaScript'>
                 alert('Los datos NO se actualizaron');
-            location.assign('ObjetosAdm.php');
+            location.assign('TipoPagosAdm.php');
             </script>";
             }
             mysqli_close($conexion);
-        
         }else{
             //si el usuario NO ha presionado el boton enviar
-            $id_objeto=$_GET['ID_Objeto']; //recuperar el id que se envia desde el home.html
-            $sql="SELECT * FROM tbl_objetos where ID_Objeto = $id_objeto";
+            $id=$_GET['ID_T_pago']; //recuperar el id que se envia desde el home.html
+            $sql="SELECT * FROM tbl_tipo_pago_r where ID_T_pago='".$id."'";
             $resultado=mysqli_query($conexion,$sql);
 
             $fila=mysqli_fetch_assoc($resultado);
 
-            $IDobj = $fila['ID_Objeto'];
-            $objeto = $fila['Objeto'];
-            $descripcion = $fila['Descripcion'];
-            $tipo_objeto = $fila['Tipo_Objeto'];
-
+            $ID_T_pago=$fila['ID_T_pago'];
+            $Nombre=$fila['Nombre'];
             mysqli_close($conexion);
-
+            
     ?>
     	<!-- Pagina de contenido-->
-	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
+      <section class="full-box dashboard-contentPage" style="overflow-y: auto;">
 		<!-- Barra superior -->
 		<nav class="full-box dashboard-Navbar">
 			<ul class="full-box list-unstyled text-right">
@@ -88,7 +69,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar datos</h1>
+                          <h1 class="box-title">Editar Tipos de Pagos</h1>
                         </div>
                         <br>
                     </div>
@@ -98,31 +79,21 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>OBJETO(*):</label>
-                            <input type="hidden" name="idObj" id="idObj" value="<?php echo $IDobj ?>">
-                            <input type="text" class="form-control" name="objeto" id="objeto" maxlength="40" placeholder="Ingrese el Numero de declaracion" value="<?php echo $objeto?>"  oninput="this.value = this.value.toUpperCase();" required>
+                            <label>ID del tipo fondo(*):</label>
+                            <input type="hidden" name="ID_T_pago" id="ID_T_pago">
+                            <input style="text" type="text" class="form-control" name="ID_T_pago" id="ID_T_pago" maxlength="10"  value="<?php echo $ID_T_pago; ?>" readonly>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>DESCRIPCION(*):</label>
-                            <input type="hidden" name="descripcion" id="descripcion">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="descripcion" id="descripcion" maxlength="100" value="<?php echo $descripcion ?>" oninput="this.value = this.value.toUpperCase();" required>
+                            <label>Nombre Tipo Pago</label>
+                            <input type="text" class="form-control"  name="Nombre" id="Nombre" placeholder="Ingrese el Tipo de Fondo" oninput="this.value = this.value.toUpperCase();" value="<?php echo $Nombre?>" require>
                           </div>
-
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>TIPO DE OBJETO(*):</label>
-                            <input type="hidden" name="tipoObj" id="tipoObj">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="tipoObj" id="tipoObj" maxlength="50" value="<?php echo $tipo_objeto?>" oninput="this.value = this.value.toUpperCase();" required>
-                          </div>
-
-                          <input type="hidden" name="id" value="<?php echo $id_sar; ?>">
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
+                          <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
-                          <a href="ObjetosAdm.php" style="color:white; text-decoration:none;">
+                          <a href="TipoPagosAdm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
                           </a>
                           </button>
@@ -146,10 +117,11 @@
 
 
 	<!--script en java para los efectos-->
+  
 	<script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>
-  <script src="../../js/usuario.js"></script>
-
+  <script src="./js/usuario.js"></script>
+  <?php include '../sidebarpro.php'; ?>
 </body>
 </html>

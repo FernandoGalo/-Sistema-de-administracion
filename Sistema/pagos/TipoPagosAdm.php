@@ -250,42 +250,15 @@ if ($datos=$sql->fetch_object()) { ?>
 
                     <?php } ?>
                     <div class="panel-body" id="formularioregistros">
-                        <form name="formulario" id="formulario" action="Insert_Pago.php" method="POST">
+                        <form name="formulario" id="formulario" action="Insert_Tipo_Pago.php" method="POST">
                         <div class="container">
                           <div class="row">
-                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                          <label>Monto Pagado(*):</label>
-                            <input type="hidden" name="Monto_pagado" id="Monto_pagado">
-                            <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese la cantidad del pago" required>
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Nombre Tipo Pago</label>
+                            <input type="text" class="form-control"  name="Nombre" id="Nombre" placeholder="Ingrese el Tipo de Fondo" oninput="this.value = this.value.toUpperCase();" require>
                           </div>
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Tipo de Pago(*):</label>
-                            <?php
-                           $sql=$conexion->query("SELECT * FROM tbl_tipo_pago_r");
-                          ?>
-                            <select class="form-control" name="Pago" id="Pago" required ><br>
-                            <option value="">Seleccione un tipo de pago</option>
-                          <?php
-                            while($row1=mysqli_fetch_array($sql)){
-                            ?>
-                             <option value="<?php echo $row1['ID_T_pago'];?>"><?php echo $row1['Nombre'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Fecha de Transaccion:</label>
-                            <input type="date" class="form-control" name="FechaTransaccion" id="FechaTransaccion" maxlength="100" placeholder="Ingrese la Fecha de Transaccion">
-                          </div>
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Proyecto al que esta siendo donado:</label>
-                            <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
-                          </div>
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Usuario</label>
-                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" placeholder="<?php echo $usuario?>" readonly>
-                          </div>
+
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>

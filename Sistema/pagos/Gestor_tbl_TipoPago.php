@@ -97,11 +97,11 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['Nombre'] . '</td>';
          $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=17");
 if ($datos=$sql->fetch_object()) {
-        $output['data'] .= '<td><a class="boton-editar" href="Update_area_trabajo_Adm.php?ID_Area_Trabajo=' . $row['ID_T_pago'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
+        $output['data'] .= '<td><a class="boton-editar" href="Update_Tipo_Pago.php?ID_T_pago=' . $row['ID_T_pago'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
 }
 $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=17");
 if ($datos=$sql->fetch_object()) { 
-        $output['data'] .= '<td><a onclick="return confirmar()" class="boton-eliminar" href="Delete_area_trabajo.php?ID_T_pago=' . $row['ID_T_pago'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
+        $output['data'] .= '<td><a onclick="return confirmar()" class="boton-eliminar" href="Delete_Tipo_Pagos.php?ID_T_pago=' . $row['ID_T_pago'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
 }
         $output['data'] .= '</tr>';
     }
