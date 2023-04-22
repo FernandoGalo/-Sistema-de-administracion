@@ -31,8 +31,8 @@
 
             include("../../conexion_BD.php");
                         
-            $sql = "INSERT INTO tbl_ms_parametros (Parametro, Descripcion_P, Valor, ID_Usuario, Fecha_Creacion, Fecha_Modificacion) 
-            VALUES ('$Nombre_Parametro', '$Descrip_Parametro', '$Valor_Parametro' , '$ID_Usuario','$Fecha_actual','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_ms_parametros (Parametro, Descripcion_P, Valor, ID_Usuario, Fecha_Creacion) 
+            VALUES ('$Nombre_Parametro', '$Descrip_Parametro', '$Valor_Parametro' , '$ID_Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 
@@ -51,7 +51,7 @@
             }else{
                 // Los dcatos NO ingresaron a la BD
                 echo "<script languaje='JavaScript'>
-                alert('Los datos NO fueron ingresados a la BD');
+                alert('Erro!!, Los datos no fueron ingresados a la BD');
                     location.assign('ParametrosAdm.php');
                     </script>";
             }

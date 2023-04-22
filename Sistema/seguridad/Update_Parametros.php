@@ -61,7 +61,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
 
             }else{
                 echo "<script language='JavaScript'>
-                alert('Los datos NO se actualizaron');
+                alert('Error!!!, Los datos no se actualizaron');
             location.assign('ParametrosAdm.php');
             </script>";
             }
@@ -122,47 +122,67 @@ $ID_Rol=$_SESSION['ID_Rol'];
                             <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                               <label>Descripcion (*):</label>
                               <input type="hidden" name="Descrip_Parametro" id="Descrip_Parametro">
-                              <input style="text-transform:uppercase" type="text" class="form-control" name="Descrip_Parametro" id="Descrip_Parametro" maxlength="80" value="<?php echo $Descripcion_Parametro; ?>" onkeypress="this.value = this.value.toUpperCase();" require>
+                              <input type="text" class="form-control" name="Descrip_Parametro" id="Descrip_Parametro" maxlength="80" value="<?php echo $Descripcion_Parametro; ?>" onkeypress="return /[a-zA-Z\s_,.]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" require>
                             </div>
 
                             <?php 
-                            //Permitir solo ingresar numeros
+                            //Permitir solo ingresar numeros enteros
                           if ($ID_Parametro==1 or $ID_Parametro==2 or $ID_Parametro==4 or $ID_Parametro==7 or $ID_Parametro==9 or $ID_Parametro==10) { ?>
                             <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                               <label>Valor (*):</label>
                               <input type="hidden" name="Valor" id="Valor">
-                              <input onpaste="return false" onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" class="form-control" name="Valor" id="Valor" maxlength="3" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return bloquearEspacio(event);" required>
+                              <input onpaste="return false" oncopy="return false"  type="text" class="form-control" name="Valor" id="Valor" maxlength="3" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return /\d/.test(event.key)" required>
                             </div>
                           <?php }?>
 
                           <?php
                           //Permitir ingresar, caraceres, letras mayusculas y munisculas
-                                if($ID_Parametro==3 or $ID_Parametro==6 ){ ?>
+                                if($ID_Parametro==3 or $ID_Parametro==6 or $ID_Parametro==15){ ?>
                                       <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <label>Valor (*):</label>
                                         <input type="hidden" name="Valor" id="Valor">
-                                        <input onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return bloquearEspacio(event);" onkeypress="return validateInput(event);"required>
+                                        <input oncopy="return false" onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>"  onkeypress="return bloquearEspacio(event);" onkeypress="return validateInput(event);" required>
                                       </div>
                           <?php }     ?>
 
                           <?php
-                          //Permitir ingresar, caraceres, letras mayusculas y munisculas
-                                if($ID_Parametro==5 or $ID_Parametro==8 ){ ?>
+                          //Permitir MAYUSCULAS, Y ESPACIOS
+                                if($ID_Parametro==5 or $ID_Parametro==8  or $ID_Parametro==12){ ?>
                                       <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <label>Valor (*):</label>
                                         <input type="hidden" name="Valor" id="Valor">
-                                        <input onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return EspaciosMayus_Y_Minus(event)" required>
+                                        <input onpaste="return false" oncopy="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="65" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return /[a-zA-Z_\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                                       </div>
                           <?php }     ?>
 
                           <?php
-                          $allowed_ids = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10); // Arreglo con los valores
+                          //Permitir Y VALIDAR NUMEROS TELEFONICOS
+                                if($ID_Parametro==13){ ?>
+                                      <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                        <label>Valor (*):</label>
+                                        <input type="hidden" name="Valor" id="Valor">
+                                        <input onpaste="return false" oncopy="return false"type="text" class="form-control" name="Valor" id="Valor" maxlength="65" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return /\d/.test(event.key)" oninput="validarTelefono(event)" required>
+                                      </div>
+                          <?php }     ?>
+
+                          <?php
+                          //Permitir MAYUSCULAS, PUNTOS, COMAS, Y ESPACIOS
+                                if($ID_Parametro==14 ){ ?>
+                                      <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                        <label>Valor (*):</label>
+                                        <input type="hidden" name="Valor" id="Valor">
+                                        <input onpaste="return false" oncopy="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="90" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="return /[a-zA-Z\s_,.]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();"  required>
+                                      </div>
+                          <?php }     ?>
+
+                          <?php
+                          $allowed_ids = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15); // Arreglo con los valores
 
                                 if(!in_array($ID_Parametro, $allowed_ids)){ ?>
                                       <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <label>Valor (*):</label>
                                         <input type="hidden" name="Valor" id="Valor">
-                                        <input onpaste="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="this.value = this.value.toUpperCase();" required>
+                                        <input onpaste="return false" oncopy="return false" type="text" class="form-control" name="Valor" id="Valor" maxlength="40" placeholder="Ingrese el valor" value="<?php echo $Valor; ?>" onkeypress="this.value = this.value.toUpperCase();" required>
                                       </div>
                           <?php }     ?>
 
@@ -217,6 +237,34 @@ $ID_Rol=$_SESSION['ID_Rol'];
       const tecla = String.fromCharCode(event.keyCode || event.which);
       return patron.test(tecla);
       }
+  </script>
+
+  
+<script>
+    //Validar Telefono
+    function validarTelefono(event) {
+    const telefono = event.target.value.trim();
+    
+    if (telefono.length < 8 || telefono[0] === '0') {
+        event.target.setCustomValidity('El número de teléfono no debe comenzar en 0 y debe tener minimo 8 digitos.');
+    } else {
+        const numeros = telefono.replace(/[^0-9]/g, '');
+        const repetidos = numeros.split('').sort().join('').match(/(.)\1{4}/g);
+        
+        if (repetidos) {
+        event.target.setCustomValidity('El número de teléfono contiene más de 5 dígitos repetidos consecutivos.');
+        } else {
+        const unicos = new Set(numeros);
+        const porcentaje = unicos.size / telefono.length;
+        
+        if (porcentaje < 0.5) {
+            event.target.setCustomValidity('El número de teléfono no cumple los requisitos mínimos.');
+        } else {
+            event.target.setCustomValidity('');
+        }
+        }
+    }
+    }
   </script>
 
 </body>

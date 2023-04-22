@@ -36,7 +36,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento Parametros</h1>
+                          <h1 class="box-title" style="text-align:center; margin-top:15px; margin-bottom:20px">Mantenimiento Parametros</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
                             if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-badge-check"></i> Agregar Parametros</button>
@@ -239,17 +239,17 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre del parametro(*):</label>
                             <input type="hidden" name="Nombre_Parametro" id="Nombre_Parametro">
-                            <input onpaste="return false" type="text" class="form-control" name="Nombre_Parametro" id="Nombre_Parametro" maxlength="50" placeholder="Ingrese el Nombre del Parametro" onkeypress="return /[a-zA-Z_]/i.test(event.key) && (event.key === '_' || /^[a-z0-9_]*$/i.test(event.target.value));" oninput="this.value = this.value.toUpperCase();" required>
+                            <input onpaste="return false" oncopy="return false"type="text" class="form-control" name="Nombre_Parametro" id="Nombre_Parametro" maxlength="50" placeholder="Ingrese el Nombre del Parametro" onkeypress="return /[a-zA-Z_]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Descripcion(*):</label>
                             <input type="hidden" name="Descrip_Parametro" id="Descrip_Parametro">
-                            <input onpaste="return false" type="text" class="form-control" name="Descrip_Parametro" id="Descrip_Parametro" maxlength="80" placeholder="Ingrese la descripcion" onkeypress="this.value = this.value.toUpperCase();" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Descrip_Parametro" id="Descrip_Parametro" maxlength="80" placeholder="Ingrese la descripcion"  onkeypress="return /[a-zA-Z\s_,.]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div  class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Valor(*):</label>
                             <input type="hidden" name="Valor_Parametro" id="Valor_Parametro">
-                            <input onpaste="return false" type="text" class="form-control" name="Valor_Parametro" id="Valor_Parametro" maxlength="50" placeholder="Valor del parametro" onkeypress="this.value = this.value.toUpperCase();" required>
+                            <input onpaste="return false" oncopy="return false" type="text" class="form-control" name="Valor_Parametro" id="Valor_Parametro" maxlength="50" placeholder="Valor del parametro"  oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                         
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
