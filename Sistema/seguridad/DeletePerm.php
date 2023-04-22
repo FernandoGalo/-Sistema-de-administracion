@@ -1,6 +1,8 @@
 <?php
 include("../../conexion_BD.php");
     $ID_Per = $_GET['ID_permiso'];
+    session_start();  
+    $IDRolPer=$_SESSION['ID_RolPer'];
 
     // $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
 
@@ -20,7 +22,7 @@ include("../../conexion_BD.php");
     if($resultado){
         echo "<script languaje='JavaScript'>
                 alert('Los datos se eliminaron correctamente de la Base de Datos');
-                location.assign('RolesAdm.php');
+                location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "')
                 </script>";  
                 require_once "../../EVENT_BITACORA.php";
                 $model = new EVENT_BITACORA;
@@ -34,12 +36,12 @@ include("../../conexion_BD.php");
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>
         alert('No puedes borrar este usuario');
-        location.assign('RolesAdm.php');
+        location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "')
         </script>";   
         } else {
             echo "<script languaje='JavaScript'>
         alert('Los datos NO se eliminaron de la BD');
-        location.assign('RolesAdm.php');
+        location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "')
         </script>"; 
         }
           
@@ -60,7 +62,7 @@ include("../../conexion_BD.php");
 
               echo "<script languaje='JavaScript'>
               alert('$mensaje Por referencia con la tabla roles');
-              location.assign('RolesAdm.php');
+               location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "')
              </script>";
 
              //printf("Ha ocurrido un error: %s\n", mysqli_error($conexion));

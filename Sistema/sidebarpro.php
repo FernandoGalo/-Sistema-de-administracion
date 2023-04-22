@@ -93,6 +93,12 @@ if ($datos=$sql->fetch_object()) { ?>
 							<a href="../seguridad/RolesAdm.php"><i class="zmdi zmdi-face"></i> Roles </a>
 						</li>
 						<?php } ?>
+						<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=18");
+if ($datos=$sql->fetch_object()) { ?>
+						<li>
+							<a href="../seguridad/ObjetosAdm.php"><i class="zmdi zmdi-money-box"></i>Objetos </a>
+						</li>
+						<?php } ?>
 					</ul>
 				</li>
 				<?php } ?>

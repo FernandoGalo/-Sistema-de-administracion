@@ -10,6 +10,8 @@
 <body>
     <?php
     include("../../conexion_BD.php");
+    session_start();  
+    $IDRolPer=$_SESSION['ID_RolPer'];
     //====================================================
         if(isset($_POST['enviar'])){
             $ID_RolPer = $_POST['idRol'];
@@ -32,9 +34,10 @@
                 if($resultado){
                     //Los datos ingresados a la BD
                     echo "<script language='JavaScript'>
-                          alert('La insercion de la pantalla se agregago correctamente');
-                      location.assign('RolesAdm.php');
-                      </script>";    
+                    alert('La insercion de la pantalla se agregó correctamente');
+                    location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "');
+                  </script>";
+              
                                 require_once "../../EVENT_BITACORA.php";
                                 $model = new EVENT_BITACORA;
                                 session_start();
@@ -46,7 +49,7 @@
                     // Los dcatos NO ingresaron a la BD
                     echo "<script languaje='JavaScript'>
                     alert('Los datos NO fueron ingresados a la BD');
-                        location.assign('RolesAdm.php');
+                    location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "')
                         </script>";
                 }      
             } catch (Exception $e) {
@@ -65,7 +68,7 @@
 
                 echo "<script languaje='JavaScript'>
                     alert('Excepción capturada: $mensaje');
-                    location.assign('PermisosUl.php');
+                    location.assign('PermisosUl.php?ID_Rol=" . $IDRolPer . "')
                 </script>";
               
 
