@@ -9,7 +9,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Inicio</title>
+	<title>Preguntas de Seguridad</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -241,12 +241,12 @@ if ($datos=$sql->fetch_object()) { ?>
                             ?>
                             <label>ID Pregunta(*):</label>
                             <input type="hidden" name="ID_Pregunta" id="ID_VID_Preguntaoluntario">
-                            <input class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $next_id; ?>" readonly>
+                            <input oncopy="return false" onpaste="return false" class="form-control" name="ID_Pregunta" id="ID_Pregunta" value="<?php echo $next_id; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Pregunta(*):</label>
                             <input type="hidden" name="Pregunta" id="Pregunta">
-                            <input onpaste="return false" type="text" class="form-control" name="Pregunta" id="Pregunta" maxlength="50" placeholder="Ingrese una pregunta" onkeypress="return validarEspaciosMayus_Y_Minus(event)" required>
+                            <input oncopy="return false" onpaste="return false" type="text" class="form-control" name="Pregunta" id="Pregunta" maxlength="50" placeholder="Ingrese una pregunta" oninput="this.value = this.value.toUpperCase();" onkeypress="return validarEspaciosYSignos(event)" required>
                           </div>
                         
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -274,12 +274,20 @@ if ($datos=$sql->fetch_object()) { ?>
   <script src="../../js/usuario.js"></script>
 
   <script>
-    //Validar Mayusculas, Minusculas, espacios y signo de interrogacion(¿,?)
-    function validarEspaciosMayus_Y_Minus(event) {
-      const patron = /[A-Za-z\s\?\¿]/;
-      const tecla = String.fromCharCode(event.keyCode || event.which);
-      return patron.test(tecla);
-      }
+        function validarEspaciosYSignos(event) {
+        var tecla = event.which || event.keyCode;
+        var caracter = String.fromCharCode(tecla);
+
+        // Permitir letras, espacios y signos de interrogación
+        var permitidos = /^[a-zA-Z\s\?\¿]*$/;
+
+        if (!permitidos.test(caracter)) {
+            event.preventDefault();
+            return false;
+        }
+
+        return true;
+        }
   </script>
 
 
