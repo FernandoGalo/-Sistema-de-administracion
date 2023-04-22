@@ -26,6 +26,7 @@
 	<?php include '../sidebar.php'; ?>
 
     <?php
+    
         if(isset($_POST['enviar'])){
             //aqui entra sio el usuario ha presionado el boton enviar
             $id=$_POST['IDusuario'];
@@ -41,15 +42,7 @@
 
 
             //si lo que esta en el form esta vacio
-            if(empty($userName)){
-                echo"<p class='error'>* Debes colocar tu nombre completo</p>";
-            }else if(empty($user)){
-                echo"<p class='error'>* Debes colocar tu usuario</p>";
-            }else if(empty($contra)){
-                echo"<p class='error'>* Debes colocar tu password</p>";
-            }else if(empty($email)){
-                echo"<p class='error'>* Debes colocar tu correo</p>";
-            }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 echo "<p class='error'> El correo es incorrecto</p>";
             }else{
 
@@ -165,7 +158,23 @@
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label for="contraseña">Contraseña</label>
                           <div class="input-group">
-                          <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" maxlength="8" onkeypress="return bloquearEspacio(event);" value="<?php echo $pass; ?>" required>
+                          <?php 
+$sql2=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE `ID_Parametro` in (9,10)");
+// Verificar si la consulta devolvió resultados
+if (mysqli_num_rows($sql2) >= 1) {
+    // Recorrer los resultados y mostrarlos en pantalla
+    while($row = mysqli_fetch_array($sql2)) {
+      if ($row['ID_Parametro'] == 9) {
+        $Min_Pass=$row['Valor'];
+    } 
+
+        if ($row['ID_Parametro'] == 10) {
+            $Max_Pass=$row['Valor'];
+        }     
+    }
+}
+?>
+                          <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" maxlength="<?php echo $Max_Pass ?>" onkeypress="return bloquearEspacio(event);" value="<?php echo $pass; ?>" required>
                            <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="button" id="ver-ocultar" onclick="mostrarContrasena()">
                           <i class="zmdi zmdi-eye"></i>

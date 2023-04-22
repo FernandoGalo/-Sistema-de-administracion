@@ -1,7 +1,7 @@
 <?php
 
 require('./fpdf.php');
-
+session_start();
 class PDF extends FPDF
 {
 
@@ -100,11 +100,14 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
+$fechaInicio = $_SESSION['fechaInicio'];
+$fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT SQL_CALC_FOUND_ROWS u.ID_Usuario, u.Usuario, u.Nombre_Usuario, r.Rol, u.Correo_electronico, u.Fecha_Creacion, u.Fecha_Vencimiento, u.Estado_Usuario
 FROM tbl_ms_usuario u
 JOIN tbl_ms_roles r ON u.ID_Rol = r.ID_Rol
-WHERE u.ID_Usuario LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR r.Rol LIKE '%{$campo}%' OR u.Correo_electronico LIKE '%{$campo}%' OR u.Estado_Usuario LIKE '%{$campo}%'");
+WHERE (u.ID_Usuario LIKE '%{$campo}%' OR u.Usuario LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR r.Rol LIKE '%{$campo}%' OR u.Correo_electronico LIKE '%{$campo}%' OR u.Estado_Usuario LIKE '%{$campo}%')
+AND u.Fecha_Creacion BETWEEN '{$fechaInicio}' AND '{$fechaFinal}' OR u.Fecha_Vencimiento BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
