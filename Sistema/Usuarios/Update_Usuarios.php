@@ -134,12 +134,12 @@
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Usuario(*):</label>
                             <input type="hidden" name="Usuario" id="Usuario">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100"  value="<?php echo $usuario; ?>" placeholder="Ingrese el usuario" onkeypress="validarMayusculas(event)" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="Usuario" id="Usuario" maxlength="100"  value="<?php echo $usuario; ?>" placeholder="Ingrese el usuario" onkeypress="validarMayusculas(event)"  oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Usuario(*):</label>
                             <input type="hidden" name="Nombre_Usuario" id="Nombre_Usuario">
-                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" onkeypress="validarMayusculas(event);" value="<?php echo $nombreUsuario; ?>" required>
+                            <input type="text" class="form-control" name="Nombre_Usuario" id="Nombre_Usuario" maxlength="100" placeholder="Ingrese el nombre de usuario" value="<?php echo $nombreUsuario; ?>"  oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                            <?php require '../../conexion_BD.php'; ?>
