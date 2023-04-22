@@ -407,7 +407,17 @@
   var municipio = document.getElementById("municipio");
   
   municipio.innerHTML = "";
-  
+
+
+  // var select = document.getElementById("municipio");
+  // var opcion = select.querySelector("option[value='$municipio']");
+  // select.removeChild(opcion);
+
+  var formulario = document.getElementById("municipio");
+  formulario.reset();
+  var formulario = document.getElementById("departamento");
+  formulario.reset();
+
   // Agregar opciones según la opción seleccionada en el primer combobox
   if (departamento.value === "ATLÁNTIDA") {
     municipio.add(new Option("LA CEIBA", "lA CEIBA"));
