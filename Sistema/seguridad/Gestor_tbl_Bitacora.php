@@ -39,7 +39,7 @@ if ($fechaInicio != null && $fechaFinal != null) {
     $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
 }elseif($fechaInicio == null || $fechaFinal == null) {
     $fechaInicio = '2023-01-01';
-    $fechaFinal = date('Y-m-d');
+    $fechaFinal = date('Y-m-d', strtotime('+1 day'));;
     $where .= ($where == '') ? 'WHERE ' : ' AND ';
     $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
 }
