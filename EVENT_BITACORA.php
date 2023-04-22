@@ -686,7 +686,6 @@ public function RegInsertpreg(){
 #delete SAR 
 public function Deletepreg(){
     session_start();
-
     $IDGlobal=$_SESSION['ID_User'];
     $ID_Pregunta=$_SESSION['IDpregDELETE'];
         $model = new conexion();
