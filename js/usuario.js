@@ -18,14 +18,19 @@ function init() {
 
 //Función limpiar
 function limpiar() {
-    $("#Nombre_Usuario").val("");
     $("#Usuario").val("");
+    $("#Nombre_Usuario").val("");
     $("#Correo_electronico").val("");
-    $("#contrasena").val("");
+    $("#Rol").val("");
+    $("#contraseña").val("");
     $("#FechaVencimiento").val("");
-    $("#Estado").attr("src", "");
+    $("#Estado_actual").val("NUEVO");
+    $("#Nombre_proyecto").val("");
+    $("#Fechaini").val("");
+    $("#Fechafinal").val("");
+    $("#Monto_proyectados").val("");
+    $("#estado").val("");
 }
-
 //Función mostrar formulario
 function mostrarform(flag) {
     limpiar();

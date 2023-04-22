@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<?php include '../sidebarpro.php'; ?>
+<?php include '../sidebar.php'; ?>
 
     <?php
         if(isset($_POST['enviar'])){
@@ -112,32 +112,30 @@
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre del proyecto(*):</label>
                             <input type="hidden" name="Nombre_proyecto" id="Nombre_proyecto">
-                            <input type="text" class="form-control" name="Nombre_proyecto" id="Nombre_proyecto" maxlength="100" placeholder="Ingrese el nombre del proyecto:" value="<?php echo $nomb_proyec; ?>" required>
+                            <input type="text" class="form-control" name="Nombre_proyecto" id="Nombre_proyecto" maxlength="100" placeholder="Ingrese el nombre del proyecto:" value="<?php echo $nomb_proyec; ?>"  oninput="this.value = this.value.toUpperCase();" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Inicio:</label>
                             <input type="date" class="form-control" name="Fechaini" id="Fechaini" maxlength="100" placeholder="Ingrese la Fecha de inicio" value="<?php echo $Fecha_ini; ?>">
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Fecha final:</label>
-                            <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha de inicio" value="<?php echo $Fecha_final; ?>">
+                              <label>Fecha final:</label>
+                              <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha de inicio" value="<?php echo $Fecha_final; ?>">
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Fondos proyectados(*):</label>
                             <input type="hidden" name="Monto_proyectados" id="Monto_proyectados">
                             <input style="text" type="text" class="form-control" name="Monto_proyectados" id="Monto_proyectados" maxlength="10"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese los fondos proyectados:" value="<?php echo $Fondos_proyec; ?>"required>
                           </div>
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Estado Actual(*)</label>
-                            <input type="text" class="form-control" name="Estado_actual" id="Estado_actual" maxlength="100" value="<?php echo $estado; ?>" readonly>
-                            <label>Estado usuario(*)</label>
+                        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                          <label>Estado usuario(*)</label>
                             <select class="form-control" name="estado" id="estado" required>
-                            <option value="">Selecione un estado</option>
-                              <option value="ACTIVO">ACTIVO</option>
-                              <option value="INACTIVO">INACTIVO</option>
-                              <option value="FINALIZADO">FINALIZADO</option>
+                              <option value="">Seleccione un estado</option>
+                              <option value="ACTIVO" <?php if ($estado == 'ACTIVO') echo 'selected'; ?>>ACTIVO</option>
+                              <option value="INACTIVO" <?php if ($estado == 'INACTIVO') echo 'selected'; ?>>INACTIVO</option>
+                              <option value="FINALIZADO" <?php if ($estado == 'FINALIZADO') echo 'selected'; ?>>FINALIZADO</option>
                             </select>
-                        </div>
+                          </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
@@ -169,7 +167,7 @@
 	<script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>
-  <script src="./js/usuario.js"></script>
+  <script src="../../js/usuario.js"></script>
 
 </body>
 </html>

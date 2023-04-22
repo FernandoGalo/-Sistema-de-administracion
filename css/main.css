@@ -126,6 +126,11 @@ body, html{
 	font-size: 14px;
 	padding: 20px 0;
 }
+
+	.full-box.dashboard-sideBar-UserInfo2 {
+		border-bottom: 1px solid rgba(255, 255, 255, .3);
+}
+
 .dashboard-sideBar-UserInfo figure img{
 	width: 100px;
 	height: 100px;

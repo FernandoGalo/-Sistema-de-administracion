@@ -1,8 +1,10 @@
 <?php 
 //Controladores importantes
- require '../../conexion_BD.php';     
+ require '../../conexion_BD.php';
+ session_start();       
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
+ $IDProyecto=$_SESSION['ID_Proyect'];
 ?>
 
 <section class="full-box cover dashboard-sideBar" style="overflow-y: auto;">
@@ -31,11 +33,9 @@
 					</li>
 				</ul>
 			</div>
-			<!-- Menu de la barra lateral -->
-			<?php $sql=$conexion->query("SELECT * FROM tbl_ms_roles where ID_Rol=$ID_Rol and Estado=1");
-if ($datos=$sql->fetch_object()) { ?>
-			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=16");
+			<div class="full-box dashboard-sideBar-UserInfo2">
+				<Ul class="list-unstyled full-box dashboard-sideBar-Menu" >
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=16");
 if ($datos=$sql->fetch_object()) { ?>
 			<li>
 					<a href="../Home/home.php">
@@ -122,6 +122,20 @@ if ($datos=$sql->fetch_object()) { ?>
 					</ul>
 				</li>
 				<?php } ?>
+				</Ul>
+			</div>
+			<!-- Menu de la barra lateral -->
+			<?php $sql=$conexion->query("SELECT * FROM tbl_ms_roles where ID_Rol=$ID_Rol and Estado=1");
+if ($datos=$sql->fetch_object()) { ?>
+			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=16");
+if ($datos=$sql->fetch_object()) { ?>
+			<li>
+			<a href="../proyectos/ProyectosGest.php?ID_proyecto=<?php echo $IDProyecto; ?>">
+	            <i class="zmdi zmdi-menu"></i> Gestion proyecto
+            </a>
+			</li>
+			<?php } ?>
 				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and  (ID_Objeto = 8 OR ID_Objeto = 13 OR ID_Objeto = 7)");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
