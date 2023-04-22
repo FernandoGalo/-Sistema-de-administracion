@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-<title>Inicio</title>
+<title>Editar Area Trabajo</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -41,7 +41,7 @@
 
             }else{
                 echo "<script language='JavaScript'>
-                alert('Los datos NO se actualizaron');
+                alert('Error!!!, Los datos no se actualizaron');
             location.assign('area_trabajo_Adm.php');
             </script>";
             }
@@ -86,17 +86,17 @@
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>ID del Area de Trabajo(*):</label>
+                            <label>ID Area de Trabajo(*):</label>
                             <input type="hidden" name="ID_Fondo" id="ID_Fondo">
                             <input style="text" type="text" class="form-control" name="ID_Area_Trabajo" id="ID_Area_Trabajo" maxlength="10"  value="<?php echo $ID_Area_Trabajo; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>nombre del Area de Trabajo</label>
-                            <input type="text" class="form-control"  name="nombre_Area_Trabajo" id="nombre_Area_Trabajo" placeholder="Ingrese el nombre del Area de Trabajo" value="<?php echo $nombre_Area_Trabajo; ?>" require>
+                            <label>Nombre del Area de Trabajo</label>
+                            <input oncopy="return false" type="text" class="form-control"  name="nombre_Area_Trabajo" id="nombre_Area_Trabajo" placeholder="Ingrese el nombre del Area de Trabajo" value="<?php echo $nombre_Area_Trabajo; ?>" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();"require>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>descripcion del Area de Trabajo</label>
-                            <input type="text" class="form-control"  name="descripcion_A_Trabajo" id="descripcion_A_Trabajo" placeholder="Ingrese la descripcion del Area de Trabajo" value="<?php echo $descripcion_A_Trabajo; ?>" require>
+                            <label>Descripcion del Area de Trabajo</label>
+                            <input oncopy="return false" type="text" class="form-control"  name="descripcion_A_Trabajo" id="descripcion_A_Trabajo" placeholder="Ingrese la descripcion del Area de Trabajo" value="<?php echo $descripcion_A_Trabajo; ?>" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();"require>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>

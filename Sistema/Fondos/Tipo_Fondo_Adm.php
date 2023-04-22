@@ -29,7 +29,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Inicio</title>
+	<title>Tipo de Fondos</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -60,7 +60,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Mantenimiento Tipo de fondos</h1>
+                          <h1 class="box-title" style="text-align:center; margin-top:15px; margin-bottom:20px">Mantenimiento Tipo de fondos</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=13");
 if ($datos=$sql->fetch_object()) { ?>
 
@@ -246,8 +246,8 @@ if ($datos=$sql->fetch_object()) { ?>
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>nombre Tipo Fondo</label>
-                            <input type="text" class="form-control"  name="nombre_T_Fondo" id="nombre_T_Fondo" placeholder="Ingrese el Tipo de Fondo" require>
+                            <label>Nombre Tipo Fondo</label>
+                            <input oncopy="return false" maxlength="39" type="text" class="form-control"  name="nombre_T_Fondo" id="nombre_T_Fondo" placeholder="Ingrese el Tipo de Fondo" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" require>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>

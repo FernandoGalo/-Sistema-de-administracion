@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-<title>Inicio</title>
+<title>Editar Tipo Fondo</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -41,7 +41,7 @@
 
             }else{
                 echo "<script language='JavaScript'>
-                alert('Los datos NO se actualizaron');
+                alert('Error!!!, Los datos no se actualizaron');
             location.assign('Tipo_Fondo_Adm.php');
             </script>";
             }
@@ -75,7 +75,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar Tipos de Fondos</h1>
+                          <h1 class="box-title">Editar Tipo de Fondo</h1>
                         </div>
                         <br>
                     </div>
@@ -86,18 +86,18 @@
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>ID del tipo fondo(*):</label>
+                            <label>ID Tipo Fondo(*):</label>
                             <input type="hidden" name="ID_Fondo" id="ID_Fondo">
-                            <input style="text" type="text" class="form-control" name="ID_tipo_fondo" id="ID_tipo_fondo" maxlength="10"  value="<?php echo $ID_tipo_fondo; ?>" readonly>
+                            <input oncopy="return false" style="text" type="text" class="form-control" name="ID_tipo_fondo" id="ID_tipo_fondo" maxlength="10"  value="<?php echo $ID_tipo_fondo; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>nombre del Tipo Fondo</label>
-                            <input type="text" class="form-control"  name="nombre_T_Fondo" id="nombre_T_Fondo" placeholder="Ingrese el nombre del Tipo Fondo" value="<?php echo $nombre_T_Fondo; ?>" require>
+                            <label>Nombre del Tipo Fondo</label>
+                            <input oncopy="return false" type="text" class="form-control"  name="nombre_T_Fondo" id="nombre_T_Fondo" placeholder="Ingrese el Nombre del Tipo Fondo" value="<?php echo $nombre_T_Fondo; ?>" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" require>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
                           <button class="btn btn-danger" type="button">
-                          <a href="FondosAdm.php" style="color:white; text-decoration:none;">
+                          <a href="Tipo_Fondo_Adm.php" style="color:white; text-decoration:none;">
                           <i class="zmdi zmdi-close-circle"></i> Cancelar
                           </a>
                           </button>
