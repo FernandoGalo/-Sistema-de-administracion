@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGREGAR</title>
+    <title>Agregar Voluntario</title>
 </head>
 <body>
     <?php
@@ -39,8 +39,8 @@
             // Los dcatos NO ingresaron a la BD
 
             
-            $sql = "INSERT INTO tbl_voluntarios (ID_Voluntario, Nombre_Voluntario, Telefono_Voluntario, Direccion_Voluntario, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES ($nuevo_id, '$Nombre_Voluntario', '$Telefono_Voluntario', '$Direccion_Voluntario', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_voluntarios (ID_Voluntario, Nombre_Voluntario, Telefono_Voluntario, Direccion_Voluntario, Creado_Por, Fecha_Creacion) 
+            VALUES ($nuevo_id, '$Nombre_Voluntario', '$Telefono_Voluntario', '$Direccion_Voluntario', '$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
 
@@ -59,7 +59,7 @@
             }else{
                 // Los dcatos NO ingresaron a la BD
                 echo "<script languaje='JavaScript'>
-                alert('Los datos NO fueron ingresados a la BD');
+                alert('Error!!!, Los datos no fueron ingresados a la BD');
                     location.assign('VoluntariosAdm.php');
                     </script>";
             }

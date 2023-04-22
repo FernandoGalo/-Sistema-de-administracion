@@ -23,7 +23,7 @@ include("../../conexion_BD.php");
     }else{
         if (mysqli_errno($conexion)) {
             echo "<script languaje='JavaScript'>
-        alert('No puedes borrar este usuario');
+        alert('No puedes borrar este voluntario');
         location.assign('VoluntariosAdm.php');
         </script>";   
         } else {
