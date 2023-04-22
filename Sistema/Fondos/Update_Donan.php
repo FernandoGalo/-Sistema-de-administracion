@@ -46,7 +46,7 @@
             }else{
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_donantes SET Nombre_D = '$Nombre_donan', Tel_cel_D = '$Telef', Direccion_D = '$Direcc' , Correo_D = '$email', Fecha_Modificacion = '$R_Fecha_actual' WHERE ID_Donante='$ID_donante';";
+            $sql="UPDATE tbl_donantes SET Nombre_D = '$Nombre_donan', Tel_cel_D = '$Telef', Direccion_D = '$Direcc' , Correo_D = '$email', Modificado_Por='$usuario' ,Fecha_Modificacion = '$R_Fecha_actual' WHERE ID_Donante='$ID_donante';";
             $resultado=mysqli_query($conexion,$sql);
             //Modificado_por = '$Usuario'//
 

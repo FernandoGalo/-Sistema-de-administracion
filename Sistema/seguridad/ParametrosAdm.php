@@ -13,11 +13,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="../../css/main.css">
-  <script type="text/javascript">
-    function confirmar(){
-      return confirm('¿Está Seguro?, se eliminará el proyecto');
-    }
-  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 
@@ -44,6 +40,11 @@ $ID_Rol=$_SESSION['ID_Rol'];
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
                             if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-badge-check"></i> Agregar Parametros</button>
+                           <!-- PARA GENERAR LOS REPORTES ====================== -->
+                        <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/Reporteparametros.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte de Parametros
+                          </button>              
+                            <!-- Fin Generar Reporte -->
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
@@ -53,53 +54,164 @@ $ID_Rol=$_SESSION['ID_Rol'];
                     <!-- centro -->
                     <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_consultar=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
                     if ($datos=$sql->fetch_object()) { ?>
-                    <div class="panel-body table-responsive" id="listadoregistros">
-                        <table style="text-align:center" id="tbllistado" class="table table-bordered table-hover">
-                        
-                        <!-- Buscar -->
-                        <form action="" method="post">
-                            <label for="campo">Buscar: </label>
-                            <input style="margin-bottom: 20px; margin-left: 10px; display: inline-block;"type="text" id="buscador" onkeyup="buscarTabla()" placeholder="Buscar...">
-                        </form>
-                        <thead accept-charset="UTF-8">
-                            <th style="text-align:center">ID</th>
-                            <th style="text-align:center">Nombre del parametro</th>
-                            <th style="text-align:center">Descripcion</th>
-                            <th style="text-align:center">Valor</th>
-                            <th style="text-align:center">Acciones</th>
-                        </thead>
-                          <tbody>                            
-                          </tbody>
-                          <tfoot>
+                   <div class="panel-body" id="listadoregistros">
+<main>
+        <div class="container py-4 text-center">
 
-                          <?php
-                          $sql="SELECT * from tbl_ms_parametros";
-                          $result=mysqli_query($conexion,$sql);
+            <div class="row g-4">
 
-                           while($mostrar=mysqli_fetch_array($result)){
-                           ?>
+                <div class="col-auto">
+                    <label for="num_registros" class="col-form-label">Mostrar: </label>
+                </div>
 
-                            <tr>
-                              <td><?php echo $mostrar['ID_Parametro']?></td> 
-                              <td><?php echo $mostrar['Parametro']?></td> 
-                              <td><?php echo $mostrar['Descripcion_P']?></td> 
-                              <td><?php echo $mostrar['Valor']?></td>
-        
-                              <td>
-                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
+                <div class="col-auto">
+                    <select name="num_registros" id="num_registros" class="form-select">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <div class="col-auto">
+                    <label for="num_registros" class="col-form-label">registros </label>
+                </div>
+
+                <div class="col-5"></div>
+
+                <div class="col-auto">
+                    <label for="campo" class="col-form-label">Buscar: </label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="campo" id="campo" class="form-control">
+                </div>
+            </div>
+
+            <script>
+document.getElementById("campo").addEventListener("keyup", function(event) {
+  // Obtener el valor del input
+  var campo = document.getElementById("campo").value;
+
+  // Actualizar el valor del enlace
+  var link = document.getElementById("generar-reporte");
+  link.setAttribute("href", "../../fpdf/Reporteparametros.php?campo=" + encodeURIComponent(campo));
+});
+</script>
+            <div class="row py-4">
+                <div class="col">
+                    <table class="table table-sm table-bordered table-striped">
+                        <thead>
+                            <th class="sort asc">ID</th>
+                            <th class="sort asc">Nombre del parametro</th>
+                            <th class="sort asc">Descripcion</th>
+                            <th class="sort asc">Valor</th>
+<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=3");
                   if ($datos=$sql->fetch_object()) { ?>
-                              <a href='Update_Parametros.php?ID_Parametro=<?php echo $mostrar['ID_Parametro']; ?>' class='boton-editar'>
-                              <i class='zmdi zmdi-edit'></i>
-                              <?php } ?>
-                              </a>
-                            </td>
-                             </tr>
-                            <?php
-                             }
-                             ?>     
-                          </tfoot>
-                        </table>
-                    </div>
+                            <th></th>
+                            <?php } ?>
+                        </thead>
+                        <!-- El id del cuerpo de la tabla. -->
+                        <tbody id="content">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label id="lbl-total"></label>
+                </div>
+
+                <div class="col-6" id="nav-paginacion"></div>
+
+                <input type="hidden" id="pagina" value="1">
+                <input type="hidden" id="orderCol" value="0">
+                <input type="hidden" id="orderType" value="asc">
+            </div>
+        </div>
+    </main>
+</div>
+    <script>
+        /* Llamando a la función getData() */
+        getData()
+
+        /* Escuchar un evento keyup en el campo de entrada y luego llamar a la función getData. */
+        document.getElementById("campo").addEventListener("keyup", function() {
+            getData()
+        }, false)
+        document.getElementById("num_registros").addEventListener("change", function() {
+            getData()
+        }, false)
+
+
+        /* Peticion AJAX */
+        function getData() {
+            let input = document.getElementById("campo").value
+            let num_registros = document.getElementById("num_registros").value
+            let content = document.getElementById("content")
+            let pagina = document.getElementById("pagina").value
+            let orderCol = document.getElementById("orderCol").value
+            let orderType = document.getElementById("orderType").value
+
+            if (pagina == null) {
+                pagina = 1
+            }
+            let url = "Gestor_Parametros.php"
+            let formaData = new FormData()
+            formaData.append('campo', input)
+            formaData.append('registros', num_registros)
+            formaData.append('pagina', pagina)
+            formaData.append('orderCol', orderCol)
+            formaData.append('orderType', orderType)
+
+            fetch(url, {
+                    method: "POST",
+                    body: formaData
+                }).then(response => response.json())
+                .then(data => {
+                    content.innerHTML = data.data
+                    document.getElementById("lbl-total").innerHTML = 'Mostrando ' + data.totalFiltro +
+                        ' de ' + data.totalRegistros + ' registros'
+                    document.getElementById("nav-paginacion").innerHTML = data.paginacion
+                }).catch(err => console.log(err))
+        }
+
+        function nextPage(pagina){
+            document.getElementById('pagina').value = pagina
+            getData()
+        }
+
+        let columns = document.getElementsByClassName("sort")
+        let tamanio = columns.length
+        for(let i = 0; i < tamanio; i++){
+            columns[i].addEventListener("click", ordenar)
+        }
+
+        function ordenar(e){
+            let elemento = e.target
+
+            document.getElementById('orderCol').value = elemento.cellIndex
+
+            if(elemento.classList.contains("asc")){
+                document.getElementById("orderType").value = "asc"
+                elemento.classList.remove("asc")
+                elemento.classList.add("desc")
+            } else {
+                document.getElementById("orderType").value = "desc"
+                elemento.classList.remove("desc")
+                elemento.classList.add("asc")
+            }
+
+            getData()
+        }
+
+    </script>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
                     <?php } ?>
                     <div class="panel-body" id="formularioregistros">
                         <form name="formulario" id="formulario" action="Insert_Parametros.php" method="POST" accept-charset="UTF-8">

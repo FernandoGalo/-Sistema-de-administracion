@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGREGAR</title>
+    <title>Agregar Pregunta</title>
 </head>
 <body>
     <?php
@@ -32,10 +32,12 @@
             // Los dcatos NO ingresaron a la BD
             $Pregunta = mysqli_real_escape_string($conexion, $pregunta);
             
-            $sql = "INSERT INTO tbl_preguntas (Pregunta, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion) 
-            VALUES ('$Pregunta', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+            $sql = "INSERT INTO tbl_preguntas (Pregunta, Creado_Por, Fecha_Creacion) 
+            VALUES ('$Pregunta', '$Usuario','$Fecha_actual')";
 
             $resultado = mysqli_query($conexion,$sql);
+
+            
 
             if($resultado){
                 //Los datos ingresados a la BD
@@ -53,7 +55,7 @@
             }else{
                 // Los dcatos NO ingresaron a la BD
                 echo "<script languaje='JavaScript'>
-                alert('Los datos NO fueron ingresados a la BD');
+                alert('Error!!!, Los datos no fueron ingresados a la BD');
                     location.assign('PreguntasAdm.php');
                     </script>";
             }
