@@ -4,6 +4,7 @@
     
     session_start();     
 $usuario=$_SESSION['usuario'];
+$IDProyecto=$_SESSION['ID_Proyect'];
     
 ?>
 
@@ -22,7 +23,7 @@ $usuario=$_SESSION['usuario'];
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
-	<?php include '../sidebarpro.php'; ?>
+
 
 
     <?php
@@ -108,7 +109,7 @@ $usuario=$_SESSION['usuario'];
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar Voluntarios</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar Voluntarios</h1>
                         </div>
                         <br>
                     </div>
@@ -118,22 +119,22 @@ $usuario=$_SESSION['usuario'];
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>ID Voluntario(*):</label>
                             <input type="hidden" name="ID_Voluntario" id="ID_Voluntario">
                             <input type="text" class="form-control" name="ID_Voluntario" id="ID_Voluntario" maxlength="10" value="<?php echo $ID_Voluntario; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Voluntario(*):</label>
                             <input type="hidden" name="Nombre_Voluntario" id="Nombre_Voluntario">
                             <input onpaste="return false"  type="text" class="form-control" name="Nombre_Voluntario" id="Nombre_Voluntario" maxlength="30" placeholder="Ingrese el nombre del voluntario"  value="<?php echo $Nombre_Voluntario; ?>" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telefono_Voluntario" id="Telefono_Voluntario">
                             <input onpaste="return false" type="text" class="form-control" name="Telefono_Voluntario" id="Telefono_Voluntario" maxlength="15" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  placeholder="Ingrese el numero telefonico del voluntario" value="<?php echo $Telefono_Voluntario; ?>" oninput="validarTelefono(event)" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Direccion Voluntario(*):</label>
                             <input type="hidden" name="Direccion_Voluntario" id="Direccion_Voluntario">
                             <input onpaste="return false" oninput="this.value = this.value.toUpperCase();" type="text" class="form-control" name="Direccion_Voluntario" id="Direccion_Voluntario" maxlength="100" placeholder="Ingrese la direccion del voluntario" value="<?php echo $Direccion_Voluntario; ?>" required>
@@ -165,6 +166,7 @@ $usuario=$_SESSION['usuario'];
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
+  <?php include '../sidebarpro.php'; ?>
 
   <script>
     //Validar Telefono

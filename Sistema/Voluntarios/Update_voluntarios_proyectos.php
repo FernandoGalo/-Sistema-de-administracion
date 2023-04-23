@@ -83,7 +83,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar el Area de Trabajo</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar el Area de Trabajo</h1>
                         </div>
                         <br>
                     </div>
@@ -93,64 +93,59 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>	ID de Vinculacion:</label>
                             <input type="text" class="form-control" name="ID_Vinculacion_Proy" id="ID_Vinculacion_Proy" value="<?php echo $ID_Vinculacion_Proy; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Voluntario:</label>
-                            <?php require '../../conexion_BD.php';?>
-                            <?php
-                           $sql2=$conexion->query("SELECT * FROM tbl_voluntarios");
-                          ?>
-                            <select class="form-control" name="ID_Voluntario" id="ID_Voluntario" required ><br>
-                            <option value="">Seleccione un voluntario</option>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql2)){
-                            ?>
-                             <option value="<?php echo $row1['ID_Voluntario'];?>"><?php echo $row1['Nombre_Voluntario'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Proyecto al que esta siendo donado:</label>
                             <?php include("../../conexion_BD.php");
-    $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+                            $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
-    while($row=mysqli_fetch_array($sql1)){
-        $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
-    }?>
+                             while($row=mysqli_fetch_array($sql1)){
+                             $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+                            }?>
                             <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Area de trabajo:</label>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                           <?php require '../../conexion_BD.php'; ?>
+                          <label>Voluntario</label>
                             <?php
-                           $sql2=$conexion->query("SELECT * FROM tbl_area_trabajo");
-                          ?>
-                            <select class="form-control" name="ID_Area_Trabajo" id="ID_Area_Trabajo" required ><br>
-                            <option value="">Seleccione el area de trabajoo</option>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql2)){
+                            $sql = $conexion->query("SELECT * FROM tbl_voluntarios");
                             ?>
-                             <option value="<?php echo $row1['ID_Area_Trabajo'];?>"><?php echo $row1['nombre_Area_Trabajo'];?></option>
+                            <select class="form-control" name="ID_Voluntario" id="ID_Voluntario" required>
+                            <option value="">Seleccione un voluntario</option>
                             <?php
-                             }
+                            while ($row1 = mysqli_fetch_array($sql)) {
+                            $selected = ($row1['ID_Voluntario'] == $ID_Voluntario) ? 'selected' : '';
+                            echo "<option value='".$row1['ID_Voluntario']."' ".$selected.">".$row1['Nombre_Voluntario']."</option>";
+                            }
                             ?>
                             </select>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                           <?php require '../../conexion_BD.php'; ?>
+                          <label>Area de trabajo:</label>
+                            <?php
+                            $sql = $conexion->query("SELECT * FROM tbl_area_trabajo");
+                            ?>
+                            <select class="form-control" name="ID_Area_Trabajo" id="ID_Area_Trabajo" required>
+                            <option value="">Seleccione el area de trabajo</option>
+                            <?php
+                            while ($row1 = mysqli_fetch_array($sql)) {
+                            $selected = ($row1['ID_Area_Trabajo'] == $ID_Area_Trabajo) ? 'selected' : '';
+                            echo "<option value='".$row1['ID_Area_Trabajo']."' ".$selected.">".$row1['nombre_Area_Trabajo']."</option>";
+                            }
+                            ?>
+                            </select>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Vinculacion de Proyectos:</label>
                             <input type="date" class="form-control" name="Fecha_Vinculacion_P" id="Fecha_Vinculacion_P" value="<?php echo $Fecha_Vinculacion_P; ?>" required>
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                          <button class="btn btn-danger" type="button">
-                          <a href="voluntarios_proyectos_Adm.php" style="color:white; text-decoration:none;">
-                          <i class="zmdi zmdi-close-circle"></i> Cancelar
-                          </a>
-                          </button>
+                          <button class="btn btn-danger" onclick="cancelar()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
                           </div>
@@ -171,7 +166,22 @@
 
 
 	<!--script en java para los efectos-->
-  
+  <script>
+  function cancelar() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "voluntarios_proyectos_Adm.php";
+  });
+}
+</script>
 	<script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
 	<script src="../../js/main.js"></script>

@@ -289,7 +289,7 @@ if ($datos=$sql->fetch_object()) { ?>
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                            <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
+                            <button class="btn btn-danger" onclick="cancelar()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
                           </div>
@@ -305,6 +305,22 @@ if ($datos=$sql->fetch_object()) { ?>
 
 	
 	<!--script en java para los efectos-->
+    <script>
+  function cancelar() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "voluntarios_proyectos_Adm.php";
+  });
+}
+</script>
   <script src="../../js/Buscador.js"></script>
   <script src="../../js/events.js"></script>
  	<script src="../../js/jquery-3.1.1.min.js"></script>

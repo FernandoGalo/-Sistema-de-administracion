@@ -75,7 +75,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar el Area de Trabajo</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar el Area de Trabajo</h1>
                         </div>
                         <br>
                     </div>
