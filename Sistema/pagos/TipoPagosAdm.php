@@ -75,7 +75,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money"></i> Agregar Pago</button>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
-                          <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/Reportepagos.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
+                          <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteTipoPago.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
                          <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Tipo Pagos
                           </button>               
                 <!-- Fin Generar Reporte -->
@@ -127,7 +127,7 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
 
   // Actualizar el valor del enlace
   var link = document.getElementById("generar-reporte");
-  link.setAttribute("href", "../../fpdf/Reportepagos.php?campo=" + encodeURIComponent(campo));
+  link.setAttribute("href", "../../fpdf/ReporteTipoPago.php?campo=" + encodeURIComponent(campo));
 });
   </script>
             <div class="row py-4">
