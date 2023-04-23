@@ -44,7 +44,7 @@ $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Bitacora</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Bitacora</h1>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
                           <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteBitacora.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
                          <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Bitacora

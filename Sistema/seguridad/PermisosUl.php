@@ -74,7 +74,7 @@ $resObjetosFaltantes = $stmt->get_result();
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Permisos del <?php echo $strRol ?></h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Permisos del <?php echo $strRol ?></h1>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-account-add"></i>Agregar permiso</button>
                           <div class="box-tools pull-right">
                         </div>

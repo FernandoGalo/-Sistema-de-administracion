@@ -109,7 +109,7 @@
         <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
+                    <div style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-header with-border">
                           <h1 class="box-title">Editar Pregunta</h1>
                         </div>
                         <br>
