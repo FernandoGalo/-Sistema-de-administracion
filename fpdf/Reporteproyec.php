@@ -1,6 +1,7 @@
 <?php
 
 require('./fpdf.php');
+session_start();
 class PDF extends FPDF
 {
 
@@ -121,12 +122,13 @@ $pdf->SetFont('Arial', '', 11);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
+$fechaInicio = $_SESSION['fechaInicio'];
+$fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_proyectos
-WHERE ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%'");
+WHERE (ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%')
+AND Fecha_de_inicio_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}' or  Fecha_final_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'");
 
-$consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_proyectos
-WHERE ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
     $ID_Proyect = $datos_reporte->ID_proyecto;
