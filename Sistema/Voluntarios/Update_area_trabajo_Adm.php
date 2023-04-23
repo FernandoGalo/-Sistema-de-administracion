@@ -100,11 +100,7 @@
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                          <button class="btn btn-danger" type="button">
-                          <a href="area_trabajo_Adm.php" style="color:white; text-decoration:none;">
-                          <i class="zmdi zmdi-close-circle"></i> Cancelar
-                          </a>
-                          </button>
+                          <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
                           </div>
@@ -131,5 +127,24 @@
 	<script src="../../js/main.js"></script>
   <script src="./js/usuario.js"></script>
   <?php include '../sidebarpro.php'; ?>
+
+  <script>
+    //Confrimar cancelacion
+  function cancelarform() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "area_trabajo_Adm.php";
+  });
+}
+</script>
+
 </body>
 </html>

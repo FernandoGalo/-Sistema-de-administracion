@@ -255,6 +255,7 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="Enviar_Parametros" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
                             <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
+                    
                           </div>
                           </div>
                           </div>
@@ -274,6 +275,25 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
   <script src="../../js/events.js"></script>
   <script src="../../js/main.js"></script>
     <script src="../../js/usuario.js"></script>
+    
+<script>
+  //Confirmar cancelacion
+  function cancelarform() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "ParametrosAdm.php";
+  });
+}
+</script>
+
 
 </body>
 </html>

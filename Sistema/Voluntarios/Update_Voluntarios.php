@@ -140,11 +140,7 @@ $usuario=$_SESSION['usuario'];
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="Enviar_V" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                          <button class="btn btn-danger" type="button">
-                          <a href="VoluntariosAdm.php" style="color:white; text-decoration:none;">
-                          <i class="zmdi zmdi-close-circle"></i> Cancelar
-                          </a>
-                          </button>
+                          <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
                           </div>
@@ -196,6 +192,24 @@ $usuario=$_SESSION['usuario'];
     }
     }
   </script>
+
+<script>
+    //Confirmar el boton cancelacion
+  function cancelarform() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "VoluntariosAdm.php";
+  });
+}
+</script>
 
 </body>
 </html>
