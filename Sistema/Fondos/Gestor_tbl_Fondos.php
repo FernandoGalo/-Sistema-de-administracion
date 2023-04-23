@@ -23,6 +23,8 @@ $table = "tbl_fondos";
 $id = 'ID_de_Fondo';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
+$fechaInicio = isset($_POST['fechaInicio']) ? $conexion->real_escape_string($_POST['fechaInicio']) : null;
+$fechaFinal = isset($_POST['fechaFinal']) ? $conexion->real_escape_string($_POST['fechaFinal']) : null;
 
 
 /* Filtrado */
@@ -38,7 +40,17 @@ if ($campo != null) {
     $where = substr_replace($where, "", -3);
     $where .= ")";
 }
-
+if ($fechaInicio != null && $fechaFinal != null) {
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}elseif($fechaInicio == null || $fechaFinal == null) {
+    $fechaInicio = '2023-01-01';
+    $fechaFinal = date('Y-m-d', strtotime('+1 day'));;
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}
+$_SESSION['fechaInicio']=$fechaInicio;
+$_SESSION['$fechaFinal']=$fechaFinal;
 /* Limit */
 $limit = isset($_POST['registros']) ? $conexion->real_escape_string($_POST['registros']) : 10;
 $pagina = isset($_POST['pagina']) ? $conexion->real_escape_string($_POST['pagina']) : 0;
@@ -73,7 +85,7 @@ JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
 JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
 JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto
 WHERE (f.ID_de_fondo LIKE '%{$campo}%' OR tf.nombre_T_Fondo LIKE '%{$campo}%' OR f.Nombre_del_Objeto LIKE '%{$campo}%' OR f.Cantidad_Rec LIKE '%{$campo}%' OR f.Valor_monetario LIKE '%{$campo}%' OR d.Nombre_D LIKE '%{$campo}%' OR f.Fecha_de_adquisicion_F LIKE '%{$campo}%')
-AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND f.Fecha_de_adquisicion_F BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);

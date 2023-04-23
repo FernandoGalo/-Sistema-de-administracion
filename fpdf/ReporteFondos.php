@@ -132,6 +132,8 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
+$fechaInicio = $_SESSION['fechaInicio'];
+$fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT f.ID_de_fondo, tf.nombre_T_Fondo, f.Nombre_del_Objeto, f.Cantidad_Rec, f.Valor_monetario, p.Nombre_del_proyecto, d.Nombre_D, f.Fecha_de_adquisicion_F
 FROM tbl_fondos f 
@@ -139,7 +141,7 @@ JOIN tbl_tipos_de_fondos tf ON f.ID_Tipo_Fondo = tf.ID_Tipo_Fondo
 JOIN tbl_donantes d ON f.ID_Donante = d.ID_Donante
 JOIN tbl_proyectos p ON f.ID_Proyecto = p.ID_proyecto
 WHERE (f.ID_de_fondo LIKE '%{$campo}%' OR tf.nombre_T_Fondo LIKE '%{$campo}%' OR f.Nombre_del_Objeto LIKE '%{$campo}%' OR f.Cantidad_Rec LIKE '%{$campo}%' OR f.Valor_monetario LIKE '%{$campo}%' OR d.Nombre_D LIKE '%{$campo}%' OR f.Fecha_de_adquisicion_F LIKE '%{$campo}%')
-AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'");
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND f.Fecha_de_adquisicion_F BETWEEN '{$fechaInicio}' AND '{$fechaFinal}' ");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
