@@ -23,6 +23,8 @@ $table = "tbl_pagos_realizados";
 $id = 'ID_de_pago ';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
+$fechaInicio = isset($_POST['fechaInicio']) ? $conexion->real_escape_string($_POST['fechaInicio']) : null;
+$fechaFinal = isset($_POST['fechaFinal']) ? $conexion->real_escape_string($_POST['fechaFinal']) : null;
 
 
 /* Filtrado */
@@ -38,6 +40,18 @@ if ($campo != null) {
     $where = substr_replace($where, "", -3);
     $where .= ")";
 }
+
+if ($fechaInicio != null && $fechaFinal != null) {
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}elseif($fechaInicio == null || $fechaFinal == null) {
+    $fechaInicio = '2023-01-01';
+    $fechaFinal = date('Y-m-d', strtotime('+1 day'));;
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}
+$_SESSION['fechaInicio']=$fechaInicio;
+$_SESSION['$fechaFinal']=$fechaFinal;
 
 /* Limit */
 $limit = isset($_POST['registros']) ? $conexion->real_escape_string($_POST['registros']) : 10;
@@ -73,7 +87,7 @@ JOIN tbl_tipo_pago_r t ON s.ID_T_pago = t.ID_T_pago
 JOIN tbl_proyectos p ON s.ID_de_proyecto = p.ID_proyecto
 JOIN tbl_ms_usuario u ON s.ID_usuario = u.ID_Usuario
 WHERE (s.ID_de_pago LIKE '%{$campo}%' OR s.Monto_pagado LIKE '%{$campo}%' OR t.nombre LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR s.Fecha_de_transaccion LIKE '%{$campo}%')
-AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND s.Fecha_de_transaccion BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
