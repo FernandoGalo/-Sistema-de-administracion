@@ -25,8 +25,8 @@ include("../../conexion_BD.php");
                 require_once "../../EVENT_BITACORA.php";
                 $model = new EVENT_BITACORA;
                 session_start();
-                $_SESSION['IDSarBitacoraDELETE']=$id_sar;
-                $model->DeleteSar();
+                $_SESSION['IDobjDELETE']=$idObj;
+                $model->DELObj();
              
 
                             

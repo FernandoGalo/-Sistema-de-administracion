@@ -942,5 +942,107 @@ public function DELProj(){
         ?>
     <?php
   }
+
+      #Insert Tipo Pago
+public function InsertTPago(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $Nombre= $_SESSION['nombtpagoBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se agrego el tipo pago: ".$Nombre;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Ingreso Tipo Pago', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+      #UPT Tipo Pago
+public function UPTTPago(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $Nombre= $_SESSION['nombtpagoBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se modificó el tipo pago: ".$Nombre;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Modificacion Tipo Pago', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+     #Delete Tipo Pago
+public function DELTPago(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $ID_T_pago= $_SESSION['IDtpagoBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se eliminó el tipo pago con ID: ".$ID_T_pago;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Eliminacion Tipo Pago', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+       #Insert OBJETO
+public function InsertObj(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $objeto= $_SESSION['OBJBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se agrego el objeto: ".$objeto;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Ingreso de objeto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+    #UP Objeto
+public function UPObj(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $objeto= $_SESSION['OBJBitacora'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se modificó el objeto: ".$objeto;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Modificacion de objeto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+  #DELETE Objeto
+public function DELObj(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+    $idObj= $_SESSION['IDobjDELETE'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se eliminó el objeto con ID: ".$idObj;
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Eliminacion de objeto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
 }  
 ?>

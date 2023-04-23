@@ -47,7 +47,13 @@
                 echo "<script language='JavaScript'>
                         alert('Los datos se actualizaron correctamente');
                     location.assign('ObjetosAdm.php');
-                    </script>";                    
+                    </script>";          
+                    require_once "../../EVENT_BITACORA.php";
+                    $model = new EVENT_BITACORA;
+                    session_start();
+                    $_SESSION['OBJBitacora']=$objeto;
+                    $model->UPObj();
+   
             }else{
                 echo "<script language='JavaScript'>
                 alert('Los datos NO se actualizaron');

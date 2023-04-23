@@ -32,6 +32,11 @@
                         alert('Los datos se actualizaron correctamente');
                     location.assign('TipoPagosAdm.php');
                     </script>";
+                    require_once "../../EVENT_BITACORA.php";
+                    $model = new EVENT_BITACORA;
+                    session_start();
+                    $_SESSION['nombtpagoBitacora']=$Nombre;
+                    $model->UPTTPago();  
 
             }else{
                 echo "<script language='JavaScript'>
