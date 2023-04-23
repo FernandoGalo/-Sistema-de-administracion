@@ -129,6 +129,8 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
+$fechaInicio = $_SESSION['fechaInicio'];
+$fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT s.ID_de_pago, s.Monto_pagado, t.nombre,p.Nombre_del_proyecto, u.Nombre_Usuario,s.Fecha_de_transaccion
 FROM tbl_pagos_realizados s
@@ -136,7 +138,7 @@ JOIN tbl_tipo_pago_r t ON s.ID_T_pago = t.ID_T_pago
 JOIN tbl_proyectos p ON s.ID_de_proyecto = p.ID_proyecto
 JOIN tbl_ms_usuario u ON s.ID_usuario = u.ID_Usuario
 WHERE (s.ID_de_pago LIKE '%{$campo}%' OR s.Monto_pagado LIKE '%{$campo}%' OR t.nombre LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR s.Fecha_de_transaccion LIKE '%{$campo}%')
-AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'");
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND s.Fecha_de_transaccion BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
