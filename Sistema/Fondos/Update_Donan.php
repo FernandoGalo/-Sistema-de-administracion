@@ -112,27 +112,27 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>ID_Usuario(*):</label>
                             <input type="hidden" name="ID_donante" id="ID_donante">
                             <input type="text" class="form-control" name="ID_donante" id="ID_donante" maxlength="100" value="<?php echo $IdDonan; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Donante(*):</label>
                             <input type="hidden" name="Nombre_Donante" id="Nombre_Donante">
                             <input onpaste="return false" type="text" value="<?php echo $Nombre_donan; ?>" class="form-control" name="Nombre_Donante" id="Nombre_Donante" maxlength="39" placeholder="Ingrese el nombre del donante" onkeypress="return /[a-zA-Z\s]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telef" id="Telef">
                             <input onpaste="return false" type="text" value="<?php echo $Tel_Cel; ?>" class="form-control" name="Telef" id="Telef" pattern="[0-9()+-]{8,20}" maxlength="19" placeholder="Ingrese el número de teléfono" oninput="validarTelefono(event)" onkeydown="return evitarEspacios(event)" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
                             <label>Direccion(*):</label>
                             <input type="hidden" name="Direccion" id="Direccion">
                             <input onpaste="return false" type="text" class="form-control" name="Direccion" id="Direccion" maxlength="39" placeholder="Ingrese la dirrecion del donante" value="<?php echo $Direcc; ?>" oninput="this.value = this.value.toUpperCase();" require>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Correo electronico(*):</label>
                             <input type="hidden" name="Correo_electronico" id="Correo_electronico">
                             <input onpaste="return false"  type="text" class="form-control" name="Correo_electronico" id="Correo_electronico" maxlength="39" placeholder="Ingrese el correo electronico"  value="<?php echo $correo; ?>" onkeypress="validarCorreo(event)" onkeydown="return evitarEspacios(event)" required>

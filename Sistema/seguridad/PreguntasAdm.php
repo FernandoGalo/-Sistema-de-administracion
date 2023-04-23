@@ -23,7 +23,7 @@ $ID_Rol=$_SESSION['ID_Rol'];
 </head>
 <body>
 	<!--Seccion donde va toda la barra lateral -->
-	<?php include '../sidebarpro.php'; ?>
+	<?php include '../sidebar.php'; ?>
 
 	<!-- Pagina de contenido-->
 	<section class="full-box dashboard-contentPage" style="overflow-y: auto;">
