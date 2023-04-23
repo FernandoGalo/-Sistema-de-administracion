@@ -61,11 +61,14 @@ class PDF extends FPDF
       $this->SetDrawColor(255, 255, 255); //colorBorde 163 163 163
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(30, 10, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(35, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('Fecha de Inicio'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('Fecha de finalización'), 1, 0, 'C', 1);
-      $this->Cell(70, 10, utf8_decode('Fondos proyectados'), 1, 0, 'C', 1);
-      $this->Cell(50, 10, utf8_decode('Estado Proyecto'), 1, 1, 'C', 1);
+      $this->Cell(50, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
+      $this->Cell(35, 10, utf8_decode('Fecha Inicio'), 1, 0, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('Fecha final'), 1, 0, 'C', 1);
+      $this->Cell(25, 10, utf8_decode('Voluntarios'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('fondos proy.'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('Fondos act.'), 1, 0, 'C', 1);
+      $this->Cell(33, 10, utf8_decode('Pagos'), 1, 0, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('Estado'), 1, 1, 'C', 1);
       // $this->Cell(50, 10, utf8_decode('CAI'), 1, 0, 'C', 1);
       // $this->Cell(20, 10, utf8_decode('Estado'), 1, 1, 'C', 1);
    }
@@ -95,7 +98,7 @@ $pdf->AddPage("landscape"); /* aqui entran dos para parametros (horientazion,tam
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 
 $i = 0;
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('Arial', '', 11);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
@@ -103,17 +106,38 @@ $campo = $_GET["campo"];
 $consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_proyectos
 WHERE ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%'");
 
-while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
-      $i = $i + 1;
-      /* TABLA */
-      $pdf->Cell(30, 10, utf8_decode($i), 0, 0, 'C', 0);
-      $pdf->Cell(35, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_de_inicio_P), 0, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($datos_reporte -> Fecha_final_P), 0, 0, 'C', 0);
-      $pdf->Cell(70, 10, 'L' . number_format($datos_reporte->Fondos_proyecto, 2), 0, 0, 'C', 0);
-      $pdf->Cell(50, 10, utf8_decode($datos_reporte -> Estado_Proyecto), 0, 1, 'C', 0);
-      // $pdf->Cell(100, 10, utf8_decode($datos_reporte -> cai), 1, 0, 'C', 0);   
-      // $pdf->Cell(20, 10, utf8_decode($datos_reporte -> estado), 0, 1, 'C', 0);   
+$consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_proyectos
+WHERE ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%'");
+
+while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
+    $ID_Proyect = $datos_reporte->ID_proyecto;
+    
+    // Consulta para obtener el total de fondos del proyecto
+    $consulta_fondos = $conexion->query("SELECT SUM(`Valor_monetario`) as Total FROM tbl_fondos WHERE `ID_Proyecto` = $ID_Proyect");
+    $datos_fondos = $consulta_fondos->fetch_object();
+    $total_fondos = $datos_fondos->Total;
+   
+    // Consulta para obtener el total de voluntarios del proyecto
+    $consulta_voluntarios = $conexion->query("SELECT COUNT(*) as Total FROM tbl_voluntarios_proyectos WHERE `ID_proyecto` = $ID_Proyect");
+    $datos_voluntarios = $consulta_voluntarios->fetch_object();
+    $total_voluntarios = $datos_voluntarios->Total;
+    
+    $consulta_pagos = $conexion->query("SELECT SUM(`Monto_pagado`) as Total FROM tbl_pagos_realizados WHERE `ID_de_proyecto` = $ID_Proyect");
+    $datos_pagos = $consulta_pagos->fetch_object();
+    $total_pagos = $datos_pagos->Total;
+   
+    $i = $i + 1;
+    /* TABLA */
+    $pdf->Cell(30, 10, utf8_decode($i), 0, 0, 'C', 0);
+    $pdf->Cell(50, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
+    $pdf->Cell(35, 10, utf8_decode($datos_reporte -> Fecha_de_inicio_P), 0, 0, 'C', 0);
+    $pdf->Cell(20, 10, utf8_decode($datos_reporte -> Fecha_final_P), 0, 0, 'C', 0);
+    $pdf->Cell(25, 10, utf8_decode($total_voluntarios), 0, 0, 'C', 0); // Nueva celda para el total de voluntarios
+    $pdf->Cell(30, 10, 'L' . number_format($datos_reporte->Fondos_proyecto, 2), 0, 0, 'C', 0);
+    $pdf->Cell(30, 10, 'L' . number_format($total_fondos, 2), 0, 0, 'C', 0); // Nueva celda para el total de fondos
+    $pdf->Cell(33, 10, 'L' . number_format($total_pagos, 2), 0, 0, 'C', 0); // Nueva celda para el total de pagos
+    $pdf->Cell(20, 10, utf8_decode($datos_reporte -> Estado_Proyecto), 0, 1, 'C', 0);
+
    }
 
-$pdf->Output('Reporteproyec.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('Reporteproyec.pdf', 'I'); //nombreDescarga, Visor(I->visualizar - D->descargar)

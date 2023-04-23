@@ -18,18 +18,7 @@ function init() {
 
 //Función limpiar
 function limpiar() {
-    $("#Usuario").val("");
-    $("#Nombre_Usuario").val("");
-    $("#Correo_electronico").val("");
-    $("#Rol").val("");
-    $("#contraseña").val("");
-    $("#FechaVencimiento").val("");
-    $("#Estado_actual").val("NUEVO");
-    $("#Nombre_proyecto").val("");
-    $("#Fechaini").val("");
-    $("#Fechafinal").val("");
-    $("#Monto_proyectados").val("");
-    $("#estado").val("");
+
 }
 //Función mostrar formulario
 function mostrarform(flag) {
