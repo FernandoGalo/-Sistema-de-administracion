@@ -89,10 +89,10 @@ class PDF extends FPDF
       $this->SetTextColor(000, 000, 000); //colorTexto
       $this->SetDrawColor(255, 255, 255); //colorBorde 163 163 163
       $this->SetFont('Arial', 'B', 11);
-      $this->Cell(35, 10, utf8_decode('N°'), 1, 0, 'C', 1);
+      $this->Cell(40, 10, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(30, 10, utf8_decode('Monto pagado'), 1, 0, 'C', 1);
-      $this->Cell(110, 10, utf8_decode('Tipo pago'), 1, 0, 'C', 1);
-      $this->Cell(50, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
+      $this->Cell(120, 10, utf8_decode('Tipo pago'), 1, 0, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('Proyecto'), 1, 0, 'C', 1);
       $this->Cell(50, 10, utf8_decode('Fecha de Transaccion'), 1, 1, 'C', 1);
     //   $this->Cell(50, 10, utf8_decode('DEPARTAMENTO'), 1, 0, 'C', 1);
     //   $this->Cell(50, 10, utf8_decode('MUNICIPIO'), 1, 1, 'C', 1);
@@ -143,10 +143,10 @@ AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND s.Fecha_de_transaccion BE
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
       /* TABLA */
-      $pdf->Cell(35, 10, utf8_decode($i), 0, 0, 'C', 0);
+      $pdf->Cell(40, 10, utf8_decode($i), 0, 0, 'C', 0);
       $pdf->Cell(30, 10, 'L' . number_format($datos_reporte->Monto_pagado, 2), 0, 0, 'C', 0);
-      $pdf->Cell(110, 10, utf8_decode($datos_reporte -> nombre), 0, 0, 'C', 0);
-      $pdf->Cell(50, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
+      $pdf->Cell(120, 10, utf8_decode($datos_reporte -> nombre), 0, 0, 'C', 0);
+      $pdf->Cell(20, 10, utf8_decode($datos_reporte -> Nombre_del_proyecto), 0, 0, 'C', 0);
       $pdf->Cell(50, 10, utf8_decode($datos_reporte -> Fecha_de_transaccion), 0, 1, 'C', 0);
     //   $pdf->Cell(50, 10, utf8_decode($datos_reporte -> departamento), 0, 0, 'C', 0);
     //   $pdf->Cell(50, 10, utf8_decode($datos_reporte -> municipio), 0, 1, 'C', 0);
