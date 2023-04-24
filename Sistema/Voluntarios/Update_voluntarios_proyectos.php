@@ -127,7 +127,7 @@
                            <?php require '../../conexion_BD.php'; ?>
                           <label>Area de trabajo:</label>
                             <?php
-                            $sql = $conexion->query("SELECT * FROM tbl_area_trabajo");
+                            $sql = $conexion->query("SELECT * FROM tbl_area_trabajo WHERE  ID_Area_Trabajo NOT IN (SELECT ID_Area_Trabajo FROM tbl_voluntarios_proyectos WHERE ID_Voluntario = $ID_Voluntario and ID_proyecto=$IDProyecto AND ID_Area_Trabajo <> $ID_Area_Trabajo)");
                             ?>
                             <select class="form-control" name="ID_Area_Trabajo" id="ID_Area_Trabajo" required>
                             <option value="">Seleccione el area de trabajo</option>
