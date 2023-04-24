@@ -142,10 +142,7 @@
                             ?>
                             </select>
                           </div>
-                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Usuario</label>
-                            <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" readonly>
-                          </div>
+                         
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Transaccion:</label>
                             <input type="date" class="form-control" name="FechaTransaccion" id="FechaTransaccion" maxlength="100" placeholder="Ingrese la Fecha de Transaccion"  value="<?php echo $Fecha_transaccion; ?>">

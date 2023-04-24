@@ -15,7 +15,7 @@ session_start();
      $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
  }
 /* Un arreglo de las columnas a mostrar en la tabla */
-$columns = ['ID_de_pago ', 'Monto_pagado', 'ID_T_pago', 'Fecha_de_transaccion', 'ID_de_proyecto', 'ID_Usuario', 'Creado_Por', 'Fecha_Creacion', 'Modificado_por', 'Fecha_Modificacion'];
+$columns = ['ID_de_pago ', 'Monto_pagado', 'ID_T_pago', 'Fecha_de_transaccion',  'ID_Usuario', 'Creado_Por', 'Fecha_Creacion', 'Modificado_por', 'Fecha_Modificacion'];
 
 /* Nombre de la tabla */
 $table = "tbl_pagos_realizados";
@@ -81,12 +81,12 @@ $sLimit = "LIMIT $inicio , $limit";
 
 /* Consulta */
 
-$sql="SELECT SQL_CALC_FOUND_ROWS s.ID_de_pago, s.Monto_pagado, t.nombre,p.Nombre_del_proyecto, u.Nombre_Usuario,s.Fecha_de_transaccion
+$sql="SELECT SQL_CALC_FOUND_ROWS s.ID_de_pago, s.Monto_pagado, t.nombre,p.Nombre_del_proyecto,s.Fecha_de_transaccion
 FROM tbl_pagos_realizados s
 JOIN tbl_tipo_pago_r t ON s.ID_T_pago = t.ID_T_pago
 JOIN tbl_proyectos p ON s.ID_de_proyecto = p.ID_proyecto
-JOIN tbl_ms_usuario u ON s.ID_usuario = u.ID_Usuario
-WHERE (s.ID_de_pago LIKE '%{$campo}%' OR s.Monto_pagado LIKE '%{$campo}%' OR t.nombre LIKE '%{$campo}%' OR u.Nombre_Usuario LIKE '%{$campo}%' OR s.Fecha_de_transaccion LIKE '%{$campo}%')
+
+WHERE (s.ID_de_pago LIKE '%{$campo}%' OR s.Monto_pagado LIKE '%{$campo}%' OR t.nombre LIKE '%{$campo}%' OR s.Fecha_de_transaccion LIKE '%{$campo}%')
 AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND s.Fecha_de_transaccion BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
@@ -118,7 +118,6 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>L.' . number_format($row['Monto_pagado'], 2) . '</td>';
         $output['data'] .= '<td>' . $row['nombre'] . '</td>';
         $output['data'] .= '<td>' . $row['Nombre_del_proyecto'] . '</td>';
-        $output['data'] .= '<td>' . $row['Nombre_Usuario'] . '</td>';
         $output['data'] .= '<td>' . $row['Fecha_de_transaccion'] . '</td>';
         $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
 if ($datos=$sql->fetch_object()) {  
