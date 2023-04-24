@@ -30,45 +30,54 @@
             $Fecha_Vinculacion_P=$_POST["Fecha_Vinculacion_P"];
             include("../../conexion_BD.php");
 
-            $sql = "SELECT * FROM tbl_voluntarios_proyectos WHERE ID_Area_Trabajo = $ID_Area_Trabajo AND ID_Voluntario = $ID_Voluntario AND ID_proyecto = $ID_proyecto";
+            $sql = "SELECT count(*) FROM tbl_voluntarios_proyectos WHERE (ID_Area_Trabajo = $ID_Area_Trabajo AND ID_Voluntario = $ID_Voluntario AND ID_proyecto = $ID_proyecto)";
             $resultado = mysqli_query($conexion,$sql);
-
-            if($resultado){
-                echo "<script languaje='JavaScript'>
-                alert('Error!!!, A intentado agregar la misma Area de trabajo al mismo Voluntario, Las areas de trabajo solo pueden ser asignadas 1 vez por Voluntario');
-                    location.assign('voluntarios_proyectos_Adm.php');
-                    </script>";
-        }else{
-            
+            if(mysqli_num_rows($resultado) > 0) {
+                $fila = mysqli_fetch_array($resultado);
+                $cantidad_filas = $fila[0];
+                
+                if($cantidad_filas > 0) {
+                    echo "<script languaje='JavaScript'>
+                    alert('Error!!!, A intentado agregar la misma Area de trabajo al mismo Voluntario, Las areas de trabajo solo pueden ser asignadas 1 vez por Voluntario');
+                        location.assign('voluntarios_proyectos_Adm.php');
+                        </script>";
+                } else {
                     $sql = "INSERT INTO tbl_voluntarios_proyectos (ID_Vinculacion_Proy, ID_Voluntario, ID_proyecto, ID_Area_Trabajo, Fecha_Vinculacion_P, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion	
-            ) 
-            VALUES (NULL,'$ID_Voluntario','$ID_proyecto','$ID_Area_Trabajo','$Fecha_Vinculacion_P', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
-
-            $resultado = mysqli_query($conexion,$sql);
-
-            if($resultado){
-                //Los datos ingresados a la BD
-                echo "<script languaje='JavaScript'>
-                        alert('Los datos fueron ingresados correctamente a la BD');
+                    ) 
+                    VALUES (NULL,'$ID_Voluntario','$ID_proyecto','$ID_Area_Trabajo','$Fecha_Vinculacion_P', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
+        
+                    $resultado = mysqli_query($conexion,$sql);
+        
+                    if($resultado){
+                        //Los datos ingresados a la BD
+                        echo "<script languaje='JavaScript'>
+                                alert('Los datos fueron ingresados correctamente a la BD');
+                                    location.assign('voluntarios_proyectos_Adm.php');
+                                    </script>";     
+                                    require_once "../../EVENT_BITACORA.php";
+                                    $model = new EVENT_BITACORA;
+                                    session_start();
+                                    $_SESSION['IDvolproBitacora']=$ID_Voluntario;
+                                    $model->InsertVOLPRO();  
+         
+        
+                    }else{
+                        // Los dcatos NO ingresaron a la BD
+                        echo "<script languaje='JavaScript'>
+                        alert('Los datos NO fueron ingresados a la BD');
                             location.assign('voluntarios_proyectos_Adm.php');
-                            </script>";     
-                            require_once "../../EVENT_BITACORA.php";
-                            $model = new EVENT_BITACORA;
-                            session_start();
-                            $_SESSION['IDvolproBitacora']=$ID_Voluntario;
-                            $model->InsertVOLPRO();  
- 
-
-            }else{
-                // Los dcatos NO ingresaron a la BD
+                            </script>";
+                    }
+                    mysqli_close($conexion);
+                    }
+                }
+              } else {
                 echo "<script languaje='JavaScript'>
-                alert('Los datos NO fueron ingresados a la BD');
-                    location.assign('voluntarios_proyectos_Adm.php');
-                    </script>";
-            }
-            mysqli_close($conexion);
-            }
-        } 
+                        alert('Los datos NO fueron ingresados a la BD');
+                            location.assign('voluntarios_proyectos_Adm.php');
+                            </script>";
+              }
+
     ?>
 </body>
 </html>
