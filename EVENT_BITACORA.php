@@ -1280,7 +1280,21 @@ public function reportbit(){
         ?>
     <?php
   }
+#Reporte area trabajo
+public function reportareaT(){
 
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de area de trabajo";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '14', 'Reporte area de trabajo', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
   #backup 
 public function backupcrea(){
     $IDGlobal=$_SESSION['ID_User'];
