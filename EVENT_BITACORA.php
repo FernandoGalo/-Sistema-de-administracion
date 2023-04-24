@@ -1283,7 +1283,6 @@ public function reportbit(){
 
   #backup 
 public function backupcrea(){
-    session_start();
     $IDGlobal=$_SESSION['ID_User'];
         $model = new conexion();
         $conexion = $model->conectar();

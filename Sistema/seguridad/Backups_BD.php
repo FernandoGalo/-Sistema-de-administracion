@@ -1,3 +1,8 @@
+<?php
+session_start();     
+$usuario=$_SESSION['user'];
+$ID_Rol=$_SESSION['ID_Rol'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,7 +84,7 @@ if(isset($_POST['crear_copia_btn'])) {
   // Comprobación de errores
   if (file_exists($backup_file)) {
     echo "<script language='JavaScript'>
-                alert('Backup Creado con éxito.');
+                alert('Backup Creado con éxito, el archivo se a guardado en C:/xampp/htdocs/Sistema-administrativo-de-fondos-y-proyectos/Sistema/seguridad/Backups/ y puedes seleccionarlo en los botones de abajo para restaurar la copia de seguridad o eliminar el archivo.');
             location.assign('Backups_BD.php');
             </script>";
             require_once "../../EVENT_BITACORA.php";
@@ -99,11 +104,6 @@ if(isset($_POST['crear_copia_btn'])) {
 </head>
 
 <body>
-<?php
-session_start();     
-$usuario=$_SESSION['user'];
-$ID_Rol=$_SESSION['ID_Rol'];
-?>
 <?php include '../sidebar.php'; ?>
 <!-- Formulario para crear y restaurar una copia de seguridad -->
 <section class="full-box dashboard-contentPage" style="overflow-y: auto;">
