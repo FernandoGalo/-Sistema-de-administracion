@@ -100,7 +100,7 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['num_declaracion'] . '</td>';
         $output['data'] .= '<td>' . $row['tipo_declaracion'] . '</td>';
         $output['data'] .= '<td>' . $row['nombre_razonSocial'] . '</td>';
-        $output['data'] .= '<td>' . $row['Monto'] . '</td>';
+        $output['data'] .= '<td>L. ' . number_format($row['Monto'], 2) .'</td>';
         $output['data'] .= '<td>' . $row['departamento'] . '</td>';
         $output['data'] .= '<td>' . $row['municipio'] . '</td>';
         $output['data'] .= '<td>' . $row['barrio_colonia'] . '</td>';
