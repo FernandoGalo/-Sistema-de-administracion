@@ -237,7 +237,7 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Telefono(*):</label>
                             <input type="hidden" name="Telef" id="Telef">
-                            <input onpaste="return false" type="text" class="form-control" name="Telef" id="Telef" pattern="[0-9()+-]{8,20}" maxlength="19" placeholder="Ingrese el número de teléfono" oninput="validarTelefono(event)" onkeydown="return evitarEspacios(event)" required>
+                            <input onpaste="return false" type="text" class="form-control" name="Telef" id="Telef" maxlength="19" placeholder="Ingrese el número de teléfono" onkeypress='return event.charCode >= 48 && event.charCode <= 57' oninput="validarTelefono(event)" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Direccion(*):</label>

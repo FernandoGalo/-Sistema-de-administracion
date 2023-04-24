@@ -5,6 +5,7 @@
  session_start();     
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
+
 ?>
 
 
@@ -54,12 +55,187 @@
 
 
 	}
+
+	/* Modal */
+	.modal {
+	display: none; 
+	position: fixed; 
+	z-index: 1000; 
+	padding-top: 20px; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0,0,0,0.4); 
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 100%;
+	max-width: 500px;
+	border-radius: 10px;
+	}
+
+	/* Modal Header */
+	.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	}
+
+	/* Close Button */
+	.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	padding: 0 10px;
+	}
+
+	.close:hover,
+	.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+	}
+
+	/* Modal Body */
+	.modal-body {
+	padding: 20px 0;
+	}
+
+	/* Modal Footer */
+	.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 10px 0;
+	}
+
+	/* Buttons */
+	.btn {
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 18px;
+	font-weight: bold;
+	}
+
+	.btn-primary {
+	background-color: #007bff;
+	border: none;
+	color: white;
+	margin-right: 10px;
+	}
+
+	.btn-primary:hover {
+	background-color: #0069d9;
+	}
+
+	.btn-warning {
+	background-color: #ffc107;
+	border: none;
+	color: white;
+	}
+
+	.btn-warning:hover {
+	background-color: #e0a800;
+	}
+
+
 </style>
 
 
 <body >
 
-	<!--+Barra lateral -->
+
+<section><!-- INICIO DEL MENSAJE MODAL_______________________________________ -->
+    <?php
+    // Obtener la fecha de vencimiento de la tabla de usuario
+    $sql = "SELECT Fecha_Vencimiento FROM tbl_ms_usuario WHERE Usuario='$usuario'";
+    $resultado = mysqli_query($conexion, $sql);
+    $fecha_vencimiento = mysqli_fetch_assoc($resultado)['Fecha_Vencimiento'];
+
+    // Comparar la fecha de vencimiento con la fecha actual
+    $fecha_actual = date("Y-m-d");
+    if ($fecha_vencimiento < $fecha_actual) {
+        // Si la fecha de vencimiento ha pasado, actualizar el estado del usuario a "inactivo" en la base de datos
+        $sql1 = "UPDATE tbl_ms_usuario SET Estado_Usuario = 'INACTIVO' WHERE Usuario='$usuario'";
+        mysqli_query($conexion, $sql1);
+		session_unset(); // Clear all session variables
+		session_destroy();// Destroy the session  
+		echo "<script languaje='JavaScript'>
+		alert('Tu contraseña ha expirado, contacese con uno de los Administradores');
+		location.assign('../../Pantallas/Login.php');
+		</script>"; 
+        exit;
+
+    } else if (date_diff(date_create($fecha_actual), date_create($fecha_vencimiento))->days < 7) {
+        // Si la fecha de vencimiento está próxima y el modal no se ha mostrado antes, mostrar un mensaje modal de advertencia utilizando JavaScript y Bootstrap
+        if (!isset($_SESSION['modalShown'])) {
+            echo "<script>
+            window.onload = function() {
+                // Obtener la modal
+                var modal = document.getElementById('myModal');
+
+                // Mostrar la modal
+                modal.style.display = 'block';
+
+                // Cuando el usuario hace clic fuera del modal, cerrarlo y establecer la variable de sesión
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                // Enviar una petición al servidor para establecer la variable de sesión
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'setModalShown.php', true);
+                xhr.send();
+            }
+            }
+        }
+        </script>";
+
+        }
+    }
+?>
+
+ 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">¡Atención!</h4>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger">
+            <p>Tu contraseña está próxima a expirar.</p>
+            <p>Por favor, actualízala para mantener tu cuenta segura.</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelBtn" type="button" class="btn btn-primary" onclick="location.href='../conf/gestion.php'">Actualizar</button>
+            <button id="updateBtn" type="button" class="btn btn-warning" data-dismiss="modal" onclick="closeModal()">Más tarde</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+    function closeModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+    }
+    </script>
+</section><!-- FIN DEL MENSAJE MODAL_______________________________________ -->
+
+
+<!--+Barra lateral -->
 	<?php include '../sidebar.php'; ?>
 
 	<!-- Pagina de contenido-->
