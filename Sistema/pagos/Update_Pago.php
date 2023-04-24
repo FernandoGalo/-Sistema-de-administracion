@@ -24,7 +24,7 @@
 </head>
 <body>
   
-<?php include '../sidebarpro.php'; ?>
+
     <?php
         if(isset($_POST['enviar_F2'])){
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$usuario'");
@@ -41,7 +41,7 @@
             //si lo que esta en el form esta vacio
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
-            $sql="UPDATE tbl_pagos_realizados SET Monto_pagado = $Monto, ID_T_pago = $T_Monto,ID_de_proyecto = $IDProyecto, ID_usuario = $ID_Usuario, Fecha_de_transaccion ='$Fecha_de_transaccion', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_de_pago = $ID_Pago";
+            $sql="UPDATE tbl_pagos_realizados SET Monto_pagado = $Monto, ID_T_pago = $T_Monto,ID_de_proyecto = $IDProyecto, ID_usuario = $ID_Usuario, Fecha_de_transaccion ='$Fecha_de_transaccion', Modificado_por= '$usuario' where ID_de_pago = $ID_Pago";
             $resultado = mysqli_query($conexion,$sql);
 
             if($resultado){
@@ -96,7 +96,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar Pagos</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar Pagos</h1>
                         </div>
                         <br>
                     </div>
@@ -106,19 +106,27 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>ID del Pago(*):</label>
                             <input type="hidden" name="ID_de_pago" id="ID_de_pago">
                             <input style="text" type="text" class="form-control" name="ID_de_pago" id="ID_de_pago" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'   value="<?php echo $ID_Pago; ?>" readonly>
                           </div>
-                          
                           <?php require '../../conexion_BD.php';?>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Proyecto al que esta siendo donado:</label>
+                            <?php 
+                            $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
+                               while($row=mysqli_fetch_array($sql1)){
+                               $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
+                            }?>
+                            <input class="form-control" name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Monto Pagado(*):</label>
                             <input type="hidden" name="Monto_pagado" id="Monto_pagado">
                             <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" value="<?php echo $Monto; ?>" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Tipo de Pago(*):</label>
                             <?php
                            $sql1=$conexion->query("SELECT * FROM tbl_tipo_pago_r");
@@ -134,30 +142,17 @@
                             ?>
                             </select>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Proyecto al que esta siendo donado:</label>
-                            <?php 
-                            $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
-                               while($row=mysqli_fetch_array($sql1)){
-                               $Nombre_del_proyecto=$row['Nombre_del_proyecto'];
-                            }?>
-                            <input class="form-control" name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Usuario</label>
                             <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Transaccion:</label>
                             <input type="date" class="form-control" name="FechaTransaccion" id="FechaTransaccion" maxlength="100" placeholder="Ingrese la Fecha de Transaccion"  value="<?php echo $Fecha_transaccion; ?>">
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                          <button class="btn btn-danger" type="button">
-                          <a href="PagosAdm.php" style="color:white; text-decoration:none;">
-                          <i class="zmdi zmdi-close-circle"></i> Cancelar
-                          </a>
-                          </button>
+                          <button class="btn btn-danger" onclick="cancelar()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
                           </div>
@@ -178,10 +173,27 @@
     
 
     <!--script en java para los efectos-->
+    <script>
+  function cancelar() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "PagosAdm.php";
+  });
+}
+</script>
     <script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>
     <script src="../../js/main.js"></script>
   <script src="../../js/usuario.js"></script>
+  <?php include '../sidebarpro.php'; ?>
 
 </body>
 </html>
