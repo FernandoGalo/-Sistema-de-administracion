@@ -31,8 +31,17 @@
             $Fecha_Vinculacion_P=$_POST["Fecha_Vinculacion_P"];
             include("../../conexion_BD.php");
 
+            $sql = "SELECT * FROM tbl_voluntarios_proyectos WHERE ID_Area_Trabajo = $ID_Area_Trabajo AND ID_Voluntario = $ID_Voluntario AND ID_proyecto = $ID_proyecto";
+            $resultado = mysqli_query($conexion,$sql);
 
-            $sql = "INSERT INTO tbl_voluntarios_proyectos (ID_Vinculacion_Proy, ID_Voluntario, ID_proyecto, ID_Area_Trabajo, Fecha_Vinculacion_P, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion	
+            if($resultado){
+                echo "<script languaje='JavaScript'>
+                alert('Error!!!, No puedes agregar la misma Area de trabajo al mismo Voluntario');
+                    location.assign('voluntarios_proyectos_Adm.php');
+                    </script>";
+        }else{
+            
+                    $sql = "INSERT INTO tbl_voluntarios_proyectos (ID_Vinculacion_Proy, ID_Voluntario, ID_proyecto, ID_Area_Trabajo, Fecha_Vinculacion_P, Creado_Por, Fecha_Creacion, Modificado_por, Fecha_Modificacion	
             ) 
             VALUES (NULL,'$ID_Voluntario','$ID_proyecto','$ID_Area_Trabajo','$Fecha_Vinculacion_P', '$Usuario','$Fecha_actual','$Usuario','$Fecha_actual')";
 
@@ -60,7 +69,7 @@
             }
             mysqli_close($conexion);
             }
-        
+        } 
     ?>
 </body>
 </html>
