@@ -19,7 +19,8 @@ $table = "tbl_r_sar";
 $id = 'ID_SAR';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
-
+$fechaInicio = isset($_POST['fechaInicio']) ? $conexion->real_escape_string($_POST['fechaInicio']) : null;
+$fechaFinal = isset($_POST['fechaFinal']) ? $conexion->real_escape_string($_POST['fechaFinal']) : null;
 
 /* Filtrado */
 $where = '';
@@ -34,7 +35,17 @@ if ($campo != null) {
     $where = substr_replace($where, "", -3);
     $where .= ")";
 }
-
+if ($fechaInicio != null && $fechaFinal != null) {
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}elseif($fechaInicio == null || $fechaFinal == null) {
+    $fechaInicio = '2023-01-01';
+    $fechaFinal = date('Y-m-d', strtotime('+1 day'));;
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}
+$_SESSION['fechaInicio']=$fechaInicio;
+$_SESSION['$fechaFinal']=$fechaFinal;
 /* Limit */
 $limit = isset($_POST['registros']) ? $conexion->real_escape_string($_POST['registros']) : 10;
 $pagina = isset($_POST['pagina']) ? $conexion->real_escape_string($_POST['pagina']) : 0;
@@ -64,10 +75,10 @@ $sLimit = "LIMIT $inicio , $limit";
 /* Consulta */
 
 $sql="SELECT SQL_CALC_FOUND_ROWS * from tbl_r_sar
-WHERE ID_SAR LIKE '%{$campo}%' OR RTN LIKE '%{$campo}%' OR num_declaracion LIKE '%{$campo}%' OR tipo_declaracion LIKE '%{$campo}%' OR nombre_razonSocial LIKE '%{$campo}%' OR Monto LIKE '%{$campo}%' OR departamento LIKE '%{$campo}%' OR municipio LIKE '%{$campo}%'
+WHERE (ID_SAR LIKE '%{$campo}%' OR RTN LIKE '%{$campo}%' OR num_declaracion LIKE '%{$campo}%' OR tipo_declaracion LIKE '%{$campo}%' OR nombre_razonSocial LIKE '%{$campo}%' OR Monto LIKE '%{$campo}%' OR departamento LIKE '%{$campo}%' OR municipio LIKE '%{$campo}%'
         OR barrio_colonia LIKE '%{$campo}%' OR calle_avenida LIKE '%{$campo}%' OR num_casa LIKE '%{$campo}%' OR bloque LIKE '%{$campo}%' OR telefono LIKE '%{$campo}%' OR celular LIKE '%{$campo}%'
         OR domicilio LIKE '%{$campo}%'OR correo LIKE '%{$campo}%' OR profesion_oficio LIKE '%{$campo}%' OR cai LIKE '%{$campo}%' OR fecha_limite_emision LIKE '%{$campo}%' OR num_inicial LIKE '%{$campo}%'
-        OR num_final LIKE '%{$campo}%'
+        OR num_final LIKE '%{$campo}%') AND fecha_limite_emision BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
