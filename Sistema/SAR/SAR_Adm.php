@@ -68,7 +68,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
 if ($datos=$sql->fetch_object()) { ?>
                           <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-file-text"></i> Agregar Datos</button>
                           <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteSAR.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
-                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Proyectos
+                         <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte SAR
                           <div class="box-tools pull-right">
                             <?php } ?>
                         </div>
