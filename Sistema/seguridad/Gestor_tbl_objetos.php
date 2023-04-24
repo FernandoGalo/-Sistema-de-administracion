@@ -96,11 +96,11 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['Objeto'] . '</td>';
         $output['data'] .= '<td>' . $row['Descripcion'] . '</td>';
         $output['data'] .= '<td>' . $row['Tipo_Objeto'] . '</td>';
-         $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
+         $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Actualizacion=1 and ID_Rol=$ID_Rol and ID_Objeto=18");
 if ($datos=$sql->fetch_object()) {
         $output['data'] .= '<td><a class="boton-editar" href="Update_objetos.php?ID_Objeto=' . $row['ID_Objeto'] . '"><i class="zmdi zmdi-edit"></i></a></td>';
 }
-$sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=6");
+$sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Eliminacion=1 and ID_Rol=$ID_Rol and ID_Objeto=18");
 if ($datos=$sql->fetch_object()) { 
         $output['data'] .= '<td><a onclick="return confirmar()" class="boton-eliminar" href="Delete_objetos.php?ID_Objeto=' . $row['ID_Objeto'] . '"><i class="zmdi zmdi-delete"></i></a></td>';
 }

@@ -35,7 +35,7 @@
 			<?php $sql=$conexion->query("SELECT * FROM tbl_ms_roles where ID_Rol=$ID_Rol and Estado=1");
 if ($datos=$sql->fetch_object()) { ?>
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=0");
+			<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=16");
 if ($datos=$sql->fetch_object()) { ?>
 			<li>
 					<a href="../Home/home.php">
@@ -56,7 +56,7 @@ if ($datos=$sql->fetch_object()) { ?>
 					</ul>
 				</li>
 				<?php } ?>
-				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and (ID_Objeto = 12 OR ID_Objeto = 2 OR ID_Objeto = 3 OR ID_Objeto = 4 OR ID_Objeto = 5)");
+				<?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Estad=1 and ID_Rol=$ID_Rol and (ID_Objeto = 12 OR ID_Objeto = 2 OR ID_Objeto = 3 OR ID_Objeto = 4 OR ID_Objeto = 5 OR ID_Objeto = 18)");
 if ($datos=$sql->fetch_object()) { ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
