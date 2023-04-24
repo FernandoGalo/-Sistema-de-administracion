@@ -127,18 +127,18 @@
                             <input style="text" type="text" class="form-control" name="Monto_pagado" id="Monto_pagado" value="<?php echo $Monto; ?>" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Tipo de Pago(*):</label>
+                           <?php require '../../conexion_BD.php'; ?>
+                          <label>Tipo de Pago(*)::</label>
                             <?php
-                           $sql1=$conexion->query("SELECT * FROM tbl_tipo_pago_r");
-                          ?>
-                            <select class="form-control" name="Pago" id="Pago" value="<?php echo $T_Monto; ?>" required ><br>
-                            
-                           <?php
-                            while($row1=mysqli_fetch_array($sql1)){
+                            $sql = $conexion->query("SELECT * FROM tbl_tipo_pago_r");
                             ?>
-                             <option value="<?php echo $row1['ID_T_pago'];?>"><?php echo $row1['Nombre'];?></option>
+                            <select class="form-control" name="Pago" id="Pago" required>
+                            <option value="">Seleccione un pago</option>
                             <?php
-                             }
+                            while ($row1 = mysqli_fetch_array($sql)) {
+                            $selected = ($row1['ID_T_pago'] == $T_Monto) ? 'selected' : '';
+                            echo "<option value='".$row1['ID_T_pago']."' ".$selected.">".$row1['Nombre']."</option>";
+                            }
                             ?>
                             </select>
                           </div>

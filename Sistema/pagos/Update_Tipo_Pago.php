@@ -84,13 +84,13 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>ID del tipo fondo(*):</label>
                             <input type="hidden" name="ID_T_pago" id="ID_T_pago">
                             <input style="text" type="text" class="form-control" name="ID_T_pago" id="ID_T_pago" maxlength="10"  value="<?php echo $ID_T_pago; ?>" readonly>
                           </div>
 
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre Tipo Pago</label>
                             <input type="text" class="form-control"  name="Nombre" id="Nombre" placeholder="Ingrese el Tipo de Fondo" oninput="this.value = this.value.toUpperCase();" value="<?php echo $Nombre?>" required>
                           </div>
