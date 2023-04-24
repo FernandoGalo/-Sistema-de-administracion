@@ -15,8 +15,7 @@
         if(isset($_POST['enviar_F'])){
             session_start();     
             $Usuario=$_SESSION['usuario'];
-            $IDProyecto=$_SESSION['ID_Proyect'];
-            echo $Usuario;        
+            $IDProyecto=$_SESSION['ID_Proyect'];     
     include("../../conexion_BD.php");
     $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Usuario'");
 
