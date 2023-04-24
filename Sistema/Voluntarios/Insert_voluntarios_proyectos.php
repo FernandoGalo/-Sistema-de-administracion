@@ -36,7 +36,7 @@
 
             if($resultado){
                 echo "<script languaje='JavaScript'>
-                alert('Error!!!, No puedes agregar la misma Area de trabajo al mismo Voluntario');
+                alert('Error!!!, A intentado agregar la misma Area de trabajo al mismo Voluntario, Las areas de trabajo solo pueden ser asignadas 1 vez por Voluntario');
                     location.assign('voluntarios_proyectos_Adm.php');
                     </script>";
         }else{
