@@ -300,7 +300,7 @@ if ($datos=$sql->fetch_object()) { ?>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Departamento(*):</label>
-                              <select class="form-control" name="departamento" id="departamento" onchange="cargarOpciones()">
+                              <select class="form-control" name="departamento" id="departamento" onchange="cargarOpciones()" required>
                                 <option value="">Selecione un departamento</option>
                                 <option value="ATLÁNTIDA">ATLÁNTIDA</option>
                                 <option value="COLÓN">COLÓN</option>
