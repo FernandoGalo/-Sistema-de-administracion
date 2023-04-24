@@ -11,7 +11,7 @@ session_start();
 require '../../conexion_BD.php';
 
 /* Un arreglo de las columnas a mostrar en la tabla */
-$columns = ['ID_SAR','RTN', 'num_declaracion', 'nombre_razonSocial','departamento','municipio', 'barrio_colonia', 'calle_avenida', 'num_casa', 'bloque', 'telefono', 'celular', 'domicilio', 'correo', 'profesion_oficio', 'cai', 'fecha_limite_emision', 'num_inicial', 'num_final'];
+$columns = ['ID_SAR','RTN', 'num_declaracion', 'tipo_declaracion','nombre_razonSocial', 'Monto','departamento','municipio', 'barrio_colonia', 'calle_avenida', 'num_casa', 'bloque', 'telefono', 'celular', 'domicilio', 'correo', 'profesion_oficio', 'cai', 'fecha_limite_emision', 'num_inicial', 'num_final'];
 
 /* Nombre de la tabla */
 $table = "tbl_r_sar";
@@ -64,7 +64,7 @@ $sLimit = "LIMIT $inicio , $limit";
 /* Consulta */
 
 $sql="SELECT SQL_CALC_FOUND_ROWS * from tbl_r_sar
-WHERE ID_SAR LIKE '%{$campo}%' OR RTN LIKE '%{$campo}%' OR num_declaracion LIKE '%{$campo}%' OR nombre_razonSocial LIKE '%{$campo}%' OR departamento LIKE '%{$campo}%' OR municipio LIKE '%{$campo}%'
+WHERE ID_SAR LIKE '%{$campo}%' OR RTN LIKE '%{$campo}%' OR num_declaracion LIKE '%{$campo}%' OR tipo_declaracion LIKE '%{$campo}%' OR nombre_razonSocial LIKE '%{$campo}%' OR Monto LIKE '%{$campo}%' OR departamento LIKE '%{$campo}%' OR municipio LIKE '%{$campo}%'
         OR barrio_colonia LIKE '%{$campo}%' OR calle_avenida LIKE '%{$campo}%' OR num_casa LIKE '%{$campo}%' OR bloque LIKE '%{$campo}%' OR telefono LIKE '%{$campo}%' OR celular LIKE '%{$campo}%'
         OR domicilio LIKE '%{$campo}%'OR correo LIKE '%{$campo}%' OR profesion_oficio LIKE '%{$campo}%' OR cai LIKE '%{$campo}%' OR fecha_limite_emision LIKE '%{$campo}%' OR num_inicial LIKE '%{$campo}%'
         OR num_final LIKE '%{$campo}%'
@@ -98,7 +98,9 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['ID_SAR'] . '</td>';
         $output['data'] .= '<td>' . $row['RTN'] . '</td>';
         $output['data'] .= '<td>' . $row['num_declaracion'] . '</td>';
+        $output['data'] .= '<td>' . $row['tipo_declaracion'] . '</td>';
         $output['data'] .= '<td>' . $row['nombre_razonSocial'] . '</td>';
+        $output['data'] .= '<td>' . $row['Monto'] . '</td>';
         $output['data'] .= '<td>' . $row['departamento'] . '</td>';
         $output['data'] .= '<td>' . $row['municipio'] . '</td>';
         $output['data'] .= '<td>' . $row['barrio_colonia'] . '</td>';

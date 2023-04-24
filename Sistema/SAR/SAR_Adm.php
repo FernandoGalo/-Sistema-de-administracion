@@ -131,7 +131,9 @@ if ($datos=$sql->fetch_object()) { ?>
                             <th class="sort asc">ID SAR</th>
                             <th class="sort asc">RTN</th>
                             <th class="sort asc">Numero de Declaracion</th>
+                            <th class="sort asc">Tipo de Declaracion</th>
                             <th class="sort asc">Nombre o Razon Social</th>
+                            <th class="sort asc">Monto</th>
                             <th class="sort asc">Departamento</th>
                             <th class="sort asc">Municipio</th>
                             <th class="sort asc">Barrio o Colonia</th>
@@ -266,44 +268,58 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>RTN(*):</label>
                             <input type="hidden" name="rtn" id="rtn">
-                            <input type="text" class="form-control" name="rtn" id="rtn" maxlength="14" placeholder="Ingrese el RTN" required>
+                            <input type="text" class="form-control" name="rtn" id="rtn" maxlength="14" placeholder="Ingrese el RTN" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero de declaracion(*):</label>
                             <input type="hidden" name="numDeclaracion" id="numDeclaracion">
-                            <input type="text" class="form-control" name="numDeclaracion" id="numDeclaracion" maxlength="100" placeholder="Ingrese el Numero de declaracion" required>
+                            <input type="text" class="form-control" name="numDeclaracion" id="numDeclaracion" maxlength="11" placeholder="Ingrese el Numero de declaracion" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
+                          </div>
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Tipo de declaracion(*):</label>
+                              <select class="form-control" name="tipoDeclaracion" id="tipoDeclaracion">
+                                <option value="">Selecione un tipo de declaracion</option>
+                                <option value="VENTA">VENTA</option>
+                                <option value="RENTA">RENTA</option>
+                              </select>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre o Razon Social(*):</label>
                             <input type="hidden" name="razonSocial" id="razonSocial">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="razonSocial" id="razonSocial" maxlength="100" placeholder="Ingrese el nombre o razon social" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="razonSocial" id="razonSocial" maxlength="100" placeholder="Ingrese el nombre o razon social" onkeypress="validarNombre(event)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Monto(*):</label>
+                            <input type="hidden" name="Monto" id="Monto">
+                            <input type="text" class="form-control" name="Monto" id="Monto" maxlength="7" placeholder="Ingrese el Monto" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
+                          </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Departamento(*):</label>
                               <select class="form-control" name="departamento" id="departamento" onchange="cargarOpciones()">
                                 <option value="">Selecione un departamento</option>
-                                <option value="ATLÁNTIDA">Atlántida</option>
-                                <option value="COLÓN">Colón</option>
-                                <option value="COMAYAGUA">Comayagua</option>
-                                <option value="COPÁN">Copán</option>
-                                <option value="CORTÉS">Cortés</option>
-                                <option value="CHOLUTECA">Choluteca</option>
-                                <option value="EL PARAÍSO">El Paraíso</option>
-                                <option value="FRANCISCO MORAZÁN">Francisco Morazán</option>
-                                <option value="GRACIAS A DIOS">Gracias a Dios</option>
-                                <option value="INTIBUCÁ">Intibucá</option>
-                                <option value="ISLAS DE LA BAHÍA">Islas de la Bahía</option>
-                                <option value="LA PAZ">La Paz</option>
-                                <option value="LEMPIRA">Lempira</option>
-                                <option value="OCOTEPEQUE">Ocotepeque</option>
-                                <option value="OLANCHO">Olancho</option>
-                                <option value="SANTA BÁRBARA">Santa Bárbara</option>
-                                <option value="VALLE">Valle</option>
-                                <option value="YORO">Yoro</option>
+                                <option value="ATLÁNTIDA">ATLÁNTIDA</option>
+                                <option value="COLÓN">COLÓN</option>
+                                <option value="COMAYAGUA">COMAYAGUA</option>
+                                <option value="COPÁN">COPÁN</option>
+                                <option value="CORTÉS">CORTÉS</option>
+                                <option value="CHOLUTECA">CHOLUTECA</option>
+                                <option value="EL PARAÍSO">EL PARAÍSO</option>
+                                <option value="FRANCISCO MORAZÁN">FRANCISCO MORAZÁN</option>
+                                <option value="GRACIAS A DIOS">GRACIAS A DIOS</option>
+                                <option value="INTIBUCÁ">INTIBUCÁ</option>
+                                <option value="ISLAS DE LA BAHÍA">ISLAS DE LA BAHÍA</option>
+                                <option value="LA PAZ">LA PAZ</option>
+                                <option value="LEMPIRA">LEMPIRA</option>
+                                <option value="OCOTEPEQUE">OCOTEPEQUE</option>
+                                <option value="OLANCHO">OLANCHO</option>
+                                <option value="SANTA BÁRBARA">SANTA BÁRBARA</option>
+                                <option value="VALLE">VALLE</option>
+                                <option value="YORO">YORO</option>
 
                               </select>
                           </div>
@@ -317,43 +333,43 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Barrio o Colonia(*):</label>
                             <input type="hidden" name="barrioColonia" id="barrioColonia">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="barrioColonia" id="barrioColonia" maxlength="100" placeholder="Ingrese el Barrio o Colonia" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="barrioColonia" id="barrioColonia" maxlength="100" placeholder="Ingrese el Barrio o Colonia" onkeypress="validarNombre(event)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Calle o Avenida(*):</label>
                             <input type="hidden" name="calleAvenida" id="calleAvenida">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="calleAvenida" id="calleAvenida" maxlength="100" placeholder="Ingrese la calle o avenida" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="calleAvenida" id="calleAvenida" maxlength="100" placeholder="Ingrese la calle o avenida" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero de casa(*):</label>
                             <input type="hidden" name="numCasa" id="numCasa">
-                            <input type="text" class="form-control" name="numCasa" id="numCasa" maxlength="100" placeholder="Ingrese el numero de casa" required>
+                            <input type="text" class="form-control" name="numCasa" id="numCasa" maxlength="100" placeholder="Ingrese el numero de casa" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Bloque(*):</label>
                             <input type="hidden" name="bloque" id="bloque">
-                            <input type="text" class="form-control" name="bloque" id="bloque" maxlength="100" placeholder="Ingrese el bloque" required>
+                            <input type="text" class="form-control" name="bloque" id="bloque" maxlength="100" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese el bloque">
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Telefono Fijo:</label>
                             <input type="hidden" name="telFijo" id="telFijo">
-                            <input type="text" class="form-control" name="telFijo" id="telFijo" maxlength="8" placeholder="Ingrese el Telefono Fijo" required>
+                            <input type="text" class="form-control" name="telFijo" id="telFijo" maxlength="8" placeholder="Ingrese el Telefono Fijo" oninput="validarTelefono(event)" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Celular(*):</label>
                             <input type="hidden" name="telCelular" id="telCelular">
-                            <input type="text" class="form-control" name="telCelular" id="telCelular" maxlength="8" placeholder="Ingrese el Telefono Celular" required>
+                            <input type="text" class="form-control" name="telCelular" id="telCelular" maxlength="8" placeholder="Ingrese el Telefono Celular" oninput="validarTelefono(event)" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Domicilio(*):</label>
                             <input type="hidden" name="domicilio" id="domicilio">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="domicilio" id="domicilio" maxlength="100" placeholder="Ingrese el Domicilio" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="domicilio" id="domicilio" maxlength="100" placeholder="Ingrese el Domicilio" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -365,13 +381,13 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Profesion u Oficio(*):</label>
                             <input type="hidden" name="profesionOficio" id="profesionOficio">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="profesionOficio" id="profesionOficio" maxlength="100" placeholder="Ingrese la profesion u Oficio" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="profesionOficio" id="profesionOficio" maxlength="100" placeholder="Ingrese la profesion u Oficio" onkeypress="validarNombre(event)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>CAI(*):</label>
                             <input type="hidden" name="cai" id="cai">
-                            <input type="text" class="form-control" name="cai" id="cai" maxlength="100" placeholder="Ingrese el codigo CAI" required>
+                            <input type="text" class="form-control" name="cai" id="cai" maxlength="36" placeholder="Ingrese el codigo CAI" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -383,13 +399,13 @@ if ($datos=$sql->fetch_object()) { ?>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero Inicial(*):</label>
                             <input type="hidden" name="numeroInicial" id="numeroInicial">
-                            <input type="text" class="form-control" name="numeroInicial" id="numeroInicial" maxlength="100" placeholder="Ingrese el Numero Inicial" required>
+                            <input type="text" class="form-control" name="numeroInicial" id="numeroInicial" maxlength="6" placeholder="Ingrese el Numero Inicial" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero Final(*):</label>
                             <input type="hidden" name="numeroFinal" id="numeroFinal">
-                            <input type="text" class="form-control" name="numeroFinal" id="numeroFinal" maxlength="100" placeholder="Ingrese el Numero Final" required>
+                            <input type="text" class="form-control" name="numeroFinal" id="numeroFinal" maxlength="6" placeholder="Ingrese el Numero Final"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -421,6 +437,58 @@ if ($datos=$sql->fetch_object()) { ?>
 </body>
 </html>
 
+
+<script>
+    //Validar Telefono
+    function validarTelefono(event) {
+    const telefono = event.target.value.trim();
+    
+    if (telefono.length < 8 || telefono[0] === '0') {
+        event.target.setCustomValidity('El número de teléfono no debe comenzar en 0 y debe tener minimo 8 digitos.');
+    } else {
+        const numeros = telefono.replace(/[^0-9]/g, '');
+        const repetidos = numeros.split('').sort().join('').match(/(.)\1{4}/g);
+        
+        if (repetidos) {
+        event.target.setCustomValidity('El número de teléfono contiene más de 5 dígitos repetidos consecutivos.');
+        } else {
+        const unicos = new Set(numeros);
+        const porcentaje = unicos.size / telefono.length;
+        
+        if (porcentaje < 0.5) {
+            event.target.setCustomValidity('El número de teléfono no cumple los requisitos mínimos.');
+        } else {
+            event.target.setCustomValidity('');
+        }
+        }
+    }
+    }
+  </script>
+
+
+<!-- <script>
+  function validarInput(input) {
+  // Expresión regular que valida que solo se ingresen letras (mayúsculas o minúsculas)
+  const regex = /^[a-zA-Z]*$/;
+  if (!regex.test(input.value)) {
+    // Si no cumple con la expresión regular, se elimina el último caracter ingresado
+    input.value = input.value.substring(0, input.value.length - 1);
+  }
+}
+</script> -->
+
+<script>
+  function validarNombre(e) {
+  var tecla = e.keyCode || e.which;
+  var teclaFinal = String.fromCharCode(tecla).toUpperCase();
+  var letras = /^[A-Z\s]+$/; // Agregar \s para permitir espacios
+
+  if (!letras.test(teclaFinal)) {
+      e.preventDefault();
+  }
+  }
+</script>
+
 <script>
   function cargarOpciones() {
   var departamento = document.getElementById("departamento");
@@ -431,7 +499,7 @@ if ($datos=$sql->fetch_object()) { ?>
   
   // Agregar opciones según la opción seleccionada en el primer combobox
   if (departamento.value === "ATLÁNTIDA") {
-    municipio.add(new Option("LA CEIBA", "lA CEIBA"));
+    municipio.add(new Option("LA CEIBA", "LA CEIBA"));
     municipio.add(new Option("EL PORVENIR", "EL PORVENIR"));
     municipio.add(new Option("TELA", "TELA"));
     municipio.add(new Option("JUTIAPA", "JUTIAPA"));

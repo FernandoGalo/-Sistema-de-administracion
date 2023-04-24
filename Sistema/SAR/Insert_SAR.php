@@ -90,7 +90,13 @@
             //$ID_SAR = $_POST['id_sar'];
             $RTN = $_POST['rtn'];
             $num_declaracion = $_POST['numDeclaracion'];
+
+            $tipoDeclaracion = $_POST['tipoDeclaracion'];
+
             $nombre_razonSocial = $_POST['razonSocial'];
+
+            $monto = $_POST['Monto'];
+
             $departamento = $_POST['departamento'];
             $municipio = $_POST['municipio'];
             $barrio_colonia = $_POST['barrioColonia'];
@@ -126,7 +132,7 @@
                 
 
                 
-            $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, nombre_razonSocial, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final, estado) VALUES ('$RTN', $num_declaracion, '$nombre_razonSocial','$departamento','$municipio', '$barrio_colonia','$calle_avenida', $num_casa, $bloque, $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final, 1)";
+            $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, nombre_razonSocial, Monto, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final, tipo_declaracion, estado) VALUES ('$RTN', $num_declaracion, '$nombre_razonSocial', $monto,'$departamento','$municipio', '$barrio_colonia','$calle_avenida', $num_casa, $bloque, $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final, '$tipoDeclaracion',1)";
 
             $resultado = mysqli_query($conexion,$sql);
 

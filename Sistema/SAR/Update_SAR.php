@@ -34,7 +34,13 @@
             //$ID_SAR = $_POST['id_sar'];
             $RTN = $_POST['rtn'];
             $num_declaracion = $_POST['numDeclaracion'];
+
+            $tipoDeclaracion = $_POST['tipoDeclaracion'];
+
             $nombre_razonSocial = strtoupper($_POST['razonSocial']);
+
+            $Monto = $_POST['Monto'];
+
             $departamento = $_POST['departamento'];
             $municipio = $_POST['municipio'];
             $barrio_colonia = strtoupper($_POST['barrioColonia']);
@@ -99,7 +105,7 @@
             // $sql="UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final = $bloque WHERE ID_SAR='$id_sar';";
 
 
-            $sql = "UPDATE tbl_r_sar SET RTN = '$RTN', num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final WHERE ID_SAR = $id_sar;";
+            $sql = "UPDATE tbl_r_sar SET RTN = '$RTN', num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', Monto = $Monto,tipo_declaracion='$tipoDeclaracion', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final WHERE ID_SAR = $id_sar;";
 
             $resultado=mysqli_query($conexion,$sql);
 
@@ -136,7 +142,13 @@
             //$ID_SAR = $fila['ID_SAR']; //recuperando los datos desde la BD
             $RTN = $fila['RTN'];
             $num_declaracion = $fila['num_declaracion'];
+
+            $tipo_declaracion = $fila['tipo_declaracion'];
+
             $nombre_razonSocial = $fila['nombre_razonSocial'];
+
+            $monto = $fila['Monto'];
+
             $departamento = $fila['departamento'];
             $municipio = $fila['municipio'];
             $barrio_colonia = $fila['barrio_colonia'];
@@ -231,49 +243,95 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>RTN(*):</label>
                             <input type="hidden" name="rtn" id="rtn">
-                            <input type="text" class="form-control" name="rtn" id="rtn" maxlength="14" placeholder="Ingrese el RTN" value="<?php echo $RTN; ?>" required>
+                            <input type="text" class="form-control" name="rtn" id="rtn" maxlength="14" placeholder="Ingrese el RTN" value="<?php echo $RTN; ?>"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero de declaracion(*):</label>
                             <input type="hidden" name="numDeclaracion" id="numDeclaracion">
-                            <input type="text" class="form-control" name="numDeclaracion" id="numDeclaracion" maxlength="100" placeholder="Ingrese el Numero de declaracion" value="<?php echo $num_declaracion; ?>" required>
+                            <input type="text" class="form-control" name="numDeclaracion" id="numDeclaracion" maxlength="11" placeholder="Ingrese el Numero de declaracion" value="<?php echo $num_declaracion; ?>"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
+                          </div>
+
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Tipo de declaracion(*):</label>
+                              <select class="form-control" name="tipoDeclaracion" id="tipoDeclaracion">
+                              <option selected><?php echo $tipo_declaracion?></option>
+                                <option value="VENTA">VENTA</option>
+                                <option value="RENTA">RENTA</option>
+                              </select>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Nombre o Razon Social(*):</label>
                             <input type="hidden" name="razonSocial" id="razonSocial">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="razonSocial" id="razonSocial" maxlength="100" placeholder="Ingrese el nombre o razon social" value="<?php echo $nombre_razonSocial; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="razonSocial" id="razonSocial" maxlength="100" placeholder="Ingrese el nombre o razon social" value="<?php echo $nombre_razonSocial; ?>" onkeypress="validarNombre(event)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
+
+                          
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Monto(*):</label>
+                            <input type="hidden" name="Monto" id="Monto">
+                            <input type="text" class="form-control" name="Monto" id="Monto" maxlength="7" placeholder="Ingrese el Monto" value="<?php echo  $monto ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
+                          </div>
+
+                          <!-- <div class="form-floating">
+                            <select class="form-select" id="floatingSelectDisabled" aria-label="Floating label disabled select example">
+                              <option selected><?php echo $departamento ?></option>
+                              <option value="">Selecione un departamento</option>
+                                <option value="ATLÁNTIDA">Atlántida</option>
+                                <option value="COLÓN">Colón</option>
+                                <option value="COMAYAGUA">Comayagua</option>
+                                <option value="COPÁN">Copán</option>
+                                <option value="CORTÉS">Cortés</option>
+                                <option value="CHOLUTECA">Choluteca</option>
+                                <option value="EL PARAÍSO">El Paraíso</option>
+                                <option value="FRANCISCO MORAZÁN">Francisco Morazán</option>
+                                <option value="GRACIAS A DIOS">Gracias a Dios</option>
+                                <option value="INTIBUCÁ">Intibucá</option>
+                                <option value="ISLAS DE LA BAHÍA">Islas de la Bahía</option>
+                                <option value="LA PAZ">La Paz</option>
+                                <option value="LEMPIRA">Lempira</option>
+                                <option value="OCOTEPEQUE">Ocotepeque</option>
+                                <option value="OLANCHO">Olancho</option>
+                                <option value="SANTA BÁRBARA">Santa Bárbara</option>
+                                <option value="VALLE">Valle</option>
+                                <option value="YORO">Yoro</option>
+                            </select>
+                            <label for="floatingSelectDisabled">Works with selects</label>
+                          </div> -->
+
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Departamento(*):</label>
                               <select class="form-control" name="departamento" id="departamento" onchange="cargarOpciones()">
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'ATLÁNTIDA') echo 'selected'; ?>>ATLÁNTIDA</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'COLÓN') echo 'selected'; ?>>COLÓN</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'COMAYAGUA') echo 'selected'; ?>>COMAYAGUA</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'COPÁN') echo 'selected'; ?>>COPÁN</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'CORTÉS') echo 'selected'; ?>>CORTÉS</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'CHOLUTECA') echo 'selected'; ?>>CHOLUTECA</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'EL PARAÍSO') echo 'selected'; ?>>EL PARAÍSO</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'FRANCISCO MORAZÁN') echo 'selected'; ?>>FRANCISCO MORAZÁN</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'GRACIAS A DIOS') echo 'selected'; ?>>GRACIAS A DIOS</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'INTIBUCÁ') echo 'selected'; ?>>INTIBUCÁ</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'ISLAS DE LA BAHÍA') echo 'selected'; ?>>ISLAS DE LA BAHÍA</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'LA PAZ') echo 'selected'; ?>>LA PAZ</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'LEMPIRA') echo 'selected'; ?>>LEMPIRA</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'OCOTEPEQUE') echo 'selected'; ?>>OCOTEPEQUE</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'OLANCHO') echo 'selected'; ?>>OLANCHO</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'SANTA BÁRBARA') echo 'selected'; ?>>SANTA BÁRBARA</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'VALLE') echo 'selected'; ?>>VALLE</option>
-                                <option value="<?php echo $departamento; ?>"<?php if ($strDept == 'YORO') echo 'selected'; ?>>YORO</option>
+                                <option selected><?php echo $departamento ?></option>
+                                <option value="ATLÁNTIDA">ATLÁNTIDA</option>
+                                <option value="COLÓN">COLÓN</option>
+                                <option value="COMAYAGUA">COMAYAGUA</option>
+                                <option value="COPÁN">COPÁN</option>
+                                <option value="CORTÉS">CORTÉS</option>
+                                <option value="CHOLUTECA">CHOLUTECA</option>
+                                <option value="EL PARAÍSO">EL PARAÍSO</option>
+                                <option value="FRANCISCO MORAZÁN">FRANCISCO MORAZÁN</option>
+                                <option value="GRACIAS A DIOS">GRACIAS A DIOS</option>
+                                <option value="INTIBUCÁ">INTIBUCÁ</option>
+                                <option value="ISLAS DE LA BAHÍA">ISLAS DE LA BAHÍA</option>
+                                <option value="LA PAZ">LA PAZ</option>
+                                <option value="LEMPIRA">LEMPIRA</option>
+                                <option value="OCOTEPEQUE">OCOTEPEQUE</option>
+                                <option value="OLANCHO">OLANCHO</option>
+                                <option value="SANTA BÁRBARA">SANTA BÁRBARA</option>
+                                <option value="VALLE">VALLE</option>
+                                <option value="YORO">YORO</option>
                               </select>
                           </div>
+
+
                              
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Municipio:</label>
                             <select class="form-control" name="municipio" id="municipio">
-                            <option value="<?php echo $municipio; ?>"><?php echo $municipio?></option>
+                            <option selected><?php echo $municipio ?></option>
                             </select>                            
                           </div> 
 
@@ -281,43 +339,43 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Barrio o Colonia(*):</label>
                             <input type="hidden" name="barrioColonia" id="barrioColonia">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="barrioColonia" id="barrioColonia" maxlength="100" placeholder="Ingrese el Barrio o Colonia" value="<?php echo $barrio_colonia; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="barrioColonia" id="barrioColonia" maxlength="100" placeholder="Ingrese el Barrio o Colonia" value="<?php echo $barrio_colonia; ?>" onkeypress="validarNombre(event)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Calle o Avenida(*):</label>
                             <input type="hidden" name="calleAvenida" id="calleAvenida">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="calleAvenida" id="calleAvenida" maxlength="100" placeholder="Ingrese la calle o avenida" value="<?php echo $calle_avenida; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="calleAvenida" id="calleAvenida" maxlength="100" placeholder="Ingrese la calle o avenida" value="<?php echo $calle_avenida; ?>" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero de casa(*):</label>
                             <input type="hidden" name="numCasa" id="numCasa">
-                            <input type="text" class="form-control" name="numCasa" id="numCasa" maxlength="100" placeholder="Ingrese el numero de casa" value="<?php echo $num_casa; ?>" required>
+                            <input type="text" class="form-control" name="numCasa" id="numCasa" maxlength="100" placeholder="Ingrese el numero de casa" value="<?php echo $num_casa; ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Bloque(*):</label>
                             <input type="hidden" name="bloque" id="bloque">
-                            <input type="text" class="form-control" name="bloque" id="bloque" maxlength="100" placeholder="Ingrese el bloque" value="<?php echo $bloque; ?>" required>
+                            <input type="text" class="form-control" name="bloque" id="bloque" maxlength="100" placeholder="Ingrese el bloque" value="<?php echo $bloque; ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" >
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Telefono Fijo:</label>
                             <input type="hidden" name="telFijo" id="telFijo">
-                            <input type="text" class="form-control" name="telFijo" id="telFijo" maxlength="8" placeholder="Ingrese el Telefono Fijo" value="<?php echo $telefono; ?>" required>
+                            <input type="text" class="form-control" name="telFijo" id="telFijo" maxlength="8" placeholder="Ingrese el Telefono Fijo" value="<?php echo $telefono; ?>" oninput="validarTelefono(event)" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Celular(*):</label>
                             <input type="hidden" name="telCelular" id="telCelular">
-                            <input type="text" class="form-control" name="telCelular" id="telCelular" maxlength="8" placeholder="Ingrese el Telefono Celular" value="<?php echo $celular; ?>" required>
+                            <input type="text" class="form-control" name="telCelular" id="telCelular" maxlength="8" placeholder="Ingrese el Telefono Celular" value="<?php echo $celular; ?>" oninput="validarTelefono(event)" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Domicilio(*):</label>
                             <input type="hidden" name="domicilio" id="domicilio">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="domicilio" id="domicilio" maxlength="100" placeholder="Ingrese el Domicilio" value="<?php echo $domicilio; ?>" required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="domicilio" id="domicilio" maxlength="100" placeholder="Ingrese el Domicilio" value="<?php echo $domicilio; ?>" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -329,13 +387,13 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Profesion u Oficio(*):</label>
                             <input type="hidden" name="profesionOficio" id="profesionOficio">
-                            <input style="text-transform:uppercase" type="text" class="form-control" name="profesionOficio" id="profesionOficio" maxlength="100" placeholder="Ingrese la profesion u Oficio" value="<?php echo $profesion_oficio; ?>"required>
+                            <input style="text-transform:uppercase" type="text" class="form-control" name="profesionOficio" id="profesionOficio" maxlength="100" placeholder="Ingrese la profesion u Oficio" value="<?php echo $profesion_oficio; ?>" onkeypress="validarNombre(event)" oninput="this.value = this.value.toUpperCase();" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>CAI(*):</label>
                             <input type="hidden" name="cai" id="cai">
-                            <input type="text" class="form-control" name="cai" id="cai" maxlength="100" placeholder="Ingrese el codigo CAI" value="<?php echo $cai; ?>" required>
+                            <input type="text" class="form-control" name="cai" id="cai" maxlength="36" placeholder="Ingrese el codigo CAI" value="<?php echo $cai; ?>" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -347,13 +405,13 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero Inicial(*):</label>
                             <input type="hidden" name="numeroInicial" id="numeroInicial">
-                            <input type="text" class="form-control" name="numeroInicial" id="numeroInicial" maxlength="100" placeholder="Ingrese el Numero Inicial" value="<?php echo $num_inicial; ?>" required>
+                            <input type="text" class="form-control" name="numeroInicial" id="numeroInicial" maxlength="6" placeholder="Ingrese el Numero Inicial" value="<?php echo $num_inicial; ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Numero Final(*):</label>
                             <input type="hidden" name="numeroFinal" id="numeroFinal">
-                            <input type="text" class="form-control" name="numeroFinal" id="numeroFinal" maxlength="100" placeholder="Ingrese el Numero Final" value="<?php echo $num_final; ?>" required>
+                            <input type="text" class="form-control" name="numeroFinal" id="numeroFinal" maxlength="6" placeholder="Ingrese el Numero Final" value="<?php echo $num_final; ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <input type="hidden" name="id" value="<?php echo $id_sar; ?>">
@@ -413,14 +471,14 @@
   // var opcion = select.querySelector("option[value='$municipio']");
   // select.removeChild(opcion);
 
-  var formulario = document.getElementById("municipio");
-  formulario.reset();
-  var formulario = document.getElementById("departamento");
-  formulario.reset();
+  // var formulario = document.getElementById("municipio");
+  // formulario.reset();
+  // var formulario = document.getElementById("departamento");
+  // formulario.reset();
 
   // Agregar opciones según la opción seleccionada en el primer combobox
   if (departamento.value === "ATLÁNTIDA") {
-    municipio.add(new Option("LA CEIBA", "lA CEIBA"));
+    municipio.add(new Option("LA CEIBA", "LA CEIBA"));
     municipio.add(new Option("EL PORVENIR", "EL PORVENIR"));
     municipio.add(new Option("TELA", "TELA"));
     municipio.add(new Option("JUTIAPA", "JUTIAPA"));
