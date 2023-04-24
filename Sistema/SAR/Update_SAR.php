@@ -376,7 +376,7 @@
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Bloque(*):</label>
                             <input type="hidden" name="bloque" id="bloque">
-                            <input type="text" class="form-control" name="bloque" id="bloque" maxlength="100" placeholder="Ingrese el bloque" value="<?php echo $bloque; ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" >
+                            <input type="text" class="form-control" name="bloque" id="bloque" maxlength="100" placeholder="Ingrese el bloque" value="<?php echo $bloque; ?>" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" required>
                           </div>
 
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
