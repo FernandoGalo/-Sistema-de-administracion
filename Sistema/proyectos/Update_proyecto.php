@@ -38,6 +38,15 @@
     $Fondos_proyec=$_POST["Monto_proyectados"];
     $estado=$_POST["estado"];
     $Fecha_actual = date('Y-m-d');
+    $fecha_inicio_timestamp = strtotime($Fecha_ini);
+    $fecha_fin_timestamp = strtotime($Fecha_final);
+    if ($fecha_inicio_timestamp > $fecha_fin_timestamp) {
+       echo "<script languaje='JavaScript'>
+                            alert('La fecha de inicio no puede ser mayor que la fecha de finalización. Por favor ingrese las fechas nuevamente');
+                                location.assign('proyectosAdm.php');
+                                </script>";
+        exit();
+    }
             //si lo que esta en el form esta vacio
             $sql="UPDATE tbl_proyectos SET ID_Usuario=$ID_Usuario, Nombre_del_proyecto='$nomb_proyec', Fecha_de_inicio_P='$Fecha_ini' ,Fecha_final_P='$Fecha_final', Fondos_proyecto  =$Fondos_proyec, Estado_Proyecto = '$estado', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_proyecto = $ID_proyecto";
             $resultado = mysqli_query($conexion,$sql);
