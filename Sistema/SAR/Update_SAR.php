@@ -59,58 +59,57 @@
 
 
             //si lo que esta en el form esta vacio
-            if(empty($RTN)){
-                echo"<p class='error'>* Debes colocar tu RTN</p>";
-            }else if(empty($num_declaracion)){
-                echo"<p class='error'>* Debes colocar el numero de declaracion</p>";
-            }else if(empty($nombre_razonSocial)){
-                echo"<p class='error'>* Debes colocar la razon social</p>";
-            }else if(empty($correo)){
-                echo"<p class='error'>* Debes colocar tu correo</p>";
-            }else if(!filter_var($correo, FILTER_VALIDATE_EMAIL)){
-                echo "<p class='error'> El correo es incorrecto</p>";
-            }else if(empty($departamento)){
-                echo "<p class='error'> Debes colocar un Departamento </p>";
-            }else if(empty($municipio)){
-                echo "<p class='error'> Debes colocar un municipio</p>";
-            }else if(empty($barrio_colonia)){
-                echo "<p class='error'> Debes colocar un barrio o colonia</p>";
-            }else if(empty($calle_avenida)){
-                echo "<p class='error'> Debes colocar la calle o avenida</p>";
-            }else if(empty($num_casa)){
-                echo "<p class='error'> Debes colocar el numero de casa</p>";
-            }else if(empty($bloque)){
-                echo "<p class='error'> Debes colocar el bloque</p>";
-            }else if(empty($telefono)){
-                echo "<p class='error'> Debes colocar un numero telefonico fijo </p>";
-            }else if(empty($celular)){
-                echo "<p class='error'> Debes colocar un numero telefonico celular</p>";
-            }else if(empty($domicilio)){
-                echo "<p class='error'> Debes colocar el domicilio</p>";
-            }else if(empty($profesion_oficio)){
-                echo "<p class='error'> Debes colocar la profesion u oficio</p>";
-            }else if(empty($cai)){
-                echo "<p class='error'> Debes colocar el codigo cai</p>";
-            }else if(empty($fecha_limite_emision)){
-                echo "<p class='error'> Debes colocar la fecha limite</p>";
-            }else if(empty($num_inicial)){
-                echo "<p class='error'> Debes colocar el numero inicial</p>";
-            }else if(empty($num_final)){
-                echo "<p class='error'> Debes colocar el numero final</p>";
-            }else{
+            // if(empty($RTN)){
+            //     echo"<p class='error'>* Debes colocar tu RTN</p>";
+            // }else if(empty($num_declaracion)){
+            //     echo"<p class='error'>* Debes colocar el numero de declaracion</p>";
+            // }else if(empty($nombre_razonSocial)){
+            //     echo"<p class='error'>* Debes colocar la razon social</p>";
+            // }else if(empty($correo)){
+            //     echo"<p class='error'>* Debes colocar tu correo</p>";
+            // }else if(!filter_var($correo, FILTER_VALIDATE_EMAIL)){
+            //     echo "<p class='error'> El correo es incorrecto</p>";
+            // }else if(empty($departamento)){
+            //     echo "<p class='error'> Debes colocar un Departamento </p>";
+            // }else if(empty($municipio)){
+            //     echo "<p class='error'> Debes colocar un municipio</p>";
+            // }else if(empty($barrio_colonia)){
+            //     echo "<p class='error'> Debes colocar un barrio o colonia</p>";
+            // }else if(empty($calle_avenida)){
+            //     echo "<p class='error'> Debes colocar la calle o avenida</p>";
+            // }else if(empty($num_casa)){
+            //     echo "<p class='error'> Debes colocar el numero de casa</p>";
+            // }else if(empty($bloque)){
+            //     echo "<p class='error'> Debes colocar el bloque</p>";
+            // }else if(empty($telefono)){
+            //     echo "<p class='error'> Debes colocar un numero telefonico fijo </p>";
+            // }else if(empty($celular)){
+            //     echo "<p class='error'> Debes colocar un numero telefonico celular</p>";
+            // }else if(empty($domicilio)){
+            //     echo "<p class='error'> Debes colocar el domicilio</p>";
+            // }else if(empty($profesion_oficio)){
+            //     echo "<p class='error'> Debes colocar la profesion u oficio</p>";
+            // }else if(empty($cai)){
+            //     echo "<p class='error'> Debes colocar el codigo cai</p>";
+            // }else if(empty($fecha_limite_emision)){
+            //     echo "<p class='error'> Debes colocar la fecha limite</p>";
+            // }else if(empty($num_inicial)){
+            //     echo "<p class='error'> Debes colocar el numero inicial</p>";
+            // }else if(empty($num_final)){
+            //     echo "<p class='error'> Debes colocar el numero final</p>";
+            // }else{
 
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
             // $sql="UPDATE tbl_r_sar SET RTN = $RTN, num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final = $bloque WHERE ID_SAR='$id_sar';";
 
-
+            
+          try {
             $sql = "UPDATE tbl_r_sar SET RTN = '$RTN', num_declaracion = $num_declaracion, nombre_razonSocial = '$nombre_razonSocial', Monto = $Monto,tipo_declaracion='$tipoDeclaracion', departamento = '$departamento', municipio = '$municipio', barrio_colonia = '$barrio_colonia', calle_avenida = '$calle_avenida', num_casa = $num_casa, bloque = $bloque, telefono = $telefono, celular = $celular, domicilio = '$domicilio', correo = '$correo', profesion_oficio = '$profesion_oficio', cai = '$cai', fecha_limite_emision = '$fecha_limite_emision', num_inicial = $num_inicial, num_final = $num_final WHERE ID_SAR = $id_sar;";
 
             $resultado=mysqli_query($conexion,$sql);
-
-
-
+          
             if($resultado){
                 echo "<script language='JavaScript'>
                         alert('Los datos se actualizaron correctamente');
@@ -121,15 +120,35 @@
                      session_start();                       
                             $_SESSION['$RTNsarBitUP']= $RTN;
                             $model->RegUptSar(); 
-                    
             }else{
                 echo "<script language='JavaScript'>
                 alert('Los datos NO se actualizaron');
             location.assign('SAR_Adm.php');
             </script>";
             }
-            mysqli_close($conexion);
-        }
+          } catch (Exception $e) {
+            $errorCode = $e->getCode(); // Almacenar el código de error SQL\   
+                $errorMessage = $e->getMessage(); // Almacenar el mensaje de error SQL
+
+                //echo $errorMessage;
+                //echo $errorCode;
+
+                $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";
+                $resultado=mysqli_query($conexion,$sql2);
+
+                $row = mysqli_fetch_assoc($resultado);
+                $mensaje = $row['mensaje'];
+                //echo $mensaje;
+
+                echo "<script languaje='JavaScript'>
+                    alert('Excepción capturada: $mensaje');
+                    location.assign('SAR_Adm.php');
+                </script>";
+          }
+           
+          mysqli_close($conexion);
+
+        // }
         }else{
             //si el usuario NO ha presionado el boton enviar
             $id_sar=$_GET['ID_SAR']; //recuperar el id que se envia desde el home.html

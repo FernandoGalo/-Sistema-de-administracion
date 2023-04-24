@@ -2,11 +2,11 @@
 include("../../conexion_BD.php");
     $id_sar = $_GET['ID_SAR'];
 
-    $sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
+    //$sql1=$conexion->query("SELECT * FROM `tbl_ms_usuario` WHERE Usuario='$Nombre_Usuario'");
 
-    while($row=mysqli_fetch_array($sql1)){
-       $IDusuarioDel=$row['ID_Usuario'];
-    }
+    // while($row=mysqli_fetch_array($sql1)){
+    //    $IDusuarioDel=$row['ID_Usuario'];
+    // }
 
 
     try {
