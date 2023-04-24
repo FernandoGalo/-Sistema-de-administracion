@@ -2,7 +2,10 @@
 
 require('./fpdf.php');
 require '../conexion_BD.php';
+require_once "../EVENT_BITACORA.php";
+$model = new EVENT_BITACORA;
 session_start();
+$model->reportvolpro();
 $IDProyecto=$_SESSION['ID_Proyect'];
 
 $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");

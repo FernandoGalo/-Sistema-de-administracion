@@ -1,7 +1,10 @@
 <?php
 
 require('./fpdf.php');
+require_once "../EVENT_BITACORA.php";
+$model = new EVENT_BITACORA;
 session_start();
+$model->reportproj();
 class PDF extends FPDF
 {
 

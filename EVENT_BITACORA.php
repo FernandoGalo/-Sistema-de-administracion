@@ -1004,7 +1004,7 @@ public function InsertObj(){
         $Descripcion = "Se agrego el objeto: ".$objeto;
         $fecha = date("Y-m-d h:i:s");
         $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Ingreso de objeto', '$Descripcion')";
+        VALUES (NULL,'$fecha', '$IDGlobal', '18', 'Ingreso de objeto', '$Descripcion')";
         $consulta2= $conexion->prepare($sql2);
         $consulta2->execute();
         ?>
@@ -1021,7 +1021,7 @@ public function UPObj(){
         $Descripcion = "Se modificó el objeto: ".$objeto;
         $fecha = date("Y-m-d h:i:s");
         $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Modificacion de objeto', '$Descripcion')";
+        VALUES (NULL,'$fecha', '$IDGlobal', '18', 'Modificacion de objeto', '$Descripcion')";
         $consulta2= $conexion->prepare($sql2);
         $consulta2->execute();
         ?>
@@ -1038,11 +1038,248 @@ public function DELObj(){
         $Descripcion = "Se eliminó el objeto con ID: ".$idObj;
         $fecha = date("Y-m-d h:i:s");
         $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
-        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Eliminacion de objeto', '$Descripcion')";
+        VALUES (NULL,'$fecha', '$IDGlobal', '18', 'Eliminacion de objeto', '$Descripcion')";
         $consulta2= $conexion->prepare($sql2);
         $consulta2->execute();
         ?>
     <?php
   }
+
+   #Reporte pago
+public function reportpago(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de pago ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '10', 'Reporte Pago', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+     #Reporte usuario
+public function reportusu(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de usuario ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '1', 'Reporte usuario', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+   #Reporte DONANTE
+public function reportdonan(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de donantes ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '8', 'Reporte donantes', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+    #Reporte DONANTE
+public function reportfondo(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de fondos ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '7', 'Reporte fondos', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+    #Reporte Objeto
+public function reportobj(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de objetos ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '18', 'Reporte objetos', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+  #Reporte parametro
+public function reportparametro(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de parametros ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '3', 'Reporte parametros', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+   #Reporte preguntas
+public function reportpregunt(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de preguntas ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '4', 'Reporte preguntas', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+   #Reporte projecto
+public function reportproj(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de proyecto ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '6', 'Reporte proyecto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+     #Reporte rol
+public function reportrol(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de roles ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '5', 'Reporte roles', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+#Reporte sar
+public function reportsar(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de SAR ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '11', 'Reporte SAR', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+#Reporte tipo fondo
+public function reportTfondo(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de tipo de fondo ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '13', 'Reporte tipo fondo', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+  #Reporte tipo pago
+public function reportTpago(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de tipo de pago ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '17', 'Reporte tipo pago', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+    #Reporte voluntario proyecto
+public function reportvolpro(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de vountario proyecto ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '15', 'Reporte voluntario proyecto', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+    #Reporte voluntarios
+public function reportvol(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de vountarios ";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '9', 'Reporte voluntarios', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+   #Reporte bitacora
+public function reportbit(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Se genero reporte de bitacora";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '2', 'Reporte bitacora', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
 }  
 ?>
