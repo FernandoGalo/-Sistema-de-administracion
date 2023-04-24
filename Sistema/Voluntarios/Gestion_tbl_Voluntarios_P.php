@@ -23,7 +23,8 @@ $table = "tbl_voluntarios_proyectos";
 $id = 'ID_Vinculacion_Proy';
  
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
-
+$fechaInicio = isset($_POST['fechaInicio']) ? $conexion->real_escape_string($_POST['fechaInicio']) : null;
+$fechaFinal = isset($_POST['fechaFinal']) ? $conexion->real_escape_string($_POST['fechaFinal']) : null;
 
 /* Filtrado */
 $where = '';
@@ -38,7 +39,17 @@ if ($campo != null) {
     $where = substr_replace($where, "", -3);
     $where .= ")";
 }
-
+if ($fechaInicio != null && $fechaFinal != null) {
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}elseif($fechaInicio == null || $fechaFinal == null) {
+    $fechaInicio = '2023-01-01';
+    $fechaFinal = date('Y-m-d', strtotime('+1 day'));;
+    $where .= ($where == '') ? 'WHERE ' : ' AND ';
+    $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
+}
+$_SESSION['fechaInicio']=$fechaInicio;
+$_SESSION['$fechaFinal']=$fechaFinal;
 /* Limit */
 $limit = isset($_POST['registros']) ? $conexion->real_escape_string($_POST['registros']) : 10;
 $pagina = isset($_POST['pagina']) ? $conexion->real_escape_string($_POST['pagina']) : 0;
@@ -72,7 +83,7 @@ LEFT JOIN tbl_voluntarios v ON vp.ID_Voluntario = v.ID_Voluntario
 LEFT JOIN tbl_proyectos p ON vp.ID_proyecto = p.ID_proyecto
 LEFT JOIN tbl_area_trabajo a ON vp.ID_Area_Trabajo = a.ID_Area_Trabajo
 WHERE (vp.ID_Vinculacion_Proy LIKE '%{$campo}%' OR v.Nombre_Voluntario LIKE '%{$campo}%' OR a.nombre_Area_Trabajo LIKE '%{$campo}%' OR vp.Fecha_Vinculacion_P LIKE '%{$campo}%') 
-AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND vp.Fecha_Vinculacion_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);

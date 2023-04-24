@@ -108,7 +108,19 @@ if ($datos=$sql->fetch_object()) { ?>
                 <div class="col-auto">
                     <input type="text" name="campo" id="campo" class="form-control">
                 </div>
-                
+                <div class="col-auto">
+                <label for="fechaInicio" class="col-form-label">Fecha Inicio </label>
+</div>
+                <div class="col-auto">
+                <input type="date" name="fechaInicio" id="fechaInicio" class="form-control">
+</div>
+<div class="col-auto">
+<label for="fechaFinal" class="col-form-label">Fecha Final </label>
+</div>
+<div class="col-auto">
+<input type="date" name="fechaFinal" id="fechaFinal" class="form-control">
+</div>
+                </div>
                 <script>
 document.getElementById("campo").addEventListener("keyup", function(event) {
   // Obtener el valor del input
@@ -120,7 +132,7 @@ document.getElementById("campo").addEventListener("keyup", function(event) {
 });
   </script>   
                 
-            </div>
+            
             <div class="row py-4">
                 <div class="col">
                     <table class="table table-sm table-bordered table-striped">
@@ -169,6 +181,17 @@ if ($datos=$sql->fetch_object()) { ?>
         document.getElementById("campo").addEventListener("keyup", function() {
             getData()
         }, false)
+        document.getElementById("fechaInicio").addEventListener("change", function() {
+    getData();
+}, false);
+document.getElementById("fechaFinal").addEventListener("change", function() {
+    if (document.getElementById("fechaFinal").value == '') {
+        document.getElementById("fechaFinal").value = document.getElementById("fechaInicio").value= null;
+        getData();
+    } else {
+        getData();
+    }
+}, false);
         document.getElementById("num_registros").addEventListener("change", function() {
             getData()
         }, false)
@@ -182,6 +205,8 @@ if ($datos=$sql->fetch_object()) { ?>
             let pagina = document.getElementById("pagina").value
             let orderCol = document.getElementById("orderCol").value
             let orderType = document.getElementById("orderType").value
+            let fechaInicio = document.getElementById("fechaInicio").value // Nueva variable
+    let fechaFinal = document.getElementById("fechaFinal").value // Nueva variable
 
             if (pagina == null) {
                 pagina = 1
@@ -193,7 +218,8 @@ if ($datos=$sql->fetch_object()) { ?>
             formaData.append('pagina', pagina)
             formaData.append('orderCol', orderCol)
             formaData.append('orderType', orderType)
-
+            formaData.append('fechaInicio', fechaInicio) // Nueva variable
+    formaData.append('fechaFinal', fechaFinal) // Nueva variable
             fetch(url, {
                     method: "POST",
                     body: formaData

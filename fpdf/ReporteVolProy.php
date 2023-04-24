@@ -4,6 +4,7 @@ require('./fpdf.php');
 require '../conexion_BD.php';
 session_start();
 $IDProyecto=$_SESSION['ID_Proyect'];
+
 $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
 while($row=mysqli_fetch_array($sql1)){
@@ -128,13 +129,15 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $campo = $_GET["campo"];
+$fechaInicio = $_SESSION['fechaInicio'];
+$fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT SQL_CALC_FOUND_ROWS vp.ID_Vinculacion_Proy, v.Nombre_Voluntario, p.Nombre_del_proyecto, a.nombre_Area_Trabajo, vp.Fecha_Vinculacion_P FROM tbl_voluntarios_proyectos vp 
 LEFT JOIN tbl_voluntarios v ON vp.ID_Voluntario = v.ID_Voluntario
 LEFT JOIN tbl_proyectos p ON vp.ID_proyecto = p.ID_proyecto
 LEFT JOIN tbl_area_trabajo a ON vp.ID_Area_Trabajo = a.ID_Area_Trabajo
 WHERE (vp.ID_Vinculacion_Proy LIKE '%{$campo}%' OR v.Nombre_Voluntario LIKE '%{$campo}%' OR a.nombre_Area_Trabajo LIKE '%{$campo}%' OR vp.Fecha_Vinculacion_P LIKE '%{$campo}%') 
-AND p.Nombre_del_proyecto = '$Nombre_del_proyecto'");
+AND p.Nombre_del_proyecto = '$Nombre_del_proyecto' AND vp.Fecha_Vinculacion_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'");
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {   
       $i = $i + 1;
