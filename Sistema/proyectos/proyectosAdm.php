@@ -259,13 +259,12 @@ document.getElementById("fechaFinal").addEventListener("change", function() {
                             <input type="text" class="form-control" name="Nombre_proyecto" id="Nombre_proyecto" maxlength="100" placeholder="Ingrese el nombre del proyecto:"  oninput="this.value = this.value.toUpperCase();"  onkeypress="return /[a-zA-Z\s]/i.test(event.key)" required>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Fecha de Inicio:</label>
-                            <input type="date" class="form-control" name="Fechaini" id="Fechaini" maxlength="100" placeholder="Ingrese la Fecha de inicio">
+                          <label>Fecha de Inicio:</label>
+                          <input type="date" class="form-control" name="Fechaini" id="Fechaini" maxlength="100" placeholder="Ingrese la Fecha de inicio">
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Fecha final:</label>
-                            <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha de inicio"
-                             min="<?= date('Y-m-d') ?>">
+                          <label>Fecha final:</label>
+                          <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha final" min="<?= date('Y-m-d') ?>">
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Fondos proyectados(*):</label>
@@ -314,6 +313,21 @@ document.getElementById("fechaFinal").addEventListener("change", function() {
   });
 }
 </script>
+
+<script>
+  const fechaInicial = document.getElementById('Fechaini');
+  const fechaFinal = document.getElementById('Fechafinal');
+
+  fechaInicial.addEventListener('change', () => {
+    if (fechaInicial.value > fechaFinal.value) {
+      fechaFinal.value = fechaInicial.value;
+    }
+    fechaFinal.min = fechaInicial.value;
+  });
+</script>
+
+
+
   <script src="../../js/Buscador.js"></script>
   <script src="../../js/events.js"></script>
  	<script src="../../js/jquery-3.1.1.min.js"></script>

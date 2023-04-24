@@ -38,15 +38,7 @@
     $Fondos_proyec=$_POST["Monto_proyectados"];
     $estado=$_POST["estado"];
     $Fecha_actual = date('Y-m-d');
-    $fecha_inicio_timestamp = strtotime($Fecha_ini);
-    $fecha_fin_timestamp = strtotime($Fecha_final);
-    if ($fecha_inicio_timestamp > $fecha_fin_timestamp) {
-       echo "<script languaje='JavaScript'>
-                            alert('La fecha de inicio no puede ser mayor que la fecha de finalización. Por favor ingrese las fechas nuevamente');
-                                location.assign('proyectosAdm.php');
-                                </script>";
-        exit();
-    }
+
             //si lo que esta en el form esta vacio
             $sql="UPDATE tbl_proyectos SET ID_Usuario=$ID_Usuario, Nombre_del_proyecto='$nomb_proyec', Fecha_de_inicio_P='$Fecha_ini' ,Fecha_final_P='$Fecha_final', Fondos_proyecto  =$Fondos_proyec, Estado_Proyecto = '$estado', Modificado_por= '$Usuario', Fecha_Modificacion = '$Fecha_actual' where ID_proyecto = $ID_proyecto";
             $resultado = mysqli_query($conexion,$sql);
@@ -128,8 +120,8 @@
                             <input type="date" class="form-control" name="Fechaini" id="Fechaini" maxlength="100" placeholder="Ingrese la Fecha de inicio" value="<?php echo $Fecha_ini; ?>">
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                              <label>Fecha final:</label>
-                              <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha de inicio" value="<?php echo $Fecha_final; ?>">
+                          <label>Fecha final:</label>
+                          <input type="date" class="form-control" name="Fechafinal" id="Fechafinal" maxlength="100" placeholder="Ingrese la Fecha final" min="<?= date('Y-m-d') ?>" value="<?php echo $Fecha_final; ?>">
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                           <label>Fondos proyectados(*):</label>
@@ -183,6 +175,18 @@
     window.location.href = "proyectosAdm.php";
   });
 }
+</script>
+</script>
+<script>
+  const fechaInicial = document.getElementById('Fechaini');
+  const fechaFinal = document.getElementById('Fechafinal');
+
+  fechaInicial.addEventListener('change', () => {
+    if (fechaInicial.value > fechaFinal.value) {
+      fechaFinal.value = fechaInicial.value;
+    }
+    fechaFinal.min = fechaInicial.value;
+  });
 </script>
 	<script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>

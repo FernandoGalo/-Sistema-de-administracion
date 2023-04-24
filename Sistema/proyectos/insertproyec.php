@@ -25,15 +25,7 @@
             $Fecha_actual = date('Y-m-d');
             
             include("../../conexion_BD.php");
-            $fecha_inicio_timestamp = strtotime($Fecha_ini);
-$fecha_fin_timestamp = strtotime($Fecha_final);
-if ($fecha_inicio_timestamp > $fecha_fin_timestamp) {
-   echo "<script languaje='JavaScript'>
-                        alert('La fecha de inicio no puede ser mayor que la fecha de finalización. Por favor ingrese las fechas nuevamente');
-                            location.assign('proyectosAdm.php');
-                            </script>";
-    exit();
-}
+
             $sql = "INSERT INTO tbl_proyectos ( ID_usuario ,Nombre_del_proyecto ,Fecha_de_inicio_P ,Fecha_final_P ,Fondos_proyecto , Estado_Proyecto , Creado_Por, Fecha_Creacion) 
             VALUES ('$ID_Usuario', '$nomb_proyec' , '$Fecha_ini' ,'$Fecha_final' ,$Fondos_proyec, '$estado' , '$Usuario','$Fecha_actual')";
 
