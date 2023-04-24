@@ -101,7 +101,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title">Editar Fondos</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar Fondos</h1>
                         </div>
                         <br>
                     </div>
@@ -111,59 +111,12 @@
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                         <div class="container">
                           <div class="row">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>ID del fondo(*):</label>
                             <input type="hidden" name="ID_Fondo" id="ID_Fondo">
                             <input style="text" type="text" class="form-control" name="ID_Fondo" id="ID_Fondo" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  value="<?php echo $ID_Fondo; ?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <?php require '../../conexion_BD.php';?>
-                            <label>Tipo de Fondo(*):</label>
-                            <?php
-
-                           $sql=$conexion->query("SELECT * FROM tbl_tipos_de_fondos");
-                          ?>
-                            <select  class="form-control" name="tipos_de_fondos" id="tipos_de_fondos" value="<?php echo $ID_Tipo_Fondo; ?>" required ><br>
-                            <option value="">Seleccione un tipo de fondo:</option>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql)){
-                            ?>
-                             <option value="<?php echo $row1['ID_tipo_fondo'];?>"><?php echo $row1['nombre_T_Fondo'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Nombre del Objeto</label>
-                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" placeholder="Ingrese el nombre del objeto" value="<?php echo $Nombre_del_Objeto; ?>" require>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Cantidad recibida</label>
-                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" pattern="^\d+(\.\d{1,2})?$" placeholder="Ingrese la cantidad de fondos recibidos" value="<?php echo $Cantidad_Rec; ?>" require>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Valor monetario</label>
-                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese el Valor monetario" value="<?php echo $Valor_monetario; ?>" require>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <label>Donante del fondo(*):</label>
-
-                            <?php
-                           $sql=$conexion->query("SELECT * FROM tbl_donantes");
-                          ?>
-                            <select  class="form-control" name="Donante" id="Donante" value="<?php echo $ID_Donador; ?>" required ><br>
-                            <option value="">Seleccione un Donante:</option>
-                           <?php
-                            while($row1=mysqli_fetch_array($sql)){
-                            ?>
-                             <option value="<?php echo $row1['ID_Donante'];?>"><?php echo $row1['Nombre_D'];?></option>
-                            <?php
-                             }
-                            ?>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Proyecto al que esta siendo donado:</label>
                             <?php include("../../conexion_BD.php");
                             $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
@@ -172,23 +125,63 @@
                              }?>
                             <input class="form-control" name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Usuario</label>
                             <?php     
                             $usuario=$_SESSION['usuario'];?>
                             <input type="text" class="form-control"  name="Usuario" id="Usuario" maxlength="100" value="<?php echo $usuario; ?>" style="text-transform:uppercase" readonly>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                           <?php require '../../conexion_BD.php'; ?>
+                          <label>Tipo de Fondo(*):</label>
+                            <?php
+                            $sql = $conexion->query("SELECT * FROM tbl_tipos_de_fondos");
+                            ?>
+                            <select class="form-control" name="tipos_de_fondos" id="tipos_de_fondos" required>
+                            <option value="">Seleccione tipo de fondo:</option>
+                            <?php
+                            while ($row1 = mysqli_fetch_array($sql)) {
+                            $selected = ($row1['ID_tipo_fondo'] == $ID_Tipo_Fondo) ? 'selected' : '';
+                            echo "<option value='".$row1['ID_tipo_fondo']."' ".$selected.">".$row1['nombre_T_Fondo']."</option>";
+                            }
+                            ?>
+                            </select>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Nombre del Objeto</label>
+                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" placeholder="Ingrese el nombre del objeto" value="<?php echo $Nombre_del_Objeto; ?>" require>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Cantidad recibida</label>
+                            <input type="text" class="form-control"  name="Cantidad_Rec" id="Cantidad_Rec" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" pattern="^\d+(\.\d{1,2})?$" placeholder="Ingrese la cantidad de fondos recibidos" value="<?php echo $Cantidad_Rec; ?>" require>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <label>Valor monetario</label>
+                            <input type="text" class="form-control"  name="Valor_monetario" id="Valor_monetario" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46" placeholder="Ingrese el Valor monetario" value="<?php echo $Valor_monetario; ?>" require>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                           <?php require '../../conexion_BD.php'; ?>
+                          <label>Donante del fondo(*):</label>
+                            <?php
+                            $sql = $conexion->query("SELECT * FROM tbl_donantes");
+                            ?>
+                            <select class="form-control" name="Donante" id="Donante" required>
+                            <option value="">Seleccione un Donante:</option>
+                            <?php
+                            while ($row1 = mysqli_fetch_array($sql)) {
+                            $selected = ($row1['ID_Donante'] == $ID_Donador) ? 'selected' : '';
+                            echo "<option value='".$row1['ID_Donante']."' ".$selected.">".$row1['Nombre_D']."</option>";
+                            }
+                            ?>
+                            </select>
+                          </div>
+                          <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Fecha de Adquisicion:</label>
                             <input type="date" class="form-control" name="FechaAdquisicion" id="FechaAdquisicion" maxlength="100" value="<?php echo $Fecha_Adquisicion; ?>">
                           </div>
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-download"></i> Guardar</button>
-                          <button class="btn btn-danger" type="button">
-                          <a href="FondosAdm.php" style="color:white; text-decoration:none;">
-                          <i class="zmdi zmdi-close-circle"></i> Cancelar
-                          </a>
-                          </button>
+                          <button class="btn btn-primary" type="submit" name="enviar_F2" value="AGREGAR"><i class="zmdi zmdi-upload"></i> Guardar</button>
+                          <button class="btn btn-danger" onclick="cancelar()" type="button"><i class="zmdi zmdi-close-circle"></i> Cancelar</button>
                           </div>
                           </div>
                           </div>
@@ -209,6 +202,22 @@
 
 
     <!--script en java para los efectos-->
+    <script>
+  function cancelar() {
+  swal({
+    title: 'Confirmar Cancelacion',
+    text: "¿Estás seguro de que deseas cancelar? Todos los datos no guardados se perderán.",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#40C13C',
+    cancelButtonColor: '#F44336',
+    confirmButtonText: '<i class="zmdi zmdi-check"></i> Si, cancelar',
+    cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Volver'
+  }).then(function () {
+    window.location.href = "FondosAdm.php";
+  });
+}
+</script>
   
     <script src="../../js/jquery-3.1.1.min.js"></script>
   <script src="../../js/events.js"></script>

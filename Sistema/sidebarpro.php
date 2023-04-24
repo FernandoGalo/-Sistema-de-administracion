@@ -1,7 +1,6 @@
 <?php 
 //Controladores importantes
- require '../../conexion_BD.php';
- session_start();       
+ require '../../conexion_BD.php';     
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
  $IDProyecto=$_SESSION['ID_Proyect'];
