@@ -149,7 +149,7 @@
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Nombre del Objeto</label>
-                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" placeholder="Ingrese el nombre del objeto" value="<?php echo $Nombre_del_Objeto; ?>" require>
+                            <input type="text" class="form-control"  name="Nombre_del_Objeto" id="Nombre_del_Objeto" oninput="this.value = this.value.toUpperCase();" placeholder="Ingrese el nombre del objeto" value="<?php echo $Nombre_del_Objeto; ?>" require>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                             <label>Cantidad recibida</label>
