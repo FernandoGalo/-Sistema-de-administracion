@@ -58,46 +58,7 @@
             $num_final = $_POST['numeroFinal'];
 
 
-            //si lo que esta en el form esta vacio
-            if(empty($RTN)){
-                echo"<p class='error'>* Debes colocar tu RTN</p>";
-            }else if(empty($num_declaracion)){
-                echo"<p class='error'>* Debes colocar el numero de declaracion</p>";
-            }else if(empty($nombre_razonSocial)){
-                echo"<p class='error'>* Debes colocar la razon social</p>";
-            }else if(empty($correo)){
-                echo"<p class='error'>* Debes colocar tu correo</p>";
-            }else if(!filter_var($correo, FILTER_VALIDATE_EMAIL)){
-                echo "<p class='error'> El correo es incorrecto</p>";
-            }else if(empty($departamento)){
-                echo "<p class='error'> Debes colocar un Departamento </p>";
-            }else if(empty($municipio)){
-                echo "<p class='error'> Debes colocar un municipio</p>";
-            }else if(empty($barrio_colonia)){
-                echo "<p class='error'> Debes colocar un barrio o colonia</p>";
-            }else if(empty($calle_avenida)){
-                echo "<p class='error'> Debes colocar la calle o avenida</p>";
-            }else if(empty($num_casa)){
-                echo "<p class='error'> Debes colocar el numero de casa</p>";
-            }else if(empty($bloque)){
-                echo "<p class='error'> Debes colocar el bloque</p>";
-            }else if(empty($telefono)){
-                echo "<p class='error'> Debes colocar un numero telefonico fijo </p>";
-            }else if(empty($celular)){
-                echo "<p class='error'> Debes colocar un numero telefonico celular</p>";
-            }else if(empty($domicilio)){
-                echo "<p class='error'> Debes colocar el domicilio</p>";
-            }else if(empty($profesion_oficio)){
-                echo "<p class='error'> Debes colocar la profesion u oficio</p>";
-            }else if(empty($cai)){
-                echo "<p class='error'> Debes colocar el codigo cai</p>";
-            }else if(empty($fecha_limite_emision)){
-                echo "<p class='error'> Debes colocar la fecha limite</p>";
-            }else if(empty($num_inicial)){
-                echo "<p class='error'> Debes colocar el numero inicial</p>";
-            }else if(empty($num_final)){
-                echo "<p class='error'> Debes colocar el numero final</p>";
-            }else{
+
 
 
 
@@ -129,7 +90,7 @@
             </script>";
             }
             mysqli_close($conexion);
-        }
+        
         }else{
             //si el usuario NO ha presionado el boton enviar
             $id_sar=$_GET['ID_SAR']; //recuperar el id que se envia desde el home.html
