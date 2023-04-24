@@ -82,6 +82,11 @@ if(isset($_POST['crear_copia_btn'])) {
                 alert('Backup Creado con éxito.');
             location.assign('Backups_BD.php');
             </script>";
+            require_once "../../EVENT_BITACORA.php";
+            $model = new EVENT_BITACORA;
+            session_start();
+            $model->backupcrea();
+
   } else {
     echo "<script language='JavaScript'>
                 alert('Error al Crear el backup.');

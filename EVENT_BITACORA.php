@@ -1281,5 +1281,53 @@ public function reportbit(){
     <?php
   }
 
+  #backup 
+public function backupcrea(){
+    session_start();
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Creo copia de seguridad";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '12', 'Creacion copia de seguridad', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+    #backup actualizar
+public function backupres(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Actualizo copia de seguridad";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '12', 'Actualizar copia de seguridad', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+  #backup delete
+public function backuDEL(){
+
+    $IDGlobal=$_SESSION['ID_User'];
+        $model = new conexion();
+        $conexion = $model->conectar();
+        $Descripcion = "Eliminó copia de seguridad";
+        $fecha = date("Y-m-d h:i:s");
+        $sql2 = "INSERT INTO tbl_ms_bitacora(ID_Bitacora,Fecha, ID_Usuario, ID_Objeto, Accion, Descripcion) 
+        VALUES (NULL,'$fecha', '$IDGlobal', '12', 'Eliminacion copia de seguridad', '$Descripcion')";
+        $consulta2= $conexion->prepare($sql2);
+        $consulta2->execute();
+        ?>
+    <?php
+  }
+
+
 }  
 ?>

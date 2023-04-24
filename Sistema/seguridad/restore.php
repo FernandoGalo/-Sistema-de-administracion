@@ -45,6 +45,10 @@ try {
                 alert('La base de datos se ha restaurado exitosamente.');
             location.assign('Backups_BD.php');
             </script>";
+            require_once "../../EVENT_BITACORA.php";
+            $model = new EVENT_BITACORA;
+            session_start();
+            $model->backupres();
 } catch (PDOException $e) {
   $pdo->exec("SET foreign_key_checks = 1;");
   echo "<script language='JavaScript'>
