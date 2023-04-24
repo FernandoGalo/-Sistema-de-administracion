@@ -172,7 +172,7 @@
 
                 echo "<script languaje='JavaScript'>
                     alert('Excepción capturada: $mensaje');
-                    location.assign('usuariosAdm.php');
+                    location.assign('SAR_Adm.php');
                 </script>";
         }
             
