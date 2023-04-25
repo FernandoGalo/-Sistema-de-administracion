@@ -61,7 +61,7 @@
           }
         ?>
 
-        <input class="controls" type="text" required name="respuesta" placeholder="Ingrese la Respuesta "><br>
+        <input onpaste="return false" oncopy="return false" onkeypress="return /[a-zA-Z0-9\-\_]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" class="controls" type="text" required name="respuesta" placeholder="Ingrese la Respuesta "><br>
      <!-- TERMINA EL WHILE -->
 
         <!-- <h3>Debe de Realizar cambio de contraseña</h3>-->

@@ -20,7 +20,7 @@ include ("../conexion_BD.php");
             //Verifica que no exista el usuario
         
         echo'<script>alert("Ingrese un Usuario Valido o contactese con uno de los Administradores")</script>';
-        //header( "refresh:0;url=../Pantallas/controlador_recupera_contra_p.php" ); 
+        header( "refresh:0;url=../Pantallas/controlador_recupera_contra_p.php" ); 
 
     } else {
         

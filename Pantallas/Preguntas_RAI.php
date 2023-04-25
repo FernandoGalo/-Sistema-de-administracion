@@ -48,7 +48,7 @@ while($row=mysqli_fetch_array($sql)){
   }
 ?>
 
-<input class="controls" type="text" name="respuesta" placeholder="Ingrese la Respuesta "><br>
+<input onpaste="return false" oncopy="return false" onkeypress="return /[a-zA-Z0-9\-\_]/i.test(event.key)" oninput="this.value = this.value.toUpperCase();" class="controls" type="text" name="respuesta" placeholder="Ingrese la Respuesta "><br>
 
 <input class="buttons" type="submit" Class="btn" name="btn_enviar_M_P" value="Enviar"> 
 </form>
