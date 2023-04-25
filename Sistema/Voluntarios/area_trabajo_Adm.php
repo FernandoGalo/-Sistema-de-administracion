@@ -16,6 +16,14 @@ session_start();
 $usuario=$_SESSION['user'];
 $ID_Rol=$_SESSION['ID_Rol'];
 
+if (empty($_SESSION['user']) and empty($_SESSION['ID_User'])) {
+    header('location:../../Pantallas/Login.php');
+  exit();
+  }
+  if(empty($_SESSION['ID_Proyect'])){
+    header('location:../proyectos/proyectosAdm.php');
+    exit();
+  }
 $sql1=$conexion->query("SELECT * FROM `tbl_ms_parametros` WHERE ID_Parametro=7");
 
     while($row=mysqli_fetch_array($sql1)){

@@ -5,6 +5,11 @@
  session_start();     
  $usuario=$_SESSION['user'];
  $ID_Rol=$_SESSION['ID_Rol'];
+
+ if (empty($_SESSION['user']) and empty($_SESSION['ID_User'])) {
+  header('location:../../Pantallas/Login.php');
+exit();
+}
 //Parte 2
                 
 $R_Fecha_actual = date('Y-m-d');       /*obtiene la fecha actual*/

@@ -8,6 +8,10 @@
  $ID_RolPer = $_GET['ID_Rol'];
  $_SESSION['ID_RolPer']= $ID_RolPer;
  
+ if (empty($_SESSION['user']) and empty($_SESSION['ID_User'])) {
+  header('location:../../Pantallas/Login.php');
+exit();
+}
 //Consulta permiso
 $rol_id = $ID_RolPer;
 

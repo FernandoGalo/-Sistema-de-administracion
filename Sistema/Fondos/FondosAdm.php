@@ -16,6 +16,17 @@ session_start();
 $usuario=$_SESSION['user'];
 $ID_Rol=$_SESSION['ID_Rol'];
 $IDProyecto=$_SESSION['ID_Proyect'];
+
+if (empty($_SESSION['user']) and empty($_SESSION['ID_User'])) {
+  header('location:../../Pantallas/Login.php');
+exit();
+}
+
+if(empty($_SESSION['ID_Proyect'])){
+  header('location:../proyectos/proyectosAdm.php');
+  exit();
+}
+
 include("../../conexion_BD.php");
     $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
