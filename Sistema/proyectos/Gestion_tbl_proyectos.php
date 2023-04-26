@@ -41,7 +41,7 @@ if ($fechaInicio != null && $fechaFinal != null) {
     $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
 }elseif($fechaInicio == null || $fechaFinal == null) {
     $fechaInicio = '2023-01-01';
-    $fechaFinal = date('Y-m-d', strtotime('+1 year'));;
+    $fechaFinal = date('Y-m-d', strtotime('+10 year'));
     $where .= ($where == '') ? 'WHERE ' : ' AND ';
     $where .= "b.Fecha BETWEEN '" . $fechaInicio . "' AND '" . $fechaFinal . "'";
 }
@@ -77,7 +77,7 @@ $sLimit = "LIMIT $inicio , $limit";
 
 $sql="SELECT SQL_CALC_FOUND_ROWS * from tbl_proyectos
 WHERE (ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%')
-AND Fecha_de_inicio_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}' or  Fecha_final_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
+AND Fecha_de_inicio_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'
 ORDER BY {$columns[$orderCol]} {$oderType}
 LIMIT {$inicio}, {$limit}";
 $resultado = $conexion->query($sql);
