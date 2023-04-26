@@ -87,15 +87,34 @@ function mostrarPassword() {
         <h3>Usuario</h3>
         <input class="controls" maxlength="15" type="text" name="usuario" onkeypress="return validarMayusculas(event)" onpaste="impedirPegar(event)"  oninput="this.value = this.value.toUpperCase();" style="text-transform:uppercase" placeholder="Ingrese su Usuario"><br> 
         <h3>Contraseña</h3>
-        <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
+        <div class="input-container">
         <input class="controls" maxlength="20" type="password" id="password" name="contra" onkeypress="return bloquearEspacio(event)" onpaste="impedirPegar(event)" placeholder="Ingrese su Contraseña">
-
+        <button type="button" class="fa fa-eye" onclick="mostrarPassword()"></button>
+        </div>
         <input class="buttons" type="submit" Class="btn" name="btn_Login" value="Iniciar Sesion" >
         <input class="buttons" type="submit" Class="btn" name="btn_R_Ingreso" value="Crear un nuevo usuario" >
         <p><a href="../Pantallas/renovar-Contra.php">¿Olvidaste la Contraseña?</a>
         
     </form>
     <li style="margin-top:10px;"><a href="../Pagina/index.html">Pagina Web</a></li><!--texto que te manda ala pagina web -->
+    <style>
+      .input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.controls {
+  padding-right: 180px;
+}
+
+.fa.fa-eye {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+    </style>
 </body>
 
 </html>
