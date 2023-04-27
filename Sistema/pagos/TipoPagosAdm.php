@@ -83,7 +83,7 @@ $R_F_Vencida= date("Y-m-j",strtotime($R_Fecha_actual."+ ".$diasV." days")); /*le
                           <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Mantenimiento de Tipo de Pagos</h1>
                           <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where Permiso_Insercion=1 and ID_Rol=$ID_Rol and ID_Objeto=17");
 if ($datos=$sql->fetch_object()) { ?>
-                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money"></i> Agregar Pago</button>
+                          <button class="btn btn-success" id="btnagregar" name="btnAgregar" onclick="mostrarform(true)"><i class="zmdi zmdi-money"></i> Agregar Tipo Pago</button>
                           <!-- PARA GENERAR LOS REPORTES ====================== -->
                           <button class="btn btn-warning" id="generar-reporte" name="generar-reporte" onclick="window.open('../../fpdf/ReporteTipoPago.php?campo=' + encodeURIComponent(document.getElementById('campo').value), '_blank')" >
                          <i class="zmdi zmdi-collection-pdf"></i> Generar Reporte Tipo Pagos
