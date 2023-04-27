@@ -117,7 +117,12 @@ if ($num_rows > 0) {
         $output['data'] .= '<td>' . $row['barrio_colonia'] . '</td>';
         $output['data'] .= '<td>' . $row['calle_avenida'] . '</td>';
         $output['data'] .= '<td>' . $row['num_casa'] . '</td>';
-        $output['data'] .= '<td>' . $row['bloque'] . '</td>';
+        // $output['data'] .= '<td>' . $row['bloque'] . '</td>';
+         if (is_null($row['bloque'])) {
+             $output['data'] .= '<td>N/A</td>';
+         } else {
+             $output['data'] .= '<td>' . $row['bloque'] . '</td>';
+         }
         $output['data'] .= '<td>' . $row['telefono'] . '</td>';
         $output['data'] .= '<td>' . $row['celular'] . '</td>';
         $output['data'] .= '<td>' . $row['domicilio'] . '</td>';

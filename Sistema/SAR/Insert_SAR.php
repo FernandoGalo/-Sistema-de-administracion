@@ -103,6 +103,12 @@
             $calle_avenida = $_POST['calleAvenida'];
             $num_casa = $_POST['numCasa'];
             $bloque = $_POST['bloque'];
+            //   if (is_null($_POST['bloque'])) {
+            //      // El valor de $_POST['bloque'] está vacío
+            //      $bloque = NULL;
+            //   }else{
+            //      $bloque = $_POST['bloque'];
+            //   }
             $telefono = $_POST['telFijo'];
             $celular = $_POST['telCelular'];
             $domicilio = $_POST['domicilio'];
@@ -132,7 +138,9 @@
                 
 
         try {
-            $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, nombre_razonSocial, Monto, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final, tipo_declaracion, estado) VALUES ('$RTN', $num_declaracion, '$nombre_razonSocial', $monto,'$departamento','$municipio', '$barrio_colonia','$calle_avenida', $num_casa, $bloque, $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final, '$tipoDeclaracion',1)";
+            // $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, nombre_razonSocial, Monto, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final, tipo_declaracion) VALUES ('$RTN', $num_declaracion, '$nombre_razonSocial', $monto,'$departamento','$municipio', '$barrio_colonia','$calle_avenida', $num_casa, $bloque, $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final, '$tipoDeclaracion')";
+
+            $sql = "INSERT INTO tbl_r_sar (RTN, num_declaracion, tipo_declaracion, nombre_razonSocial, Monto, departamento, municipio, barrio_colonia, calle_avenida, num_casa, bloque, telefono, celular, domicilio, correo, profesion_oficio, cai, fecha_limite_emision, num_inicial, num_final) VALUES ('$RTN',  $num_declaracion, '$tipoDeclaracion', '$nombre_razonSocial', $monto, '$departamento', '$municipio', '$barrio_colonia', '$calle_avenida', $num_casa, '$bloque', $telefono, $celular, '$domicilio', '$correo', '$profesion_oficio', '$cai', '$fecha_limite_emision', $num_inicial, $num_final)";
 
             $resultado = mysqli_query($conexion,$sql);
 
@@ -160,20 +168,20 @@
             $errorCode = $e->getCode(); // Almacenar el código de error SQL\   
                 $errorMessage = $e->getMessage(); // Almacenar el mensaje de error SQL
 
-                //echo $errorMessage;
-                //echo $errorCode;
+                echo $errorMessage;
+                echo $errorCode;
 
-                $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";
-                $resultado=mysqli_query($conexion,$sql2);
+                // $sql2 = "SELECT mensaje FROM tbl_errores WHERE codigo = $errorCode";
+                // $resultado=mysqli_query($conexion,$sql2);
 
-                $row = mysqli_fetch_assoc($resultado);
-                $mensaje = $row['mensaje'];
+                // $row = mysqli_fetch_assoc($resultado);
+                //$mensaje = $row['mensaje'];
                 //echo $mensaje;
 
-                echo "<script languaje='JavaScript'>
-                    alert('Excepción capturada: $mensaje');
-                    location.assign('SAR_Adm.php');
-                </script>";
+                // echo "<script languaje='JavaScript'>
+                //     alert('Excepción capturada: $mensaje');
+                //     location.assign('SAR_Adm.php');
+                // </script>";
         }
             
             
