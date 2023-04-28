@@ -76,7 +76,7 @@ class PDF extends FPDF
       $this->SetTextColor(0, 95, 189);
       $this->Cell(100); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE VOLUNTARIOS"), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE TIPO DE PAGOS"), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
@@ -128,4 +128,4 @@ while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
       $pdf->Cell(120, 10, utf8_decode($datos_reporte -> Nombre), 0, 1, 'C', 0);
    }
 
-$pdf->Output('ReporteDeVoluntarios.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('ReporteDeTipodepagos.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
