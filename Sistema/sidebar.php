@@ -110,7 +110,7 @@ if ($datos=$sql->fetch_object()) { ?>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="../SAR/SAR_Adm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Mantenimiento SAR </a>
+							<a href="../SAR/SAR_Adm.php"><i class="zmdi zmdi-file zmdi-hc-fw"></i> Gestion SAR </a>
 						</li>
 					</ul>
 				</li>
