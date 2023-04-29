@@ -83,7 +83,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar la Vinculacion Voluntarios Por Proyecto</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar la Vinculacion de Voluntarios a Proyecto</h1>
                         </div>
                         <br>
                     </div>
