@@ -294,7 +294,7 @@ document.getElementById("fechaFinal").addEventListener("change", function() {
                         <div class="container">
                           <div class="row">
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Proyecto al que esta siendo donado:</label>
+                            <label>Pagos del Proyecto:</label>
                             <input type="text" class="form-control"  name="Proyecto" id="Proyecto" placeholder="<?php echo $Nombre_del_proyecto?>" readonly>
                           </div>
                            <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">

@@ -113,7 +113,7 @@
                           </div>
                           <?php require '../../conexion_BD.php';?>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Proyecto al que esta siendo donado:</label>
+                            <label>Pagos del Proyecto:</label>
                             <?php 
                             $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
                                while($row=mysqli_fetch_array($sql1)){

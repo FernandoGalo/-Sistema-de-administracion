@@ -83,7 +83,7 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar el Area de Trabajo</h1>
+                          <h1 style="text-align:center; margin-top:15px; margin-bottom:20px" class="box-title">Editar la Vinculacion Voluntarios Por Proyecto</h1>
                         </div>
                         <br>
                     </div>
@@ -98,7 +98,7 @@
                             <input type="text" class="form-control" name="ID_Vinculacion_Proy" id="ID_Vinculacion_Proy" value="<?php echo $ID_Vinculacion_Proy; ?>" readonly>
                           </div>
                           <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                            <label>Proyecto al que esta siendo donado:</label>
+                            <label>Proyecto al que se esta vinculando:</label>
                             <?php include("../../conexion_BD.php");
                             $sql1=$conexion->query("SELECT * FROM `tbl_proyectos` WHERE ID_proyecto='$IDProyecto'");
 
