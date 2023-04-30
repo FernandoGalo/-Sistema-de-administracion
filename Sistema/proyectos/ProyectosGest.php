@@ -64,6 +64,8 @@
                           <div class="container-fluid">
                               <!-- Small boxes (Stat box) -->
                               <div class="row">
+                              <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=15");
+if ($datos=$sql->fetch_object()) { ?>
                                 <div class="col-lg-3 col-6">
                                   <!-- small box -->
                                   <div class="small-box bg-info">
@@ -76,7 +78,6 @@
                                         // Obtener el resultado como un array asociativo
                                         $datos = mysqli_fetch_array($resultado);
                                         $Voluntarios_cantidad = $datos['Total'];
-                                        
                                       ?>
                                       <h3> <?php echo $Voluntarios_cantidad ?></h3>
                                       
@@ -89,8 +90,11 @@
                                     <a href="../Voluntarios/voluntarios_proyectos_Adm.php" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
                                   </div>
                                 </div>
+                                <?php } ?>
                                 <!-- ./col -->
                                 <!-- ################################ INICIO DE FONDOS ##################################### -->
+                                <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=7");
+if ($datos=$sql->fetch_object()) { ?>
                                 <div class="col-lg-3 col-6">
                                   <!-- small box -->
                                   <div class="small-box bg-success">
@@ -114,8 +118,10 @@
                                     <a href="../Fondos/FondosAdm.php" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
                                   </div>
                                 </div>
-                                
+                                <?php } ?>
                                 <!-- ################################ INICIO DE PAGOS ##################################### -->
+                                <?php $sql=$conexion->query("SELECT * FROM tbl_permisos where  Estad=1 and ID_Rol=$ID_Rol and ID_Objeto=10");
+if ($datos=$sql->fetch_object()) { ?>
                                 <div class="col-lg-3 col-6">
                                   <!-- small box -->
                                   <div class="small-box bg-danger">
@@ -140,6 +146,7 @@
                                     <a href="../pagos/PagosAdm.php" class="small-box-footer">Informacion <i class="fas fa-arrow-circle-right"></i></a>
                                   </div>
                                 </div>
+                                <?php } ?>
                                 <!-- ./col -->
                                 <!-- ./col -->
                                 <!-- ################################ Regresar a Proyectos ##################################### -->
