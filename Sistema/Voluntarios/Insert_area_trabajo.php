@@ -23,6 +23,18 @@
             $ultimo_id = $row['max_id'];
             $nuevo_id = $ultimo_id + 1;
 
+            $query = "SELECT * FROM tbl_area_trabajo WHERE nombre_Area_Trabajo='$nombre_Area_Trabajo'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El Area de trabajo ya existe');
+                        location.assign('area_trabajo_Adm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }
+
             $sql = "INSERT INTO tbl_area_trabajo (ID_Area_Trabajo, 	nombre_Area_Trabajo, descripcion_A_Trabajo) 
             VALUES ($nuevo_id,'$nombre_Area_Trabajo','$descripcion_A_Trabajo')";
 

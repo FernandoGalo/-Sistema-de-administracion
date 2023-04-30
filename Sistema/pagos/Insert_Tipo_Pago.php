@@ -16,7 +16,17 @@
             $Nombre=$_POST["Nombre"];
             include("../../conexion_BD.php");
 
-
+            $query = "SELECT * FROM tbl_tipo_pago_r WHERE Nombre='$Nombre'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El tipo de pago ya existe');
+                        location.assign('TipoPagosAdm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }
             $sql = "INSERT INTO tbl_tipo_pago_r (ID_T_pago, Nombre) 
             VALUES (NULL,'$Nombre')";
 

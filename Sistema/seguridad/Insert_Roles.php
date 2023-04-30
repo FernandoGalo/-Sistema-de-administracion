@@ -23,7 +23,17 @@
             $descripcion = $_POST['descripcion'];
             $estado = $_POST['estado'];
                 
-
+            $query = "SELECT * FROM tbl_ms_roles WHERE Rol='$nombreRol'";
+        $verificacion = mysqli_query($conexion, $query);
+        
+        if (mysqli_num_rows($verificacion) > 0) {
+            // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+            echo "<script language='JavaScript'>
+                    alert('Error!!!, Ese Rol ya existe');
+                    location.assign('RolesAdm.php');
+                  </script>";
+            exit; // Finaliza la ejecución del script si hay errores
+        }
                 
             $sql = "INSERT INTO tbl_ms_roles (Rol, Descripcion, Estado, Creado_Por, Fecha_Creacion ) VALUES ( '$nombreRol', '$descripcion', $estado,  '$usuario', '$R_Fecha_actual' )";
 

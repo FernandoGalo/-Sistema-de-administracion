@@ -30,7 +30,17 @@
             $Fecha_actual = date('Y-m-d');
 
             include("../../conexion_BD.php");
-                        
+            $query = "SELECT * FROM tbl_ms_parametros WHERE Parametro='$Nombre_Parametro'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El Parametro ya existe');
+                        location.assign('ParametrosAdm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }          
             $sql = "INSERT INTO tbl_ms_parametros (Parametro, Descripcion_P, Valor, ID_Usuario, Fecha_Creacion) 
             VALUES ('$Nombre_Parametro', '$Descrip_Parametro', '$Valor_Parametro' , '$ID_Usuario','$Fecha_actual')";
 

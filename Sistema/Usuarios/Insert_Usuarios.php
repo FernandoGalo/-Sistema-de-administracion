@@ -63,6 +63,7 @@ if (mysqli_num_rows($sql2) >= 1) {
                 
 
             try {
+                
                 $sql = "INSERT INTO tbl_ms_usuario ( ID_Rol, Nombre_Usuario, Usuario, Contraseña, Correo_electronico, Fecha_Vencimiento, Estado_Usuario, Creado_Por, Fecha_Creacion ) VALUES ($Rol,'$nombreCompleto', '$nombreUsuario','$contraseña','$email', '$R_F_Vencida', 'NUEVO', '$usuario','$R_Fecha_actual'  )";
 
                 $resultado = mysqli_query($conexion,$sql);

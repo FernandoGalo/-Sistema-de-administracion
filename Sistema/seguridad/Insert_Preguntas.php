@@ -32,6 +32,17 @@
             // Los dcatos NO ingresaron a la BD
             $Pregunta = mysqli_real_escape_string($conexion, $pregunta);
             
+            $query = "SELECT * FROM tbl_preguntas WHERE Pregunta='$pregunta'";
+        $verificacion = mysqli_query($conexion, $query);
+        
+        if (mysqli_num_rows($verificacion) > 0) {
+            // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+            echo "<script language='JavaScript'>
+                    alert('Error!!!, La pregunta ya existe');
+                    location.assign('PreguntasAdm.php');
+                  </script>";
+            exit; // Finaliza la ejecución del script si hay errores
+        }
             $sql = "INSERT INTO tbl_preguntas (Pregunta, Creado_Por, Fecha_Creacion) 
             VALUES ('$Pregunta', '$Usuario','$Fecha_actual')";
 

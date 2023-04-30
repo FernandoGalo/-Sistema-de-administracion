@@ -25,6 +25,18 @@
     $nombre_Area_Trabajo=$_POST["nombre_Area_Trabajo"];
     $descripcion_A_Trabajo=$_POST["descripcion_A_Trabajo"];
             //si lo que esta en el form esta vacio
+            $query = "SELECT * FROM tbl_area_trabajo WHERE nombre_Area_Trabajo='$nombre_Area_Trabajo'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El Area de trabajo ya existe');
+                        location.assign('area_trabajo_Adm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }
+
             $sql="UPDATE tbl_area_trabajo SET nombre_Area_Trabajo = '$nombre_Area_Trabajo', descripcion_A_Trabajo='$descripcion_A_Trabajo' where ID_Area_Trabajo = $ID_Area_Trabajo";
             $resultado = mysqli_query($conexion,$sql);
 

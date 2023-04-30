@@ -24,6 +24,17 @@
     $ID_tipo_fondo=$_POST["ID_tipo_fondo"];
     $nombre_T_Fondo=$_POST["nombre_T_Fondo"];
             //si lo que esta en el form esta vacio
+            $query = "SELECT * FROM tbl_tipos_de_fondos WHERE nombre_T_Fondo='$nombre_T_Fondo'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El tipo de Fondo ya existe');
+                        location.assign('Tipo_Fondo_Adm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }
             $sql="UPDATE tbl_tipos_de_fondos SET nombre_T_Fondo = '$nombre_T_Fondo' where ID_tipo_fondo = $ID_tipo_fondo";
             $resultado = mysqli_query($conexion,$sql);
 

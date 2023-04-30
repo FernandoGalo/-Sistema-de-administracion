@@ -35,6 +35,17 @@
             $descripcion = $_POST['descripcion'];
             $tipoObj = $_POST['tipoObj'];
 
+            $query = "SELECT * FROM tbl_objetos WHERE Objeto='$objeto'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El Objeto ya existe');
+                        location.assign('ObjetosAdm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }
 
 
             $sql = "UPDATE tbl_objetos SET Objeto = '$objeto', Descripcion = '$descripcion', Tipo_Objeto = '$tipoObj' WHERE ID_Objeto = $idObje;";

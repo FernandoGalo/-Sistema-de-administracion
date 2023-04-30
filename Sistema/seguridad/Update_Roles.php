@@ -52,7 +52,17 @@
 
 
 
-
+              $query = "SELECT * FROM tbl_ms_roles WHERE Rol='$nombreRol'";
+              $verificacion = mysqli_query($conexion, $query);
+              
+              if (mysqli_num_rows($verificacion) > 0) {
+                  // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                  echo "<script language='JavaScript'>
+                          alert('Error!!!, Ese Rol ya existe');
+                          location.assign('RolesAdm.php');
+                        </script>";
+                  exit; // Finaliza la ejecución del script si hay errores
+              }
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
             $sql="UPDATE tbl_ms_roles SET Rol = '$nombreRol', Descripcion ='$descripcion', Estado = $estado, Modificado_Por = '$usuario', Fecha_Modificacion = '$R_Fecha_actual' WHERE ID_ROL = $id_rol2";
             $resultado=mysqli_query($conexion,$sql);

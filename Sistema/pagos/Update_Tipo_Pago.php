@@ -24,6 +24,17 @@
     $ID_T_pago=$_POST["ID_T_pago"];
     $Nombre=$_POST["Nombre"];
             //si lo que esta en el form esta vacio
+            $query = "SELECT * FROM tbl_tipo_pago_r WHERE Nombre='$Nombre'";
+            $verificacion = mysqli_query($conexion, $query);
+            
+            if (mysqli_num_rows($verificacion) > 0) {
+                // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                echo "<script language='JavaScript'>
+                        alert('Error!!!, El tipo de pago ya existe');
+                        location.assign('TipoPagosAdm.php');
+                      </script>";
+                exit; // Finaliza la ejecución del script si hay errores
+            }
             $sql="UPDATE tbl_tipo_pago_r SET Nombre = '$Nombre' where ID_T_pago = $ID_T_pago";
             $resultado = mysqli_query($conexion,$sql);
 

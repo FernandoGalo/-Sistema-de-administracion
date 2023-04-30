@@ -51,6 +51,18 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 
 
             //UPDATE tbl_ms_usuario SET Usuario=$user WHERE Nombre_Usuario=$id;
+            $query = "SELECT * FROM tbl_ms_usuario WHERE Usuario='$user'";
+                    $verificacion = mysqli_query($conexion, $query);
+                    
+                    if (mysqli_num_rows($verificacion) > 0) {
+                        // La pregunta ya existe, mostrar mensaje de error y redirigir al usuario
+                        echo "<script language='JavaScript'>
+                                alert('Error!!!, Ese Usuario ya existe');
+                                location.assign('ObjetosAdm.php');
+                              </script>";
+                        exit; // Finaliza la ejecución del script si hay errores
+                    }
+
             $sql="UPDATE tbl_ms_usuario SET Nombre_Usuario = '$userName', Usuario ='$user', ID_Rol ='$Rol', Contraseña = '$contra', Correo_electronico = '$email', Fecha_Vencimiento = '$vencimiento', Estado_Usuario = '$Estado', Modificado_Por = '$usuario', Fecha_Modificacion = '$R_Fecha_actual' WHERE ID_Usuario='$id'";
             $resultado=mysqli_query($conexion,$sql);
 
