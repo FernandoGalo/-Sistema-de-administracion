@@ -12,18 +12,22 @@ $(document).ready(function(){
 	});
 	$('.btn-exit-system').on('click', function(){
 		swal({
-		  	title:'¿Estas seguro?',
-		  	text: "La sesión actual se cerrará",
-		  	type: 'warning',
-		  	showCancelButton: true,
-		  	confirmButtonColor: '#03A9F4',
-		  	cancelButtonColor: '#F44336',
-		  	confirmButtonText: '<i class="zmdi zmdi-run"></i> Si, Salir!',
-		  	cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Cancelar!'
+			  title:'¿Estás seguro?',
+			  text: "La sesión actual se cerrará",
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#03A9F4',
+			  cancelButtonColor: '#F44336',
+			  confirmButtonText: '<i class="zmdi zmdi-run"></i> Si, Salir!',
+			  cancelButtonText: '<i class="zmdi zmdi-close-circle"></i> No, Cancelar!'
 		}).then(function () {
-			window.location.href="../../Pantallas/Login.php";
-			session_unset(); // Clear all session variables
-			session_destroy();// Destroy the session
+			$.ajax({
+				url: '../../Controladores/cerrar_sesion.php',
+				method: 'POST',
+				success: function() {
+					window.location.replace('../../Pantallas/Login.php');
+				}
+			});
 		});
 	});
 	$('.btn-menu-dashboard').on('click', function(){

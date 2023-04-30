@@ -130,7 +130,7 @@ $fechaFinal = $_SESSION['$fechaFinal'];
 
 $consulta_reporte_alquiler = $conexion->query("SELECT * from tbl_proyectos
 WHERE (ID_proyecto LIKE '%{$campo}%' OR Nombre_del_proyecto LIKE '%{$campo}%' OR Fecha_de_inicio_P LIKE '%{$campo}%' OR Fecha_final_P LIKE '%{$campo}%' OR Fondos_proyecto LIKE '%{$campo}%' OR Estado_Proyecto LIKE '%{$campo}%')
-AND Fecha_de_inicio_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}' or  Fecha_final_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}'");
+AND Fecha_de_inicio_P BETWEEN '{$fechaInicio}' AND '{$fechaFinal}' ");
 
 
 while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {
